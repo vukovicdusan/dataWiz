@@ -1,10 +1,12 @@
 import React from "react";
-import Wrapper from "./Wrapper";
-import ServiceBox from "./ServiceBox";
+import Wrapper from "../Wrapper";
+import ServiceBox from "../ServiceBox";
+import BackgroundLight from "../BackgroundLight";
 
 const ServiceSection = () => {
   return (
-    <section>
+    <section className="relative mb-10">
+      <BackgroundLight></BackgroundLight>
       <Wrapper>
         <h2 className="text-5xl text-primaryAccent text-center mb-10 font-bold">
           Services

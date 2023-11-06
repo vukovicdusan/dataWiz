@@ -1,5 +1,6 @@
-import Hero from "@/components/Hero";
-import ServiceSection from "@/components/ServiceSection";
+import Hero from "@/components/sections/Hero";
+import MyProcessSection from "@/components/sections/MyProcessSection";
+import ServiceSection from "@/components/sections/ServiceSection";
 import Shapedivider from "@/components/Shapedivider";
 import Wrapper from "@/components/Wrapper";
 
@@ -40,6 +41,7 @@ export default function Home() {
       </div>
       <Shapedivider classProp={"rotate-180 translate-y-[-5px]"}></Shapedivider>
       <ServiceSection></ServiceSection>
+      <MyProcessSection></MyProcessSection>
     </main>
   );
 }

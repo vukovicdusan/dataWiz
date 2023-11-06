@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import rocket from "../public/images/rocket-hero.svg";
-import Button from "./Button";
-import Wrapper from "./Wrapper";
+import rocket from "../../public/images/rocket-hero.svg";
+import Button from "../Button";
+import Wrapper from "../Wrapper";
 
 const Hero = () => {
   return (
