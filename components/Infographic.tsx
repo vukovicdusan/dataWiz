@@ -1,13 +1,50 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef, useState } from "react";
 
 const Infographic = () => {
+  let animationRef = useRef<HTMLOListElement>(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    let config = {
+      threshold: 0.5,
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setShow(true);
+        }
+      });
+    }, config);
+
+    if (animationRef.current) {
+      observer.observe(animationRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+  // let show = true;
+  let processes: string[] = [
+    " Introductory Call",
+    "Tracking Audit",
+    "Data Plan",
+    "Plan Execution",
+    "Wrap-up Meeting",
+  ];
   return (
-    <ol className="pb-40 list-none grid gap-x-[var(--column-gap)] gap-y-[var(--row-gap)] [counter-reset:liCount] text-primaryAccent overflow-hidden w-[min(45rem,100%)] mx-auto mb-[-4rem] [--column-gap:2rem] [--rocket-width:6rem] grid-cols-[1fr_var(--rocket-width)_1fr]">
-      <div>
-        <svg className="icon">
-          <use xlinkHref={"./img/subservices/sprite.svg#rocket"}></use>
+    <ol ref={animationRef} className="infographic">
+      <div className={show ? "enter-up-show rocket" : "enter-up-hidden rocket"}>
+        <svg className="w-[var(--rocket-width)] h-[var(--rocket-height)] translate-y-[30px]">
+          <use xlinkHref={"./images/sprite.svg#rocket"}></use>
         </svg>
       </div>
+      {processes.map((process, index) => (
+        <li className={show ? "fade-in-show" : "fade-in-hidden"} key={index}>
+          {process}
+        </li>
+      ))}
     </ol>
   );
 };
