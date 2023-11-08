@@ -36,7 +36,7 @@ const Infographic = () => {
   return (
     <ol ref={animationRef} className="infographic">
       <div className={show ? "enter-up-show rocket" : "enter-up-hidden rocket"}>
-        <svg className="w-[var(--rocket-width)] h-[var(--rocket-height)] translate-y-[30px]">
+        <svg>
           <use xlinkHref={"./images/sprite.svg#rocket"}></use>
         </svg>
       </div>
