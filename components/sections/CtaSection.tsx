@@ -6,23 +6,38 @@ import Wrapper from "../Wrapper";
 import CtaForm from "../CtaForm";
 
 const CtaSection = () => {
-  return (
-    <div className="bg-secondaryAccent">
-      <Wrapper>
-        <h2 className="text-5xl text-center mb-10 font-bold">
-          Improve your<span className="text-primaryAccent"> data quality</span>
-        </h2>
-        <section className="flex flex-wrap-reverse justify-between mx-auto bg-secondaryAccent lg:flex-wrap">
-          <div className="lg:basis-1/2 md:basis-full">
-            <Image src={rocket} alt="rocket"></Image>
-          </div>
-          <div className="lg:basis-1/2 md:basis-full">
-            <CtaForm></CtaForm>
-          </div>
-        </section>
-      </Wrapper>
-    </div>
-  );
+	return (
+		<div className="bg-secondaryAccent">
+			<Wrapper>
+				<div className="mb-10">
+					<h2 className="text-5xl text-center mb-4 font-bold">
+						Improve your
+						<span className="text-primaryAccent">
+							{" "}
+							data quality
+						</span>
+					</h2>
+					<h3 className="text-lg text-center">
+						Contact us because we are the best in the world.
+					</h3>
+				</div>
+				<section className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">
+					<div className="lg:basis-1/2 basis-full">
+						<Image
+							className="m-auto"
+							width={300}
+							height={300}
+							src={rocket}
+							alt="rocket"
+						></Image>
+					</div>
+					<div className="lg:basis-1/2 basis-full">
+						<CtaForm></CtaForm>
+					</div>
+				</section>
+			</Wrapper>
+		</div>
+	);
 };
 
 export default CtaSection;
