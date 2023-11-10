@@ -29,10 +29,12 @@ const FaqSection = () => {
 	return (
 		<Wrapper>
 			<section className="relative">
-				<h2 className="text-5xl font-bold text-center">FAQ</h2>
-				<p className="text-lg text-center mb-8">
-					These are some of our most commonly asked questions
-				</p>
+				<div className="mb-10">
+					<h2 className="text-5xl font-bold text-center mb-4">FAQ</h2>
+					<p className="text-lg text-center mb-8">
+						These are some of our most commonly asked questions
+					</p>
+				</div>
 				{faqs.map((faq, index) => (
 					<FaqItem
 						key={index}
