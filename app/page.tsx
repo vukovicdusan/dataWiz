@@ -1,4 +1,5 @@
 import CtaSection from "@/components/sections/CtaSection";
+import FaqSection from "@/components/sections/FaqSection";
 import Hero from "@/components/sections/Hero";
 import MyProcessSection from "@/components/sections/MyProcessSection";
 import ServiceSection from "@/components/sections/ServiceSection";
@@ -48,6 +49,7 @@ export default function Home() {
       <CtaSection></CtaSection>
       <Shapedivider classProp={"rotate-180 translate-y-[-5px]"}></Shapedivider>
       <Testimonials></Testimonials>
+      <FaqSection></FaqSection>
     </main>
   );
 }

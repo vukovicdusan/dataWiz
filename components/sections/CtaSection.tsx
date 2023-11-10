@@ -14,9 +14,9 @@ const CtaSection = () => {
             Improve your
             <span className="text-primaryAccent"> data quality</span>
           </h2>
-          <h3 className="text-lg text-center">
+          <p className="text-lg text-center">
             Contact us because we are the best in the world.
-          </h3>
+          </p>
         </div>
         <section className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">
           <div className="lg:basis-1/2 basis-full">
