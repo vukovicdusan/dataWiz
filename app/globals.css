@@ -34,6 +34,29 @@ body {
   z-index: 20 !important;
 }
 
+@media (max-width: 640px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    bottom: 0px;
+    top: revert !important;
+  }
+
+  .swiper-button-next {
+    left: 50% !important;
+    right: revert !important;
+    transform: translateX(20px);
+  }
+  .swiper-button-prev {
+    right: 50% !important;
+    left: revert !important;
+    transform: translateX(-20px);
+  }
+
+  .swiper {
+    padding-bottom: 4rem !important;
+  }
+}
+
 /* @layer components { */
 
 /* } */

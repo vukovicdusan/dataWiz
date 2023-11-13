@@ -13,10 +13,10 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Shapedivider classProp={""}></Shapedivider>
+      <Shapedivider classProp={"translate-y-1"}></Shapedivider>
       <div className="bg-secondaryAccent">
         <Wrapper>
-          <section className="flex flex-wrap-reverse justify-between mx-auto bg-secondaryAccent lg:flex-wrap">
+          <section className="flex flex-wrap-reverse justify-between mx-auto bg-secondaryAccent lg:flex-wrap py-1">
             <div className="lg:basis-1/2 md:basis-full justify-start">
               <AnimationContainer direction={"fromRight"}>
                 <p className="mb-5 text-left">

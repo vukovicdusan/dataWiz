@@ -35,7 +35,7 @@ const FaqSection = () => {
             <h2 className="text-5xl font-bold text-center mb-4">FAQ</h2>
           </AnimationContainer>
           <AnimationContainer direction={"fromTop"}>
-            <p className="text-lg text-center mb-8">
+            <p className="text-lg text-center mb-4 sm:mb-8">
               These are some of our most commonly asked questions
             </p>
           </AnimationContainer>
