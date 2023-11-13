@@ -8,7 +8,7 @@ import AnimationContainer from "../AnimationContainer";
 const Hero = () => {
   return (
     <Wrapper>
-      <section className="flex flex-wrap justify-center items-center mx-auto gap-8 sm:gap-0 h-[50vh]">
+      <section className="flex flex-wrap justify-center items-center mx-auto gap-8 sm:gap-0 md:h-[50vh]">
         <div className="md:basis-1/2 basis-full ">
           <AnimationContainer direction={"fromRight"}>
             <h1 className="text-5xl mb-5 font-bold">

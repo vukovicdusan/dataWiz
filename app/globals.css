@@ -3,49 +3,35 @@
 @tailwind utilities;
 
 :root {
-	--foreground-rgb: 0, 0, 0;
-	--background-start-rgb: 214, 219, 220;
-	--background-end-rgb: 255, 255, 255;
-	--primaryAccent: #2e68dd;
-	--secondaryAccent: #212f52;
-	--primaryBg: #020315;
-	--secondaryBg: #454a5c;
-	/*INFOGRAPHIC*/
-	--row-gap: 4rem;
-	--column-gap: 2rem;
-	--rocket-aspect: calc(134.13 / 196.24); /* svg viewbox */
-	--rocket-height: calc(var(--rocket-width) / var(--rocket-aspect));
-	--flame-outer-color: #f16e39;
-	--flame-inner-color: #fed103;
-	--number-circle-size: 2.5rem;
-	--number-circle-border-size: 0.25rem;
-	--number-line-height: 0.125rem;
-	--number-line-length: calc(var(--rocket-width) / 2 + var(--column-gap) / 2);
-	--number-line-dot-size: 0.25rem;
-	--column-gap: 2rem;
-	--rocket-width: 6rem;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primaryAccent: #2e68dd;
+  --secondaryAccent: #212f52;
+  --primaryBg: #020315;
+  --secondaryBg: #454a5c;
 }
 
 @media (max-width: 30rem) {
-	--row-gap: 1rem;
-	--column-gap: 1rem;
+  --row-gap: 1rem;
+  --column-gap: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
-		--foreground-rgb: 255, 255, 255;
-		--background-start-rgb: 0, 0, 0;
-		--background-end-rgb: 0, 0, 0;
-	}
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
 }
 
 body {
-	color: #fff;
+  color: #fff;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
-	z-index: 20 !important;
+  z-index: 20 !important;
 }
 
 /* @layer components { */

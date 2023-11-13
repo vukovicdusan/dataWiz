@@ -8,7 +8,7 @@ import AnimationContainer from "../AnimationContainer";
 
 const CtaSection = () => {
   return (
-    <div className="bg-secondaryAccent py-4">
+    <div className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
         <div className="mb-10">
           <AnimationContainer direction={"fromBottom"}>
