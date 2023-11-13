@@ -3,58 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --primaryAccent: #2e68dd;
-  --secondaryAccent: #212f52;
-  --primaryBg: #020315;
-  --secondaryBg: #454a5c;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+	--primaryAccent: #2e68dd;
+	--secondaryAccent: #212f52;
+	--primaryBg: #020315;
+	--secondaryBg: #454a5c;
 }
 
 @media (max-width: 30rem) {
-  --row-gap: 1rem;
-  --column-gap: 1rem;
+	--row-gap: 1rem;
+	--column-gap: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
+}
+
+html {
+	scroll-behavior: smooth;
 }
 
 body {
-  color: #fff;
+	color: #fff;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
-  z-index: 20 !important;
+	z-index: 20 !important;
 }
 
 @media (max-width: 640px) {
-  .swiper-button-prev,
-  .swiper-button-next {
-    bottom: 0px;
-    top: revert !important;
-  }
+	.swiper-button-prev,
+	.swiper-button-next {
+		bottom: 0px;
+		top: revert !important;
+	}
 
-  .swiper-button-next {
-    left: 50% !important;
-    right: revert !important;
-    transform: translateX(20px);
-  }
-  .swiper-button-prev {
-    right: 50% !important;
-    left: revert !important;
-    transform: translateX(-20px);
-  }
+	.swiper-button-next {
+		left: 50% !important;
+		right: revert !important;
+		transform: translateX(20px);
+	}
+	.swiper-button-prev {
+		right: 50% !important;
+		left: revert !important;
+		transform: translateX(-20px);
+	}
 
-  .swiper {
-    padding-bottom: 4rem !important;
-  }
+	.swiper {
+		padding-bottom: 4rem !important;
+	}
 }
 
 /* @layer components { */

@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 type TTopNavigation = {
 	links: {
 		link: string;
@@ -8,24 +9,6 @@ type TTopNavigation = {
 };
 const TopNavigation = (props: TTopNavigation) => {
 	const [open, setOpen] = useState<boolean>(false);
-	const [scrollPosition, setScrollPosition] = useState<number>(
-		window.scrollY
-	);
-	const [sticky, setSticky] = useState<boolean>(false);
-
-	useEffect(() => {
-		function scrollHandler() {
-			let newScroll = window.scrollY;
-			setSticky(scrollPosition > newScroll);
-			setScrollPosition(newScroll);
-		}
-
-		window.addEventListener("scroll", () => {
-			scrollHandler();
-		});
-	}, []);
-
-	console.log(sticky);
 
 	function navHandler(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
