@@ -12,10 +12,12 @@ const CtaSection = () => {
       <Wrapper>
         <div className="mb-10">
           <AnimationContainer direction={"fromBottom"}>
-            <h2 className="text-5xl text-center mb-4 font-bold">
-              Improve your
-              <span className="text-primaryAccent"> data quality</span>
-            </h2>
+            <div className="flex gap-8 items-center justify-center relative">
+              <h2 className="text-5xl text-center mb-4 font-bold">
+                Improve your
+                <span className="text-primaryAccent"> data quality</span>
+              </h2>
+            </div>
             <AnimationContainer direction={"fromTop"}>
               <p className="text-lg text-center">
                 Contact us because we are the best in the world.
