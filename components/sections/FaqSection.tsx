@@ -2,6 +2,7 @@ import React from "react";
 import Wrapper from "../Wrapper";
 import BackgroundLight from "../BackgroundLight";
 import FaqItem from "../FaqItem";
+import AnimationContainer from "../AnimationContainer";
 
 const FaqSection = () => {
   const faqs = [
@@ -30,13 +31,23 @@ const FaqSection = () => {
     <Wrapper>
       <section className="relative">
         <div className="mb-10">
-          <h2 className="text-5xl font-bold text-center mb-4">FAQ</h2>
-          <p className="text-lg text-center mb-8">
-            These are some of our most commonly asked questions
-          </p>
+          <AnimationContainer direction={"fromBottom"}>
+            <h2 className="text-5xl font-bold text-center mb-4">FAQ</h2>
+          </AnimationContainer>
+          <AnimationContainer direction={"fromTop"}>
+            <p className="text-lg text-center mb-8">
+              These are some of our most commonly asked questions
+            </p>
+          </AnimationContainer>
         </div>
         {faqs.map((faq, index) => (
-          <FaqItem key={index} body={faq.body} title={faq.title}></FaqItem>
+          <AnimationContainer
+            key={index}
+            direction={"fromBottom"}
+            delay={"delay-" + index + "00"}
+          >
+            <FaqItem body={faq.body} title={faq.title}></FaqItem>
+          </AnimationContainer>
         ))}
         <BackgroundLight></BackgroundLight>
       </section>
