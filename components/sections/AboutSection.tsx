@@ -38,7 +38,7 @@ const AboutSection = () => {
                 never use that word.
               </p>
             </div>
-            <div className="lg:basis-1/2 basis-full">
+            <div className="lg:basis-1/2 basis-full mb-8 lg:mb-0">
               <Image
                 className="m-auto"
                 width={300}

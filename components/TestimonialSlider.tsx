@@ -40,7 +40,7 @@ const TestimonialSlider = () => {
   ];
   return (
     <Swiper
-      className="px-4 sm:px-0 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[linear-gradient(90deg,rgba(2,3,21,1)0%,rgba(0,0,0,0)100%)] before:w-2/5 before:h-full before:z-10 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:bg-[linear-gradient(-90deg,rgba(2,3,21,1)0%,rgba(0,0,0,0)100%)] after:w-2/5 after:h-full after:z-10"
+      className="px-4 sm:px-0 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:bg-[linear-gradient(90deg,rgba(2,3,21,1)0%,rgba(0,0,0,0)100%)] sm:before:w-2/5 before:w-4 before:h-full before:z-10 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:bg-[linear-gradient(-90deg,rgba(2,3,21,1)0%,rgba(0,0,0,0)100%)] sm:after:w-2/5 after:w-4 after:h-full after:z-10"
       slidesPerView={3}
       spaceBetween={20}
       loop={true}
