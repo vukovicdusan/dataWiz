@@ -33,7 +33,7 @@ const Hero = () => {
           </AnimationContainer>
         </div>
         <div className="md:basis-1/2 basis-full">
-          <AnimationContainer direction={"fromLeft"} delay={"delay-500"}>
+          <AnimationContainer direction={""} delay={"200"}>
             <Image
               className="m-auto"
               width={400}

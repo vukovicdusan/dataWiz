@@ -48,7 +48,7 @@ const AboutSection = () => {
               </AnimationContainer>
             </div>
             <div className="lg:basis-1/2 basis-full mb-8 lg:mb-0">
-              <AnimationContainer direction={"fromLeft"}>
+              <AnimationContainer direction={""}>
                 <Image
                   className="m-auto"
                   width={300}

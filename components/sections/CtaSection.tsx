@@ -27,7 +27,7 @@ const CtaSection = () => {
         </div>
         <div className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">
           <div className="lg:basis-1/2 basis-full">
-            <AnimationContainer direction={"fromRight"}>
+            <AnimationContainer direction={""}>
               <Image
                 className="m-auto"
                 width={300}
