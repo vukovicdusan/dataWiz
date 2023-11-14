@@ -20,10 +20,11 @@ const CtaForm = () => {
 	}
 
 	const sendContactForm = async (
-		e: React.MouseEvent<HTMLButtonElement>,
+		e: React.FormEvent<HTMLFormElement>,
 		data: TContactFormInput | {}
 	) => {
 		e.preventDefault();
+		console.log(data);
 		fetch("api/contact", {
 			method: "POST",
 			body: JSON.stringify(data),
@@ -39,7 +40,7 @@ const CtaForm = () => {
 
 	return (
 		<form
-			onSubmit={(e) => sendContactForm(inputValue)}
+			onSubmit={(e) => sendContactForm(e, inputValue)}
 			className="flex flex-col gap-6"
 		>
 			<div className="relative flex flex-col w-full">

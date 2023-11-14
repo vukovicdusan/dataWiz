@@ -27,7 +27,7 @@ const handler = async (req, res) => {
 			await transporter.sendMail({
 				...mailOptions,
 				subject: `Poruka od ${data.email}`,
-				html: `<h2>Poruka od ${data.email}</h2><p>${data.message}</p><p>Tel:${data.tel}</p>`,
+				html: `<h2>Poruka od ${data.email}</h2><p>${data.message}</p>`,
 			});
 			return res.status(200).json({ success: true });
 		} catch (err) {
