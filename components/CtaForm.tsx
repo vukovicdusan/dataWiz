@@ -19,8 +19,29 @@ const CtaForm = () => {
 		setInputValue({ ...inputValue, [field]: value });
 	}
 
+	const sendContactForm = async (
+		e: React.MouseEvent<HTMLButtonElement>,
+		data: TContactFormInput | {}
+	) => {
+		e.preventDefault();
+		fetch("api/contact", {
+			method: "POST",
+			body: JSON.stringify(data),
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+		}).then((res) => {
+			if (!res.ok) throw new Error("Poruka nije mogla da bude poslata.");
+			return res.json();
+		});
+	};
+
 	return (
-		<form className="flex flex-col gap-6">
+		<form
+			onSubmit={(e) => sendContactForm(inputValue)}
+			className="flex flex-col gap-6"
+		>
 			<div className="relative flex flex-col w-full">
 				<input
 					className="max-w-full py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
