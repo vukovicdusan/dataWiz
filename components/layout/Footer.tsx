@@ -13,21 +13,21 @@ const Footer = () => {
           <ul className="flex gap-8">
             <li>
               <a href="www.google.com">
-                <svg className="w-[30px] h-[30px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
+                <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                   <use xlinkHref={`./images/sprite.svg#facebook`}></use>
                 </svg>
               </a>
             </li>
             <li>
               <a href="www.google.com">
-                <svg className="w-[30px] h-[30px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
+                <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                   <use xlinkHref={`./images/sprite.svg#instagram`}></use>
                 </svg>
               </a>
             </li>
             <li>
               <a href="www.google.com">
-                <svg className="w-[30px] h-[30px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
+                <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                   <use xlinkHref={`./images/sprite.svg#linkedin`}></use>
                 </svg>
               </a>
