@@ -1,23 +1,41 @@
 "use client";
 import React, { useState } from "react";
 import Button from "./Button";
-// import { sendContactForm } from "../lib/api";
 
 type TContactFormInput = {
-  field: string;
+  name: string;
+  email: string;
+  message: string;
 };
 
 const CtaForm = () => {
-  const [inputValue, setInputValue] = useState<TContactFormInput | {}>({});
+  const [inputValue, setInputValue] = useState<TContactFormInput>({
+    name: "",
+    email: "",
+    message: "",
+  });
+
   function inputHandler(
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) {
-    e.preventDefault;
+    e.preventDefault();
     let field = (e.target as HTMLInputElement | HTMLTextAreaElement).name;
     let value = (e.target as HTMLInputElement | HTMLTextAreaElement).value;
-    setInputValue({ ...inputValue, [field]: value });
+    switch (field) {
+      case "name":
+        setInputValue({ ...inputValue, name: value });
+        break;
+      case "email":
+        setInputValue({ ...inputValue, email: value });
+        break;
+      case "message":
+        setInputValue({ ...inputValue, message: value });
+        break;
+      default:
+        break;
+    }
   }
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +56,7 @@ const CtaForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="flex flex-col gap-6">
+    <form onSubmit={onSubmitHandler} className="flex flex-col gap-6  pt-2">
       <div className="relative flex flex-col w-full">
         <input
           className="max-w-full py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
@@ -51,7 +69,11 @@ const CtaForm = () => {
           onChange={inputHandler}
         />
         <label
-          className="absolute text-primaryAccent bg-secondaryAccent top-1/2 -translate-y-1/2 left-4 px-2 transition-all duration-200 ease-linear peer-focus:text-sm peer-focus:-top-1"
+          className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
+            Object.values(inputValue.name).length === 0
+              ? "top-1/2 -translate-y-1/2"
+              : "-translate-y-1/2"
+          }`}
           htmlFor="name"
         >
           Name
@@ -70,7 +92,11 @@ const CtaForm = () => {
           onChange={inputHandler}
         />
         <label
-          className="absolute text-primaryAccent bg-secondaryAccent top-1/2 -translate-y-1/2 left-4 px-2 transition-all duration-200 ease-linear peer-focus:text-sm peer-focus:-top-1"
+          className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
+            Object.values(inputValue.email).length === 0
+              ? "top-1/2 -translate-y-1/2"
+              : "-translate-y-1/2"
+          }`}
           htmlFor="email"
         >
           Email
@@ -88,14 +114,16 @@ const CtaForm = () => {
           onChange={inputHandler}
         />
         <label
-          className="absolute text-primaryAccent bg-secondaryAccent top-3 left-4 px-2 transition-all duration-200 ease-linear peer-focus:text-sm peer-focus:-top-3"
+          className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:text-sm peer-focus:-top-3 ${
+            Object.values(inputValue.message).length === 0 ? "top-3" : "-top-3"
+          }`}
           htmlFor="message"
         >
           Message
         </label>
       </div>
-      <p className="text-primaryAccent font-bold">
-        Thank you for your message! I will contact you ASAP!
+      <p className="text-green-500 font-bold">
+        Thank you for your message! I will get back to you ASAP!
       </p>
       <Button>Get your free audit</Button>
     </form>

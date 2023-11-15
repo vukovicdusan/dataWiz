@@ -11,18 +11,18 @@ const CtaSection = () => {
     <section id="audit" className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
         <div className="mb-10">
-          <AnimationContainer direction={"fromBottom"}>
-            <div className="flex gap-8 items-center justify-center relative">
+          <div className="flex gap-8 items-center justify-center relative">
+            <AnimationContainer direction={"fromBottom"}>
               <h2 className="text-5xl text-center mb-4 font-bold uppercase">
                 Improve your
                 <span className="text-primaryAccent"> data quality</span>
               </h2>
-            </div>
-            <AnimationContainer direction={"fromTop"}>
-              <p className="text-lg text-center">
-                Contact us because we are the best in the world.
-              </p>
             </AnimationContainer>
+          </div>
+          <AnimationContainer direction={"fromTop"}>
+            <p className="text-lg text-center">
+              Contact us because we are the best in the world.
+            </p>
           </AnimationContainer>
         </div>
         <div className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">
