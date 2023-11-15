@@ -67,7 +67,7 @@ const CtaForm = () => {
 			console.log(err);
 		}
 	};
-	console.log(responseState);
+
 	return (
 		<form onSubmit={onSubmitHandler} className="flex flex-col gap-6  pt-2">
 			<div className="relative flex flex-col w-full">
