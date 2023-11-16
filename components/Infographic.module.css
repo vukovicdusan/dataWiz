@@ -16,7 +16,7 @@
   --column-gap: 2rem;
   --rocket-width: 6rem;
 
-  padding-bottom: 14rem;
+  padding-bottom: 16rem;
   list-style: none;
   display: grid;
   column-gap: var(--column-gap);
@@ -27,7 +27,7 @@
   overflow: hidden;
   width: min(45rem, 100%);
   margin-inline: auto;
-  margin-block-end: -12rem;
+  margin-block-end: -16rem;
   --column-gap: 2rem;
   --rocket-width: 6rem;
   grid-template-columns: 1fr var(--rocket-width) 1fr;
