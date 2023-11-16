@@ -1,8 +1,19 @@
 import React from "react";
 
-const BackgroundLight = () => {
+type TWidthHeightProps = {
+  width?: string;
+  height?: string;
+};
+
+const BackgroundLight = (props: TWidthHeightProps) => {
+  // let width = "w-[" + props.width ? props.width : "50%" + "]";
+  // let height = "w-[" + props.height ? props.height : "50%" + "]";
   return (
-    <span className="bg-[rgba(46,_104,_221,_0.40)] blur-3xl w-1/2 h-1/2 absolute -z-10 rounded-full top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></span>
+    <span
+      className={`bg-[rgba(46,_104,_221,_0.40)] blur-3xl absolute -z-10 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${
+        props.width || "w-1/2"
+      } ${props.height || "h-1/2"}`}
+    ></span>
   );
 };
 

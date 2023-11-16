@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import Button from "../Button";
 import rocket from "../../public/images/rocket-cta.svg";
 import Wrapper from "../Wrapper";
 import CtaForm from "../CtaForm";

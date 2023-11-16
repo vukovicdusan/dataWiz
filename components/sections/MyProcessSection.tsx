@@ -8,7 +8,7 @@ const MyProcessSection = () => {
     <section id="process">
       <Wrapper>
         <AnimationContainer direction={"fromRight"}>
-          <h2 className="text-5xl text-primaryAccent text-center mb-10 font-bold uppercase">
+          <h2 className="text-5xl text-center mb-10 font-bold uppercase">
             My <span className="text-primaryAccent">Process</span>
           </h2>
         </AnimationContainer>
