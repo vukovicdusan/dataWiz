@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/contact/route.jsx"
+    "app/api/contact/route.jsx",
+    "components/ParallaxProvider.jsx"
   ],
   "exclude": ["node_modules"]
 }
