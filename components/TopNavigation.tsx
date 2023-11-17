@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type TTopNavigation = {
   links: {
@@ -9,6 +9,16 @@ type TTopNavigation = {
 };
 const TopNavigation = (props: TTopNavigation) => {
   const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    open
+      ? (document.body.style.position = "fixed")
+      : (document.body.style.position = "revert");
+
+    return () => {
+      document.body.style.position = "revert";
+    };
+  }, [open]);
 
   function navHandler(
     e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>
@@ -20,7 +30,7 @@ const TopNavigation = (props: TTopNavigation) => {
     <>
       <nav
         id="mobile-navigation"
-        className={`fixed sm:relative top-0 right-0 pl-10 pr-4 py-2  h-full w-max flex items-end z-30 backdrop-blur-lg bg-[rgba(46,104,208,.2)] sm:bg-transparent sm:backdrop-blur-0 sm:block transition-all duration-500 ease-in-out ${
+        className={`fixed sm:relative top-0 bottom-0 right-0 pl-10 pr-4 py-6 border border-l-primaryAccent sm:border-0 h-full w-max flex items-end z-30 backdrop-blur-lg bg-[rgba(46,104,208,.2)] sm:bg-transparent sm:backdrop-blur-0 sm:block transition-all duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-80 sm:translate-x-0"
         }`}
       >
@@ -40,7 +50,7 @@ const TopNavigation = (props: TTopNavigation) => {
       </nav>
       <button
         onClick={navHandler}
-        className="sm:hidden flex flex-col gap-[6px] fixed top-5 right-5 w-max h-max z-30"
+        className="sm:hidden flex flex-col gap-[6px] absolute top-2 right-0 w-max h-max z-30"
         aria-expanded={open}
         aria-controls="mobile-navigation"
       >
