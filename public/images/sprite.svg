@@ -24,20 +24,10 @@
 					</clipPath>
 				</defs>
 			</symbol>
-			 <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" id="dot-line">
-    			<g id="Mask group">
-					<mask id="mask0_125_929" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="30">
-						<g id="Group">
-						<path id="Vector" d="M30 0H0V30H30V0Z" fill="#2E68DD"></path>
-						</g>
-					</mask>
-					<g mask="url(#mask0_125_929)">
-						<g id="Group_2">
-						<path id="Vector_2" d="M18.7509 19.7018L23.4528 14.9999L18.7509 10.298L14.0491 14.9999L18.7509 19.7018ZM18.7509 22.3556L12.3328 15.9374H3.17406V14.0625H12.3328L18.7509 7.64429L26.1066 14.9999L18.7509 22.3556Z" fill="#2E68DD"></path>
-						</g>
-					</g>
-				</g>
-  			</symbol>
+			<symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" id="dot-line">
+   				<path d="M18.7509 19.7018L23.4528 14.9999L18.7509 10.298L14.0491 14.9999L18.7509 19.7018ZM18.7509 22.3556L12.3328 15.9374H3.17406V14.0625H12.3328L18.7509 7.64429L26.1066 14.9999L18.7509 22.3556Z" fill="#2E68DD"></path>
+			</symbol>
+
 			<symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 85" id="website-tracking">
 				<g id="Layer_1 (3) 1" clip-path="url(#clip0_125_668)">
 				<g id="Clip path group">
