@@ -22,6 +22,7 @@ const ServiceBox = (props: TServiceBoxProps) => {
           <ul className="flex flex-wrap gap-2 mt-2">
             {props.subservices?.map((subservice, index) => (
               <ServiceTooltipElement
+                key={index}
                 title={subservice[0]}
                 content={subservice[1]}
               ></ServiceTooltipElement>
