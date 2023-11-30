@@ -44,9 +44,7 @@ const ServiceTooltipElement = (props: TServiceTooltipElement) => {
   }, []);
 
   const tooltipCloseHandler = () => {
-    if (document.activeElement) {
-      (document.activeElement as HTMLElement).blur();
-    }
+    setTooltipShow(false);
   };
 
   return (
