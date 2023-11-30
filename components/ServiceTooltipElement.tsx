@@ -25,8 +25,8 @@ const ServiceTooltipElement = (props: TServiceTooltipElement) => {
         ? setTooltipYPosition("right-0 md:right-full")
         : setTooltipYPosition("left-0 sm:left-0 md:left-1/2");
       distanceToTop > distanceToBottom
-        ? setTooltipXPosition("top-0 md:-top-[300%]")
-        : setTooltipXPosition("bottom-0 md:top-full");
+        ? setTooltipXPosition("-top-[300%]")
+        : setTooltipXPosition("top-full");
     }
   };
 
@@ -58,7 +58,7 @@ const ServiceTooltipElement = (props: TServiceTooltipElement) => {
       </svg>
       <button className="contents">{props.title}</button>
       <div
-        className={`fixed sm:absolute bg-[rgba(0,0,0,0.3) w-full  md:w-[30ch] sm:w-[40ch] h-fit bg-secondaryAccent rounded-3xl border border-primaryAccent p-4
+        className={`absolute bg-[rgba(0,0,0,0.3) max-[330px]:w-[25ch]  w-[30ch] sm:w-[35h] h-fit bg-secondaryAccent rounded-3xl border border-primaryAccent p-4
                   transition-all duration-200 ease-linear z-30 ${
                     tooltipShow
                       ? " opacity-100 visible "
