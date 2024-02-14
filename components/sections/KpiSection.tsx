@@ -6,19 +6,19 @@ const KpiSection = () => {
     <Wrapper>
       <section className="mb-20 mt-20">
         <div className="switcher gap-10 justify-center mb-20">
-          <div className="text-center">
+          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
             <p className="text-8xl font-bold text-primaryAccent mb-2">200+</p>
             <p className="font-bold">Projects</p>
           </div>
-          <div className="text-center">
+          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
             <p className="text-8xl font-bold text-primaryAccent mb-2">6y</p>
             <p className="font-bold">Of Experience</p>
           </div>
-          <div className="text-center">
+          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
             <p className="text-8xl font-bold text-primaryAccent mb-2">300+</p>
             <p className="font-bold">Audits</p>
           </div>
-          <div className="text-center">
+          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
             <p className="text-8xl font-bold text-primaryAccent mb-2">150+</p>
             <p className="font-bold">Clients</p>
           </div>
