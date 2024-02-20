@@ -2,6 +2,7 @@ import React from "react";
 import Wrapper from "../Wrapper";
 import Infographic from "../Infographic";
 import AnimationContainer from "../AnimationContainer";
+import Infographic2 from "../Infographic2";
 
 const MyProcessSection = () => {
   return (
@@ -12,7 +13,8 @@ const MyProcessSection = () => {
             My <span className="text-primaryAccent">Process</span>
           </h2>
         </AnimationContainer>
-        <Infographic></Infographic>
+        {/* <Infographic></Infographic> */}
+        <Infographic2></Infographic2>
       </Wrapper>
     </section>
   );
