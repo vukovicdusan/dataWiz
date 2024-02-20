@@ -1,27 +1,32 @@
 import React from "react";
 import Wrapper from "../Wrapper";
+import KpiCounter from "../KpiCounter";
 
 const KpiSection = () => {
   return (
     <Wrapper>
       <section className="mb-20 mt-20">
         <div className="switcher gap-10 justify-center mb-20">
-          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
-            <p className="text-8xl font-bold text-primaryAccent mb-2">200+</p>
-            <p className="font-bold">Projects</p>
-          </div>
-          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
-            <p className="text-8xl font-bold text-primaryAccent mb-2">6y</p>
-            <p className="font-bold">Of Experience</p>
-          </div>
-          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
-            <p className="text-8xl font-bold text-primaryAccent mb-2">300+</p>
-            <p className="font-bold">Audits</p>
-          </div>
-          <div className="text-center bg-secondaryAccent rounded-3xl py-6 px-4">
-            <p className="text-8xl font-bold text-primaryAccent mb-2">150+</p>
-            <p className="font-bold">Clients</p>
-          </div>
+          <KpiCounter
+            number={6}
+            afterNumber={"y"}
+            title={"Of Experience"}
+          ></KpiCounter>
+          <KpiCounter
+            number={200}
+            afterNumber={"+"}
+            title={"Projects"}
+          ></KpiCounter>
+          <KpiCounter
+            number={300}
+            afterNumber={"+"}
+            title={"Audits"}
+          ></KpiCounter>
+          <KpiCounter
+            number={150}
+            afterNumber={"+"}
+            title={"Clients"}
+          ></KpiCounter>
         </div>
 
         <div className="flex flex-wrap gap-20">
