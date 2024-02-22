@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Infographic2.module.css";
+import Image from "next/image";
+import hat from "../public/images/logo-hat.png";
 
 const Infographic2 = () => {
   const bubbleContainerRef = useRef<HTMLDivElement>(null);
@@ -61,8 +63,7 @@ const Infographic2 = () => {
     <div className={`${styles.mainContainer} ${styles.centralized}`}>
       <div className={styles.mainCircle}>
         <div className={`${styles.inner} ${styles.centralized}`}>
-          My <br />
-          Process
+          <Image alt="logo" src={hat}></Image>
         </div>
       </div>
       {processes.map((process, index) => (

@@ -25,7 +25,6 @@
 }
 
 .mainContainer {
-  border: solid 1px #000;
   margin: 0 auto;
   padding-top: 120px;
   height: 350px;
@@ -45,8 +44,8 @@
 }
 
 .mainContainer .mainCircle .inner {
-  background: #4c67aa;
-  border: 4px solid #e3e3e3;
+  /* background: #4c67aa; */
+  /* border: 4px solid #e3e3e3; */
   border-radius: 100%;
   box-shadow: 4px 5px 5px 0px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
@@ -124,35 +123,7 @@
   text-align: center;
 }
 
-.mainContainer .bubbleContainer.black .bubble,
-.mainContainer .bubbleContainer.black .pointer .inner {
-  background: #505269;
-}
-
 .mainContainer .bubbleContainer.blueDark .bubble,
 .mainContainer .bubbleContainer.blueDark .pointer .inner {
-  background: #4c67aa;
-}
-
-.mainContainer .bubbleContainer.blueLight .bubble,
-.mainContainer .bubbleContainer.blueLight .pointer .inner {
-  background: #25ade1;
-}
-
-.mainContainer .bubbleContainer.green .bubble,
-.mainContainer .bubbleContainer.green .pointer .inner {
-  background: #8dc03f;
-}
-
-.mainContainer .bubbleContainer.orange .bubble {
-  background: #fa9128;
-}
-
-.mainContainer .bubbleContainer.orange .pointer .inner {
-  background: #fa9128;
-}
-
-.mainContainer .bubbleContainer.red .bubble,
-.mainContainer .bubbleContainer.red .pointer .inner {
-  background: #e46020;
+  background: var(--primaryAccent);
 }
