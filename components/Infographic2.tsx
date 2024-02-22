@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Infographic2.module.css";
 import Image from "next/image";
-import hat from "../public/images/logo-hat.png";
+import hat from "../public/images/logo-hat-star.png";
 
 const Infographic2 = () => {
   const bubbleContainerRef = useRef<HTMLDivElement>(null);
