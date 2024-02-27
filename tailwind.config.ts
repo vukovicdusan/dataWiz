@@ -19,6 +19,9 @@ const config: Config = {
         wrapperWidth: "clamp(16rem, 93vw, 75rem)",
         wrapperPadding: "clamp(1.09rem, 1rem + 0.47vw, 1.33rem)",
       },
+      animation: {
+        "spin-slow": "spin 50s linear infinite",
+      },
     },
   },
   plugins: [],

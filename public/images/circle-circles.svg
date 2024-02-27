@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgba(255, 255, 255, 0);" cx="206.057" cy="190.023" rx="129.454" ry="129.454" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" cx="240.498" cy="161.52" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" cx="267.814" cy="129.454" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" cx="169.239" cy="211.995" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" cx="131.234" cy="232.779" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgba(255, 255, 255, 0);" cx="205.463" cy="190.024" rx="86.105" ry="86.105" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+  <ellipse style="stroke: rgb(0, 0, 0); fill: rgba(255, 255, 255, 0);" cx="206.947" cy="189.926" rx="44.24" ry="44.24" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+</svg>

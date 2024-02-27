@@ -3,6 +3,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import CtaSection from "@/components/sections/CtaSection";
 import FaqSection from "@/components/sections/FaqSection";
 import Hero from "@/components/sections/Hero";
+import IndustriesSection from "@/components/sections/IndustriesSection";
 import InfoSection from "@/components/sections/InfoSection";
 import KpiSection from "@/components/sections/KpiSection";
 import MyProcessSection from "@/components/sections/MyProcessSection";
@@ -12,12 +13,13 @@ import Shapedivider from "@/components/Shapedivider";
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-hidden">
       <Hero />
       <Shapedivider classProp={"translate-y-1"}></Shapedivider>
       <InfoSection></InfoSection>
       <Shapedivider classProp={"rotate-180 translate-y-[-5px]"}></Shapedivider>
       <KpiSection></KpiSection>
+      <IndustriesSection></IndustriesSection>
       <ServiceSection></ServiceSection>
       <MyProcessSection></MyProcessSection>
       <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider>

@@ -166,5 +166,15 @@
 				</clipPath>
 				</defs>
   			</symbol>
-			
+			<!-- <svg width="0" height="0" class="hidden"> -->
+				<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" id="circle-circles">
+					<ellipse cx="206.057" cy="190.023" rx="129.454" ry="129.454" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"></ellipse>
+					<ellipse cx="240.498" cy="161.52" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"></ellipse>
+					<ellipse cx="267.814" cy="129.454" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"></ellipse>
+					<ellipse cx="169.239" cy="211.995" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"></ellipse>
+					<ellipse cx="131.234" cy="232.779" rx="6.532" ry="6.532" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"></ellipse>
+					<ellipse cx="205.463" cy="190.024" rx="86.105" ry="86.105" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"></ellipse>
+					<ellipse cx="206.947" cy="189.926" rx="44.24" ry="44.24" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"></ellipse>
+				</symbol>
+			<!-- </svg> -->
 		</svg>
