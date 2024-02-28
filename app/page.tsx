@@ -19,8 +19,8 @@ export default function Home() {
       <InfoSection></InfoSection>
       <Shapedivider classProp={"rotate-180 translate-y-[-5px]"}></Shapedivider>
       <KpiSection></KpiSection>
-      <IndustriesSection></IndustriesSection>
       <ServiceSection></ServiceSection>
+      <IndustriesSection></IndustriesSection>
       <MyProcessSection></MyProcessSection>
       <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider>
       <CtaSection></CtaSection>

@@ -5,12 +5,14 @@ import { ChildrenProps } from "@/types/ChildrenProps";
 interface AnimationContainerProps extends ChildrenProps {
   direction: string;
   delay?: string;
+  wrapperClass?: string;
 }
 
 const AnimationContainer: React.FC<AnimationContainerProps> = ({
   direction,
   children,
   delay,
+  wrapperClass,
 }) => {
   let animationRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
@@ -57,7 +59,7 @@ const AnimationContainer: React.FC<AnimationContainerProps> = ({
   }
 
   return (
-    <div className="overflow-hidden" ref={animationRef}>
+    <div className={`overflow-hidden ${wrapperClass}`} ref={animationRef}>
       <div
         className={`transition-all duration-1000 ease-in-out h-full ${
           show
