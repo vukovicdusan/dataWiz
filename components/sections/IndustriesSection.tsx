@@ -26,13 +26,13 @@ const IndustriesSection = () => {
   ];
   return (
     <Wrapper>
-      <div className="flex justify-between flex-wrap">
-        <section className="pb-10 relative basis-1/2">
+      <div className="flex justify-between flex-wrap gap-8">
+        <section className="pb-10 relative basis-[calc(50%-1rem)] flex-grow-[999]">
           <AnimationContainer direction={"fromTop"}>
             <div className=" flex flex-row gap-4 align-middle mb-2">
-              <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full">
+              <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full shrink-0">
                 <Image
-                  className="invert object-contain"
+                  className="invert object-contain "
                   width={35}
                   src={industries}
                   alt="industries icon"
@@ -65,12 +65,12 @@ const IndustriesSection = () => {
             </ul>
           </div>
         </section>
-        <section className="mb-20 relative basis-1/2">
+        <section className="mb-20 relative basis-[calc(50%-1rem)] flex-grow-[999]">
           <AnimationContainer direction={"fromTop"}>
             <div className="flex flex-row gap-4 align-middle mb-2">
-              <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full">
+              <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full shrink-0">
                 <Image
-                  className="invert object-contain"
+                  className="invert object-contain "
                   width={35}
                   src={tools}
                   alt="tools icon"
