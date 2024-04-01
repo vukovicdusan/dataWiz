@@ -11,7 +11,7 @@ const TopNavigation = (props: TTopNavigation) => {
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    open && document.body.clientWidth < 650
+    open && document.body.clientWidth < 1025
       ? (document.body.style.position = "fixed")
       : (document.body.style.position = "revert");
 
@@ -30,11 +30,11 @@ const TopNavigation = (props: TTopNavigation) => {
     <>
       <nav
         id="mobile-navigation"
-        className={`fixed sm:relative top-0 bottom-0 right-0 pl-10 pr-4 py-6 border-l border-l-primaryAccent sm:border-0 h-full w-max flex items-end z-30 backdrop-blur-lg bg-[rgba(46,104,208,.2)] sm:bg-transparent sm:backdrop-blur-0 sm:block transition-all duration-500 ease-in-out ${
-          open ? "translate-x-0" : "translate-x-80 sm:translate-x-0"
+        className={`fixed lg:relative top-0 bottom-0 right-0 pl-10 pr-4 py-6 border-l border-l-primaryAccent lg:border-0 h-full w-max flex items-end z-30 backdrop-blur-lg bg-[rgba(46,104,208,.2)] lg:bg-transparent lg:backdrop-blur-0 lg:block transition-all duration-500 ease-in-out ${
+          open ? "translate-x-0" : "translate-x-80 lg:translate-x-0"
         }`}
       >
-        <ul className="flex gap-3 flex-wrap sm:flex-nowrap flex-col sm:flex-row">
+        <ul className="flex gap-3 flex-wrap lg:flex-nowrap flex-col lg:flex-row">
           {props.links.map((link, index) => (
             <li key={index} className="text-right">
               <a
@@ -50,7 +50,7 @@ const TopNavigation = (props: TTopNavigation) => {
       </nav>
       <button
         onClick={navHandler}
-        className="sm:hidden flex flex-col gap-[6px] absolute top-2 right-0 w-max h-max z-30"
+        className="lg:hidden flex flex-col gap-[6px] absolute top-2 right-0 w-max h-max z-30"
         aria-expanded={open}
         aria-controls="mobile-navigation"
       >
