@@ -26,7 +26,7 @@ const IndustriesSection = () => {
   ];
   return (
     <Wrapper>
-      <div className="flex justify-between flex-wrap gap-8">
+      <div id="industries" className="flex justify-between flex-wrap gap-8">
         <section className="pb-10 relative basis-[calc(50%-1rem)] flex-grow-[999]">
           <AnimationContainer direction={"fromTop"}>
             <div className=" flex flex-row gap-4 align-middle mb-2">

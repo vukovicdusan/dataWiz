@@ -5,7 +5,7 @@ import KpiCounter from "../KpiCounter";
 const KpiSection = () => {
   return (
     <Wrapper>
-      <section className="mb-20 mt-20">
+      <section id="kpis" className="mb-20 mt-20">
         <div className="switcher gap-5 md:gap-10 justify-center mb-20">
           <KpiCounter
             number={6}

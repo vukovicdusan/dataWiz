@@ -6,7 +6,9 @@ import TopNavigation from "../TopNavigation";
 
 const Header = () => {
   const linksArr = [
+    { link: "#kpis", name: "What sets me apart" },
     { link: "#services", name: "Services" },
+    { link: "#industries", name: "Industries" },
     { link: "#process", name: "My Process" },
     { link: "#audit", name: "Audit" },
     { link: "#faq", name: "FAQ" },
