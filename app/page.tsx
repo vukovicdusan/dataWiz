@@ -16,9 +16,9 @@ export default function Home() {
     <main className="overflow-hidden">
       <Hero />
       <Shapedivider classProp={"translate-y-1"}></Shapedivider>
-      <InfoSection></InfoSection>
-      <Shapedivider classProp={"rotate-180 translate-y-[-5px]"}></Shapedivider>
+      {/* <InfoSection></InfoSection> */}
       <KpiSection></KpiSection>
+      <Shapedivider classProp={"rotate-180 translate-y-[-5px]"}></Shapedivider>
       <ServiceSection></ServiceSection>
       <IndustriesSection></IndustriesSection>
       <MyProcessSection></MyProcessSection>

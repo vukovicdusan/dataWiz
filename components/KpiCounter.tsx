@@ -10,7 +10,7 @@ type kpiPropsType = {
 
 const KpiCounter = (props: kpiPropsType) => {
   return (
-    <div className="text-center bg-secondaryAccent rounded-3xl py-4 md:py-6 px-4">
+    <div className="text-center border border-white rounded-3xl py-4 md:py-6 px-4">
       <p className="text-6xl md:text-8xl font-bold text-primaryAccent mb-2">
         <CountUp
           enableScrollSpy={true}
