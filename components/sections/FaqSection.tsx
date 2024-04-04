@@ -3,6 +3,7 @@ import Wrapper from "../Wrapper";
 import BackgroundLight from "../BackgroundLight";
 import FaqItem from "../FaqItem";
 import AnimationContainer from "../AnimationContainer";
+import FaqsLimiter from "../FaqsLimiter";
 
 const FaqSection = () => {
   const faqs = [
@@ -42,15 +43,7 @@ const FaqSection = () => {
             </p>
           </AnimationContainer>
         </div>
-        {faqs.map((faq, index) => (
-          <AnimationContainer
-            key={index}
-            direction={"fromBottom"}
-            delay={"delay-" + index + "00"}
-          >
-            <FaqItem body={faq.body} title={faq.title}></FaqItem>
-          </AnimationContainer>
-        ))}
+        <FaqsLimiter faqs={faqs}></FaqsLimiter>
         <BackgroundLight></BackgroundLight>
       </section>
     </Wrapper>
