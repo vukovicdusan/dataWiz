@@ -18,6 +18,22 @@
   }
 }
 
+@keyframes circle {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.duration {
+  animation: circle 60s alternate ease infinite;
+}
+.duration text {
+  font-size: 12px;
+}
+
 .centralized {
   display: flex;
   align-items: center;
@@ -34,7 +50,7 @@
 }
 
 .mainContainer .mainCircle {
-  border: 6px solid #454a5c;
+  border: 6px solid #111833;
   border-radius: 100%;
   box-sizing: border-box;
   padding: 24px;
@@ -69,8 +85,8 @@
 }
 
 .mainContainer .bubbleContainer .pointer {
-  background: #fff;
-  border: 4px solid #454a5c;
+  background: #111833;
+  border: 4px solid #111833;
   border-radius: 100%;
   box-sizing: border-box;
   position: absolute;
@@ -81,14 +97,14 @@
 }
 
 .mainContainer .bubbleContainer .pointer .arrow {
-  width: 0;
+  /* width: 0;
   height: 0;
   border-style: solid;
   border-width: 7px 14px 7px 0;
-  border-color: transparent #454a5c transparent transparent;
+  border-color: transparent #111833 transparent transparent;
   position: absolute;
   left: -15px;
-  top: 5.52px;
+  top: 5.52px; */
 }
 
 .mainContainer .bubbleContainer .pointer .inner {
@@ -104,10 +120,10 @@
   border-radius: 100%;
   box-sizing: border-box;
   position: absolute;
-  height: 110px;
+  height: 125px;
   top: calc(50% - 55px);
   left: -145px;
-  width: 110px;
+  width: 125px;
   transform: rotate(0deg);
   transition: all ease 0.8s;
 }
@@ -117,8 +133,8 @@
   border-radius: 100%;
   box-shadow: 4px 5px 5px 0px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  height: 84px;
-  width: 84px;
+  height: 100px;
+  width: 100px;
   overflow: hidden;
   text-align: center;
 }
@@ -148,7 +164,7 @@
   .mainContainer .bubbleContainer .bubble {
     height: 90px;
     width: 90px;
-    left: -115px;
+    left: -125px;
   }
 
   .mainContainer .bubbleContainer .bubble .inner {
@@ -156,24 +172,33 @@
     width: 68px;
     font-size: 14px;
   }
+
+  .duration {
+    width: 100px;
+    height: 100px;
+  }
+
+  .duration text {
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 450px) {
   .mainContainer .mainCircle {
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
     padding: 10px;
   }
 
   .mainContainer .bubbleContainer {
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
   }
 
   .mainContainer .bubbleContainer .bubble {
-    height: 70px;
-    width: 70px;
-    left: -95px;
+    height: 80px;
+    width: 80px;
+    /* left: -95px; */
     top: calc(50% - 35px);
   }
 
@@ -198,5 +223,9 @@
   .mainContainer .bubbleContainer .pointer .arrow {
     left: -17px;
     top: 1px;
+  }
+
+  .duration {
+    display: none;
   }
 }

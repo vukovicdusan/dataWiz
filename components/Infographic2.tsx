@@ -4,15 +4,21 @@ import styles from "./Infographic2.module.css";
 import Image from "next/image";
 import hat from "../public/images/logo-hat-star.png";
 
+type ProcessType = {
+  name: string;
+  duration: string;
+};
+
 const Infographic2 = () => {
   const bubbleContainerRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
-  let processes: string[] = [
-    " Introductory Call",
-    "Tracking Audit",
-    "Data Plan",
-    "Plan Execution",
-    "Wrap-up Meeting",
+  let processes: ProcessType[] = [
+    { name: "Introductory Call", duration: "~ 2 days" },
+    { name: "Audit", duration: "~ 2 days" },
+    { name: "Planning", duration: "~ 1 day" },
+    { name: "Plan Execution ", duration: "~ 1-2 weeks" },
+    { name: "Testing", duration: "~ 1 week" },
+    { name: "Review Call", duration: "~ 2 days" },
   ];
 
   useEffect(() => {
@@ -81,10 +87,26 @@ const Infographic2 = () => {
           </div>
           <div
             style={show ? getStyle(index, "bubble") : {}}
-            className={`${styles.bubble}  ${styles.centralized}`}
+            className={`relative z-0 ${styles.bubble}  ${styles.centralized}`}
           >
+            <svg
+              className={`absolute z-10 fill-white w-[calc(100%+10px)] h-[calc(100%+10px)] ${styles.duration}`}
+              viewBox="0 0 100 100"
+              width="100"
+              height="100"
+            >
+              <defs>
+                <path
+                  id="circle"
+                  d=" M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                ></path>
+              </defs>
+              <text fontSize="13">
+                <textPath xlinkHref="#circle">{process.duration}</textPath>
+              </text>
+            </svg>
             <div className={`${styles.inner}  ${styles.centralized}`}>
-              {process}
+              {process.name}
             </div>
           </div>
         </div>
