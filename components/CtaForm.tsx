@@ -9,9 +9,18 @@ type TResponseState = {
   success: boolean;
 };
 
-const CtaForm = () => {
+type CtaContentPropType = {
+  id: string;
+  title: string;
+  subtitle: string;
+  list: string[];
+  ctaButton: string;
+};
+
+const CtaForm = (props: CtaContentPropType) => {
   const [inputValue, valueHandler] = useInput();
   const [loading, setLoading] = useState<boolean>(false);
+
   const [responseState, setResponseState] = useState<TResponseState>({
     message: "initial_state",
     success: false,
@@ -42,13 +51,15 @@ const CtaForm = () => {
     else return true;
   }
 
-  console.log(inputValue);
-
   return (
-    <form onSubmit={onSubmitHandler} className="flex flex-col gap-6  pt-2">
+    <form
+      id={props.id}
+      onSubmit={onSubmitHandler}
+      className="flex flex-col gap-6  pt-2"
+    >
       <div className="relative flex flex-col w-full">
         <input
-          className="max-w-full py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
           type="text"
           name="name"
           id="name"
@@ -70,7 +81,7 @@ const CtaForm = () => {
       </div>
       <div className="relative flex flex-col w-full">
         <input
-          className="max-w-full py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
           type="text"
           name="email"
           id="email"
@@ -93,7 +104,7 @@ const CtaForm = () => {
       </div>
       <div className="relative flex flex-col w-full">
         <input
-          className="max-w-full py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
           type="text"
           name="website"
           id="website"
@@ -116,7 +127,7 @@ const CtaForm = () => {
       </div>
       <div className="relative flex flex-col w-full">
         <textarea
-          className="max-w-full py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
           name="message"
           id="message"
           autoCapitalize="none"
@@ -145,7 +156,7 @@ const CtaForm = () => {
         </p>
       ) : null}
       <div className="flex gap-2 items-center">
-        <Button>Get your free audit</Button>
+        <Button>{props.ctaButton}</Button>
         {loading ? <Spinner></Spinner> : null}
       </div>
     </form>

@@ -1,11 +1,43 @@
-import Image from "next/image";
-import React from "react";
-import rocket from "../../public/images/rocket-cta.svg";
+"use client";
+// import Image from "next/image";
+import React, { useState } from "react";
+// import rocket from "../../public/images/rocket-cta.svg";
 import Wrapper from "../Wrapper";
 import CtaForm from "../CtaForm";
 import AnimationContainer from "../AnimationContainer";
 
+let auditCta = {
+  id: "audit",
+  title: "Free Audit: Get More Data. Better Data.",
+  subtitle:
+    "The only thing worse than not being data-driven is being driven by bad data.",
+  list: [
+    "Let's talk, and I’ll help you get:",
+    "More higher quality data to optimize website, user journey and marketing.",
+    "Enhanced ad performance.",
+    "Future-proof analytic setup.",
+    "Clean and easy-to-manage setup.",
+  ],
+  ctaButton: "Get your free audit",
+};
+
+let consultationCta = {
+  id: "consultation",
+  title: "Free Consultation: Big things start with small talk.",
+  subtitle:
+    "Let’s unpack your business and explore how can I help achieve your goals.",
+  list: [
+    "I will help you:",
+    "Spot and fix issues in your current setup",
+    "Identify areas of improvement",
+    "Outline the implementation plan",
+    "Answer all your questions",
+  ],
+  ctaButton: "Start Your Success Story",
+};
+
 const CtaSection = () => {
+  const [ctaContent, setCtaContent] = useState(auditCta);
   return (
     <section id="audit" className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
@@ -19,26 +51,43 @@ const CtaSection = () => {
             </AnimationContainer>
           </div>
           <AnimationContainer direction={"fromTop"}>
-            <p className="text-lg text-center">
-              Contact us because we are the best in the world.
-            </p>
+            <p className="text-lg text-center">{ctaContent.subtitle}</p>
           </AnimationContainer>
         </div>
         <div className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">
           <div className="lg:basis-1/2 basis-full">
+            <AnimationContainer direction={"fromLeft"}>
+              <CtaForm {...ctaContent}></CtaForm>
+            </AnimationContainer>
+          </div>
+          <div className="lg:basis-1/2 basis-full">
             <AnimationContainer direction={""}>
-              <Image
+              <ul className="ml-8">
+                {ctaContent.list.map((item, index) => (
+                  <li
+                    className={`flex gap-2 text-lg mb-2 max-w-[40ch] ${
+                      index === 0 ? "font-bold mb-4" : ""
+                    }`}
+                    key={index}
+                  >
+                    <svg
+                      className={`w-[24px] h-[24px] mt-1 shrink-0 ${
+                        index === 0 ? "hidden" : ""
+                      }`}
+                    >
+                      <use xlinkHref={`./images/sprite.svg#dot-line`}></use>
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {/* <Image
                 className="m-auto"
                 width={300}
                 height={300}
                 src={rocket}
                 alt="rocket"
-              ></Image>
-            </AnimationContainer>
-          </div>
-          <div className="lg:basis-1/2 basis-full">
-            <AnimationContainer direction={"fromLeft"}>
-              <CtaForm></CtaForm>
+              ></Image> */}
             </AnimationContainer>
           </div>
         </div>
