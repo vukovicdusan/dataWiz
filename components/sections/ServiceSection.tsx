@@ -63,6 +63,36 @@ const ServiceSection = () => {
             ]}
             icon={"tracking-strategy"}
           ></ServiceBox>
+             <ServiceBox
+            service={"Marketing Conversion Tracking"}
+            subservices={[
+              [
+                "Google Ads",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+              [
+                "Meta Ads",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+              [
+                "Microsoft Ads",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+              [
+                "TikTok Ads",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+              [
+                "Linkedin Ads",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+              [
+                "Other",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+            ]}
+            icon={"conversion-tracking"}
+          ></ServiceBox>
           <ServiceBox
             service={"Tracking Audit & Planning"}
             subservices={[
@@ -93,6 +123,25 @@ const ServiceSection = () => {
             ]}
             icon={"tracking-audit"}
           ></ServiceBox>
+          
+          <ServiceBox
+            service={"Reporting & Visualization"}
+            subservices={[
+              [
+                "GA4",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+              [
+                "Looker Studio",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+              [
+                "Reporting Automation",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+              ],
+            ]}
+            icon={"reporting-visualization"}
+          ></ServiceBox>
           <ServiceBox
             service={"Analysis"}
             subservices={[
@@ -118,59 +167,6 @@ const ServiceSection = () => {
               ],
             ]}
             icon={"analysis"}
-          ></ServiceBox>
-          <ServiceBox
-            service={"Reporting & Visualization"}
-            subservices={[
-              [
-                "GA4",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-              [
-                "Looker Studio",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-              [
-                "Reporting Automation",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-            ]}
-            icon={"reporting-visualization"}
-          ></ServiceBox>
-          {/* <ServiceBox
-            service={"Server-Side Tracking"}
-            icon={"server-side-tracking"}
-          ></ServiceBox> */}
-
-          <ServiceBox
-            service={"Marketing Conversion Tracking"}
-            subservices={[
-              [
-                "Google Ads",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-              [
-                "Meta Ads",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-              [
-                "Microsoft Ads",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-              [
-                "TikTok Ads",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-              [
-                "Linkedin Ads",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-              [
-                "Other",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-              ],
-            ]}
-            icon={"conversion-tracking"}
           ></ServiceBox>
 
           <ServiceBox
