@@ -52,7 +52,7 @@ const CtaSection = () => {
   let firstSection = ctaTitleArr[0] + " " + ctaTitleArr[1];
   let lastSection = ctaTitleArr.slice(2, ctaTitleArr.length).join(" ");
   return (
-    <section id="form" className="relative bg-secondaryAccent py-4 z-10">
+    <section id="cta" className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
         <div className="mb-10">
           <div className="flex gap-8 items-center justify-center relative">

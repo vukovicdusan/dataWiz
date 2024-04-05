@@ -9,7 +9,7 @@ const HeroCta = () => {
     let consultationCta = "Start Your Success Story";
 
   return (
-    <ButtonLink link={"/contact"}>{path === "/audit" ? auditCta : consultationCta}</ButtonLink>
+    <ButtonLink link={"#cta"}>{path === "/audit" ? auditCta : consultationCta}</ButtonLink>
   )
 }
 
