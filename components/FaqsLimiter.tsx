@@ -24,11 +24,11 @@ const FaqsLimiter: React.FC<{ faqs: FaqType[] }> = ({ faqs }) => {
       ))}
       {faqs.length === limit || faqs.length > limit ? (
         <button
-          className="flex gap-2 items-center text-left mx-auto"
+          className="flex gap-2 items-center text-left mx-auto text-primaryAccent"
           onClick={() => setLimit(limit + 3)}
         >
           Show More
-          <svg className="w-[20px] h-[20px] fill-white">
+          <svg className="w-[20px] h-[20px] fill-primaryAccent">
             <use xlinkHref={`./images/sprite.svg#plus`}></use>
           </svg>
         </button>

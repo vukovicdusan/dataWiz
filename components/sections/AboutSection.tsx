@@ -19,31 +19,33 @@ const AboutSection = () => {
             <div className="lg:basis-1/2 md:basis-full justify-start">
               <AnimationContainer direction={"fromBottom"}>
                 <p className="mb-4 text-left">
-                  <span className="text-primaryAccent">Igor </span>
-                  is a Web Analyst on a mission. He enjoys dissecting data to
-                  understand the &apos;what,&apos; the &apos;who,&apos; and the
-                  &apos;why&apos; questions behind it. His analytical and coding
-                  skills mix proves to be the right puzzle piece in collecting,
-                  measuring, and visualizing complex data from multiple angles.
-                  The ultimate goal – to create value and extract actionable
-                  insights from raw data. He is one of those people who loves
-                  their job.
+                  Hello, I'm
+                  <span className="text-primaryAccent font-bold"> Igor! </span>
+                  I'm driven by the 'who' and the 'why' behind every dataset I
+                  encounter. My blend of analytical prowess and coding skills
+                  allows me to approach complex data from various angles,
+                  piecing together the puzzle to uncover valuable insights.
+                  Ultimately, my mission is to transform raw data into
+                  actionable strategies that drive tangible value.
                 </p>
               </AnimationContainer>
               <AnimationContainer direction={"fromBottom"}>
                 <p className="mb-4 text-left">
-                  When he&apos;s not talking about meeting clients&apos; targets
-                  and ROIs, he&apos;s probably talking about sports. He claims
-                  that playing sports is better than watching it. For those fond
-                  of martial arts, Igor is your go-to wushu_bjj_MMA guy.
+                  Professionally, I thrive on challenges that push me to think
+                  critically and innovate. I've honed my skills in data
+                  analysis, allowing me to navigate intricate datasets with
+                  ease. By dissecting information from various perspectives, I
+                  uncover hidden patterns and trends that drive informed
+                  decision-making.
                 </p>{" "}
               </AnimationContainer>
               <AnimationContainer direction={"fromBottom"}>
                 <p className="mb-4 text-left">
-                  He has always had a taste for adventure and breaking out of
-                  his comfort zone. Not surprisingly, you can often find him
-                  planning his next big trip. He&apos;s a globetrotter, even if
-                  he would never use that word.
+                  Outside of work, I'm a passionate adventurer at heart.
+                  Exploring new places and cultures fuels my sense of curiosity
+                  and excitement. Whether I'm planning my next trip or immersing
+                  myself in a new destination, I cherish the thrill of discovery
+                  and the opportunity to broaden my horizons.
                 </p>
               </AnimationContainer>
             </div>
