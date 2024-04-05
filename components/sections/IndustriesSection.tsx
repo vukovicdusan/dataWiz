@@ -9,11 +9,11 @@ const IndustriesSection = () => {
   let industriesArr: string[] = [
     "Ecommerce & Retail",
     "SaaS, Tech, & IT",
+    "Health & Wellness",
     "Legal & Insurance",
     "Real Estate",
     "Finance & Mortgage",
     "Education",
-    "Health & Wellness",
   ];
 
   let toolsArr: string[] = [
@@ -22,6 +22,7 @@ const IndustriesSection = () => {
     "Marketing Pixels (Google Ads, Meta Ads, Microsoft Ads, TikTok Ads, etc)",
     "Looker Studio",
     "Stape",
+    "CookieBot",
     "BigQuery (GBQ)",
     "Mixpanel",
     // "Google Sheets",
