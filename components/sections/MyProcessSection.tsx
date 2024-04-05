@@ -10,7 +10,7 @@ const MyProcessSection = () => {
       <Wrapper>
         <AnimationContainer direction={"fromRight"}>
           <h2 className="text-5xl text-center mb-10 font-bold uppercase">
-            My <span className="text-primaryAccent">Process</span>
+            My <span className="text-primaryAccent">Blueprint </span>For Success
           </h2>
         </AnimationContainer>
         {/* <Infographic></Infographic> */}

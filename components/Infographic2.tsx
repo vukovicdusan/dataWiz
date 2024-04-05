@@ -90,7 +90,7 @@ const Infographic2 = () => {
             className={`relative z-0 ${styles.bubble}  ${styles.centralized}`}
           >
             <svg
-              className={`absolute z-10 fill-white w-[calc(100%+10px)] h-[calc(100%+10px)] ${styles.duration}`}
+              className={`absolute z-10 fill-white w-[calc(100%+15px)] h-[calc(100%+15px)] ${styles.duration}`}
               viewBox="0 0 100 100"
               width="100"
               height="100"
@@ -101,7 +101,7 @@ const Infographic2 = () => {
                   d=" M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
                 ></path>
               </defs>
-              <text fontSize="13">
+              <text fontSize="10">
                 <textPath xlinkHref="#circle">{process.duration}</textPath>
               </text>
             </svg>

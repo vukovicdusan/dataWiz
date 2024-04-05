@@ -7,11 +7,13 @@ import AnimationContainer from "../AnimationContainer";
 
 const IndustriesSection = () => {
   let industriesArr: string[] = [
-    "ECommerce and Retail",
-    "SaaS",
-    "Tech and IT",
-    "Finance",
-    "Startups",
+    "Ecommerce & Retail",
+    "SaaS, Tech, & IT",
+    "Legal & Insurance",
+    "Real Estate",
+    "Finance & Mortgage",
+    "Education",
+    "Health & Wellness",
   ];
 
   let toolsArr: string[] = [
@@ -22,7 +24,7 @@ const IndustriesSection = () => {
     "Stape",
     "BigQuery (GBQ)",
     "Mixpanel",
-    "Google Sheets",
+    // "Google Sheets",
   ];
   return (
     <Wrapper>
