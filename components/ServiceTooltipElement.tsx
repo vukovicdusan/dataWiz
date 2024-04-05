@@ -57,7 +57,7 @@ const ServiceTooltipElement = (props: TServiceTooltipElement) => {
         <use xlinkHref={`./images/sprite.svg#dot-line`}></use>
       </svg>
       <button className="contents">{props.title}</button>
-      <div
+      {/* <div
         className={`absolute bg-[rgba(0,0,0,0.3) max-[330px]:w-[25ch]  w-[30ch] sm:w-[35h] h-fit bg-secondaryAccent rounded-3xl border border-primaryAccent p-4
                   transition-all duration-200 ease-linear z-30 ${
                     tooltipShow
@@ -74,7 +74,7 @@ const ServiceTooltipElement = (props: TServiceTooltipElement) => {
           </button>
         </div>
         <p className="text-white">{props.content}</p>
-      </div>
+      </div> */}
     </li>
   );
 };
