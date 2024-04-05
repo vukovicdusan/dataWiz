@@ -54,15 +54,11 @@ const KpiSection = () => {
             </div>
             <div className="grow shrink basis-[calc((40rem-100%)*999)]">
               <h3 className="text-2xl font-bold mb-5">
-                Someone that <span className="text-primaryAccent">cares</span>{" "}
-                for your business, doesn't treat you like one of the accounts
+                Lorem <span className="text-primaryAccent">ipsum</span>{" "}
+                dolor sit amet
               </h3>
               <p>
-                Unlike agencies that see you as just another account, I see each
-                partnership as unique and invaluable. While agencies may
-                prioritize extending contracts and conserving resources, my
-                focus is solely on maximizing your business' potential. With me,
-                you're not just another number – you're a priority.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum excepturi tenetur maxime nulla illum ullam, quia repellendus fugit reprehenderit perspiciatis nisi totam porro debitis harum error sunt necessitatibus fuga eveniet placeat temporibus officia non dolor libero modi! Molestiae, eveniet magni.
               </p>
             </div>
           </div>
