@@ -5,6 +5,7 @@ import Wrapper from "../Wrapper";
 import AnimationContainer from "../AnimationContainer";
 import BackgroundLight from "../BackgroundLight";
 import ButtonLink from "../ButtonLink";
+import HeroCta from "../HeroCta";
 
 const Hero = () => {
   return (
@@ -25,10 +26,7 @@ const Hero = () => {
             </p>
           </AnimationContainer>
           <AnimationContainer direction={"fromBottom"}>
-            <ButtonLink link={"#form"}>
-              Unlock Your Data's Potential
-              {/* Start Your Success Story */}
-            </ButtonLink>
+            <HeroCta></HeroCta>
           </AnimationContainer>
         </div>
         <div className="relative md:basis-1/2 basis-full">
