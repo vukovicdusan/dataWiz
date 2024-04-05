@@ -1,7 +1,6 @@
 import React from "react";
 import Wrapper from "../Wrapper";
 import BackgroundLight from "../BackgroundLight";
-import FaqItem from "../FaqItem";
 import AnimationContainer from "../AnimationContainer";
 import FaqsLimiter from "../FaqsLimiter";
 
@@ -43,7 +42,9 @@ const FaqSection = () => {
             </p>
           </AnimationContainer>
         </div>
-        <FaqsLimiter faqs={faqs}></FaqsLimiter>
+        <AnimationContainer direction={"fromTop"}>
+          <FaqsLimiter faqs={faqs}></FaqsLimiter>
+        </AnimationContainer>
         <BackgroundLight></BackgroundLight>
       </section>
     </Wrapper>

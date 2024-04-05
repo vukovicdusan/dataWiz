@@ -22,7 +22,19 @@ const FaqsLimiter: React.FC<{ faqs: FaqType[] }> = ({ faqs }) => {
           <FaqItem body={faq.body} title={faq.title}></FaqItem>
         </AnimationContainer>
       ))}
-      <button onClick={() => setLimit(limit + 3)}>Show More</button>
+      {faqs.length === limit || faqs.length > limit ? (
+        <button
+          className="flex gap-2 items-center text-left mx-auto"
+          onClick={() => setLimit(limit + 3)}
+        >
+          Show More
+          <svg className="w-[20px] h-[20px] fill-white">
+            <use xlinkHref={`./images/sprite.svg#plus`}></use>
+          </svg>
+        </button>
+      ) : (
+        ""
+      )}
     </>
   );
 };
