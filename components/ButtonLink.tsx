@@ -1,19 +1,22 @@
 import { ChildrenProps } from "@/types/ChildrenProps";
 import React from "react";
 
-type ButtonPropsType = {
-  onClick?: Function;
+type ButtonLinkPropsType = {
+  link?: string;
 };
 
-const Button = (props: ChildrenProps & ButtonPropsType) => {
+const ButtonLink = (props: ChildrenProps & ButtonLinkPropsType) => {
   return (
-    <button className="flex gap-4 rounded-3xl bg-primaryAccent px-3 py-2 group w-fit">
+    <a
+      href={props.link}
+      className="flex gap-4 rounded-3xl bg-primaryAccent px-3 py-2 group w-fit"
+    >
       {props.children}
       <svg className="w-[24px] h-[24px] group-hover:translate-x-1 transition-transform">
         <use xlinkHref={`./images/sprite.svg#button-arrow`}></use>
       </svg>
-    </button>
+    </a>
   );
 };
 
-export default Button;
+export default ButtonLink;

@@ -14,19 +14,20 @@ const KpiSection = () => {
               title={"Of Experience"}
             ></KpiCounter>
             <KpiCounter
-              number={200}
+              number={150}
               afterNumber={"+"}
-              title={"Projects"}
+              title={"Clients"}
             ></KpiCounter>
             <KpiCounter
               number={300}
               afterNumber={"+"}
-              title={"Audits"}
+              title={"Projects"}
             ></KpiCounter>
             <KpiCounter
-              number={150}
-              afterNumber={"+"}
-              title={"Clients"}
+              beforeNumber={"+"}
+              number={20}
+              afterNumber={"%"}
+              title={"AVG Revenue Increase"}
             ></KpiCounter>
           </div>
 
@@ -37,11 +38,12 @@ const KpiSection = () => {
                 <span className="text-primaryAccent">marketing finess </span>
               </h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                dolor alias facere quia voluptate rerum quam enim minima non
-                asperiores, ipsa obcaecati maxime, accusamus amet temporibus
-                commodi adipisci distinctio velit. Aliquid deleniti itaque
-                debitis ad ab laudantium dolores, placeat eaque.
+                My unique blend of programming and marketing backgrounds makes
+                me stand out. I'll handle the most intricate technical
+                challenges while crafting tracking solutions that maximize your
+                ad performance. From optimizing checkout funnels to decoding
+                customer behavior, I ask the right questions and enhance your
+                bottom line.
               </p>
             </div>
             <div className="grow shrink basis-[calc((40rem-100%)*999)]">
@@ -50,10 +52,11 @@ const KpiSection = () => {
                 for your business, doesn't treat you like one of the accounts
               </h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-                libero optio quasi assumenda alias sit ipsa iste illum odit, rem
-                placeat suscipit similique voluptatum, quo, eius repellat. Fugit
-                nobis placeat, laboriosam voluptatibus magnam iste.
+                Unlike agencies that see you as just another account, I see each
+                partnership as unique and invaluable. While agencies may
+                prioritize extending contracts and conserving resources, my
+                focus is solely on maximizing your business' potential. With me,
+                you're not just another number – you're a priority.
               </p>
             </div>
           </div>

@@ -4,7 +4,8 @@ import CountUp from "react-countup";
 
 type kpiPropsType = {
   number: number;
-  afterNumber: string;
+  beforeNumber?: string;
+  afterNumber?: string;
   title: string;
 };
 
@@ -12,6 +13,7 @@ const KpiCounter = (props: kpiPropsType) => {
   return (
     <div className="text-center border border-white rounded-3xl py-4 md:py-6 px-4">
       <p className="text-6xl md:text-8xl font-bold text-primaryAccent mb-2">
+        {props.beforeNumber}
         <CountUp
           enableScrollSpy={true}
           scrollSpyOnce={true}

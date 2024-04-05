@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../public/images/logo-generic.svg";
+import logo from "../../public/images/logo-hat-star.png";
 import Image from "next/image";
 import Wrapper from "../Wrapper";
 import TopNavigation from "../TopNavigation";
@@ -19,7 +19,7 @@ const Header = () => {
     <header className="relative top-0 left-0 right-0 mx-auto py-4 z-30">
       <Wrapper>
         <div className="flex justify-between items-center relative">
-          <Image src={logo} alt="logo" width={150}></Image>
+          <Image src={logo} alt="logo" width={80}></Image>
           <TopNavigation links={linksArr}></TopNavigation>
         </div>
       </Wrapper>
