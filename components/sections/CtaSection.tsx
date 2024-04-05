@@ -1,10 +1,11 @@
 "use client";
 // import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import rocket from "../../public/images/rocket-cta.svg";
 import Wrapper from "../Wrapper";
 import CtaForm from "../CtaForm";
 import AnimationContainer from "../AnimationContainer";
+import { usePathname } from "next/navigation";
 
 let auditCta = {
   id: "audit",
@@ -38,20 +39,32 @@ let consultationCta = {
 
 const CtaSection = () => {
   const [ctaContent, setCtaContent] = useState(auditCta);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const url = `${pathname}`;
+    url === "/consultation"
+      ? setCtaContent(consultationCta)
+      : setCtaContent(auditCta);
+  }, [pathname]);
+
+  let ctaTitleArr = ctaContent.title.split(" ");
+  let firstSection = ctaTitleArr[0] + " " + ctaTitleArr[1];
+  let lastSection = ctaTitleArr.slice(2, ctaTitleArr.length).join(" ");
   return (
-    <section id="audit" className="relative bg-secondaryAccent py-4 z-10">
+    <section id="form" className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
         <div className="mb-10">
           <div className="flex gap-8 items-center justify-center relative">
             <AnimationContainer direction={"fromBottom"}>
               <h2 className="text-5xl text-center mb-4 font-bold uppercase">
-                Improve your
-                <span className="text-primaryAccent"> data quality</span>
+                <span className="text-primaryAccent">{firstSection + " "}</span>
+                {lastSection}
               </h2>
             </AnimationContainer>
           </div>
           <AnimationContainer direction={"fromTop"}>
-            <p className="text-lg text-center">{ctaContent.subtitle}</p>
+            <p className="text-xl text-center">{ctaContent.subtitle}</p>
           </AnimationContainer>
         </div>
         <div className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">

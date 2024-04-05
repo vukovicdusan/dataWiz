@@ -25,7 +25,7 @@ const Hero = () => {
             </p>
           </AnimationContainer>
           <AnimationContainer direction={"fromBottom"}>
-            <ButtonLink link={"#audit"}>
+            <ButtonLink link={"#form"}>
               Unlock Your Data's Potential
               {/* Start Your Success Story */}
             </ButtonLink>
