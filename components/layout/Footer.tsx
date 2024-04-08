@@ -1,7 +1,7 @@
 import React from "react";
 import Wrapper from "../Wrapper";
 import Image from "next/image";
-import logo from "../../public/images/logo-generic.svg";
+import logo from "../../public/images/full-logo.png";
 
 const Footer = () => {
   let date = new Date().getFullYear();
@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="pt-4 px-4">
       <Wrapper>
         <div className="flex flex-col gap-8 items-center pb-20">
-          <Image alt="logo" src={logo} width={300}></Image>
+          <Image alt="logo" src={logo} width={200}></Image>
           <ul className="flex gap-8">
             <li>
               <a href="www.google.com">
