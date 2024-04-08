@@ -12,7 +12,7 @@ const Header = () => {
     { link: "#process", name: "My Process" },
     { link: "#cta", name: "Contact" },
     { link: "#testimonials", name: "Reviews" },
-    { link: "#faq", name: "FAQ" },
+    // { link: "#faq", name: "FAQ" },
     { link: "#about", name: "About Me" },
   ];
 
