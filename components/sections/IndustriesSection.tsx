@@ -29,28 +29,28 @@ const IndustriesSection = () => {
   ];
   return (
     <Wrapper>
-       <AnimationContainer direction={"fromTop"}>
-       <h2 className="text-5xl text-white text-center mb-16 font-bold uppercase">
-            My <span className="text-primaryAccent">Expertise</span> Covers:
+      <AnimationContainer direction={"fromTop"}>
+        <h2 className="text-5xl text-white text-center mb-16 font-bold uppercase">
+          My <span className="text-primaryAccent">Expertise</span> Covers:
         </h2>
-        </AnimationContainer>
+      </AnimationContainer>
       <div id="industries" className="flex justify-between flex-wrap gap-8">
         <section className="pb-10 relative basis-[calc(50%-1rem)] flex-grow-[999]">
           {/* <AnimationContainer direction={"fromTop"}> */}
-            <div className=" flex flex-row gap-4 align-middle mb-2">
-              <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full shrink-0">
-                <Image
-                  className="invert object-contain "
-                  width={35}
-                  src={industries}
-                  alt="industries icon"
-                ></Image>
-              </div>
-            
-              <h2 className="text-5xl font-bold uppercase text-primaryAccent">
-                Industries
-              </h2>
+          <div className=" flex flex-row gap-4 align-middle mb-2">
+            <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full shrink-0">
+              <Image
+                className="invert object-contain "
+                width={35}
+                src={industries}
+                alt="industries icon"
+              ></Image>
             </div>
+
+            <h2 className="text-5xl font-bold uppercase text-primaryAccent">
+              Expertise
+            </h2>
+          </div>
           {/* </AnimationContainer> */}
           <div className="flex gap-5">
             <div className="w-9">
@@ -76,19 +76,19 @@ const IndustriesSection = () => {
         </section>
         <section className="mb-20 relative basis-[calc(50%-1rem)] flex-grow-[999]">
           {/* <AnimationContainer direction={"fromTop"}> */}
-            <div className="flex flex-row gap-4 align-middle mb-2">
-              <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full shrink-0">
-                <Image
-                  className="invert object-contain "
-                  width={35}
-                  src={tools}
-                  alt="tools icon"
-                ></Image>
-              </div>
-              <h2 className="text-5xl font-bold uppercase text-primaryAccent">
-                Tools
-              </h2>
+          <div className="flex flex-row gap-4 align-middle mb-2">
+            <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(46,_104,_221,_0.40)] after:blur-md after:-z-10 after:rounded-full shrink-0">
+              <Image
+                className="invert object-contain "
+                width={35}
+                src={tools}
+                alt="tools icon"
+              ></Image>
             </div>
+            <h2 className="text-5xl font-bold uppercase text-primaryAccent">
+              Tools
+            </h2>
+          </div>
           {/* </AnimationContainer> */}
           <div className="flex gap-5">
             <div className="w-9 shrink-0">
