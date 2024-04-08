@@ -90,7 +90,7 @@ const Infographic2 = () => {
             className={`relative z-0 ${styles.bubble}  ${styles.centralized}`}
           >
             <svg
-              className={`absolute z-10 fill-white w-[calc(100%+15px)] h-[calc(100%+15px)] ${styles.duration}`}
+              className={`absolute z-10 fill-white w-[calc(100%+5px)] h-[calc(100%+5px)] ${styles.duration}`}
               viewBox="0 0 100 100"
               width="100"
               height="100"
