@@ -49,8 +49,8 @@ const CtaSection = () => {
   }, [pathname]);
 
   let ctaTitleArr = ctaContent.title.split(" ");
-  let firstSection = ctaTitleArr[0] + " " + ctaTitleArr[1];
-  let lastSection = ctaTitleArr.slice(2, ctaTitleArr.length).join(" ");
+  let titleFirstSection = ctaTitleArr[0] + " " + ctaTitleArr[1];
+  let titleLastSection = ctaTitleArr.slice(2, ctaTitleArr.length).join(" ");
   return (
     <section id="cta" className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
@@ -58,14 +58,16 @@ const CtaSection = () => {
           <div className="flex gap-8 items-center justify-center relative">
             <AnimationContainer direction={"fromBottom"}>
               <h2 className="text-5xl text-center mb-4 font-bold uppercase">
-                <span className="text-primaryAccent">{firstSection + " "}</span>
-                {lastSection}
+                <span className="text-primaryAccent">
+                  {titleFirstSection + " "}
+                </span>
+                {titleLastSection}
               </h2>
             </AnimationContainer>
           </div>
-          <AnimationContainer direction={"fromTop"}>
+          {/* <AnimationContainer direction={"fromTop"}>
             <p className="text-xl text-center">{ctaContent.subtitle}</p>
-          </AnimationContainer>
+          </AnimationContainer> */}
         </div>
         <div className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">
           <div className="lg:basis-1/2 basis-full">
@@ -74,8 +76,11 @@ const CtaSection = () => {
             </AnimationContainer>
           </div>
           <div className="lg:basis-1/2 basis-full">
+            <AnimationContainer direction={"fromTop"}>
+              <p className="text-xl sm:ml-8  mb-4">{ctaContent.subtitle}</p>
+            </AnimationContainer>
             <AnimationContainer direction={""}>
-              <ul className="ml-8">
+              <ul className="sm:ml-8">
                 {ctaContent.list.map((item, index) => (
                   <li
                     className={`flex gap-2 text-lg mb-2 max-w-[40ch] ${
