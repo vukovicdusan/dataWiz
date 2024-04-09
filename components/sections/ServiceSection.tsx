@@ -63,7 +63,7 @@ const ServiceSection = () => {
             ]}
             icon={"tracking-strategy"}
           ></ServiceBox>
-             <ServiceBox
+          <ServiceBox
             service={"Marketing Conversion Tracking"}
             subservices={[
               [
@@ -123,7 +123,7 @@ const ServiceSection = () => {
             ]}
             icon={"tracking-audit"}
           ></ServiceBox>
-          
+
           <ServiceBox
             service={"Reporting & Visualization"}
             subservices={[

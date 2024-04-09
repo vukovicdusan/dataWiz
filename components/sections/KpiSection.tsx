@@ -7,7 +7,7 @@ const KpiSection = () => {
   return (
     <div className="bg-secondaryAccent">
       <Wrapper>
-      <AnimationContainer direction={"fromBottom"}>
+        <AnimationContainer direction={"fromBottom"}>
           <h2 className="text-5xl text-white text-center mb-10 font-bold uppercase">
             What Sets Me Apart?
           </h2>
@@ -48,17 +48,21 @@ const KpiSection = () => {
                 me stand out. I'll handle the most intricate technical
                 challenges while crafting tracking solutions that maximize your
                 ad performance. From optimizing checkout funnels to decoding
-                customer behavior, I ask the right questions and enhance your
+                customer behavior, I ask the right questions to enhance your
                 bottom line.
               </p>
             </div>
             <div className="grow shrink basis-[calc((40rem-100%)*999)]">
               <h3 className="text-2xl font-bold mb-5">
-                Lorem <span className="text-primaryAccent">ipsum</span>{" "}
-                dolor sit amet
+                Lorem <span className="text-primaryAccent">ipsum</span> dolor
+                sit amet
               </h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum excepturi tenetur maxime nulla illum ullam, quia repellendus fugit reprehenderit perspiciatis nisi totam porro debitis harum error sunt necessitatibus fuga eveniet placeat temporibus officia non dolor libero modi! Molestiae, eveniet magni.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum
+                excepturi tenetur maxime nulla illum ullam, quia repellendus
+                fugit reprehenderit perspiciatis nisi totam porro debitis harum
+                error sunt necessitatibus fuga eveniet placeat temporibus
+                officia non dolor libero modi! Molestiae, eveniet magni.
               </p>
             </div>
           </div>

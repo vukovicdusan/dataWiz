@@ -48,7 +48,7 @@ const IndustriesSection = () => {
             </div>
 
             <h2 className="text-5xl font-bold uppercase text-primaryAccent">
-              Expertise
+              Industries
             </h2>
           </div>
           {/* </AnimationContainer> */}
