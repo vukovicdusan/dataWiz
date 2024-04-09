@@ -1,7 +1,7 @@
 import React from "react";
 import Wrapper from "../Wrapper";
 import Image from "next/image";
-import logo from "../../public/images/full-logo.png";
+import logo from "../../public/images/full-logo-blue.png";
 
 const Footer = () => {
   let date = new Date().getFullYear();
