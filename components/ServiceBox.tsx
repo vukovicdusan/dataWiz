@@ -10,7 +10,7 @@ type TServiceBoxProps = {
 const ServiceBox = (props: TServiceBoxProps) => {
   return (
     <>
-      <article className="flex gap-5 rounded-3xl bg-secondaryAccent p-6 h-full">
+      <article className="flex gap-5 rounded-3xl bg-secondaryAccent p-6 h-full min-[917px]:last:translate-x-1/2">
         <svg
           className="lg:w-[80px] lg:h-[80px] sm:w-[70px] sm:h-[70px] w-[40px]
         h-[40px] shrink-0"

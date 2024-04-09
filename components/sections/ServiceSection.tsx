@@ -15,6 +15,7 @@ const ServiceSection = () => {
           </h2>
         </AnimationContainer>
         <div className="grid gap-3 grid-cols-[repeat(auto-fit,_minmax(min(400px,_100%),_1fr))]">
+          {/* <div className="flex flex-wrap gap-3"> */}
           <ServiceBox
             service={"Website Tracking"}
             subservices={[
