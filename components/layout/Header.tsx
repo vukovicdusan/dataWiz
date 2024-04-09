@@ -20,7 +20,12 @@ const Header = () => {
     <header className="relative top-0 left-0 right-0 mx-auto py-4 z-30">
       <Wrapper>
         <div className="flex justify-between items-center relative">
-          <Image src={logo} alt="logo" width={80}></Image>
+          <Image
+            src={logo}
+            alt="logo"
+            width={80}
+            className="w-[50px] sm:w-[80px]"
+          ></Image>
           <TopNavigation links={linksArr}></TopNavigation>
         </div>
       </Wrapper>

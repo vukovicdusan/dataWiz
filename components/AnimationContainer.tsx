@@ -41,16 +41,16 @@ const AnimationContainer: React.FC<AnimationContainerProps> = ({
     let direction;
     switch (directionProp) {
       case "fromRight":
-        direction = "translate-x-[500px]";
+        direction = "translate-x-[50px]";
         break;
       case "fromLeft":
-        direction = "-translate-x-[500px]";
+        direction = "-translate-x-[50px]";
         break;
       case "fromTop":
-        direction = "translate-y-[500px]";
+        direction = "translate-y-[50px]";
         break;
       case "fromBottom":
-        direction = "-translate-y-[500px]";
+        direction = "-translate-y-[50px]";
         break;
       case "":
         direction = "";

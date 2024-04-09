@@ -50,7 +50,7 @@ const TopNavigation = (props: TTopNavigation) => {
       </nav>
       <button
         onClick={navHandler}
-        className="lg:hidden flex flex-col gap-[6px] absolute top-2 right-0 w-max h-max z-30"
+        className="lg:hidden flex flex-col gap-[6px] absolute lg:top-2 lg:translate-y-0 right-0 w-max h-max z-30 -translate-y-1/2 top-1/2"
         aria-expanded={open}
         aria-controls="mobile-navigation"
       >
