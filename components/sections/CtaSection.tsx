@@ -77,14 +77,16 @@ const CtaSection = () => {
           </div>
           <div className="lg:basis-1/2 basis-full">
             <AnimationContainer direction={"fromTop"}>
-              <p className="text-xl sm:ml-8  mb-4">{ctaContent.subtitle}</p>
+              <p className="text-2xl font-bold sm:ml-8  mb-4">
+                {ctaContent.subtitle}
+              </p>
             </AnimationContainer>
             <AnimationContainer direction={""}>
               <ul className="sm:ml-8">
                 {ctaContent.list.map((item, index) => (
                   <li
                     className={`flex gap-2 text-lg mb-2 max-w-[40ch] ${
-                      index === 0 ? "font-bold mb-4" : ""
+                      index === 0 ? " mb-4" : ""
                     }`}
                     key={index}
                   >
