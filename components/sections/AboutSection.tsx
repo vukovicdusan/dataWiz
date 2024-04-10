@@ -22,30 +22,25 @@ const AboutSection = () => {
                   Hello, I'm
                   <span className="text-primaryAccent font-bold"> Igor! </span>
                   I'm driven by the 'who' and the 'why' behind every dataset I
-                  encounter. My blend of analytical prowess and coding skills
-                  allows me to approach complex data from various angles,
-                  piecing together the puzzle to uncover valuable insights.
-                  Ultimately, my mission is to transform raw data into
-                  actionable strategies that drive tangible value.
+                  encounter. With a fusion of analytical prowess and coding
+                  skills, I dissect complex data from diverse angles to reveal
+                  valuable insights. My mission is to transform raw data into
+                  actionable strategies that drive growth.
                 </p>
               </AnimationContainer>
               <AnimationContainer direction={"fromBottom"}>
                 <p className="mb-4 text-left">
-                  Professionally, I thrive on challenges that push me to think
-                  critically and innovate. I've honed my skills in data
-                  analysis, allowing me to navigate intricate datasets with
-                  ease. By dissecting information from various perspectives, I
-                  uncover hidden patterns and trends that drive informed
-                  decision-making.
+                  I thrive on challenges that push me to think critically and
+                  innovate. I've honed my skills in data analysis, allowing me
+                  to navigate intricate datasets effortlessly. unveiling hidden
+                  patterns and trends that drive informed decision-making.
                 </p>{" "}
               </AnimationContainer>
               <AnimationContainer direction={"fromBottom"}>
                 <p className="mb-4 text-left">
                   Outside of work, I'm a passionate adventurer at heart.
                   Exploring new places and cultures fuels my sense of curiosity
-                  and excitement. Whether I'm planning my next trip or immersing
-                  myself in a new destination, I cherish the thrill of discovery
-                  and the opportunity to broaden my horizons.
+                  and excitement.
                 </p>
               </AnimationContainer>
             </div>
