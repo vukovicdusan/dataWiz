@@ -19,6 +19,7 @@ const KpiCounter = (props: kpiPropsType) => {
           scrollSpyOnce={true}
           start={0}
           end={props.number}
+          duration={2}
         />
         {props.afterNumber}
       </p>

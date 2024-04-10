@@ -13,37 +13,37 @@ const KpiSection = () => {
           </h2>
         </AnimationContainer>
         <section id="kpis" className="pb-20 pt-20">
-          <div className="switcher gap-5 md:gap-10 justify-center mb-20">
-            <AnimationContainer direction={"fromBottom"}>
+          <AnimationContainer direction={"fromBottom"}>
+            <div className="switcher gap-5 md:gap-10 justify-center mb-20">
               <KpiCounter
                 number={6}
                 afterNumber={"y"}
                 title={"Of Experience"}
               ></KpiCounter>
-            </AnimationContainer>
-            <AnimationContainer direction={"fromBottom"} delay={"delay-200"}>
+              {/* </AnimationContainer> */}
+              {/* <AnimationContainer direction={"fromBottom"} delay={"delay-200"}> */}
               <KpiCounter
                 number={150}
                 afterNumber={"+"}
                 title={"Clients"}
               ></KpiCounter>
-            </AnimationContainer>
-            <AnimationContainer direction={"fromBottom"} delay={"delay-500"}>
+              {/* </AnimationContainer> */}
+              {/* <AnimationContainer direction={"fromBottom"} delay={"delay-500"}> */}
               <KpiCounter
                 number={300}
                 afterNumber={"+"}
                 title={"Projects"}
               ></KpiCounter>
-            </AnimationContainer>
-            <AnimationContainer direction={"fromBottom"} delay={"delay-700"}>
+              {/* </AnimationContainer> */}
+              {/* <AnimationContainer direction={"fromBottom"} delay={"delay-700"}> */}
               <KpiCounter
                 beforeNumber={"+"}
                 number={20}
                 afterNumber={"%"}
                 title={"AVG Revenue Increase"}
               ></KpiCounter>
-            </AnimationContainer>
-          </div>
+            </div>
+          </AnimationContainer>
 
           <div className="flex flex-wrap gap-20">
             <div className="grow shrink basis-[calc((40rem-100%)*999)]">
