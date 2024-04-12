@@ -50,7 +50,7 @@ const KpiSection = () => {
               <AnimationContainer direction={"fromBottom"}>
                 <h3 className="text-2xl font-bold mb-5">
                   Programming prowess meets{" "}
-                  <span className="text-primaryAccent">marketing finess </span>
+                  <span className="text-primaryAccent">marketing finesse</span>
                 </h3>
                 <p>
                   My unique blend of programming and marketing backgrounds makes
