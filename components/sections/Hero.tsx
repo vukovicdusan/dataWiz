@@ -22,7 +22,7 @@ const Hero = () => {
           <AnimationContainer direction={"fromTop"} delay={"delay-300"}>
             <p className="mb-5 text-lg">
               Your success, decoded. Decipher your data with the help of a
-              seasoned web analyst to create a roadmap for growth
+              seasoned web analyst to create a roadmap for growth.
             </p>
           </AnimationContainer>
           <AnimationContainer direction={"fromBottom"}>
