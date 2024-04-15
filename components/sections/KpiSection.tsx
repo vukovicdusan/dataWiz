@@ -18,7 +18,7 @@ const KpiSection = () => {
               <KpiCounter
                 number={6}
                 afterNumber={"y"}
-                title={"Of Experience"}
+                title={"Experience"}
               ></KpiCounter>
               {/* </AnimationContainer> */}
               {/* <AnimationContainer direction={"fromBottom"} delay={"delay-200"}> */}
