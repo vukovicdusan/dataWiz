@@ -48,14 +48,14 @@ export default function RootLayout({
           <ServiceSection></ServiceSection>
           <IndustriesSection></IndustriesSection>
           <MyProcessSection></MyProcessSection>
+          <Testimonials></Testimonials>
           <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider>
           <CtaSection></CtaSection>
           <Shapedivider
             classProp={"rotate-180 translate-y-[-5px]"}
           ></Shapedivider>
-          <Testimonials></Testimonials>
           {/* <FaqSection></FaqSection> */}
-          <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider>
+          {/* <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider> */}
           <AboutSection></AboutSection>
           <BackToTop></BackToTop>
         </main>

@@ -7,7 +7,7 @@ import AnimationContainer from "../AnimationContainer";
 const Footer = () => {
   let date = new Date().getFullYear();
   return (
-    <footer className="pt-4 px-4">
+    <footer className="pt-4 px-4 bg-secondaryAccent">
       <Wrapper>
         <AnimationContainer direction={"fromTop"}>
           <div className="flex flex-col gap-8 items-center pb-20">

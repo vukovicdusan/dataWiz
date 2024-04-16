@@ -4,12 +4,13 @@ import Image from "next/image";
 import rocket from "../../public/images/rocket-about.svg";
 import ShapedividerDark from "../ShapedividerDark";
 import AnimationContainer from "../AnimationContainer";
+import Shapedivider from "../Shapedivider";
 
 const AboutSection = () => {
   return (
-    <div className="bg-secondaryAccent">
+    <div>
       <Wrapper>
-        <section id="about" className="bg-secondaryAccent">
+        <section id="about">
           <AnimationContainer direction={"fromBottom"}>
             <h2 className="text-5xl font-bold text-center mb-10 uppercase">
               About Me
@@ -58,7 +59,7 @@ const AboutSection = () => {
           </div>
         </section>
       </Wrapper>
-      <ShapedividerDark classProp={"translate-y-1"}></ShapedividerDark>
+      <Shapedivider classProp={"translate-y-1"}></Shapedivider>
     </div>
   );
 };
