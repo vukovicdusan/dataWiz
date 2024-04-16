@@ -12,7 +12,7 @@ const AboutSection = () => {
         <section id="about" className="bg-secondaryAccent">
           <AnimationContainer direction={"fromBottom"}>
             <h2 className="text-5xl font-bold text-center mb-10 uppercase">
-              About <span className="text-primaryAccent">Me</span>
+              About Me
             </h2>
           </AnimationContainer>
           <div className="flex flex-wrap-reverse justify-between mx-aut lg:flex-wrap ">

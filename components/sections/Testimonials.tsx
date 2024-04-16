@@ -11,8 +11,7 @@ const Testimonials = () => {
       <section id="testimonials">
         <AnimationContainer direction={"fromLeft"}>
           <h2 className="text-5xl font-bold text-center uppercase">
-            Don't Just Take My <span className="text-primaryAccent">Word</span>{" "}
-            <br></br>
+            Don't Just Take My Word <br></br>
             For It:
           </h2>
         </AnimationContainer>

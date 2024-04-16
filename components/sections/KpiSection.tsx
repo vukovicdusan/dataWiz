@@ -49,8 +49,7 @@ const KpiSection = () => {
             <div className="grow shrink basis-[calc((40rem-100%)*999)]">
               <AnimationContainer direction={"fromBottom"}>
                 <h3 className="text-2xl font-bold mb-5">
-                  Programming prowess meets{" "}
-                  <span className="text-primaryAccent">marketing finesse</span>
+                  Programming prowess meets marketing finesse
                 </h3>
                 <p>
                   My unique blend of programming and marketing backgrounds makes
@@ -65,8 +64,7 @@ const KpiSection = () => {
             <div className="grow shrink basis-[calc((40rem-100%)*999)]">
               <AnimationContainer direction={"fromBottom"} delay={"delay-200"}>
                 <h3 className="text-2xl font-bold mb-5">
-                  Lorem <span className="text-primaryAccent">ipsum</span> dolor
-                  sit amet
+                  Lorem ipsum dolor sit amet
                 </h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.

@@ -48,9 +48,6 @@ const CtaSection = () => {
       : setCtaContent(auditCta);
   }, [pathname]);
 
-  let ctaTitleArr = ctaContent.title.split(" ");
-  let titleFirstSection = ctaTitleArr[0] + " " + ctaTitleArr[1];
-  let titleLastSection = ctaTitleArr.slice(2, ctaTitleArr.length).join(" ");
   return (
     <section id="cta" className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
@@ -58,16 +55,10 @@ const CtaSection = () => {
           <div className="flex gap-8 items-center justify-center relative">
             <AnimationContainer direction={"fromBottom"}>
               <h2 className="text-5xl text-center mb-4 font-bold uppercase">
-                <span className="text-primaryAccent">
-                  {titleFirstSection + " "}
-                </span>
-                {titleLastSection}
+                {ctaContent.title}
               </h2>
             </AnimationContainer>
           </div>
-          {/* <AnimationContainer direction={"fromTop"}>
-            <p className="text-xl text-center">{ctaContent.subtitle}</p>
-          </AnimationContainer> */}
         </div>
         <div className="flex flex-wrap-reverse sm:flex-nowrap gap-8 sm:gap-0 justify-center sm:justify-between mx-auto bg-secondaryAccent ">
           <div className="lg:basis-1/2 basis-full">

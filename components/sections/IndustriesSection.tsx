@@ -31,7 +31,7 @@ const IndustriesSection = () => {
     <Wrapper>
       <AnimationContainer direction={"fromTop"}>
         <h2 className="text-5xl text-white text-center mb-16 font-bold uppercase">
-          My <span className="text-primaryAccent">Expertise</span> Covers:
+          My Expertise Covers:
         </h2>
       </AnimationContainer>
       <div id="industries" className="flex justify-between flex-wrap gap-8">

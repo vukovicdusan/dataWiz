@@ -10,8 +10,8 @@ const ServiceSection = () => {
       <BackgroundLight></BackgroundLight>
       <Wrapper>
         <AnimationContainer direction={"fromBottom"}>
-          <h2 className="text-5xl text-primaryAccent text-center mb-10 font-bold uppercase">
-            Let Me <span className="text-white">Help</span> You With:
+          <h2 className="text-5xl text-white text-center mb-10 font-bold uppercase">
+            Let Me Help You With:
           </h2>
         </AnimationContainer>
         <AnimationContainer direction={"fromBottom"}>
