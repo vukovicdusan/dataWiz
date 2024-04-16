@@ -20,13 +20,11 @@ const AboutSection = () => {
             <div className="lg:basis-1/2 md:basis-full justify-start">
               <AnimationContainer direction={"fromBottom"}>
                 <p className="mb-4 text-left">
-                  Hello, I'm
-                  <span className="text-primaryAccent font-bold"> Igor! </span>
-                  I'm driven by the 'who' and the 'why' behind every dataset I
-                  encounter. With a fusion of analytical prowess and coding
-                  skills, I dissect complex data from diverse angles to reveal
-                  valuable insights. My mission is to transform raw data into
-                  actionable strategies that drive growth.
+                  Hello, I'm Igor! I'm driven by the 'who' and the 'why' behind
+                  every dataset I encounter. With a fusion of analytical prowess
+                  and coding skills, I dissect complex data from diverse angles
+                  to reveal valuable insights. My mission is to transform raw
+                  data into actionable strategies that drive growth.
                 </p>
               </AnimationContainer>
               <AnimationContainer direction={"fromBottom"}>
