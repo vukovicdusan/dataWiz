@@ -110,8 +110,6 @@ const CtaForm = (props: CtaContentPropType) => {
           id="website"
           autoCapitalize="none"
           autoCorrect="off"
-          required
-          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           onChange={(e) => valueHandler(e)}
         />
         <label
@@ -132,7 +130,6 @@ const CtaForm = (props: CtaContentPropType) => {
           id="message"
           autoCapitalize="none"
           autoCorrect="off"
-          required
           title="Leave a message if you want."
           onChange={(e) => valueHandler(e)}
         />
