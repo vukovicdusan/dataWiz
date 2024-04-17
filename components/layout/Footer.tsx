@@ -28,7 +28,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="https://www.linkedin.com/company/datawiz-analytics/">
                   <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#linkedin`}></use>
                   </svg>
