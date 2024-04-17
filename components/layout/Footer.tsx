@@ -14,21 +14,25 @@ const Footer = () => {
             <Image alt="logo" src={logo} width={200}></Image>
             <ul className="flex gap-8">
               <li>
-                <a href="#">
+                <a rel="noopener" target="_blank" href="#">
                   <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#facebook`}></use>
                   </svg>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a rel="noopener" target="_blank" href="#">
                   <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#instagram`}></use>
                   </svg>
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/company/datawiz-analytics/">
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href="https://www.linkedin.com/company/datawiz-analytics/"
+                >
                   <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#linkedin`}></use>
                   </svg>
