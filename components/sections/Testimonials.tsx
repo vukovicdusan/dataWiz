@@ -21,7 +21,6 @@ const Testimonials = () => {
               alt="logo"
               className="object-contain w-full h-full hidden sm:block"
               src={logo}
-              placeholder="blur"
             ></Image>
           </AnimationContainer>
           <div className="flex justify-center items-center sm:w-1/4 mb-8 sm:mb-0"></div>
