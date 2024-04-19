@@ -25,14 +25,22 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a rel="noopener" target="_blank" href="#">
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href="https://www.facebook.com/profile.php?id=61558462116754"
+                >
                   <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#facebook`}></use>
                   </svg>
                 </a>
               </li>
               <li>
-                <a rel="noopener" target="_blank" href="#">
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href="https://www.instagram.com/thedatawizanalytics/"
+                >
                   <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#instagram`}></use>
                   </svg>
