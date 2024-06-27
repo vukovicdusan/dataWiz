@@ -34,11 +34,11 @@ const TopNavigation = (props: TTopNavigation) => {
           open ? "translate-x-0" : "translate-x-80 lg:translate-x-0"
         }`}
       >
-        <ul className="flex gap-3 flex-wrap lg:flex-nowrap flex-col lg:flex-row">
+        <ul className="flex gap-6 flex-wrap lg:flex-nowrap flex-col lg:flex-row">
           {props.links.map((link, index) => (
             <li
               key={index}
-              className="relative text-right lg:after:absolute lg:after:h-1 lg:after:w-1 lg:after:bg-white lg:after:-right-2 lg:after:top-1/2 lg:after:-translate-y-1/2 lg:after:rounded-full last:lg:after:bg-transparent"
+              className="relative text-right lg:after:absolute lg:after:h-4 lg:after:w-[1px] lg:after:bg-white lg:after:-right-[14px] lg:after:top-1/2 lg:after:-translate-y-1/2 lg:after:rounded-full last:lg:after:bg-transparent"
             >
               <a
                 onClick={navHandler}
