@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   title: "DataWiz",
   description:
     "Welcome to DataWiz, where data meets insight and transforms your digital world.",
+  verification: {
+    other: { "facebook-domain-verification": "xr5b757smcignim4zuexkq0b2guxko" },
+  },
 };
 
 export default function RootLayout({
