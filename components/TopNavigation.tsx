@@ -38,7 +38,7 @@ const TopNavigation = (props: TTopNavigation) => {
           {props.links.map((link, index) => (
             <li
               key={index}
-              className="relative text-right lg:after:absolute lg:after:h-4 lg:after:w-[1px] lg:after:bg-white lg:after:-right-[14px] lg:after:top-1/2 lg:after:-translate-y-1/2 lg:after:rounded-full last:lg:after:bg-transparent"
+              className="relative text-right lg:after:absolute lg:after:h-4 lg:after:w-[1px] lg:after:bg-primaryAccent lg:after:-right-[14px] lg:after:top-1/2 lg:after:-translate-y-1/2 lg:after:rounded-full last:lg:after:bg-transparent"
             >
               <a
                 onClick={navHandler}
