@@ -20,6 +20,7 @@ type CtaContentPropType = {
 const CtaForm = (props: CtaContentPropType) => {
   const [inputValue, valueHandler] = useInput();
   const [loading, setLoading] = useState<boolean>(false);
+  const [honeypot, setHoneypot] = useState<boolean>(false);
 
   const [responseState, setResponseState] = useState<TResponseState>({
     message: "initial_state",
@@ -28,6 +29,9 @@ const CtaForm = (props: CtaContentPropType) => {
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (honeypot) {
+      return;
+    }
     try {
       setLoading(true);
       const response = await fetch("/api/contact", {
@@ -143,6 +147,12 @@ const CtaForm = (props: CtaContentPropType) => {
           Message (optional)
         </label>
       </div>
+      <input
+        onChange={() => setHoneypot(true)}
+        type="text"
+        className="hidden"
+        name="honeypot"
+      />
       {responseState.message !== "initial_state" ? (
         <p
           className={`font-bold ${
