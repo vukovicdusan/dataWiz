@@ -25,6 +25,7 @@ const IndustriesSection = () => {
     "CookieBot",
     "BigQuery (GBQ)",
     "Mixpanel",
+    "Nimbata",
     // "Google Sheets",
   ];
   return (

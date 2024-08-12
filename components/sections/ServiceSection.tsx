@@ -59,7 +59,11 @@ const ServiceSection = () => {
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
-                  "Offline Conversion Tracking",
+                  "Offline Tracking",
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+                ],
+                [
+                  "Phone Call Tracking",
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
               ]}
@@ -115,7 +119,7 @@ const ServiceSection = () => {
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
-                  "UTM Tagging Strategy",
+                  "UTM Strategy",
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
@@ -164,6 +168,10 @@ const ServiceSection = () => {
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
+                  "Ecommerce",
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+                ],
+                [
                   "Funnel",
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
@@ -174,20 +182,24 @@ const ServiceSection = () => {
             <ServiceBox
               service={"Consultation & Education"}
               subservices={[
+                // [
+                //   "Strategy & Planning",
+                //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+                // ],
+                // [
+                //   "Tracking Consultation",
+                //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+                // ],
+                // [
+                //   "Analytics Consultation",
+                //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+                // ],
+                // [
+                //   "Reporting Consultation",
+                //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
+                // ],
                 [
-                  "Strategy & Planning",
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-                ],
-                [
-                  "Tracking Consultation",
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-                ],
-                [
-                  "Analytics Consultation",
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-                ],
-                [
-                  "Reporting Consultation",
+                  "Consultation",
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
