@@ -160,15 +160,11 @@ const ServiceSection = () => {
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
-                  "Product",
+                  "Ecommerce",
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
                   "User",
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
-                ],
-                [
-                  "Ecommerce",
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
