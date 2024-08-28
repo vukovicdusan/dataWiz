@@ -18,7 +18,7 @@ type CtaContentPropType = {
 };
 
 const CtaForm = (props: CtaContentPropType) => {
-  const [inputValue, valueHandler] = useInput();
+  const [inputValue, valueHandler, showErrorHandler, checkAll] = useInput();
   const [loading, setLoading] = useState<boolean>(false);
   const [honeypot, setHoneypot] = useState<boolean>(false);
 
@@ -29,23 +29,29 @@ const CtaForm = (props: CtaContentPropType) => {
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (honeypot) {
-      return;
-    }
-    try {
-      setLoading(true);
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        body: JSON.stringify(inputValue),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      setResponseState(await response.json());
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
+    let anyErrors =
+      inputValue.name.error || inputValue.email.error || inputValue.email.error;
+    if (anyErrors) {
+      checkAll();
+    } else {
+      if (honeypot) {
+        return;
+      }
+      try {
+        setLoading(true);
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          body: JSON.stringify(inputValue),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        setResponseState(await response.json());
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -59,77 +65,102 @@ const CtaForm = (props: CtaContentPropType) => {
     <form
       id={props.id}
       onSubmit={onSubmitHandler}
-      className="flex flex-col gap-6  pt-2"
+      className="flex flex-col gap-6 p-2"
     >
       <div className="relative flex flex-col w-full">
         <input
-          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className={`max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border ${
+            inputValue.name?.showError && inputValue.name?.error
+              ? "border-red-600"
+              : "border-white"
+          }`}
           type="text"
           name="name"
           id="name"
           autoCapitalize="none"
           autoCorrect="off"
-          required
+          // required
           onChange={(e) => valueHandler(e)}
+          onBlur={showErrorHandler}
         />
         <label
           className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
-            inputChecker("name")
-              ? "top-1/2 -translate-y-1/2"
-              : "-translate-y-1/2"
+            inputChecker("name") ? "top-1/2 -translate-y-4" : "-translate-y-1/2"
           }`}
           htmlFor="name"
         >
           Name
         </label>
+        <span className="text-red-600 text-sm h-2 pl-2">
+          {inputValue.name?.showError ? inputValue.name.message : ""}
+          {/* {showError.name ? showErrorParser("name") : ""} */}
+        </span>
       </div>
       <div className="relative flex flex-col w-full">
         <input
-          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className={`max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border ${
+            inputValue.email?.showError && inputValue.email?.error
+              ? "border-red-600"
+              : "border-white"
+          }`}
           type="text"
           name="email"
           id="email"
           autoCapitalize="none"
           autoCorrect="off"
-          required
-          pattern="[^@]+@[^\.]+\..+"
+          // required
+          // pattern="[^@]+@[^\.]+\..+"
           onChange={(e) => valueHandler(e)}
+          onBlur={showErrorHandler}
         />
         <label
           className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
             inputChecker("email")
-              ? "top-1/2 -translate-y-1/2"
+              ? "top-1/2 -translate-y-4"
               : "-translate-y-1/2"
           }`}
           htmlFor="email"
         >
           Email
         </label>
+        <span className="text-red-600 text-sm h-2 pl-2">
+          {inputValue.email?.showError ? inputValue.email.message : ""}
+          {/* {showError.email ? showErrorParser("email") : ""} */}
+        </span>
       </div>
       <div className="relative flex flex-col w-full">
         <input
-          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className={`max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border ${
+            inputValue.website?.showError && inputValue.website?.error
+              ? "border-red-600"
+              : "border-white"
+          }`}
           type="text"
           name="website"
           id="website"
           autoCapitalize="none"
           autoCorrect="off"
           onChange={(e) => valueHandler(e)}
+          onBlur={showErrorHandler}
         />
         <label
           className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
             inputChecker("website")
-              ? "top-1/2 -translate-y-1/2"
+              ? "top-1/2 -translate-y-4"
               : "-translate-y-1/2"
           }`}
           htmlFor="website"
         >
           Company Website
         </label>
+        <span className="text-red-600 text-sm h-2 pl-2">
+          {inputValue.website?.showError ? inputValue.website.message : ""}
+          {/* {inputValue.website ? inputValue.website.message : ""} */}
+        </span>
       </div>
       <div className="relative flex flex-col w-full">
         <textarea
-          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border border-white"
+          className="max-w-[99%] py-3 px-4 peer rounded-2xl bg-secondaryAccent border"
           name="message"
           id="message"
           autoCapitalize="none"

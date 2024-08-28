@@ -1,31 +1,64 @@
+import { inputValidator } from "@/helpers/inputValidator";
 import React, { useState } from "react";
 
 type FormState = {
-  [key: string]: string;
+  [key: string]: {
+    value: string;
+    error: boolean;
+    message: string;
+    showError?: boolean;
+  };
 };
 
 const useInput = () => {
-  const [inputValue, setInputValue] = useState<FormState>({});
+  const [inputValue, setInputValue] = useState<FormState>({
+    name: { error: true, message: "", value: "" },
+    email: { error: true, message: "", value: "" },
+    website: { error: true, message: "", value: "" },
+  });
 
   const valueHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    /* Extracted input value*/
     const { name, value } = e.target;
-
-    /** Set extracted value state and check for password repeat value */
-    setInputValue((prevInputValue) => {
-      const updatedValue = {
-        ...prevInputValue,
-        [name]: value,
-      };
-      return updatedValue;
-    });
+    setInputValue((prevInputValue) => ({
+      ...prevInputValue,
+      ...inputValidator(name, value),
+    }));
   };
 
-  return [inputValue, valueHandler] as const;
+  const showErrorHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { name, value } = e.target;
+    setInputValue((prevInputValue) => ({
+      ...prevInputValue,
+      ...inputValidator(name, value),
+    }));
+    let field = name;
+    setInputValue((prevState) => ({
+      ...prevState,
+      [field]: {
+        ...prevState[field],
+        showError:
+          inputValue.field?.error || inputValue.field?.error === undefined
+            ? true
+            : false,
+      },
+    }));
+  };
+
+  const checkAll = () => {
+    inputValue.name.error;
+    setInputValue((prev) => ({
+      ...prev,
+      name: { ...prev.name, showError: true },
+      email: { ...prev.email, showError: true },
+      website: { ...prev.website, showError: true },
+    }));
+  };
+
+  return [inputValue, valueHandler, showErrorHandler, checkAll] as const;
 };
 
 export default useInput;
