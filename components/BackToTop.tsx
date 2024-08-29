@@ -27,7 +27,7 @@ const BackToTop = () => {
     <button
       className={`${
         show ? "translate-y-0" : "translate-y-96"
-      } h-[70px] w-[70px] fixed bottom-6 right-6  border-[2px] border-[rgba(255,255,255,0.4)] rounded-full  opacity-40 z-20 transition-transform duration-300 ease-in-out group`}
+      } h-[70px] w-[70px] fixed bottom-6 right-6  border-[2px] border-[rgba(255,255,255,0.4)] rounded-full z-20 transition-transform duration-300 ease-in-out group`}
       onClick={scrollToTop}
     >
       <span className="absolute -top-6 left-1/2 -translate-x-1/2 w-max text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">

@@ -33,8 +33,8 @@ const Hero = () => {
           <AnimationContainer direction={""} delay={"200"}>
             <Image
               className="m-auto"
-              width={400}
-              height={400}
+              width={550}
+              height={550}
               src={heroImg}
               alt="heroImg"
             ></Image>
