@@ -3,6 +3,10 @@ import Wrapper from "../Wrapper";
 import Image from "next/image";
 import logo from "../../public/images/full-logo-blue.png";
 import AnimationContainer from "../AnimationContainer";
+import facebook from "../../public/images/facebook.png";
+import upwork from "../../public/images/UpWork.png";
+import instagram from "../../public/images/instagram.png";
+import linkedin from "../../public/images/LinkedIn.png";
 
 const Footer = () => {
   let date = new Date().getFullYear();
@@ -19,9 +23,16 @@ const Footer = () => {
                   target="_blank"
                   href="https://www.upwork.com/freelancers/knezevicigor"
                 >
-                  <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
+                  {/* <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#upwork`}></use>
-                  </svg>
+                  </svg> */}
+                  <Image
+                    className="shrink-0 hover:-translate-y-2 transition-transform duration-200"
+                    width={40}
+                    height={40}
+                    src={upwork}
+                    alt="upwork icon"
+                  ></Image>
                 </a>
               </li>
               <li>
@@ -30,9 +41,16 @@ const Footer = () => {
                   target="_blank"
                   href="https://www.facebook.com/profile.php?id=61558462116754"
                 >
-                  <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
+                  {/* <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#facebook`}></use>
-                  </svg>
+                  </svg> */}
+                  <Image
+                    className="shrink-0 hover:-translate-y-2 transition-transform duration-200"
+                    width={40}
+                    height={40}
+                    src={facebook}
+                    alt="facebook icon"
+                  ></Image>
                 </a>
               </li>
               <li>
@@ -41,9 +59,16 @@ const Footer = () => {
                   target="_blank"
                   href="https://www.instagram.com/thedatawizanalytics/"
                 >
-                  <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
+                  {/* <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#instagram`}></use>
-                  </svg>
+                  </svg> */}
+                  <Image
+                    className="shrink-0 hover:-translate-y-2 transition-transform duration-200"
+                    width={40}
+                    height={40}
+                    src={instagram}
+                    alt="instagram icon"
+                  ></Image>
                 </a>
               </li>
               <li>
@@ -52,9 +77,16 @@ const Footer = () => {
                   target="_blank"
                   href="https://www.linkedin.com/company/datawiz-analytics/"
                 >
-                  <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
+                  {/* <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#linkedin`}></use>
-                  </svg>
+                  </svg> */}
+                  <Image
+                    className="shrink-0 hover:-translate-y-2 transition-transform duration-200"
+                    width={40}
+                    height={40}
+                    src={linkedin}
+                    alt="linkedin icon"
+                  ></Image>
                 </a>
               </li>
             </ul>

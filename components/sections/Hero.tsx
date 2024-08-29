@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import rocket from "../../public/images/rocket-hero.svg";
+import heroImg from "../../public/images/hero.webp";
 import Wrapper from "../Wrapper";
 import AnimationContainer from "../AnimationContainer";
 import BackgroundLight from "../BackgroundLight";
@@ -35,8 +35,8 @@ const Hero = () => {
               className="m-auto"
               width={400}
               height={400}
-              src={rocket}
-              alt="rocket"
+              src={heroImg}
+              alt="heroImg"
             ></Image>
           </AnimationContainer>
           <BackgroundLight

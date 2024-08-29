@@ -1,7 +1,7 @@
 import React from "react";
 import Wrapper from "../Wrapper";
 import Image from "next/image";
-import rocket from "../../public/images/rocket-about.svg";
+import igor from "../../public/images/IgorK.webp";
 import ShapedividerDark from "../ShapedividerDark";
 import AnimationContainer from "../AnimationContainer";
 import Shapedivider from "../Shapedivider";
@@ -46,11 +46,11 @@ const AboutSection = () => {
             <div className="lg:basis-1/2 basis-full mb-8 lg:mb-0">
               <AnimationContainer direction={""}>
                 <Image
-                  className="m-auto"
+                  className="w-[300px] h-[300px] m-auto rounded-full object-cover"
                   width={300}
                   height={300}
-                  src={rocket}
-                  alt="rocket"
+                  src={igor}
+                  alt="igor"
                 ></Image>
               </AnimationContainer>
             </div>
