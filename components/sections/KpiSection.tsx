@@ -64,15 +64,15 @@ const KpiSection = () => {
             <div className="grow shrink basis-[calc((40rem-100%)*999)]">
               <AnimationContainer direction={"fromBottom"} delay={"delay-200"}>
                 <h3 className="text-2xl font-bold mb-5">
-                  Lorem ipsum dolor sit amet
+                  Your true partner over agency experience
                 </h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Rerum excepturi tenetur maxime nulla illum ullam, quia
-                  repellendus fugit reprehenderit perspiciatis nisi totam porro
-                  debitis harum error sunt necessitatibus fuga eveniet placeat
-                  temporibus officia non dolor libero modi! Molestiae, eveniet
-                  magni.
+                  Unlike agencies that see you as just another account, I treat
+                  your project as my own. Rather than giving you the bare
+                  minimum to keep you as a client, I focus on real results.
+                  Where standard service falls short, I prioritize maximizing
+                  your business's potential. With me, you're not just another
+                  number – you're a priority.
                 </p>
               </AnimationContainer>
             </div>
