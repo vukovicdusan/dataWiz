@@ -6,7 +6,7 @@ import FaqItem from "./FaqItem";
 
 type FaqType = {
   title: string;
-  body: string;
+  body: React.ReactNode;
 };
 
 const FaqsLimiter: React.FC<{ faqs: FaqType[] }> = ({ faqs }) => {

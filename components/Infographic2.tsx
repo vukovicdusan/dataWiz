@@ -16,7 +16,7 @@ const Infographic2 = () => {
     { name: "Introductory Call", duration: "~ 2 days" },
     { name: "Audit", duration: "~ 2 days" },
     { name: "Planning", duration: "~ 1 day" },
-    { name: "Plan Execution ", duration: "~ 1-2 weeks" },
+    { name: "Plan Execution", duration: "~ 1-2 weeks" },
     { name: "Testing", duration: "~ 1 week" },
     { name: "Review Call", duration: "~ 2 days" },
   ];

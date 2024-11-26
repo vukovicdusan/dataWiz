@@ -9,8 +9,8 @@ import Shapedivider from "../Shapedivider";
 const AboutSection = () => {
   return (
     <div>
-      <Wrapper>
-        <section id="about">
+      <section id="about" className="bg-secondaryAccent">
+        <Wrapper>
           <AnimationContainer direction={"fromBottom"}>
             <h2 className="text-5xl font-bold text-center mb-10 uppercase">
               About Me
@@ -55,9 +55,9 @@ const AboutSection = () => {
               </AnimationContainer>
             </div>
           </div>
-        </section>
-      </Wrapper>
-      <Shapedivider classProp={"translate-y-1"}></Shapedivider>
+        </Wrapper>
+        <ShapedividerDark classProp={"translate-y-1"}></ShapedividerDark>
+      </section>
     </div>
   );
 };

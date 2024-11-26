@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const HeroCta = () => {
   let path = usePathname();
-  let auditCta = "Get your free audit";
+  let auditCta = "Unlock Your Data's Potential";
   let consultationCta = "Start Your Success Story";
 
   return (

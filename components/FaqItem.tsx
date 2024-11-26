@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 type TFaqItemProps = {
   title: string;
-  body: string;
+  body: React.ReactNode;
 };
 
 const FaqItem = (props: TFaqItemProps) => {
@@ -42,9 +42,7 @@ const FaqItem = (props: TFaqItemProps) => {
         aria-hidden={!open}
         id="panel-content"
       >
-        <div className="overflow-hidden">
-          <p>{props.body}</p>
-        </div>
+        <div className="overflow-hidden">{props.body}</div>
       </div>
     </div>
   );

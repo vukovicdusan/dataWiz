@@ -57,8 +57,8 @@ export default function RootLayout({
           <Shapedivider
             classProp={"rotate-180 translate-y-[-5px]"}
           ></Shapedivider>
-          {/* <FaqSection></FaqSection> */}
-          {/* <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider> */}
+          <FaqSection></FaqSection>
+          <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider>
           <AboutSection></AboutSection>
           <BackToTop></BackToTop>
         </main>

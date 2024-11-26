@@ -15,16 +15,16 @@ const Testimonials = () => {
             For It:
           </h2>
         </AnimationContainer>
-        <div className="flex sm:flex-row flex-col my-20">
-          <AnimationContainer direction={"fromLeft"}>
+        <div className="flex my-20">
+          {/* <AnimationContainer direction={"fromLeft"}>
             <Image
               alt="logo"
               className="object-contain w-full h-full hidden sm:block"
               src={logo}
             ></Image>
-          </AnimationContainer>
+          </AnimationContainer> */}
           <div className="flex justify-center items-center sm:w-1/4 mb-8 sm:mb-0"></div>
-          <div className="w-full sm:w-3/4 relative">
+          <div className="w-full relative">
             <AnimationContainer direction={"fromRight"}>
               <TestimonialSlider />
             </AnimationContainer>

@@ -115,7 +115,7 @@ const ServiceSection = () => {
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
-                  "Tracking Plan",
+                  "Measurement Plan",
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo explicabo obcaecati mollitia repudiandae, quasi quaerat!",
                 ],
                 [
