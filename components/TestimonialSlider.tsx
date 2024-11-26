@@ -17,28 +17,28 @@ import glide from "../public/images/testimonials/glide.png";
 const TestimonialSlider = () => {
   const testimonialsData = [
     {
-      name: "SeatGeek",
-      title: "Ecom",
-      testimonial:
-        "I work for a major company that grosses multiple billions in gross sales. We had a major issue with conversion tracking, missing many purchases despite extensive testing and communication with Google (we get white glove service based on our ad spend). Igor was instrumental in identifying and resolving the problem, working through a very complex config involving privacy/ Google Consent Mode, tag sequencing and GA4 tracking.",
-      logo: seatgeek,
-      industrie: "Ecom",
-    },
-    {
       name: "Awesome Books",
-      title: "Ecom",
+      title: "Ecommerce",
       testimonial:
         "Could not recommend Igor and the DataWiz team more highly. Quick to reply to any issue, really good technical understanding of topics and feels like they are part of your team. Carry on the great work guys.",
       logo: awesomebooks,
-      industrie: "Ecom",
+      industrie: "Ecommerce",
+    },
+    {
+      name: "SeatGeek",
+      title: "Ecommerce",
+      testimonial:
+        "I work for a major company that grosses multiple billions in gross sales. We had a major issue with conversion tracking, missing many purchases despite extensive testing and communication with Google (we get white glove service based on our ad spend). Igor was instrumental in identifying and resolving the problem, working through a very complex config involving privacy/ Google Consent Mode, tag sequencing and GA4 tracking.",
+      logo: seatgeek,
+      industrie: "Ecommerce",
     },
     {
       name: "Dr. Berg",
-      title: "Ecom & Health",
+      title: "Ecommerce & Health",
       testimonial:
         "Igor is highly knowledgeable when it comes to data and tracking. Igor helped us improve our shop and paid advertising tracking during the re-platforming of our website. He is highly responsive and a pleasure to work with. If you want someone to help you with your data, I highly recommend Igor.",
       logo: drberg,
-      industrie: "Ecom & Health",
+      industrie: "Ecommerce & Health",
     },
     {
       name: "Magnum Insurance",
@@ -50,11 +50,11 @@ const TestimonialSlider = () => {
     },
     {
       name: "MoEngage",
-      title: "SAAS",
+      title: "SaaS",
       testimonial:
         "Igor has been a great asset to our team over the years. He created hundreds of reports in GA4, giving us the insights we needed to act quickly. He also developed an intricate dashboard in Looker Studio that made understanding and visualizing data easy. The insights he provided with reporting over the years have been amazing.",
       logo: moengage,
-      industrie: "SAAS",
+      industrie: "SaaS",
     },
     {
       name: "Prescan",
@@ -91,24 +91,24 @@ const TestimonialSlider = () => {
     >
       {testimonialsData.map((testimonial, index) => (
         <SwiperSlide
-          className="px-4 py-6 rounded-2xl bg-secondaryAccent"
+          className="px-6 py-7 rounded-2xl bg-secondaryAccent"
           key={index}
         >
           <div className="flex gap-4 items-center mb-4">
             <Image
-              width={50}
-              height={50}
+              width={80}
+              height={80}
               alt="company logo"
               src={testimonial.logo}
               className="object-contain"
             ></Image>
             <div className="flex flex-col justify-center">
-              <p className="font-bold">{testimonial.name}</p>
-              <p>{testimonial.title}</p>
+              <p className="font-bold text-xl">{testimonial.name}</p>
+              <p className="text-primaryAccent text-lg">{testimonial.title}</p>
             </div>
           </div>
           <p className="mb-2">{testimonial.testimonial}</p>
-          <p className="text-primaryAccent">{testimonial.industrie}</p>
+          {/* <p className="text-primaryAccent">{testimonial.industrie}</p> */}
         </SwiperSlide>
       ))}
     </Swiper>
