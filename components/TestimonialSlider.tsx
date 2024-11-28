@@ -5,7 +5,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Image from "next/image";
-import logo from "../public/images/logo-hat.png";
 import seatgeek from "../public/images/testimonials/SeatGeek.png";
 import drberg from "../public/images/testimonials/drberg.svg";
 import awesomebooks from "../public/images/testimonials/awesomeBooks.jpg";
@@ -28,7 +27,7 @@ const TestimonialSlider = () => {
       name: "SeatGeek",
       title: "Ecommerce",
       testimonial:
-        "I work for a major company that grosses multiple billions in gross sales. We had a major issue with conversion tracking, missing many purchases despite extensive testing and communication with Google (we get white glove service based on our ad spend). Igor was instrumental in identifying and resolving the problem, working through a very complex config involving privacy/ Google Consent Mode, tag sequencing and GA4 tracking.",
+        "I work for a major company that grosses multiple billions in gross sales. We had a major issue with conversion tracking, missing many purchases despite extensive testing and communication with Google… Igor was instrumental in identifying and resolving the problem...",
       logo: seatgeek,
       industrie: "Ecommerce",
     },
@@ -44,7 +43,7 @@ const TestimonialSlider = () => {
       name: "Magnum Insurance",
       title: "Legal",
       testimonial:
-        "We've been working with DataWiz on the setup and optimization of our tagging and marketing analytics systems, and his expertise has made a significant impact on our business. From day one, he took the time to understand our unique needs and delivered a solution that not only streamlined our tracking but also provided us with more accurate and actionable data. He’s proactive in identifying areas for improvement, and his optimization efforts have helped us better monitor our marketing performance across multiple ad buying and analytical platforms. What sets DataWiz apart is his dedication to ongoing support. Even after the initial setup, he has continued to collaborate with our team, making regular adjustments and updates to ensure that everything runs smoothly and remains aligned with our evolving business goals.",
+        "We've been working with DataWiz on the setup and optimization of our tagging and marketing analytics systems, and his expertise has made a significant impact on our business... If you’re looking for a highly skilled professional who is reliable, communicative, and always focused on delivering results, I can’t recommend DataWiz enough...",
       logo: magnum,
       industrie: "Legal",
     },
