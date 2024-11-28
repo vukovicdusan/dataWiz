@@ -38,19 +38,6 @@ const FaqSection = () => {
       ),
     },
     {
-      title:
-        "How do you tailor your services to fit the specific needs of my business?",
-      body: (
-        <p>
-          I take the time to understand your business and analytics needs. Based
-          on this, we create a customized plan that is 100% tailored to your
-          objectives, ensuring you get the results as quickly as possible. Every
-          project we handle is designed to meet your unique requirements and
-          drive the outcomes you're aiming for.
-        </p>
-      ),
-    },
-    {
       title: "What does your pricing model look like?",
       body: (
         <>
@@ -71,7 +58,19 @@ const FaqSection = () => {
     },
     {
       title:
-        "Do you offer long-term analytics support and monitoring services?",
+        "How do you tailor your services to fit the specific needs of my business?",
+      body: (
+        <p>
+          I begin by thoroughly understanding your business, goals, and
+          analytics requirements. This allows me to develop a customized
+          strategy tailored specifically to your objectives. Every aspect of the
+          project is designed with your unique needs in mind, ensuring that I
+          deliver a solution to achieve your desired outcomes.
+        </p>
+      ),
+    },
+    {
+      title: "Do you offer long-term analytics support?",
       body: (
         <>
           <p className="pb-2">
@@ -81,15 +80,6 @@ const FaqSection = () => {
             reporting, data quality monitoring, and tracking updates to ensure
             your analytics remain reliable and actionable.
           </p>
-          <p>
-            Although I design setups to be as durable as possible, tracking
-            systems require regular monitoring and updates to maintain data
-            accuracy and adapt to changes over time. Additionally, data alone is
-            passive—it’s through analysis and actionable insights that you can
-            drive meaningful results and profit from your efforts. My long-term
-            services ensure you can trust your data and consistently turn it
-            into value.
-          </p>
         </>
       ),
     },
@@ -97,65 +87,55 @@ const FaqSection = () => {
       title:
         "What are the key benefits of an analytics project for my business?",
       body: (
-        <ol className="list-decimal list-inside py-2">
-          <li>Measure Marketing Success</li>
-          <ul className="list-disc list-inside pl-4 pb-2">
-            <li>
-              Gain insights into optimizing marketing strategies, campaigns, and
-              ad spending.
-            </li>
-          </ul>
-          <li>Track Website Performance</li>
-          <ul className="list-disc list-inside pl-4 pb-2">
-            <li>
-              Uncover actionable insights to enhance your website’s performance.
-            </li>
-          </ul>
-          <li>Fuel Ad Algorithms</li>
-          <ul className="list-disc list-inside pl-4 pb-2">
-            <li>
-              Boost ad performance by providing better data to ad algorithms.
-            </li>
-          </ul>
-          <li>Understand Your Target Audience</li>
-          <ul className="list-disc list-inside pl-4 pb-2">
-            <li>
-              Unlock a deeper understanding of user preferences, behaviors, and
-              demographics.
-            </li>
-          </ul>
-          <li>Make Data-Driven Decisions</li>
-          <ul className="list-disc list-inside pl-4 pb-2">
-            <li>
-              Empower every aspect of your business with data-driven decisions.
-            </li>
-          </ul>
-        </ol>
+        <>
+          <p>The key benefits of a web analytics project include:</p>
+          <ol className="list-decimal list-inside py-2">
+            <li>Measure Marketing Success</li>
+            {/* <ul className="list-disc list-inside pl-4 pb-2">
+              <li>
+                Gain insights into optimizing marketing strategies, campaigns,
+                and ad spending.
+              </li>
+            </ul> */}
+            <li>Track Website Performance</li>
+            {/* <ul className="list-disc list-inside pl-4 pb-2">
+              <li>
+                Uncover actionable insights to enhance your website’s
+                performance.
+              </li>
+            </ul> */}
+            <li>Fuel Ad Algorithms</li>
+            {/* <ul className="list-disc list-inside pl-4 pb-2">
+              <li>
+                Boost ad performance by providing better data to ad algorithms.
+              </li>
+            </ul> */}
+            <li>Understand Your Target Audience</li>
+            {/* <ul className="list-disc list-inside pl-4 pb-2">
+              <li>
+                Unlock a deeper understanding of user preferences, behaviors,
+                and demographics.
+              </li>
+            </ul> */}
+            <li>Make Data-Driven Decisions</li>
+            {/* <ul className="list-disc list-inside pl-4 pb-2">
+              <li>
+                Empower every aspect of your business with data-driven
+                decisions.
+              </li>
+            </ul> */}
+          </ol>
+        </>
       ),
     },
     {
-      title:
-        "What are the key benefits of an analytics project for my business?",
+      title: "Do you work alongside our internal team?",
       body: (
         <p>
-          Absolutely. Collaborating with your internal team is a top priority. I
-          work closely with all stakeholders to craft a tracking and analytics
-          strategy tailored to your business. I’m particularly hands-on with
-          your development team during the tracking implementation process,
-          providing detailed documentation and ongoing support.
-        </p>
-      ),
-    },
-    {
-      title: "Which KPIs are most important for the success of my business?",
-      body: (
-        <p>
-          KPIs vary depending on the industry and the unique goals of your
-          business. I take the time to understand your specific tracking needs
-          and objectives, then develop a customized measurement plan that
-          identifies the most relevant KPIs to drive your success. Schedule a
-          free consultation to discuss your goals and identify the KPIs that
-          matter most for your business!
+          Absolutely! I work closely with all stakeholders to craft a tracking
+          and analytics strategy tailored to your business. I’m particularly
+          hands-on with your development team during the tracking implementation
+          process, providing detailed documentation and ongoing support.
         </p>
       ),
     },
@@ -164,8 +144,7 @@ const FaqSection = () => {
       body: (
         <>
           <p>
-            Keeping you informed throughout the project is a top priority. I
-            provide regular updates and include detailed information at every
+            I provide regular updates and include detailed information at every
             key milestone. Typically, I update you at the following stages:
           </p>
           <ol className="list-decimal list-inside py-2 pl-2">
@@ -186,49 +165,55 @@ const FaqSection = () => {
       ),
     },
     {
-      title: "How do you ensure data privacy and security for your clients?",
+      title: "Which KPIs are most important for the success of my business?",
+      body: (
+        <p>
+          KPIs vary depending on the industry and the unique goals of your
+          business. I take the time to understand your specific tracking needs
+          and objectives, then develop a customized measurement plan that
+          identifies the most relevant KPIs to drive your success. Schedule a
+          free consultation to discuss your goals and identify the KPIs that
+          matter most for your business!
+        </p>
+      ),
+    },
+
+    {
+      title: "How do you ensure data privacy and security?",
       body: (
         <>
           <p>
-            I prioritize data privacy and security in every project. This
-            includes:
+            I prioritize data privacy and security at every stage of the project
+            by implementing the following measures:
           </p>
           <ul className="list-disc list-inside py-2 pl-2">
             <li className="pb-2">
-              <span className="font-semibold">
-                Compliance with Regulations:
-              </span>{" "}
-              Adhering to GDPR, CCPA, and other relevant data privacy laws to
-              ensure legal compliance.
+              <span className="font-semibold">Regulatory Compliance:</span>{" "}
+              Adhering to GDPR, CCPA, and other applicable data privacy laws to
+              maintain legal compliance.
             </li>
             <li className="pb-2">
               <span className="font-semibold">
-                Secure Tracking Implementations:
+                Secure Tracking Configurations:
               </span>{" "}
-              Configuring server-side tracking to minimize data exposure and
-              enhance security.
+              Using server-side tracking to reduce data exposure and enhance
+              security.
             </li>
             <li className="pb-2">
-              <span className="font-semibold">Access Control:</span> Restricting
-              data access to authorized personnel only, safeguarding sensitive
+              <span className="font-semibold">Access Control:</span> Limiting
+              data access strictly to authorized personnel to protect sensitive
               information.
             </li>
             <li className="pb-2">
-              <span className="font-semibold">Data Confidentiality:</span> I do
-              not share your data with any third parties. Your data remains
-              confidential, and I’m more than happy to sign non-disclosure
-              agreements (NDAs) to further ensure your peace of mind.
-            </li>
-            <li className="pb-2">
-              <span className="font-semibold">Regular Audits:</span> Conducting
-              routine audits to verify data accuracy and compliance with privacy
-              standards.
+              <span className="font-semibold">Data Confidentiality:</span> Your
+              data is never shared with third parties. It remains confidential,
+              and I’m always willing to sign non-disclosure agreements (NDAs)
+              for added assurance.
             </li>
           </ul>
           <p>
-            By following these practices, I ensure your data is protected,
-            confidential, and handled with the highest level of security and
-            care.
+            These practices ensure your data is handled with the utmost
+            security, confidentiality, and care.
           </p>
         </>
       ),
@@ -243,22 +228,21 @@ const FaqSection = () => {
           </p>
           <ol className="list-decimal list-inside py-2 pl-2">
             <li className="pb-2">
-              <span className="font-semibold">Internal Testing:</span> Using
+              <span className="font-semibold">Internal Testing:</span> I use
               tools such as GTM preview mode, debug/testing modes, network and
               console tabs, and other diagnostic tools to identify and resolve
-              issues before testing with real users.
+              issues before testing the real user data.
             </li>
             <li className="pb-2">
-              <span className="font-semibold">Real-User Testing:</span> To
-              ensure the highest data quality, I test the setup with actual
-              users. I create testing environments for all relevant platforms
-              and monitor the data quality for 1-3 weeks, depending on traffic
+              <span className="font-semibold">Real-User Testing:</span> I
+              evaluate user data from testing environments for all relevant
+              platforms. I monitor the data for 1-3 weeks, depending on traffic
               and conversion volumes.
             </li>
             <li className="pb-2">
-              <span className="font-semibold">Ongoing Monitoring:</span> I
-              continuously track data accuracy throughout the testing period,
-              making necessary adjustments to ensure precision.
+              <span className="font-semibold">Setup Refinements:</span> I make
+              real-time adjustments to the setup whenever issues are identified
+              to ensure precision.
             </li>
             <li className="pb-2">
               <span className="font-semibold">Client Review:</span> Before
@@ -266,12 +250,17 @@ const FaqSection = () => {
               setup with you to ensure everything is aligned with your goals and
               expectations.
             </li>
+            <li className="pb-2">
+              <span className="font-semibold">Ongoing Monitoring:</span> I
+              continuously track data accuracy throughout the testing period,
+              making necessary adjustments to ensure precision.
+            </li>
           </ol>
-          <p>
+          {/* <p>
             Changes are only published once I’m confident that the data is as
             accurate as possible, ensuring reliable and actionable insights for
             your business.
-          </p>
+          </p> */}
         </>
       ),
     },
@@ -280,7 +269,7 @@ const FaqSection = () => {
         "Do you offer training to help our team use and interpret analytics tools effectively?",
       body: (
         <p>
-          Absolutely! I provide training sessions for your team, ensuring you
+          Of course! I provide training sessions for your team, ensuring you
           know how to extract the most value from your tracking setup. The
           sessions are completely customized to your needs and can cover a range
           of topics, from beginner to advanced, depending on your team's

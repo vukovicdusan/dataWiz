@@ -10,7 +10,7 @@ type FaqType = {
 };
 
 const FaqsLimiter: React.FC<{ faqs: FaqType[] }> = ({ faqs }) => {
-  const [limit, setLimit] = useState<number>(3);
+  const [limit, setLimit] = useState<number>(4);
   return (
     <>
       {faqs.slice(0, limit).map((faq, index) => (
@@ -25,7 +25,7 @@ const FaqsLimiter: React.FC<{ faqs: FaqType[] }> = ({ faqs }) => {
       {faqs.length === limit || faqs.length > limit ? (
         <button
           className="flex gap-2 items-center text-left mx-auto text-primaryAccent"
-          onClick={() => setLimit(limit + 3)}
+          onClick={() => setLimit(limit + 4)}
         >
           Show More
           <svg className="w-[20px] h-[20px] fill-primaryAccent">
