@@ -194,7 +194,7 @@ const CtaForm = (props: CtaContentPropType) => {
         </p>
       ) : null}
       <div className="flex gap-2 items-center">
-        <Button>{props.ctaButton}</Button>
+        <Button id={`${props.id}-button`}>{props.ctaButton}</Button>
         {loading ? <Spinner></Spinner> : null}
       </div>
     </form>
