@@ -35,15 +35,13 @@ const Footer = () => {
                   ></Image>
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a
                   rel="noopener"
                   target="_blank"
                   href="https://www.facebook.com/profile.php?id=61558462116754"
                 >
-                  {/* <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
-                    <use xlinkHref={`./images/sprite.svg#facebook`}></use>
-                  </svg> */}
+                 
                   <Image
                     className="shrink-0 hover:-translate-y-2 transition-transform duration-200"
                     width={40}
@@ -52,12 +50,12 @@ const Footer = () => {
                     alt="facebook icon"
                   ></Image>
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a
                   rel="noopener"
                   target="_blank"
-                  href="https://www.instagram.com/thedatawizanalytics/"
+                  href="https://www.instagram.com/analyticsbydatawiz/"
                 >
                   {/* <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#instagram`}></use>
@@ -75,7 +73,7 @@ const Footer = () => {
                 <a
                   rel="noopener"
                   target="_blank"
-                  href="https://www.linkedin.com/company/datawiz-analytics/"
+                  href="https://www.linkedin.com/company/thedatawiz/"
                 >
                   {/* <svg className="w-[50px] h-[50px] shrink-0 hover:-translate-y-2 transition-transform duration-200">
                     <use xlinkHref={`./images/sprite.svg#linkedin`}></use>
