@@ -15,6 +15,7 @@ import MyProcessSection from "@/components/sections/MyProcessSection";
 import ServiceSection from "@/components/sections/ServiceSection";
 import Testimonials from "@/components/sections/Testimonials";
 import Shapedivider from "@/components/Shapedivider";
+import CalendlyBadgeWidget from "@/components/CalendlyBadgeWidget";
 
 const titilium = Titillium_Web({
   weight: ["300", "400", "700"],
@@ -61,6 +62,7 @@ export default function RootLayout({
           <Shapedivider classProp={"translate-y-[5px]"}></Shapedivider>
           <AboutSection></AboutSection>
           <BackToTop></BackToTop>
+          <CalendlyBadgeWidget></CalendlyBadgeWidget>
         </main>
         <Footer />
       </body>
