@@ -10,12 +10,12 @@ const Testimonials = () => {
     <Wrapper>
       <section id="testimonials">
         <AnimationContainer direction={"fromLeft"}>
-          <h2 className="text-5xl font-bold text-center uppercase">
+          <h2 className="text-5xl font-bold text-center uppercase mb-10">
             Don't Just Take My Word <br></br>
             For It:
           </h2>
         </AnimationContainer>
-        <div className="flex my-20">
+        <div className="flex mb-20">
           {/* <AnimationContainer direction={"fromLeft"}>
             <Image
               alt="logo"

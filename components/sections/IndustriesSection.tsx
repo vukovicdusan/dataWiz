@@ -31,7 +31,7 @@ const IndustriesSection = () => {
   return (
     <Wrapper>
       <AnimationContainer direction={"fromTop"}>
-        <h2 className="text-5xl text-white text-center mb-16 font-bold uppercase">
+        <h2 className="text-5xl text-white text-center mb-10 font-bold uppercase">
           My Expertise Covers:
         </h2>
       </AnimationContainer>

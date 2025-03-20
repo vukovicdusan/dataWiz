@@ -281,14 +281,14 @@ const FaqSection = () => {
   return (
     <Wrapper>
       <section id="faq" className="relative mb-32">
-        <div className="mb-10">
+        <div className="">
           <AnimationContainer direction={"fromBottom"}>
             <h2 className="text-5xl font-bold text-center mb-4 uppercase">
               FAQ
             </h2>
           </AnimationContainer>
           <AnimationContainer direction={"fromTop"}>
-            <p className="text-lg text-center mb-4 sm:mb-8">
+            <p className="text-lg text-center mb-10">
               These are some of our most commonly asked questions
             </p>
           </AnimationContainer>

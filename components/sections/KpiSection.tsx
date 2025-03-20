@@ -5,14 +5,14 @@ import AnimationContainer from "../AnimationContainer";
 
 const KpiSection = () => {
   return (
-    <div className="bg-secondaryAccent">
+    <div className="bg-secondaryAccent sm:py-0 py-10">
       <Wrapper>
         <AnimationContainer direction={"fromBottom"}>
           <h2 className="text-5xl text-white text-center mb-10 font-bold uppercase">
             What Sets Me Apart?
           </h2>
         </AnimationContainer>
-        <section id="kpis" className="pb-20 pt-20">
+        <section id="kpis">
           <AnimationContainer direction={"fromBottom"}>
             <div className="switcher gap-5 md:gap-10 justify-center mb-20">
               <KpiCounter

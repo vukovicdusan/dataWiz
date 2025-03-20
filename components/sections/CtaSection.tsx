@@ -51,10 +51,10 @@ const CtaSection = () => {
   return (
     <section id="cta" className="relative bg-secondaryAccent py-4 z-10">
       <Wrapper>
-        <div className="mb-10">
+        <div className="">
           <div className="flex gap-8 items-center justify-center relative">
             <AnimationContainer direction={"fromBottom"}>
-              <h2 className="text-5xl text-center mb-4 font-bold uppercase">
+              <h2 className="text-5xl text-center mb-10 font-bold uppercase">
                 {ctaContent.title}
               </h2>
             </AnimationContainer>
