@@ -105,7 +105,7 @@ const Shapedivider = (props: TShapedividerClassProps) => {
       </g>
       <defs>
         <clipPath id="clip0_125_295">
-          <rect width="1440" height="371" fill="white" />
+          <rect width="1440" height="271" fill="white" />
         </clipPath>
       </defs>
     </svg>

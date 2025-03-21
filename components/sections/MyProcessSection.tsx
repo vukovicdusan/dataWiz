@@ -6,7 +6,7 @@ import Infographic2 from "../Infographic2";
 
 const MyProcessSection = () => {
   return (
-    <section id="process" className="mb-64">
+    <section id="process" className="mb-10 sm:mb-52">
       <Wrapper>
         <AnimationContainer direction={"fromRight"}>
           <h2 className="text-5xl text-center mb-10 font-bold uppercase">

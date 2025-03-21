@@ -6,7 +6,7 @@ import AnimationContainer from "../AnimationContainer";
 
 const ServiceSection = () => {
   return (
-    <section id="services" className="relative mb-64 z-10">
+    <section id="services" className="relative mb-20 sm:mb-64 z-10">
       <BackgroundLight></BackgroundLight>
       <Wrapper>
         <AnimationContainer direction={"fromBottom"}>
