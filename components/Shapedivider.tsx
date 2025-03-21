@@ -10,7 +10,7 @@ const Shapedivider = (props: TShapedividerClassProps) => {
       className={props.classProp}
       //   width="1440"
       //   height="371"
-      viewBox="0 0 1440 371"
+      viewBox="0 0 1440 271"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

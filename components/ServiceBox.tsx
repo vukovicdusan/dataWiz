@@ -3,7 +3,7 @@ import ServiceTooltipElement from "./ServiceTooltipElement";
 
 type TServiceBoxProps = {
   icon: string;
-  subservices?: [string, string][];
+  subservices?: [string, string, string?, string?][];
   service?: string;
 };
 
@@ -24,7 +24,7 @@ const ServiceBox = (props: TServiceBoxProps) => {
               <ServiceTooltipElement
                 key={index}
                 title={subservice[0]}
-                content={subservice[1]}
+                content={subservice}
               ></ServiceTooltipElement>
             ))}
           </ul>

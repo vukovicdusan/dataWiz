@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 type TServiceTooltipElement = {
   title: string;
-  content: string;
+  content: [string, string, string?, string?];
   key: number;
 };
 
@@ -73,7 +73,18 @@ const ServiceTooltipElement = (props: TServiceTooltipElement) => {
             </svg>
           </button>
         </div>
-        <p className="text-white">{props.content}</p>
+        <ul className="flex flex-col gap-2 ">
+          {props.content
+            .filter((_, index) => index !== 0)
+            .map((el, index) => (
+              <li
+                key={index}
+                className="text-white border-b-[1px] border-white pb-3 "
+              >
+                {el}
+              </li>
+            ))}
+        </ul>
       </div>
     </li>
   );
