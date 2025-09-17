@@ -3,6 +3,7 @@ import logo from "../../public/images/logo-hat-star.png";
 import Image from "next/image";
 import Wrapper from "../Wrapper";
 import TopNavigation from "../TopNavigation";
+import Link from "next/link";
 
 const Header = () => {
   const linksArr = [
@@ -20,12 +21,14 @@ const Header = () => {
     <header className="relative top-0 left-0 right-0 mx-auto py-4 z-30">
       <Wrapper>
         <div className="flex justify-between items-center relative">
-          <Image
-            src={logo}
-            alt="logo"
-            width={80}
-            className="w-[50px] sm:w-[80px]"
-          ></Image>
+          <Link href={"/"}>
+            <Image
+              src={logo}
+              alt="logo"
+              width={80}
+              className="w-[50px] sm:w-[80px]"
+            ></Image>
+          </Link>
           <TopNavigation links={linksArr}></TopNavigation>
         </div>
       </Wrapper>
