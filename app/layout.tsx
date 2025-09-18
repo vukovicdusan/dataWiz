@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-
 const titilium = Titillium_Web({
   weight: ["300", "400", "700"],
   subsets: ["latin"],
@@ -29,9 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${titilium.className} bg-primaryBg`}>
         <Header />
-        <main className="overflow-hidden">
-          {children}
-        </main>
+        <main className="overflow-hidden">{children}</main>
         <Footer />
       </body>
     </html>
