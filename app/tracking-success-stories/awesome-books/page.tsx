@@ -8,6 +8,7 @@ import Shapedivider from "@/components/Shapedivider";
 import AnimationContainer from "@/components/AnimationContainer";
 import AwesomeBooksTable1 from "@/components/tables/AwesomeBooksTable1";
 import AwesomeBooksTable2 from "@/components/tables/AwesomeBooksTable2";
+import DoughnutAB from "@/components/charts/DoughnutAB";
 
 export const metadata: Metadata = {
   title: "DataWiz - Success Stories - Awesome Books",
@@ -52,36 +53,37 @@ const awesomeBooks = () => {
         classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}
       ></Shapedivider>
       <section className="bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 py-10">
-        <div className="relative flex justify-center items-center mx-auto gap-10  md:h-[50vh]">
-          <div className="max-w-prose">
-            <h2 className="font-bold text-5xl mb-2">Meet the Client</h2>
-            <p className="text-xl">
-              AwesomeBooks (
-              <a className="text-primaryAccent" href="awesomebooks.com">
-                awesomebooks.com
-              </a>
-              ) is a global online bookstore offering millions of new and used
-              books at affordable prices. With a mission to make books
-              accessible to everyone, they combine sustainable practices with a
-              wide selection that serves readers worldwide.
-            </p>
-          </div>
-          <div>
+        <Wrapper>
+          <div className="flex md:flex-nowrap flex-wrap gap-8 md:gap-1 justify-center md:justify-between">
+            <div className="md:max-w-prose max-w-full">
+              <h2 className="font-bold text-5xl mb-2">Meet the Client</h2>
+              <p className="text-xl">
+                AwesomeBooks (
+                <a className="text-primaryAccent" href="awesomebooks.com">
+                  awesomebooks.com
+                </a>
+                ) is a global online bookstore offering millions of new and used
+                books at affordable prices. With a mission to make books
+                accessible to everyone, they combine sustainable practices with
+                a wide selection that serves readers worldwide.
+              </p>
+            </div>
+
             <Image
-              className="object-contain"
+              className="object-contain my-auto"
               width={300}
               alt="dataWiz logo"
               src={awesomeBooksLogo}
             ></Image>
           </div>
-        </div>
+        </Wrapper>
       </section>
       <Shapedivider
         classProp={
           "rotate-180 translate-y-[-5px] w-screen ml-[50%] -translate-x-1/2"
         }
       ></Shapedivider>
-      <section className="relative flex justify-between items-center mx-auto gap-10  py-10 mt-10">
+      <section className="relative flex md:flex-nowrap flex-wrap justify-between items-center mx-auto gap-10  py-10 mt-10">
         <div>
           <div className="flex items-center gap-4 mb-4">
             <svg
@@ -311,8 +313,8 @@ const awesomeBooks = () => {
           />
         </svg>
       </section>
-      <section className="relative flex justify-between items-start mx-auto gap-10  py-10 mt-10">
-        <div className="max-w-prose">
+      <section className="relative flex md:flex-nowrap flex-wrap justify-between items-start mx-auto gap-10  py-10 mt-10">
+        <div className="max-w-prose md:basis-1/2 basis-full">
           <h2 className="text-5xl font-bold mb-4">Initial Setup</h2>
           <ul className="rounded-3xl bg-secondaryAccent p-6">
             <li className="mb-4">
@@ -337,7 +339,7 @@ const awesomeBooks = () => {
             </li>
           </ul>
         </div>
-        <div className="max-w-prose ">
+        <div className="max-w-prose md:basis-1/2 basis-full">
           <h2 className="text-5xl font-bold mb-4">Solutions</h2>
           <ul className="rounded-3xl bg-secondaryAccent p-6">
             <li className="mb-4">
@@ -371,8 +373,8 @@ const awesomeBooks = () => {
       <section className=" bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 py-10">
         <Wrapper>
           <h2 className="text-5xl font-bold mb-6">Project Results</h2>
-          <div className="flex flex-wrap justify-between items-center mb-10">
-            <div className="flex flex-col max-w-md gap-4">
+          <div className="flex flex-wrap lg:flex-nowrap justify-between items-start mb-10 gap-4 md:gap-4">
+            <div className="flex md:basis-[50% - 2rem] basis-full flex-col md:max-w-md max-w-full gap-4">
               <h3 className="text-5xl text-primaryAccent">Data Accuracy</h3>
               <ul className="rounded-3xl bg-secondaryAccent">
                 <li className="mb-4">
@@ -406,15 +408,15 @@ const awesomeBooks = () => {
                 </li>
               </ul>
             </div>
-            <div className="min-w-[20rem]">
+            <div className="md:basis-[50% - 2rem] basis-full md:min-w-[15rem] min-w-full sm:overflow-auto overflow-x-scroll">
               <AwesomeBooksTable1></AwesomeBooksTable1>
             </div>
           </div>
-          <div className="flex flex-wrap justify-between items-center">
-            <div className="min-w-[20rem]">
+          <div className="flex flex-wrap lg:flex-nowrap justify-between items-start flex-col-reverse md:flex-row gap-4 md:gap-4">
+            <div className="md:basis-[50% - 2rem] basis-full md:min-w-[15rem] min-w-full sm:overflow-auto overflow-x-scroll">
               <AwesomeBooksTable2></AwesomeBooksTable2>
             </div>
-            <div className="flex flex-col max-w-md gap-4">
+            <div className="flex flex-col md:basis-[50% - 2rem] basis-full md:max-w-md max-w-full gap-4">
               <h3 className="text-5xl text-primaryAccent">
                 Marketing Attribution
               </h3>
@@ -457,6 +459,43 @@ const awesomeBooks = () => {
           "rotate-180 translate-y-[-5px] w-screen ml-[50%] -translate-x-1/2"
         }
       ></Shapedivider>
+      <section className="flex justify-between flex-wrap  py-10 mt-10">
+        <div className="md:max-w-md max-w-full md:basis-1/2 basis-full">
+          <h2 className="text-5xl font-bold mb-6">
+            Overcoming Tracking Restrictions
+          </h2>
+          <h3 className="text-xl font-bold mb-1">Understanding the Metric </h3>
+          <p className="mb-4">
+            This metric represents the percentage of users who employ ad
+            blockers, browser restrictions, iOS tracking prevention, or other
+            similar technologies that limit or prevent tracking. While not all
+            of these users necessarily block tracking right now, it reflects the
+            potential for data loss as these technologies evolve.
+          </p>
+          <h3 className="text-xl font-bold mb-2">Business Impact</h3>
+          <ul>
+            <li className="mb-2">
+              <strong>Tracking Accuracy:</strong> Server-side tracking bypasses
+              current tracking restrictions, ensuring high data accuracy and
+              attribution.
+            </li>
+            <li className="mb-2">
+              <strong>Future Resilience:</strong>As tracking prevention systems
+              evolve, server-side tracking provides a future-proof solution.
+            </li>
+          </ul>
+        </div>
+        <div className="relative flex flex-col md:basis-1/2 basis-full md:max-w-md max-w-full justify-center items-center gap-6 min-w-[25rem]">
+          <h3 className="text-xl font-bold mb-1">Project Outcomes</h3>
+          <div className="absolute top-10 -left-[200px] rounded-3xl bg-secondaryAccent max-w-max p-4">
+            <p className="text-sm">
+              Note: We bypassed these restrictions<br></br> with server side
+              tracking.
+            </p>
+          </div>
+          <DoughnutAB></DoughnutAB>
+        </div>
+      </section>
     </Wrapper>
   );
 };
