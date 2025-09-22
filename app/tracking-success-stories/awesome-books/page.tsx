@@ -47,7 +47,7 @@ const awesomeBooks = () => {
         </div>
         <div className="flex items-center gap-4">
           <Image
-            className="object-contain"
+            className="object-contain "
             width={150}
             alt="dataWiz logo"
             src={dataWizLogo}
@@ -55,11 +55,11 @@ const awesomeBooks = () => {
         </div>
       </section>
       <Shapedivider
-        classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}
+        classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}
       ></Shapedivider>
       <section className="bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 py-10">
         <Wrapper>
-          <div className="flex md:flex-nowrap flex-wrap gap-8 md:gap-1 justify-center md:justify-between">
+          <div className="flex md:flex-nowrap flex-wrap gap-8 md:gap-1 items-center justify-center md:justify-between">
             <div className="md:max-w-prose max-w-full">
               <h2 className="font-bold text-5xl mb-2">Meet the Client</h2>
               <p className="text-xl">
@@ -75,7 +75,7 @@ const awesomeBooks = () => {
             </div>
 
             <Image
-              className="object-contain my-auto"
+              className="object-contain my-auto rounded-full bg-white"
               width={300}
               alt="dataWiz logo"
               src={awesomeBooksLogo}
@@ -373,7 +373,7 @@ const awesomeBooks = () => {
         </div>
       </section>
       <Shapedivider
-        classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}
+        classProp={"translate-y-5 w-screen ml-[50%] -translate-x-1/2"}
       ></Shapedivider>
       <section className=" bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 py-10">
         <Wrapper>
