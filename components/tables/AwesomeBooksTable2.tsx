@@ -3,7 +3,7 @@ import React from "react";
 const AwesomeBooksTable2 = () => {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full border border-gray-300 text-sm">
+      <table className="min-w-full border border-gray-300 md:text-sm text-xs">
         <thead>
           <tr>
             <th className="border border-gray-300 p-2 text-left">PLATFORM</th>

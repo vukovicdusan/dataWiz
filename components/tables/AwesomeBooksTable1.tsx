@@ -2,7 +2,7 @@ import React from "react";
 
 const AwesomeBooksTable1 = () => {
   return (
-    <table className="w-full border-collapse border border-gray-300 text-sm">
+    <table className="w-full border-collapse border border-gray-300 md:text-sm text-xs">
       <thead>
         <tr className="">
           <th className="border border-gray-300 p-2 text-left">PLATFORM</th>

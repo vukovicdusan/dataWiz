@@ -9,6 +9,7 @@ import AnimationContainer from "@/components/AnimationContainer";
 import AwesomeBooksTable1 from "@/components/tables/AwesomeBooksTable1";
 import AwesomeBooksTable2 from "@/components/tables/AwesomeBooksTable2";
 import DoughnutAB from "@/components/charts/DoughnutAB";
+import KpiCounter from "@/components/KpiCounter";
 
 export const metadata: Metadata = {
   title: "DataWiz - Success Stories - Awesome Books",
@@ -372,8 +373,33 @@ const awesomeBooks = () => {
       ></Shapedivider>
       <section className=" bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 py-10">
         <Wrapper>
-          <h2 className="text-5xl font-bold mb-6">Project Results</h2>
-          <div className="flex flex-wrap lg:flex-nowrap justify-between items-start mb-10 gap-4 md:gap-4">
+          <h2 className="text-5xl font-bold mb-10 text-center">
+            Project Results
+          </h2>
+          <div className="switcher gap-5 md:gap-10 justify-center mb-20">
+            <KpiCounter
+              number={6}
+              afterNumber={"y"}
+              title={"Experience"}
+            ></KpiCounter>
+            <KpiCounter
+              number={150}
+              afterNumber={"+"}
+              title={"Clients"}
+            ></KpiCounter>
+            <KpiCounter
+              number={300}
+              afterNumber={"+"}
+              title={"Projects"}
+            ></KpiCounter>
+            <KpiCounter
+              beforeNumber={"+"}
+              number={20}
+              afterNumber={"%"}
+              title={"AVG Revenue Increase"}
+            ></KpiCounter>
+          </div>
+          <div className="flex flex-wrap lg:flex-nowrap justify-between items-start mb-20 gap-4 md:gap-10">
             <div className="flex md:basis-[50% - 2rem] basis-full flex-col md:max-w-md max-w-full gap-4">
               <h3 className="text-5xl text-primaryAccent">Data Accuracy</h3>
               <ul className="rounded-3xl bg-secondaryAccent">
@@ -412,7 +438,7 @@ const awesomeBooks = () => {
               <AwesomeBooksTable1></AwesomeBooksTable1>
             </div>
           </div>
-          <div className="flex flex-wrap lg:flex-nowrap justify-between items-start flex-col-reverse md:flex-row gap-4 md:gap-4">
+          <div className="flex flex-wrap lg:flex-nowrap justify-between items-start flex-col-reverse md:flex-row gap-4 md:gap-10">
             <div className="md:basis-[50% - 2rem] basis-full md:min-w-[15rem] min-w-full sm:overflow-auto overflow-x-scroll">
               <AwesomeBooksTable2></AwesomeBooksTable2>
             </div>
@@ -459,7 +485,7 @@ const awesomeBooks = () => {
           "rotate-180 translate-y-[-5px] w-screen ml-[50%] -translate-x-1/2"
         }
       ></Shapedivider>
-      <section className="flex justify-between flex-wrap  py-10 mt-10">
+      <section className="flex flex-wrap md:flex-nowrap justify-between py-10 mt-10 gap-10 md:gap-2">
         <div className="md:max-w-md max-w-full md:basis-1/2 basis-full">
           <h2 className="text-5xl font-bold mb-6">
             Overcoming Tracking Restrictions
@@ -485,9 +511,9 @@ const awesomeBooks = () => {
             </li>
           </ul>
         </div>
-        <div className="relative flex flex-col md:basis-1/2 basis-full md:max-w-md max-w-full justify-center items-center gap-6 min-w-[25rem]">
+        <div className="relative flex flex-col md:basis-1/2 basis-full md:max-w-md max-w-full justify-center items-center gap-2 lg:gap-6 min-w-[25rem]">
           <h3 className="text-xl font-bold mb-1">Project Outcomes</h3>
-          <div className="absolute top-10 -left-[200px] rounded-3xl bg-secondaryAccent max-w-max p-4">
+          <div className="relative lg:absolute top-0 lg:top-10 lg-0 lg:-left-[200px] rounded-3xl bg-secondaryAccent max-w-max p-4">
             <p className="text-sm">
               Note: We bypassed these restrictions<br></br> with server side
               tracking.
