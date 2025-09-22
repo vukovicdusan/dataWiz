@@ -401,7 +401,9 @@ const awesomeBooks = () => {
           </div>
           <div className="flex flex-wrap lg:flex-nowrap justify-between items-start mb-20 gap-4 md:gap-10">
             <div className="flex md:basis-[50% - 2rem] basis-full flex-col md:max-w-md max-w-full gap-4">
-              <h3 className="text-5xl text-primaryAccent">Data Accuracy</h3>
+              <h3 className="font-bold text-5xl mb-1 text-primaryAccent">
+                Data Accuracy
+              </h3>
               <ul className="rounded-3xl bg-secondaryAccent">
                 <li className="mb-4">
                   <h3 className="text-xl font-bold mb-1">
@@ -443,7 +445,7 @@ const awesomeBooks = () => {
               <AwesomeBooksTable2></AwesomeBooksTable2>
             </div>
             <div className="flex flex-col md:basis-[50% - 2rem] basis-full md:max-w-md max-w-full gap-4">
-              <h3 className="text-5xl text-primaryAccent">
+              <h3 className="font-bold text-5xl mb-1 text-primaryAccent">
                 Marketing Attribution
               </h3>
               <ul className="rounded-3xl bg-secondaryAccent">
@@ -521,6 +523,21 @@ const awesomeBooks = () => {
           </div>
           <DoughnutAB></DoughnutAB>
         </div>
+      </section>
+      <section className="py-10 mt-10">
+        <h2 className="text-5xl font-bold mb-6 text-center">
+          Client Experience
+        </h2>
+        <div className="text-l mb-5 font-bold uppercase text-center text-primaryAccent">
+          Review
+        </div>
+        <p className="text-center max-w-prose mx-auto mb-4 text-xl font-bold">
+          “Could not recommend Igor and DataWiz more highly. Quick to reply to
+          any issue, really good technical understanding of topics, and feels
+          like they are part of your team. Carry on the great work guys.”
+        </p>
+        <p className="text-center italic">Mubin A.</p>
+        <p className="text-center italic">Director</p>
       </section>
     </Wrapper>
   );
