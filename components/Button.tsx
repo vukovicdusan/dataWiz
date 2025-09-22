@@ -14,7 +14,7 @@ const Button = (props: ChildrenProps & ButtonPropsType) => {
     >
       {props.children}
       <svg className="w-[24px] h-[24px] group-hover:translate-x-1 transition-transform">
-        <use xlinkHref={`./images/sprite.svg#button-arrow`}></use>
+        <use xlinkHref={`/images/sprite.svg#button-arrow`}></use>
       </svg>
     </button>
   );

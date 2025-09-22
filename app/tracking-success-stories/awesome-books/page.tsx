@@ -10,6 +10,10 @@ import AwesomeBooksTable1 from "@/components/tables/AwesomeBooksTable1";
 import AwesomeBooksTable2 from "@/components/tables/AwesomeBooksTable2";
 import DoughnutAB from "@/components/charts/DoughnutAB";
 import KpiCounter from "@/components/KpiCounter";
+import CtaSection from "@/components/sections/CtaSection";
+import BackToTop from "@/components/BackToTop";
+import CalendlyBadgeWidget from "@/components/CalendlyBadgeWidget";
+import ShapedividerDark from "@/components/ShapedividerDark";
 
 export const metadata: Metadata = {
   title: "DataWiz - Success Stories - Awesome Books",
@@ -524,14 +528,14 @@ const awesomeBooks = () => {
           <DoughnutAB></DoughnutAB>
         </div>
       </section>
-      <section className="py-10 mt-10">
+      <section className="py-10 mt-10 ">
         <h2 className="text-5xl font-bold mb-6 text-center">
           Client Experience
         </h2>
         <div className="text-l mb-5 font-bold uppercase text-center text-primaryAccent">
           Review
         </div>
-        <p className="text-center max-w-prose mx-auto mb-4 text-xl font-bold">
+        <p className="text-center max-w-prose mx-auto mb-4 text-2xl font-bold">
           “Could not recommend Igor and DataWiz more highly. Quick to reply to
           any issue, really good technical understanding of topics, and feels
           like they are part of your team. Carry on the great work guys.”
@@ -539,6 +543,17 @@ const awesomeBooks = () => {
         <p className="text-center italic">Mubin A.</p>
         <p className="text-center italic">Director</p>
       </section>
+      <Shapedivider
+        classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}
+      ></Shapedivider>
+      <div className="bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 ">
+        <CtaSection></CtaSection>
+        <ShapedividerDark
+          classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}
+        ></ShapedividerDark>
+      </div>
+      <BackToTop></BackToTop>
+      <CalendlyBadgeWidget></CalendlyBadgeWidget>
     </Wrapper>
   );
 };

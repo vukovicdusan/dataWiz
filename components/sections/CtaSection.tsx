@@ -86,7 +86,7 @@ const CtaSection = () => {
                         index === 0 ? "hidden" : ""
                       }`}
                     >
-                      <use xlinkHref={`./images/sprite.svg#dot-line`}></use>
+                      <use xlinkHref={`/images/sprite.svg#dot-line`}></use>
                     </svg>
                     {item}
                   </li>
