@@ -9,11 +9,11 @@ import Image from "next/image";
 import React from "react";
 import awesomeBooks from "../../public/images/testimonials/awesomeBooks.jpg";
 import Link from "next/link";
+import KpiCounter from "@/components/KpiCounter";
 
 export const metadata: Metadata = {
   title: "DataWiz - Tracking Success Stories ",
-  description:
-    "Welcome to DataWiz, where data meets insight and transforms your digital world.",
+  description: "Welcome to DataWiz, where data meets insight and transforms your digital world.",
   verification: {
     other: { "facebook-domain-verification": "xr5b757smcignim4zuexkq0b2guxko" },
   },
@@ -33,42 +33,34 @@ const TrackingSuccessStories = () => {
     <Wrapper>
       {" "}
       <section className="py-10 mt-10">
-        <h1 className="text-5xl mb-10 font-bold uppercase text-center">
-          Tracking Success Stories
-        </h1>
+        <h1 className="text-5xl mb-10 font-bold uppercase text-center">Tracking Success Stories</h1>
         <div className="switcher">
-          <Link
-            href="/tracking-success-stories/awesome-books"
-            className="flex items-start gap-5 rounded-3xl bg-secondaryAccent p-6 h-full max-w-prose hover:-translate-y-5 transition-all duration-300"
-          >
-            <Image
-              src={awesomeBooks}
-              width={60}
-              height={60}
-              alt="awesome books logo"
-              className="object-contain flex-shrink-0 rounded-full"
-            ></Image>
-            <div>
+          <Link href="/tracking-success-stories/awesome-books" className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent p-6 h-full max-w-prose hover:-translate-y-5 transition-all duration-300">
+            <div className="flex gap-4 items-center">
+              <Image src={awesomeBooks} width={60} height={60} alt="awesome books logo" className="object-contain flex-shrink-0 rounded-full"></Image>
               <h4 className="font-bold text-xl">Awesome Books</h4>
-              <p>
+            </div>
+            <div className="flex flex-col gap-2">
+              {/* <p>
                 AwesomeBooks, a global online bookstore, partnered with us to
                 fix critical tracking gaps. By achieving accurate data, complete
                 attribution, and full platform coverage, they unlocked reliable
                 insights that boosted campaign performance and optimized ad
                 spend.
-              </p>
+              </p> */}
+              <div className="flex gap-3">
+                <KpiCounter size={"sm"} number={6} afterNumber={"y"} title={"Experience"}></KpiCounter>
+                <KpiCounter size={"sm"} number={20} afterNumber={"%"} title={"Data Accuracy"}></KpiCounter>
+                <KpiCounter size={"sm"} number={15} afterNumber={"%"} title={"Avg Avenue Increase"}></KpiCounter>
+              </div>
             </div>
           </Link>
         </div>
       </section>
-      <Shapedivider
-        classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}
-      ></Shapedivider>
+      <Shapedivider classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}></Shapedivider>
       <div className="bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 ">
         <CtaSection></CtaSection>
-        <ShapedividerDark
-          classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}
-        ></ShapedividerDark>
+        <ShapedividerDark classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}></ShapedividerDark>
       </div>
       <BackToTop></BackToTop>
       <CalendlyBadgeWidget></CalendlyBadgeWidget>

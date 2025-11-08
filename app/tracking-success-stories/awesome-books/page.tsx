@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 const awesomeBooks = () => {
   return (
     <Wrapper>
-      <section className="relative flex flex-col justify-center items-center mx-auto gap-10  md:h-[50vh] py-10 mt-10">
+      {/* <section className="relative flex flex-col justify-center items-center mx-auto gap-10  md:h-[50vh] py-10 mt-10">
         <div className="flex gap-2 flex-col justify-center">
           <div className="text-l mb-5 font-bold uppercase text-center">
             Tracking <span className="text-primaryAccent">Success</span> Story
@@ -53,13 +53,22 @@ const awesomeBooks = () => {
             src={dataWizLogo}
           ></Image>
         </div>
-      </section>
-      <Shapedivider
+      </section> */}
+      {/* <Shapedivider
         classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}
-      ></Shapedivider>
-      <section className="bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 py-10">
+      ></Shapedivider> */}
+      <section className=" translate-y-1 w-screen ml-[50%] -translate-x-1/2 py-10">
         <Wrapper>
+          <div className="flex gap-2 flex-col justify-center mb-16">
+          <div className="text-l mb-5 font-bold uppercase text-center">
+            Tracking <span className="text-primaryAccent">Success</span> Story
+          </div>
+          <h1 className="text-5xl mb-5 font-bold uppercase text-center">
+            Awesome Books
+          </h1>
+        </div>
           <div className="flex md:flex-nowrap flex-wrap gap-8 md:gap-1 items-center justify-center md:justify-between">
+            
             <div className="md:max-w-prose max-w-full">
               <h2 className="font-bold text-5xl mb-2">Meet the Client</h2>
               <p className="text-xl">
@@ -83,11 +92,11 @@ const awesomeBooks = () => {
           </div>
         </Wrapper>
       </section>
-      <Shapedivider
+      {/* <Shapedivider
         classProp={
           "rotate-180 translate-y-[-5px] w-screen ml-[50%] -translate-x-1/2"
         }
-      ></Shapedivider>
+      ></Shapedivider> */}
       <section className="relative flex md:flex-nowrap flex-wrap justify-between items-center mx-auto gap-10  py-10 mt-10">
         <div>
           <div className="flex items-center gap-4 mb-4">
