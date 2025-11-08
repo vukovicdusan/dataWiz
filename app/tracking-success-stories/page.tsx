@@ -49,9 +49,10 @@ const TrackingSuccessStories = () => {
                 spend.
               </p> */}
               <div className="flex gap-3">
-                <KpiCounter size={"sm"} number={6} afterNumber={"y"} title={"Experience"}></KpiCounter>
-                <KpiCounter size={"sm"} number={20} afterNumber={"%"} title={"Data Accuracy"}></KpiCounter>
-                <KpiCounter size={"sm"} number={15} afterNumber={"%"} title={"Avg Avenue Increase"}></KpiCounter>
+                <KpiCounter size={"sm"} number={95} afterNumber={"y"} title={"Avg. Accuracy"}></KpiCounter>
+                <KpiCounter size={"sm"} number={20} afterNumber={"%"} title={"Total Events"}></KpiCounter>
+                <KpiCounter size={"sm"} number={15} afterNumber={"%"} title={"Attributed Events"}></KpiCounter>
+                <KpiCounter size={"sm"} number={-1} afterNumber={"sec"} title={"Site Speed"}></KpiCounter>
               </div>
             </div>
           </Link>
