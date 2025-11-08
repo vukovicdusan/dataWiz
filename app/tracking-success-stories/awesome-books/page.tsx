@@ -91,6 +91,7 @@ const awesomeBooks = () => {
       <section className="relative flex md:flex-nowrap flex-wrap justify-between items-center mx-auto gap-10  py-10 mt-10">
         <div>
           <div className="flex items-center gap-4 mb-4">
+            <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(232,9,9,0.4)] after:blur-md after:-z-10 after:rounded-full shrink-0">
             <svg
               width={40}
               height={40}
@@ -100,7 +101,7 @@ const awesomeBooks = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 123.996 123.996"
               xmlSpace="preserve"
-            >
+              >
               <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
@@ -115,6 +116,7 @@ const awesomeBooks = () => {
                 </g>{" "}
               </g>
             </svg>
+                </div>
             <h2 className="font-bold text-5xl mb-1 text-primaryAccent">
               Challenges
             </h2>
@@ -125,7 +127,7 @@ const awesomeBooks = () => {
                 direction={"fromBottom"}
                 wrapperClass={"h-full"}
               >
-                <div className="w-[3px] h-full bg-[linear-gradient(0deg,rgba(0,0,0,0)0%,rgb(9,55,148)25%,rgb(46,104,221)50%,rgb(9,55,148)85%,rgba(0,0,0,0)100%)] mx-auto"></div>
+                <div className="w-[3px] h-full bg-[linear-gradient(0deg,rgba(0,0,0,0)0%,rgb(224,114,114)25%,rgb(219,15,15)50%,rgb(224,114,114)85%,rgba(0,0,0,0)100%)] mx-auto"></div>
               </AnimationContainer>
             </div>
             <ul className="list-disc list-inside">
@@ -154,6 +156,7 @@ const awesomeBooks = () => {
         </div>
         <div>
           <div className="flex items-center gap-4 mb-4">
+          <div className="relative after:w-full after:h-full after:absolute after:top-1/2 after:-translate-y-1/2 after:left-1/2 after:-translate-x-1/2 after:bg-[rgba(2,252,23,0.4)] after:blur-md after:-z-10 after:rounded-full shrink-0">
             <svg
               viewBox="0 0 24 24"
               fill="#fff"
@@ -201,10 +204,11 @@ const awesomeBooks = () => {
                   <path
                     d="M10.4954 17.369C10.7918 17.0726 10.7918 16.592 10.4954 16.2956C10.1989 15.9992 9.71835 15.9992 9.42193 16.2956L7.29417 18.4233C6.99774 18.7198 6.99774 19.2003 7.29417 19.4968C7.59059 19.7932 8.07118 19.7932 8.36761 19.4968L10.4954 17.369Z"
                     fill="#fff"
-                  ></path>{" "}
+                    ></path>{" "}
                 </g>{" "}
               </g>
             </svg>
+          </div>
             <h2 className="font-bold text-5xl mb-1 text-primaryAccent">
               Objectives
             </h2>
@@ -215,7 +219,7 @@ const awesomeBooks = () => {
                 direction={"fromBottom"}
                 wrapperClass={"h-full"}
               >
-                <div className="w-[3px] h-full bg-[linear-gradient(0deg,rgba(0,0,0,0)0%,rgb(9,55,148)25%,rgb(46,104,221)50%,rgb(9,55,148)85%,rgba(0,0,0,0)100%)] mx-auto"></div>
+                <div className="w-[3px] h-full bg-[linear-gradient(0deg,rgba(0,0,0,0)0%,rgb(120,245,133)25%,rgb(9,148,23)50%,rgb(120,245,133)85%,rgba(0,0,0,0)100%)] mx-auto"></div>
               </AnimationContainer>
             </div>
             <ul className="list-disc list-inside">
