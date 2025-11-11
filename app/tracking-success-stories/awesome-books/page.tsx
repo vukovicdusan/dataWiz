@@ -330,7 +330,7 @@ const awesomeBooks = () => {
       </section>
       <section className="py-10 mt-10 relative">
         <h2 className="text-5xl font-bold mb-6 text-center">Client Experience</h2>
-        <div className="text-l mb-5 font-bold uppercase text-center text-primaryAccent">Review</div>
+        {/* <div className="text-l mb-5 font-bold uppercase text-center text-primaryAccent">Review</div> */}
         <p className="text-center max-w-prose mx-auto mb-4 text-2xl font-bold">“Could not recommend Igor and DataWiz more highly. Quick to reply to any issue, really good technical understanding of topics, and feels like they are part of your team. Carry on the great work guys.”</p>
         <p className="text-center italic">Mubin A.</p>
         <p className="text-center italic">Director</p>
