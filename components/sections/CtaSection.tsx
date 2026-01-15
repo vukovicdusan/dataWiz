@@ -37,15 +37,44 @@ let consultationCta = {
   ctaButton: "Start Your Success Story",
 };
 
+let caseStudies = {
+  id: "case-studies",
+  title: "Want to Achieve Similar Results?",
+  subtitle:
+    "If you're looking for more data, better data, and a tracking setup that actually makes sense, we’ve got you covered. We offer a free intro call to dive into your challenges and potential solutions. Let’s see if we’re a good fit.",
+  list: [
+    "I will help you:",
+    "Spot and fix issues in your current setup",
+    "Identify areas of improvement",
+    "Outline the implementation plan",
+    "Answer all your questions",
+  ],
+  ctaButton: "Book a Free Call!",
+};
+
 const CtaSection = () => {
   const [ctaContent, setCtaContent] = useState(auditCta);
   const pathname = usePathname();
 
   useEffect(() => {
+    console.log("pathname", pathname);
     const url = `${pathname}`;
-    url === "/consultation"
-      ? setCtaContent(consultationCta)
-      : setCtaContent(auditCta);
+    switch (url) {
+      case '/consultation':
+        setCtaContent(consultationCta)
+        break;
+      case '/audit':
+        setCtaContent(auditCta)
+        break;
+      case '/case-studies':
+        setCtaContent(caseStudies)
+        break;
+      default:
+        setCtaContent(auditCta)
+    }
+    // url === "/consultation"
+    //   ? setCtaContent(consultationCta)
+    //   : setCtaContent(auditCta);
   }, [pathname]);
 
   return (

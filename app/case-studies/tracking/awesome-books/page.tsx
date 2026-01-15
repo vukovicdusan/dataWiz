@@ -275,10 +275,8 @@ const awesomeBooks = () => {
               <AwesomeBooksTable1></AwesomeBooksTable1>
             </div>
           </div>
-          <div className="flex flex-wrap lg:flex-nowrap justify-between items-center flex-col-reverse md:flex-row gap-4 md:gap-10">
-            <div className="md:basis-[50% - 2rem] basis-full md:min-w-[15rem] min-w-full sm:overflow-auto overflow-x-scroll">
-              <AwesomeBooksTable2></AwesomeBooksTable2>
-            </div>
+          <div className="flex flex-wrap lg:flex-nowrap justify-between sm:items-center md:flex-row-reverse gap-4 md:gap-10">
+            
             <div className="flex flex-col md:basis-[50% - 2rem] basis-full md:max-w-md max-w-full gap-4">
               <h3 className="font-bold text-5xl mb-1 text-primaryAccent">Marketing Attribution</h3>
               <ul className="rounded-3xl bg-secondaryAccent">
@@ -298,6 +296,9 @@ const awesomeBooks = () => {
                   </ul>
                 </li>
               </ul>
+            </div>
+            <div className="md:basis-[50% - 2rem] basis-full md:min-w-[15rem] min-w-full sm:overflow-auto overflow-x-scroll">
+              <AwesomeBooksTable2></AwesomeBooksTable2>
             </div>
           </div>
         </Wrapper>
