@@ -57,25 +57,19 @@ const CtaSection = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("pathname", pathname);
-    const url = `${pathname}`;
-    switch (url) {
-      case '/consultation':
-        setCtaContent(consultationCta)
-        break;
-      case '/audit':
-        setCtaContent(auditCta)
-        break;
-      case '/case-studies':
-        setCtaContent(caseStudies)
-        break;
-      default:
-        setCtaContent(auditCta)
-    }
-    // url === "/consultation"
-    //   ? setCtaContent(consultationCta)
-    //   : setCtaContent(auditCta);
-  }, [pathname]);
+  if (!pathname) return;
+
+  if (pathname.startsWith('/case-studies')) {
+    setCtaContent(caseStudies);
+  } else if (pathname.startsWith('/consultation')) {
+    setCtaContent(consultationCta);
+  } else if (pathname.startsWith('/audit')) {
+    setCtaContent(auditCta);
+  } else {
+    setCtaContent(auditCta);
+  }
+}, [pathname]);
+
 
   return (
     <section id="cta" className="relative bg-secondaryAccent py-4 z-10">
