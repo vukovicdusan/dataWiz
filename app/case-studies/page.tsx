@@ -35,7 +35,7 @@ const TrackingSuccessStories = () => {
       <section className="py-10 mt-10">
         <h1 className="text-5xl mb-10 font-bold uppercase text-center">Tracking Success Stories</h1>
         <div className="switcher">
-          <Link href="/case-studies/tracking/awesome-books" className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent p-6 h-full max-w-prose hover:-translate-y-5 transition-all duration-300">
+          <Link href="/case-studies/tracking/awesome-books" className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent p-4 sm:p-6 h-full max-w-prose hover:-translate-y-5 transition-all duration-300">
             <div className="flex gap-4 items-center">
               <Image src={awesomeBooks} width={60} height={60} alt="awesome books logo" className="object-contain flex-shrink-0 rounded-full"></Image>
               <h4 className="font-bold text-xl">Awesome Books</h4>
@@ -48,7 +48,7 @@ const TrackingSuccessStories = () => {
                 insights that boosted campaign performance and optimized ad
                 spend.
               </p> */}
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-wrap sm:flex-nowrap justify-center">
                 <KpiCounter size={"sm"} number={95} afterNumber={"y"} title={"Avg. Accuracy"}></KpiCounter>
                 <KpiCounter size={"sm"} number={20} afterNumber={"%"} title={"Total Events"}></KpiCounter>
                 <KpiCounter size={"sm"} number={15} afterNumber={"%"} title={"Attributed Events"}></KpiCounter>
