@@ -1,7 +1,7 @@
 import Wrapper from "@/components/Wrapper";
 import React from "react";
-import dataWizLogo from "../../../public/images/logo-hat-star.png";
-import awesomeBooksLogo from "../../../public/images/awesome-books-removebg.avif";
+// import dataWizLogo from "../../../public/images/logo-hat-star.png";
+import awesomeBooksLogo from "../../../../public/images/awesome-books-removebg.avif";
 import Image from "next/image";
 import type { Metadata } from "next";
 import Shapedivider from "@/components/Shapedivider";
