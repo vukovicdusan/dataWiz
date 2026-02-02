@@ -6,65 +6,82 @@ import ShapedividerDark from "@/components/ShapedividerDark";
 import Wrapper from "@/components/Wrapper";
 import { Metadata } from "next";
 import Image from "next/image";
-import React from "react";
-import awesomeBooks from "../../public/images/testimonials/awesomeBooks.jpg";
 import Link from "next/link";
 import KpiCounter from "@/components/KpiCounter";
+import { getTrackingCaseStudiesArchive } from "@/lib/caseStudiesTracking";
 
 export const metadata: Metadata = {
   title: "DataWiz - Tracking Success Stories ",
-  description: "Welcome to DataWiz, where data meets insight and transforms your digital world.",
+  description:
+    "Welcome to DataWiz, where data meets insight and transforms your digital world.",
   verification: {
     other: { "facebook-domain-verification": "xr5b757smcignim4zuexkq0b2guxko" },
   },
   robots: {
     index: false,
     follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-    },
+    googleBot: { index: false, follow: false, noimageindex: true },
   },
 };
 
-const TrackingSuccessStories = () => {
+const TrackingSuccessStories = async () => {
+  const archive = await getTrackingCaseStudiesArchive();
+
   return (
     <Wrapper>
-      {" "}
       <section className="py-10 mt-10">
-        <h1 className="text-5xl mb-10 font-bold uppercase text-center">Tracking Success Stories</h1>
-        <div className="switcher">
-          <Link href="/case-studies/tracking/awesome-books" className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent p-4 sm:p-6 h-full max-w-prose hover:-translate-y-5 transition-all duration-300">
-            <div className="flex gap-4 items-center">
-              <Image src={awesomeBooks} width={60} height={60} alt="awesome books logo" className="object-contain flex-shrink-0 rounded-full"></Image>
-              <h4 className="font-bold text-xl">Awesome Books</h4>
-            </div>
-            <div className="flex flex-col gap-2">
-              {/* <p>
-                AwesomeBooks, a global online bookstore, partnered with us to
-                fix critical tracking gaps. By achieving accurate data, complete
-                attribution, and full platform coverage, they unlocked reliable
-                insights that boosted campaign performance and optimized ad
-                spend.
-              </p> */}
-              <div className="flex gap-3 flex-wrap sm:flex-nowrap justify-center">
-                <KpiCounter size={"sm"} number={95} afterNumber={"y"} title={"Avg. Accuracy"}></KpiCounter>
-                <KpiCounter size={"sm"} number={20} afterNumber={"%"} title={"Total Events"}></KpiCounter>
-                <KpiCounter size={"sm"} number={15} afterNumber={"%"} title={"Attributed Events"}></KpiCounter>
-                <KpiCounter size={"sm"} number={-1} afterNumber={"sec"} title={"Site Speed"}></KpiCounter>
+        <h1 className="text-5xl mb-10 font-bold uppercase text-center">
+          {archive.title}
+        </h1>
+
+        <div className="switcher gap-4">
+          {archive.items.map((item) => (
+            <Link
+              key={item.slug}
+              href={`/case-studies/tracking/${item.slug}`}
+              className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent p-4 sm:p-6 h-full max-w-prose hover:-translate-y-5 transition-all duration-300"
+            >
+              <div className="flex gap-4 items-center">
+                <Image
+                  src={item.logo}
+                  width={60}
+                  height={60}
+                  alt={`${item.name} logo`}
+                  className="object-contain flex-shrink-0 rounded-full"
+                />
+                <h4 className="font-bold text-xl">{item.name}</h4>
               </div>
-            </div>
-          </Link>
+
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-3 flex-wrap sm:flex-nowrap justify-center">
+                  {item.kpis.map((kpi) => (
+                    <KpiCounter
+                      key={kpi.title}
+                      size={"sm"}
+                      number={kpi.number}
+                      afterNumber={kpi.afterNumber}
+                      title={kpi.title}
+                    />
+                  ))}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
-      <Shapedivider classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}></Shapedivider>
+
+      <Shapedivider
+        classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}
+      />
       <div className="bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 ">
-        <CtaSection></CtaSection>
-        <ShapedividerDark classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}></ShapedividerDark>
+        <CtaSection />
+        <ShapedividerDark
+          classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}
+        />
       </div>
-      <BackToTop></BackToTop>
-      <CalendlyBadgeWidget></CalendlyBadgeWidget>
+
+      <BackToTop />
+      <CalendlyBadgeWidget />
     </Wrapper>
   );
 };
