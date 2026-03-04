@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Titillium_Web } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -26,6 +27,74 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* 1) Default Consent: must run ASAP (before anything that might set cookies) */}
+        <Script id="gtag-consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              personalization_storage: 'denied',
+              functionality_storage: 'denied',
+              security_storage: 'granted'
+            });
+          `}
+        </Script>
+
+        {/* 2) Cookiebot loader */}
+        <Script
+          id="cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="dd7e32ed-af68-45ca-9674-a44996d2d53c"
+          data-consentmode="disabled"
+          type="text/javascript"
+          strategy="beforeInteractive"
+        />
+
+        {/* 3) Consent listener + load GTM ONLY after consent ready */}
+        <Script id="cookiebot-consent-listener" strategy="afterInteractive">
+          {`
+            (function() {
+              function loadGTM() {
+                if (window.__gtmLoaded) return;
+                window.__gtmLoaded = true;
+
+                (function(w,d,s,l,i){
+                  w[l]=w[l]||[];
+                  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                  var f=d.getElementsByTagName(s)[0],
+                      j=d.createElement(s),
+                      dl=l!='dataLayer'?'&l='+l:'';
+                  j.async=true;
+                  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                  f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-5C5RQSK');
+              }
+
+              window.addEventListener("CookiebotOnConsentReady", function () {
+                if (!window.Cookiebot || !window.Cookiebot.consent) return;
+
+                const C = window.Cookiebot.consent;
+
+                gtag("consent", "update", {
+                  analytics_storage: C.statistics ? "granted" : "denied",
+                  ad_storage: C.marketing ? "granted" : "denied",
+                  ad_user_data: C.marketing ? "granted" : "denied",
+                  ad_personalization: C.marketing ? "granted" : "denied",
+                  personalization_storage: C.preferences ? "granted" : "denied",
+                  functionality_storage: C.preferences ? "granted" : "denied"
+                });
+
+                loadGTM();
+              });
+            })();
+          `}
+        </Script>
+      </head>
       <body className={`${titilium.className} bg-primaryBg`}>
         <Header />
         <main className="overflow-hidden">{children}</main>
