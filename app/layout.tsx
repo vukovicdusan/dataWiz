@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Titillium_Web } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -28,22 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Cookiebot MUST be a plain script tag with id="Cookiebot" */}
-        <script
-          id="Cookiebot"
-          src="https://consent.cookiebot.com/uc.js"
-          data-cbid="dd7e32ed-af68-45ca-9674-a44996d2d53c"
-          data-consentmode="disabled"
-          type="text/javascript"
-          async
-        ></script>
-
-        {/* Default Consent (can be plain script too) */}
+        {/* 1) Consent defaults FIRST */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){ dataLayer.push(arguments); }
+
               gtag('consent', 'default', {
                 ad_storage: 'denied',
                 ad_user_data: 'denied',
@@ -57,45 +47,52 @@ export default function RootLayout({
           }}
         />
 
-        {/* Consent listener + GTM loader */}
+        {/* 2) Cookiebot */}
+        <script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="dd7e32ed-af68-45ca-9674-a44996d2d53c"
+          data-consentmode="disabled"
+          type="text/javascript"
+          async
+        ></script>
+
+        {/* 3) GTM loads immediately */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              (function() {
+              (function(w,d,s,l,i){
+                w[l]=w[l]||[];
+                w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),
+                    dl=l!='dataLayer' ? '&l='+l : '';
+                j.async=true;
+                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-5C5RQSK');
+            `,
+          }}
+        />
 
-                function loadGTM() {
-                  if (window.__gtmLoaded) return;
-                  window.__gtmLoaded = true;
+        {/* 4) Update consent when Cookiebot is ready */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener("CookiebotOnConsentReady", function () {
+                if (!window.Cookiebot || !window.Cookiebot.consent) return;
 
-                  (function(w,d,s,l,i){
-                    w[l]=w[l]||[];
-                    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                    var f=d.getElementsByTagName(s)[0],
-                        j=d.createElement(s),
-                        dl=l!='dataLayer'?'&l='+l:'';
-                    j.async=true;
-                    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                    f.parentNode.insertBefore(j,f);
-                  })(window,document,'script','dataLayer','GTM-5C5RQSK');
-                }
+                var C = window.Cookiebot.consent;
 
-                window.addEventListener("CookiebotOnConsentReady", function () {
-                  if (!window.Cookiebot || !window.Cookiebot.consent) return;
-                  const C = window.Cookiebot.consent;
-
-                  gtag("consent", "update", {
-                    analytics_storage: C.statistics ? "granted" : "denied",
-                    ad_storage: C.marketing ? "granted" : "denied",
-                    ad_user_data: C.marketing ? "granted" : "denied",
-                    ad_personalization: C.marketing ? "granted" : "denied",
-                    personalization_storage: C.preferences ? "granted" : "denied",
-                    functionality_storage: C.preferences ? "granted" : "denied"
-                  });
-
-                  loadGTM();
+                gtag("consent", "update", {
+                  analytics_storage: C.statistics ? "granted" : "denied",
+                  ad_storage: C.marketing ? "granted" : "denied",
+                  ad_user_data: C.marketing ? "granted" : "denied",
+                  ad_personalization: C.marketing ? "granted" : "denied",
+                  personalization_storage: C.preferences ? "granted" : "denied",
+                  functionality_storage: C.preferences ? "granted" : "denied"
                 });
-
-              })();
+              });
             `,
           }}
         />
