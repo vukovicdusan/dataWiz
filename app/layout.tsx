@@ -38,20 +38,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){ dataLayer.push(arguments); }
-              gtag('consent', 'default', {
-                ad_storage: 'denied',
-                ad_user_data: 'denied',
-                ad_personalization: 'denied',
-                analytics_storage: 'denied',
-                personalization_storage: 'denied',
-                functionality_storage: 'denied',
-                security_storage: 'granted'
-              });
+          window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied',
+  'personalization_storage': 'denied',
+  'functionality_storage': 'denied',
+  'security_storage': 'granted',
+  'wait_for_update': 500
+});
             `,
           }}
         />
+          {/* Cookiebot */}
+       <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="dd7e32ed-af68-45ca-9674-a44996d2d53c" data-consentmode="disabled" type="text/javascript" async></script>
 
         {/* Consent listener + GTM loader */}
         <script
@@ -59,39 +63,39 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `
               (function() {
 
-                function loadGTM() {
-                  if (window.__gtmLoaded) return;
-                  window.__gtmLoaded = true;
+  function loadGTM() {
+    if (window.__gtmLoaded) return;
+    window.__gtmLoaded = true;
 
-                  (function(w,d,s,l,i){
-                    w[l]=w[l]||[];
-                    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                    var f=d.getElementsByTagName(s)[0],
-                        j=d.createElement(s),
-                        dl=l!='dataLayer'?'&l='+l:'';
-                    j.async=true;
-                    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                    f.parentNode.insertBefore(j,f);
-                  })(window,document,'script','dataLayer','GTM-5C5RQSK');
-                }
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5C5RQSK');
+  }
 
-                window.addEventListener("CookiebotOnConsentReady", function () {
-                  if (!window.Cookiebot || !window.Cookiebot.consent) return;
-                  const C = window.Cookiebot.consent;
+  window.addEventListener('CookiebotOnConsentReady', function () {
+    const C = Cookiebot.consent;
 
-                  gtag("consent", "update", {
-                    analytics_storage: C.statistics ? "granted" : "denied",
-                    ad_storage: C.marketing ? "granted" : "denied",
-                    ad_user_data: C.marketing ? "granted" : "denied",
-                    ad_personalization: C.marketing ? "granted" : "denied",
-                    personalization_storage: C.preferences ? "granted" : "denied",
-                    functionality_storage: C.preferences ? "granted" : "denied"
-                  });
+    gtag('consent', 'update', {
+      'ad_storage': C.marketing ? 'granted' : 'denied',
+      'ad_user_data': C.marketing ? 'granted' : 'denied',
+      'ad_personalization': C.marketing ? 'granted' : 'denied',
+      'analytics_storage': C.statistics ? 'granted' : 'denied',
+      'personalization_storage': C.preferences ? 'granted' : 'denied',
+      'functionality_storage': C.preferences ? 'granted' : 'denied',
+      'security_storage': 'granted'
+    });
 
-                  loadGTM();
-                });
+    loadGTM();
+  });
 
-              })();
+})();
             `,
           }}
         />
