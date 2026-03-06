@@ -48,7 +48,6 @@ gtag('consent', 'default', {
   wait_for_update: 500
 });
 
-gtag('set', 'url_passthrough', true);
 
 (function() {
 
