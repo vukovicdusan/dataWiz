@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Titillium_Web } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -28,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Cookiebot MUST be a plain script tag with id="Cookiebot" */}
+        {/* Cookiebot */}
         <script
           id="Cookiebot"
           src="https://consent.cookiebot.com/uc.js"
@@ -38,7 +37,7 @@ export default function RootLayout({
           async
         ></script>
 
-        {/* Default Consent (can be plain script too) */}
+        {/* Default Consent  */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -61,42 +60,46 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              (function() {
+      (function() {
+        function loadGTM() {
+          if (window.__gtmLoaded) return;
+          window.__gtmLoaded = true;
 
-                function loadGTM() {
-                  if (window.__gtmLoaded) return;
-                  window.__gtmLoaded = true;
+          (function(w,d,s,l,i){
+            w[l]=w[l]||[];
+            w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+            var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),
+                dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-5C5RQSK');
+        }
 
-                  (function(w,d,s,l,i){
-                    w[l]=w[l]||[];
-                    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                    var f=d.getElementsByTagName(s)[0],
-                        j=d.createElement(s),
-                        dl=l!='dataLayer'?'&l='+l:'';
-                    j.async=true;
-                    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                    f.parentNode.insertBefore(j,f);
-                  })(window,document,'script','dataLayer','GTM-5C5RQSK');
-                }
+        function applyCookiebotConsent() {
+          if (!window.Cookiebot || !window.Cookiebot.consent) return;
 
-                window.addEventListener("CookiebotOnConsentReady", function () {
-                  if (!window.Cookiebot || !window.Cookiebot.consent) return;
-                  const C = window.Cookiebot.consent;
+          var C = window.Cookiebot.consent;
 
-                  gtag("consent", "update", {
-                    analytics_storage: C.statistics ? "granted" : "denied",
-                    ad_storage: C.marketing ? "granted" : "denied",
-                    ad_user_data: C.marketing ? "granted" : "denied",
-                    ad_personalization: C.marketing ? "granted" : "denied",
-                    personalization_storage: C.preferences ? "granted" : "denied",
-                    functionality_storage: C.preferences ? "granted" : "denied"
-                  });
+          gtag("consent", "update", {
+            analytics_storage: C.statistics ? "granted" : "denied",
+            ad_storage: C.marketing ? "granted" : "denied",
+            ad_user_data: C.marketing ? "granted" : "denied",
+            ad_personalization: C.marketing ? "granted" : "denied",
+            personalization_storage: C.preferences ? "granted" : "denied",
+            functionality_storage: C.preferences ? "granted" : "denied"
+          });
 
-                  loadGTM();
-                });
+          loadGTM();
+        }
 
-              })();
-            `,
+        window.addEventListener("CookiebotOnLoad", applyCookiebotConsent);
+        window.addEventListener("CookiebotOnConsentReady", applyCookiebotConsent);
+        window.addEventListener("CookiebotOnAccept", applyCookiebotConsent);
+        window.addEventListener("CookiebotOnDecline", applyCookiebotConsent);
+      })();
+    `,
           }}
         />
       </head>
