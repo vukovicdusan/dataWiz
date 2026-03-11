@@ -61,6 +61,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
       (function() {
+        window.__gtmLoaded = window.__gtmLoaded || false;
+        window.__cookiebotConsentSignature = window.__cookiebotConsentSignature || null;
+
         function loadGTM() {
           if (window.__gtmLoaded) return;
           window.__gtmLoaded = true;
@@ -81,6 +84,18 @@ export default function RootLayout({
           if (!window.Cookiebot || !window.Cookiebot.consent) return;
 
           var C = window.Cookiebot.consent;
+          var signature = JSON.stringify({
+            preferences: !!C.preferences,
+            statistics: !!C.statistics,
+            marketing: !!C.marketing
+          });
+
+          if (window.__cookiebotConsentSignature === signature) {
+            if (!window.__gtmLoaded) loadGTM();
+            return;
+          }
+
+          window.__cookiebotConsentSignature = signature;
 
           gtag("consent", "update", {
             analytics_storage: C.statistics ? "granted" : "denied",
