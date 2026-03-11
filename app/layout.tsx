@@ -60,11 +60,16 @@ export default function RootLayout({
             var gtmLoaded = false;
 
             function getCookie(name) {
-              var match = document.cookie.match(
-                new RegExp("(?:^|;\\s*)" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "=([^;]*)")
-              );
-              return match ? decodeURIComponent(match[1]) : null;
-            }
+  var match = document.cookie.match(
+    new RegExp(
+      "(?:^|;\\s*)" +
+        name.replace(/[.*+?^\${}()|[\]\\]/g, "\\$&") +
+        "=([^;]*)"
+    )
+  );
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
 
             function readCookiebotConsentCookie() {
               var raw = getCookie('CookieConsent');
