@@ -109,7 +109,6 @@ export default function RootLayout({
           loadGTM();
         }
 
-        window.addEventListener("CookiebotOnLoad", applyCookiebotConsent);
         window.addEventListener("CookiebotOnConsentReady", applyCookiebotConsent);
         window.addEventListener("CookiebotOnAccept", applyCookiebotConsent);
         window.addEventListener("CookiebotOnDecline", applyCookiebotConsent);
