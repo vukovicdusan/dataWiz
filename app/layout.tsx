@@ -80,6 +80,11 @@ export default function RootLayout({
           })(window,document,'script','dataLayer','GTM-5C5RQSK');
         }
 
+        function scheduleGTM() {
+          if (window.__gtmLoaded) return;
+          window.setTimeout(loadGTM, 0);
+        }
+
         function applyCookiebotConsent() {
           if (!window.Cookiebot || !window.Cookiebot.consent) return;
 
@@ -91,7 +96,7 @@ export default function RootLayout({
           });
 
           if (window.__cookiebotConsentSignature === signature) {
-            if (!window.__gtmLoaded) loadGTM();
+            if (!window.__gtmLoaded) scheduleGTM();
             return;
           }
 
@@ -106,7 +111,8 @@ export default function RootLayout({
             functionality_storage: C.preferences ? "granted" : "denied"
           });
 
-          loadGTM();
+          dataLayer.push({ event: "cookiebot_consent_updated" });
+          scheduleGTM();
         }
 
         window.addEventListener("CookiebotOnConsentReady", applyCookiebotConsent);
