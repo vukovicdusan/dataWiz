@@ -61,7 +61,7 @@ export default function RootLayout({
 
             function getCookie(name) {
               var match = document.cookie.match(
-                new RegExp('(?:^|;\\s*)' + name.replace(/[.+?^${}()|[\]\\]/g, '\\$&') + '=([^;])')
+                new RegExp('(?:^|;\\s*)' + name.replace(/[.+?^${}()|[\\]\\\\]/g, '\\$&') + '=([^;]*)')
               );
               return match ? decodeURIComponent(match[1]) : null;
             }
