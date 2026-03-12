@@ -58,17 +58,19 @@ export default function RootLayout({
           (function () {
             var GTM_ID = 'GTM-5C5RQSK';
             var gtmLoaded = false;
+            var gtmLoadScheduled = false;
+            var lastAppliedConsentKey = null;
 
             function getCookie(name) {
-  var match = document.cookie.match(
-    new RegExp(
-      "(?:^|;\\s*)" +
-        name.replace(/[.*+?^\${}()|[\]\\]/g, "\\$&") +
-        "=([^;]*)"
-    )
-  );
-  return match ? decodeURIComponent(match[1]) : null;
-}
+              var match = document.cookie.match(
+                new RegExp(
+                  "(?:^|;\\s*)" +
+                    name.replace(/[.*+?^\${}()|[\]\\]/g, "\\$&") +
+                    "=([^;]*)"
+                )
+              );
+              return match ? decodeURIComponent(match[1]) : null;
+            }
 
 
             function readCookiebotConsentCookie() {
@@ -91,9 +93,23 @@ export default function RootLayout({
               return consent;
             }
 
+            function getConsentKey(consent) {
+              return [
+                consent.hasResponse,
+                consent.preferences,
+                consent.statistics,
+                consent.marketing
+              ].join('|');
+            }
+
             function pushConsentUpdateFromCookie() {
               var c = readCookiebotConsentCookie();
               if (!c.hasResponse) return c;
+
+              var consentKey = getConsentKey(c);
+              if (consentKey === lastAppliedConsentKey) return c;
+
+              lastAppliedConsentKey = consentKey;
 
               gtag('consent', 'update', {
                 ad_storage:            c.marketing   ? 'granted' : 'denied',
@@ -116,6 +132,8 @@ export default function RootLayout({
 
             function loadGTM() {
               if (gtmLoaded) return;
+
+              gtmLoadScheduled = false;
               gtmLoaded = true;
 
               (function(w,d,s,l,i){
@@ -143,6 +161,8 @@ export default function RootLayout({
 
               /* Queue consent update first, then load GTM */
               if (shouldLoadGTM(c)) {
+                if (gtmLoaded || gtmLoadScheduled) return;
+                gtmLoadScheduled = true;
                 setTimeout(loadGTM, 0);
               }
             }
