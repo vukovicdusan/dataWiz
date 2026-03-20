@@ -39,7 +39,7 @@ const TrackingSuccessStories = async () => {
             <Link
               key={item.slug}
               href={`/case-studies/tracking/${item.slug}`}
-              className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent p-4 sm:p-6 h-full max-w-prose hover:-translate-y-5 transition-all duration-300"
+              className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent border-solid border border-transparent p-4 sm:p-6 h-full max-w-[60ch] hover:-translate-y-5 hover:border-white transition-all duration-300"
             >
               <div className="flex gap-4 items-center">
                 <Image
