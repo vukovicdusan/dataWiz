@@ -19,7 +19,7 @@ items:
   - name: "Bio Spajz"
     slug: "bio-spajz"
     logo: "/images/case-studies/bio_spajz_logo.webp"
-    case_study: "bio_spajz.pdf"
+    case_study: "bio_spajz_case_study.pdf"
     kpis:
       - title: "Data Accuracy"
         number: 96.7

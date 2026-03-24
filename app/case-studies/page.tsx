@@ -41,7 +41,7 @@ const TrackingSuccessStories = async () => {
               href={`/case-studies/tracking/${item.slug}`}
               className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent border-solid border border-transparent p-4 sm:p-6 h-full max-w-[60ch] hover:-translate-y-5 hover:border-white transition-all duration-300"
             >
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 items-center justify-between w-full">
                 <Image
                   src={item.logo}
                   width={60}
@@ -50,6 +50,12 @@ const TrackingSuccessStories = async () => {
                   className="object-contain flex-shrink-0 rounded-full"
                 />
                 <h4 className="font-bold text-xl">{item.name}</h4>
+                <span className="flex gap-2 ml-auto">
+                  Read More
+                  <svg className="w-[24px] h-[24px] group-hover:translate-x-1 transition-transform">
+                    <use xlinkHref={`./images/sprite.svg#button-arrow`}></use>
+                  </svg>
+                </span>
               </div>
 
               <div className="flex flex-col gap-2">

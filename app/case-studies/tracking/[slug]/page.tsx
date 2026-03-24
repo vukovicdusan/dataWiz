@@ -22,9 +22,9 @@ export async function generateStaticParams() {
   return archive.items.map((item) => ({ slug: item.slug }));
 }
 
-export async function generateMetadata(
-  { params }: TrackingCaseStudyPageProps,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: TrackingCaseStudyPageProps): Promise<Metadata> {
   const caseStudy = await getTrackingCaseStudyBySlug(params.slug);
 
   if (!caseStudy) {
@@ -38,7 +38,9 @@ export async function generateMetadata(
     description:
       "Welcome to DataWiz, where data meets insight and transforms your digital world.",
     verification: {
-      other: { "facebook-domain-verification": "xr5b757smcignim4zuexkq0b2guxko" },
+      other: {
+        "facebook-domain-verification": "xr5b757smcignim4zuexkq0b2guxko",
+      },
     },
     robots: {
       index: false,
@@ -52,7 +54,9 @@ export async function generateMetadata(
   };
 }
 
-const TrackingCaseStudyPage = async ({ params }: TrackingCaseStudyPageProps) => {
+const TrackingCaseStudyPage = async ({
+  params,
+}: TrackingCaseStudyPageProps) => {
   const caseStudy = await getTrackingCaseStudyBySlug(params.slug);
 
   if (!caseStudy) {
