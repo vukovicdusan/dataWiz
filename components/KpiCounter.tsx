@@ -12,20 +12,32 @@ type kpiPropsType = {
 
 const KpiCounter = (props: kpiPropsType) => {
   let kpiLg = (
-    <div className="text-center border border-white rounded-3xl py-4 md:py-6 px-4">
+    <div className="text-center border border-white rounded-3xl py-4 md:py-6 px-4 w-[20rem]">
       <p className="text-6xl md:text-8xl font-bold text-primaryAccent mb-2">
         {props.beforeNumber}
-        <CountUp enableScrollSpy={true} scrollSpyOnce={true} start={0} end={props.number} duration={2} />
+        <CountUp
+          enableScrollSpy={true}
+          scrollSpyOnce={true}
+          start={0}
+          end={props.number}
+          duration={2}
+        />
         {props.afterNumber}
       </p>
       <p className="font-bold">{props.title}</p>
     </div>
   );
   let kpiSm = (
-    <div className="text-center border border-white rounded-2xl py-1 md:py-2 px-3">
+    <div className="text-center border border-white rounded-2xl py-1 md:py-2 px-3 w-[15ch]">
       <p className="text-1xl md:text-2xl font-bold text-primaryAccent mb-2">
         {props.beforeNumber}
-        <CountUp enableScrollSpy={true} scrollSpyOnce={true} start={0} end={props.number} duration={2} />
+        <CountUp
+          enableScrollSpy={true}
+          scrollSpyOnce={true}
+          start={0}
+          end={props.number}
+          duration={2}
+        />
         {props.afterNumber}
       </p>
       <p className="font-bold">{props.title}</p>

@@ -87,7 +87,7 @@ const TrackingCaseStudyPage = async ({
               className="rounded-full object-contain"
             />
             <Link
-              href="/case-studies"
+              href="/case-studies/tracking"
               className="text-sm font-bold uppercase tracking-[0.15em] text-primaryAccent"
             >
               Back to case studies

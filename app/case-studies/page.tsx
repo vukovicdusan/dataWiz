@@ -1,19 +1,11 @@
-import BackToTop from "@/components/BackToTop";
-import CalendlyBadgeWidget from "@/components/CalendlyBadgeWidget";
-import CtaSection from "@/components/sections/CtaSection";
-import Shapedivider from "@/components/Shapedivider";
-import ShapedividerDark from "@/components/ShapedividerDark";
 import Wrapper from "@/components/Wrapper";
-import { Metadata } from "next";
-import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
-import KpiCounter from "@/components/KpiCounter";
-import { getTrackingCaseStudiesArchive } from "@/lib/caseStudiesTracking";
 
 export const metadata: Metadata = {
-  title: "DataWiz - Tracking Success Stories ",
+  title: "DataWiz - Case Studies",
   description:
-    "Welcome to DataWiz, where data meets insight and transforms your digital world.",
+    "Browse DataWiz case study categories and explore client success stories by service area.",
   verification: {
     other: { "facebook-domain-verification": "xr5b757smcignim4zuexkq0b2guxko" },
   },
@@ -24,72 +16,43 @@ export const metadata: Metadata = {
   },
 };
 
-const TrackingSuccessStories = async () => {
-  const archive = await getTrackingCaseStudiesArchive();
-
+const CaseStudiesPage = () => {
   return (
     <Wrapper>
-      <section className="py-10 mt-10">
-        <h1 className="text-5xl mb-10 font-bold uppercase text-center">
-          {archive.title}
-        </h1>
+      <section className="mt-10 py-10">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primaryAccent">
+            Case Studies
+          </p>
+          <h1 className="mb-6 text-5xl font-bold uppercase">
+            Explore success stories by category
+          </h1>
+          <p className="mx-auto mb-10 max-w-2xl text-lg text-white/80">
+            Tracking is the first category available now, with more case study
+            types ready to be added here as the library grows.
+          </p>
+        </div>
 
-        <div className="switcher gap-4">
-          {archive.items.map((item) => (
-            <Link
-              key={item.slug}
-              href={`/case-studies/tracking/${item.slug}`}
-              className="flex flex-col items-center gap-5 rounded-3xl bg-secondaryAccent border-solid border border-transparent p-4 sm:p-6 h-full max-w-[60ch] hover:-translate-y-5 hover:border-white transition-all duration-300"
-            >
-              <div className="flex gap-4 items-center justify-between w-full">
-                <Image
-                  src={item.logo}
-                  width={60}
-                  height={60}
-                  alt={`${item.name} logo`}
-                  className="object-contain flex-shrink-0 rounded-full"
-                />
-                <h4 className="font-bold text-xl">{item.name}</h4>
-                <span className="flex gap-2 ml-auto">
-                  Read More
-                  <svg className="w-[24px] h-[24px] group-hover:translate-x-1 transition-transform">
-                    <use xlinkHref={`./images/sprite.svg#button-arrow`}></use>
-                  </svg>
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <div className="flex gap-3 flex-wrap sm:flex-nowrap justify-center">
-                  {item.kpis.map((kpi) => (
-                    <KpiCounter
-                      key={kpi.title}
-                      size={"sm"}
-                      number={kpi.number}
-                      afterNumber={kpi.afterNumber}
-                      title={kpi.title}
-                    />
-                  ))}
-                </div>
-              </div>
-            </Link>
-          ))}
+        <div className="mx-auto max-w-3xl">
+          <Link
+            href="/case-studies/tracking"
+            className="block rounded-3xl border border-white/10 bg-secondaryAccent p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primaryAccent"
+          >
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-primaryAccent">
+              Available now
+            </p>
+            <h2 className="mb-3 text-3xl font-bold uppercase">
+              Tracking case studies
+            </h2>
+            <p className="text-white/80">
+              Browse implementation and performance stories focused on
+              tracking, measurement, and analytics foundations.
+            </p>
+          </Link>
         </div>
       </section>
-
-      <Shapedivider
-        classProp={"translate-y-[5px] w-screen ml-[50%] -translate-x-1/2"}
-      />
-      <div className="bg-secondaryAccent translate-y-1 w-screen ml-[50%] -translate-x-1/2 ">
-        <CtaSection />
-        <ShapedividerDark
-          classProp={"translate-y-1 w-screen ml-[50%] -translate-x-1/2"}
-        />
-      </div>
-
-      <BackToTop />
-      <CalendlyBadgeWidget />
     </Wrapper>
   );
 };
 
-export default TrackingSuccessStories;
+export default CaseStudiesPage;
