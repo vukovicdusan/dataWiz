@@ -21,7 +21,9 @@ const TopNavigation = (props: TTopNavigation) => {
   }, [open]);
 
   function navHandler(
-    e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLAnchorElement>,
   ) {
     open ? setOpen(false) : setOpen(true);
   }
@@ -30,7 +32,7 @@ const TopNavigation = (props: TTopNavigation) => {
     <>
       <nav
         id="mobile-navigation"
-        className={`fixed lg:relative top-0 bottom-0 right-0 pl-10 pr-4 py-6 border-l border-l-primaryAccent lg:border-0 h-full w-max flex items-end z-30 backdrop-blur-lg bg-[rgba(46,104,208,.2)] lg:bg-transparent lg:backdrop-blur-0 lg:block transition-all duration-500 ease-in-out ${
+        className={`fixed lg:relative top-0 bottom-0 right-0 mb-16 pl-10 pr-4 py-6 border-l border-l-primaryAccent lg:border-0 h-full w-max flex items-end z-30 backdrop-blur-lg bg-[rgba(46,104,208,.2)] lg:bg-transparent lg:backdrop-blur-0 lg:block transition-all duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-80 lg:translate-x-0"
         }`}
       >
