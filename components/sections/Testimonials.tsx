@@ -31,7 +31,7 @@ const Testimonials = () => {
             </AnimationContainer>
             <AnimationContainer direction={"fromLeft"}>
               <ButtonLink
-                link={"/case-studies"}
+                link={"/case-studies/tracking"}
                 className={"mx-auto mt-6 sm:mt-4"}
               >
                 Check out our success stories

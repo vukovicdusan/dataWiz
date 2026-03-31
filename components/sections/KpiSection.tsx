@@ -13,7 +13,7 @@ const KpiSection = () => {
             What Sets Me Apart?
           </h2>
         </AnimationContainer>
-        <section id="kpis">
+        <section id="kpis" className="pb-2">
           <AnimationContainer direction={"fromBottom"}>
             <div className="switcher gap-5 md:gap-10 justify-center mb-10">
               <KpiCounter
@@ -32,18 +32,15 @@ const KpiSection = () => {
                 size="lg"
                 number={25}
                 afterNumber={"%"}
-                title={"Accuracy Improvement"}
+                title={"Avg. Accuracy Improvement"}
               ></KpiCounter>
               <KpiCounter
                 size="lg"
                 number={15}
                 afterNumber={"%"}
-                title={"Attribution Improvement"}
+                title={"Avg. Attribution Improvement"}
               ></KpiCounter>
             </div>
-            <ButtonLink link={"/case-studies"} className={"mx-auto mb-10"}>
-              Check it out for yourself
-            </ButtonLink>
           </AnimationContainer>
 
           <div className="flex flex-wrap gap-20">
@@ -78,6 +75,12 @@ const KpiSection = () => {
               </AnimationContainer>
             </div>
           </div>
+          <ButtonLink
+            link={"/case-studies/tracking"}
+            className={"mx-auto mt-4"}
+          >
+            Check it out for yourself
+          </ButtonLink>
         </section>
       </Wrapper>
     </div>
