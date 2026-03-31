@@ -2,6 +2,7 @@ import React from "react";
 import Wrapper from "../Wrapper";
 import KpiCounter from "../KpiCounter";
 import AnimationContainer from "../AnimationContainer";
+import ButtonLink from "../ButtonLink";
 
 const KpiSection = () => {
   return (
@@ -14,7 +15,7 @@ const KpiSection = () => {
         </AnimationContainer>
         <section id="kpis">
           <AnimationContainer direction={"fromBottom"}>
-            <div className="switcher gap-5 md:gap-10 justify-center mb-20">
+            <div className="switcher gap-5 md:gap-10 justify-center mb-10">
               <KpiCounter
                 size="lg"
                 number={150}
@@ -40,6 +41,9 @@ const KpiSection = () => {
                 title={"Attribution Improvement"}
               ></KpiCounter>
             </div>
+            <ButtonLink link={"/case-studies"} className={"mx-auto mb-10"}>
+              Check it out for yourself
+            </ButtonLink>
           </AnimationContainer>
 
           <div className="flex flex-wrap gap-20">

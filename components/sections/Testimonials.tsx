@@ -4,6 +4,7 @@ import Wrapper from "../Wrapper";
 import AnimationContainer from "../AnimationContainer";
 import Image from "next/image";
 import logo from "@/public/images/logo-hat-star.png";
+import ButtonLink from "../ButtonLink";
 
 const Testimonials = () => {
   return (
@@ -27,6 +28,14 @@ const Testimonials = () => {
           <div className="w-full relative">
             <AnimationContainer direction={"fromRight"}>
               <TestimonialSlider />
+            </AnimationContainer>
+            <AnimationContainer direction={"fromLeft"}>
+              <ButtonLink
+                link={"/case-studies"}
+                className={"mx-auto mt-6 sm:mt-4"}
+              >
+                Check out our success stories
+              </ButtonLink>
             </AnimationContainer>
           </div>
         </div>

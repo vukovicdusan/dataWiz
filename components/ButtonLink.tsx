@@ -3,13 +3,18 @@ import React from "react";
 
 type ButtonLinkPropsType = {
   link?: string;
+  className?: string;
 };
 
 const ButtonLink = (props: ChildrenProps & ButtonLinkPropsType) => {
   return (
     <a
       href={props.link}
-      className="flex gap-4 rounded-3xl bg-primaryAccent px-3 py-2 group w-fit capitalize"
+      className={
+        props.className +
+        " " +
+        "flex gap-4 rounded-3xl bg-primaryAccent px-3 py-2 group w-fit capitalize"
+      }
     >
       {props.children}
       <svg className="w-[24px] h-[24px] group-hover:translate-x-1 transition-transform">
