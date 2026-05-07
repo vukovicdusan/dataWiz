@@ -15,7 +15,7 @@ const Header = () => {
     { link: "/#testimonials", name: "Reviews" },
     // { link: "#faq", name: "FAQ" },
     { link: "/#about", name: "About Me" },
-    { link: "/case-studies", name: "Case Studies" },
+    { link: "/case-studies/tracking", name: "Case Studies" },
   ];
 
   return (
