@@ -14,8 +14,12 @@ const Footer = () => {
     <footer className="pt-4 px-4 ">
       <Wrapper>
         <AnimationContainer direction={"fromTop"}>
-          <div className="flex flex-col gap-8 items-center pb-20">
+          <div className="flex flex-col gap-8 items-center pb-10">
             <Image alt="logo" src={logo} width={200}></Image>
+            <div className="stack">
+              <p className="font-bold text-center">Contact:</p>
+              <a className="hover:text-primaryAccent" href="mailto:igor@datawizanalytics.com">igor@datawizanalytics.com</a>
+            </div>
             <ul className="flex gap-8">
               <li>
                 <a
@@ -90,7 +94,14 @@ const Footer = () => {
             </ul>
           </div>
         </AnimationContainer>
-        <div>
+        <div className="flex flex-col justify-center items-center gap-2">
+          <ul className="flex gap-4 text-xs  text-gray-400 justify-center ">
+            <li className="relative hover:text-primaryAccent lg:after:absolute lg:after:h-4 lg:after:w-[1px] lg:after:bg-primaryAccent lg:after:-right-[14px] lg:after:top-1/2 lg:after:-translate-y-1/2 lg:after:rounded-full last:lg:after:bg-transparent"><a href="/privacy-policy" className="hover:text-primaryAccent ">Privacy Policy</a></li> 
+            <li className="ml-[14px]"><a href="/terms" className="hover:text-primaryAccent">Terms</a></li>
+          </ul>
+          <p className="text-xs text-center text-gray-400">
+            DataWiz LLC - Adress: Sheridan, Wyoming 82801, USA
+          </p>
           <p className="text-xs text-center text-gray-400">
             Copyright © dataWiz {date}
           </p>
