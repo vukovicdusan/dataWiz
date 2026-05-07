@@ -7,14 +7,14 @@ import Link from "next/link";
 
 const Header = () => {
   const linksArr = [
-    { link: "#kpis", name: "What sets me apart" },
-    { link: "#services", name: "Services" },
-    { link: "#industries", name: "Expertise" },
-    { link: "#process", name: "My Process" },
-    { link: "#cta", name: "Contact" },
-    { link: "#testimonials", name: "Reviews" },
+    { link: "/#kpis", name: "What sets me apart" },
+    { link: "/#services", name: "Services" },
+    { link: "/#industries", name: "Expertise" },
+    { link: "/#process", name: "My Process" },
+    { link: "/#cta", name: "Contact" },
+    { link: "/#testimonials", name: "Reviews" },
     // { link: "#faq", name: "FAQ" },
-    { link: "#about", name: "About Me" },
+    { link: "/#about", name: "About Me" },
     { link: "/case-studies", name: "Case Studies" },
   ];
 
