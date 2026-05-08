@@ -5,7 +5,7 @@ const Terms = () => {
   return (
     <Wrapper>
       <section className="mt-10 py-10">
-        <div className="mx-auto max-w-4xl text-center flex flex-col gap-8">
+        <div className="mx-auto max-w-4xl flex flex-col gap-8">
           <div className="flex flex-col gap-4">
             <h1 className="text-3xl font-bold ">Terms and Conditions</h1>
             <p>
@@ -16,7 +16,7 @@ const Terms = () => {
               !
             </p>
             <p>
-              These terms and conditions outline the rules and regulations for the use of DataWiz LLCs Website, located at{" "}
+              These terms and conditions outline the rules and regulations for the use of DataWiz LLC's Website, located at{" "}
               <a href="https://datawizanalytics.com/" className="text-primaryAccent hover:text-white">
                 datawizanalytics.com/
               </a>
@@ -41,7 +41,7 @@ const Terms = () => {
               <a href="https://datawizanalytics.com/" className="text-primaryAccent hover:text-white">
                 datawizanalytics.com/
               </a>{" "}
-              you agreed to use cookies in agreement with the DataWiz LLCs Privacy Policy.
+              you agreed to use cookies in agreement with the DataWiz LLC's Privacy Policy.
             </p>
             <p>Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website.</p>
             <p>Some of our affiliate/advertising partners may also use cookies.</p>
@@ -89,7 +89,7 @@ const Terms = () => {
                 </a>
               </li>
             </ul>
-            <p>This Agreement shall begin on the date hereof. Our Terms and Conditions were created with the help of the Free Terms and Conditions Generator.</p>
+            <p>This Agreement shall begin on the date hereof.</p>
           </div>
           <div className="flex flex-col gap-4">
             <p>Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. DataWiz LLC does not filter, edit, publish or review Comments prior to their presence on the website.</p>
@@ -142,7 +142,7 @@ const Terms = () => {
               <li>• By use of the uniform resource locator being linked to; or</li>
               <li>• By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party's site.</li>
             </ul>
-            <p>No use of DataWiz LLCs logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
+            <p>No use of DataWiz LLC's logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
           </div>
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold ">iFrames</h2>
@@ -156,7 +156,7 @@ const Terms = () => {
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold ">Reservation of Rights</h2>
             <p>We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request.</p>
-            <p>We also reserve the right to amen these terms and conditions and it's linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.</p>
+            <p>We also reserve the right to amend these terms and conditions and it's linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.</p>
           </div>
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-bold ">Removal of links from our website</h2>

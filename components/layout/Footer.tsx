@@ -100,7 +100,7 @@ const Footer = () => {
             <li className="ml-[14px]"><a href="/terms" className="hover:text-primaryAccent">Terms</a></li>
           </ul>
           <p className="text-xs text-center text-gray-400">
-            DataWiz LLC - Adress: Sheridan, Wyoming 82801, USA
+            DataWiz LLC - Address: Sheridan, Wyoming 82801, USA
           </p>
           <p className="text-xs text-center text-gray-400">
             Copyright © dataWiz {date}

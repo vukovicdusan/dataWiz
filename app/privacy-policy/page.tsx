@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
   return (
     <Wrapper>
       <section className="mt-10 py-10">
-        <div className="mx-auto max-w-4xl text-center flex flex-col gap-8">
+        <div className="mx-auto max-w-4xl flex flex-col gap-8">
           <div className="flex flex-col gap-4">
             <h1 className="text-3xl font-bold ">Privacy Policy</h1>
             <p>This privacy policy has been compiled to better serve those who are concerned with how their ‘Personally identifiable information’ (PII) is being used online. PII, as used in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.</p>
@@ -129,7 +129,7 @@ const PrivacyPolicy = () => {
             <p className="font-bold">In order to be in line with Fair Information Practices we will take the following responsive action, should a data breach occur:</p>
             <p>We will notify the users via email:</p>
             <ul>
-              <li>• Whithin 7 bussiness days</li>
+              <li>• Whithin 7 business days</li>
             </ul>
             <p>We also agree to the individual redress principle, which requires that individuals have a right to pursue legally enforceable rights against data collectors and processors who fail to adhere to the law. This principle requires not only that individuals have enforceable rights against data users, but also that individuals have recourse to courts or a government agency to investigate and/or prosecute non-compliance by data processors.</p>
           </div>
