@@ -1,4 +1,4 @@
-import { getTrackingCaseStudyBySlug } from "@/lib/caseStudiesTracking";
+import { getAllCaseStudies } from "@/lib/caseStudies";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
@@ -10,9 +10,9 @@ type RouteContext = {
 };
 
 export async function GET(_request: Request, { params }: RouteContext) {
-  const caseStudy = await getTrackingCaseStudyBySlug(params.slug);
+  const caseStudy = (await getAllCaseStudies()).find((item) => item.slug === params.slug);
 
-  if (!caseStudy?.case_study) {
+  if (!caseStudy?.caseStudyFile) {
     return new NextResponse("Case study PDF not found.", { status: 404 });
   }
 
@@ -21,7 +21,7 @@ export async function GET(_request: Request, { params }: RouteContext) {
     "content",
     "case-studies",
     "tracking",
-    caseStudy.case_study,
+    caseStudy.caseStudyFile,
   );
 
   try {
@@ -30,7 +30,7 @@ export async function GET(_request: Request, { params }: RouteContext) {
     return new NextResponse(pdfBuffer, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `inline; filename="${caseStudy.case_study}"`,
+        "Content-Disposition": `inline; filename="${caseStudy.caseStudyFile}"`,
         "Cache-Control": "public, max-age=3600",
       },
     });

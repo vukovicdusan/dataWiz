@@ -7,31 +7,43 @@ import {
   Tooltip,
   Legend,
   ChartOptions,
+  ChartData,
 } from "chart.js";
+import type { CaseStudyChartData } from "@/lib/caseStudies";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const data = {
+type DoughnutABProps = {
+  chart?: CaseStudyChartData;
+};
+
+const fallbackChart: CaseStudyChartData = {
   labels: ["Normal Users", "Use Tracking Prevention"],
-  datasets: [
-    {
-      data: [68, 32],
-      backgroundColor: ["#3b82f6", "#ef4444"],
-      hoverOffset: 6,
-      cutout: "55%",
+  values: [68, 32],
+  colors: ["#3b82f6", "#ef4444"],
+  offsets: [0, 50],
+  cutout: "55%",
+};
 
-      offset: [0, 50],
+export default function DonutExploded({ chart = fallbackChart }: DoughnutABProps) {
+  const data: ChartData<"doughnut"> = {
+    labels: chart.labels,
+    datasets: [
+      {
+        data: chart.values,
+        backgroundColor: chart.colors ?? ["#3b82f6", "#ef4444", "#22c55e", "#f59e0b"],
+        hoverOffset: 6,
+        offset: chart.offsets,
+      },
+    ],
+  };
+  const options: ChartOptions<"doughnut"> = {
+    cutout: chart.cutout ?? "55%",
+    plugins: {
+      legend: { position: "bottom" },
+      tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.parsed}%` } },
     },
-  ],
-};
+  };
 
-const options: ChartOptions<"doughnut"> = {
-  plugins: {
-    legend: { position: "bottom" },
-    tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.parsed}%` } },
-  },
-};
-
-export default function DonutExploded() {
   return <Doughnut data={data} options={options} />;
 }

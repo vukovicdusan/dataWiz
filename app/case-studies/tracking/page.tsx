@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import KpiCounter from "@/components/KpiCounter";
-import { getTrackingCaseStudiesArchive } from "@/lib/caseStudiesTracking";
+import { getCaseStudyListByCategory } from "@/lib/caseStudies";
 
 export const metadata: Metadata = {
   title: "DataWiz - Tracking Success Stories ",
@@ -25,17 +25,17 @@ export const metadata: Metadata = {
 };
 
 const TrackingSuccessStories = async () => {
-  const archive = await getTrackingCaseStudiesArchive();
+  const caseStudies = await getCaseStudyListByCategory("tracking");
 
   return (
     <Wrapper>
       <section className="py-10 mt-10">
         <h1 className="text-5xl mb-10 font-bold uppercase text-center">
-          {archive.title}
+          Tracking Success Stories
         </h1>
 
         <div className="switcher gap-4">
-          {archive.items.map((item) => (
+          {caseStudies.map((item) => (
             <Link
               key={item.slug}
               href={`/case-studies/tracking/${item.slug}`}
@@ -60,7 +60,7 @@ const TrackingSuccessStories = async () => {
 
               <div className="flex flex-col gap-2">
                 <div className="flex gap-3 flex-wrap sm:flex-nowrap justify-center">
-                  {item.kpis.map((kpi) => (
+                  {item.featuredKpis.map((kpi) => (
                     <KpiCounter
                       key={kpi.title}
                       size={"sm"}
