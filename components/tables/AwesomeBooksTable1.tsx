@@ -31,6 +31,10 @@ function getCellClassName(cell: CaseStudyTableData["rows"][number]["cells"][numb
     return "text-green-400";
   }
 
+  if (tone === "blue") {
+    return "text-blue-400";
+  }
+
   return "";
 }
 

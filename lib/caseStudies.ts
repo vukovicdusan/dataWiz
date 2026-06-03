@@ -18,12 +18,16 @@ const ContentItemSchema = z.object({
   description: z.string().optional(),
 });
 
+const MetricDescriptionSchema = z.object({
+  description: z.string().default(""),
+});
+
 const TableCellSchema = z.union([
   z.string(),
   z.number(),
   z.object({
     value: z.union([z.string(), z.number()]),
-    tone: z.enum(["default", "red", "green"]).optional(),
+    tone: z.enum(["default", "red", "green", "blue"]).optional(),
   }),
 ]);
 
@@ -66,7 +70,10 @@ const TestimonialSchema = z.object({
   title: z.string().optional(),
 });
 
-const TemplateToneSchema = z.enum(["default", "red", "green"]).optional();
+const TemplateToneSchema = z.preprocess(
+  (value) => (value === "" ? undefined : value),
+  z.enum(["default", "red", "green", "blue"]).optional(),
+);
 
 const TemplateMetricSchema = z.object({
   data_accuracy: z.string().default(""),
@@ -105,7 +112,7 @@ const TemplateCaseStudySchema = z.object({
     solutions: z.array(ContentItemSchema).default([]),
   }),
   project_results: z.object({
-    understanding_metrics: z.array(z.object({ description: z.string().default("") })).default([]),
+    understanding_metrics: z.array(MetricDescriptionSchema).default([]),
     data_accuracy: z.object({
       project_outcomes: z.array(TemplateOutcomeSchema).default([]),
       industry_average_note: z.string().optional(),
@@ -121,6 +128,14 @@ const TemplateCaseStudySchema = z.object({
       use_tracking_prevention: z.string().default(""),
       use_tracking_prevention_tone: TemplateToneSchema,
       other_tone: TemplateToneSchema,
+      note: z.string().optional(),
+      business_impact: z.array(ContentItemSchema).default([]),
+      additional_improvements: z
+        .object({
+          intro: z.string().optional(),
+          items: z.array(ContentItemSchema).default([]),
+        })
+        .optional(),
     }),
   }),
   client_experience: z.object({
@@ -146,6 +161,13 @@ const CaseStudySchema = z.object({
   objectives: z.array(ContentItemSchema).default([]),
   initialSetup: z.array(ContentItemSchema).default([]),
   solutions: z.array(ContentItemSchema).default([]),
+  understandingMetrics: z.array(ContentItemSchema).default([]),
+  additionalImprovements: z
+    .object({
+      intro: z.string().optional(),
+      items: z.array(ContentItemSchema).default([]),
+    })
+    .optional(),
   results: z.array(ResultSectionSchema).default([]),
   testimonial: TestimonialSchema.optional(),
 });
@@ -177,7 +199,29 @@ function optionalItem(title: string, description?: string): CaseStudyContentItem
   return description ? { title, description } : null;
 }
 
-function withTone(value: string, tone?: "default" | "red" | "green") {
+function metricToContentItem(metric: z.infer<typeof MetricDescriptionSchema>): CaseStudyContentItem | null {
+  const description = metric.description.trim();
+
+  if (!description) {
+    return null;
+  }
+
+  const separatorIndex = description.indexOf(":");
+
+  if (separatorIndex === -1) {
+    return {
+      title: "Metric",
+      description,
+    };
+  }
+
+  return {
+    title: description.slice(0, separatorIndex).trim(),
+    description: description.slice(separatorIndex + 1).trim(),
+  };
+}
+
+function withTone(value: string, tone?: z.infer<typeof TemplateToneSchema>) {
   return tone && tone !== "default" ? { value, tone } : value;
 }
 
@@ -216,6 +260,11 @@ function normalizeTemplateCaseStudy(
     objectives: caseStudy.project_overview.objectives,
     initialSetup: caseStudy.project_overview.initial_setup,
     solutions: caseStudy.project_overview.solutions,
+    understandingMetrics: understandingMetrics
+      .map(metricToContentItem)
+      .filter((item): item is CaseStudyContentItem => Boolean(item)),
+    additionalImprovements:
+      caseStudy.project_results.overcoming_tracking_restrictions.additional_improvements,
     results: [
       {
         title: "Data Accuracy",
@@ -232,18 +281,14 @@ function normalizeTemplateCaseStudy(
             ],
           })),
         },
+        note: caseStudy.project_results.data_accuracy.industry_average_note,
         items: [
-          optionalItem("Understanding the Metric", understandingMetrics[0]?.description),
-          optionalItem(
-            "Industry Average",
-            caseStudy.project_results.data_accuracy.industry_average_note,
-          ),
           optionalItem("Consent Note", caseStudy.project_results.data_accuracy.consent_note),
           ...caseStudy.project_results.data_accuracy.business_impact,
         ].filter((item): item is CaseStudyContentItem => Boolean(item)),
       },
       {
-        title: "Marketing Attribution",
+        title: "Attribution Improvement",
         visual: "table",
         reverse: true,
         table: {
@@ -262,7 +307,6 @@ function normalizeTemplateCaseStudy(
           ),
         },
         items: [
-          optionalItem("Understanding the Metric", understandingMetrics[1]?.description),
           optionalItem("Consent Note", caseStudy.project_results.attribution_improvement.consent_note),
           ...caseStudy.project_results.attribution_improvement.business_impact,
         ].filter((item): item is CaseStudyContentItem => Boolean(item)),
@@ -279,8 +323,9 @@ function normalizeTemplateCaseStudy(
                 offsets: [0, 50],
                 cutout: "55%",
               },
+              note: caseStudy.project_results.overcoming_tracking_restrictions.note,
               items: [
-                optionalItem("Understanding the Metric", understandingMetrics[2]?.description),
+                ...caseStudy.project_results.overcoming_tracking_restrictions.business_impact,
               ].filter((item): item is CaseStudyContentItem => Boolean(item)),
             },
           ]
@@ -288,7 +333,6 @@ function normalizeTemplateCaseStudy(
             {
               title: "Overcoming Tracking Restrictions",
               items: [
-                optionalItem("Understanding the Metric", understandingMetrics[2]?.description),
                 optionalItem(
                   "Tracking Accuracy",
                   "Server-side tracking bypasses current tracking restrictions, ensuring high data accuracy and attribution.",
@@ -365,6 +409,15 @@ async function readCaseStudyFile(filePath: string): Promise<CaseStudy | null> {
   const raw = await fs.readFile(filePath, "utf8");
   const { content, data } = matter(raw);
   const templateParsed = TemplateCaseStudySchema.safeParse(data);
+  const looksLikeTemplateCaseStudy =
+    "client" in data || "logo_file" in data || "project_overview" in data || "project_results" in data;
+
+  if (!templateParsed.success && looksLikeTemplateCaseStudy) {
+    throw new Error(
+      `Invalid template case study frontmatter in ${filePath}: ${templateParsed.error.message}`,
+    );
+  }
+
   const parsed = templateParsed.success
     ? CaseStudySchema.safeParse(normalizeTemplateCaseStudy(templateParsed.data))
     : CaseStudySchema.safeParse(data);

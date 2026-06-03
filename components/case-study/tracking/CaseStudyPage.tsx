@@ -119,11 +119,21 @@ function DetailSection({ title, items = [], tone, icon }: DetailSectionProps) {
 
 function ResultVisual({ section }: { section: CaseStudyResultSection }) {
   if (section.visual === "awesomeBooksTable1" || section.visual === "table") {
-    return <AwesomeBooksTable1 table={section.table} />;
+    return (
+      <div className="flex flex-col gap-3">
+        <AwesomeBooksTable1 table={section.table} />
+        {section.note ? <p className="text-sm text-white/80">{section.note}</p> : null}
+      </div>
+    );
   }
 
   if (section.visual === "awesomeBooksTable2") {
-    return <AwesomeBooksTable2 table={section.table} />;
+    return (
+      <div className="flex flex-col gap-3">
+        <AwesomeBooksTable2 table={section.table} />
+        {section.note ? <p className="text-sm text-white/80">{section.note}</p> : null}
+      </div>
+    );
   }
 
   if (section.visual === "doughnutAB" || section.visual === "chart") {
@@ -163,6 +173,55 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
       </div>
       {visual ? <div className="overflow-x-auto ">{visual}</div> : null}
     </div>
+  );
+}
+
+function UnderstandingMetricsSection({ metrics }: { metrics: CaseStudyContentItem[] }) {
+  if (metrics.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mb-20">
+      <h3 className="mb-6 text-3xl font-bold text-primaryAccent">Understanding Metrics</h3>
+      <div className="max-w-5xl">
+        {metrics.map((metric) => (
+          <div key={metric.title} className=" py-4 first:pt-0">
+            <p>
+              <strong>{metric.title}:</strong>
+              {metric.description ? ` ${metric.description}` : null}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function AdditionalImprovementsSection({
+  section,
+}: {
+  section: CaseStudy["additionalImprovements"];
+}) {
+  if (!section || (!section.intro && section.items.length === 0)) {
+    return null;
+  }
+
+  return (
+    <section className="mx-auto mt-10 max-w-4xl py-10">
+      <h2 className="mb-5 text-center text-3xl font-bold text-primaryAccent">
+        Additional Improvements
+      </h2>
+      {section.intro ? <p className="mb-8">{section.intro}</p> : null}
+      <div>
+        {section.items.map((item) => (
+          <div key={item.title} className="mb-3">
+            <h3 className="text-xl font-bold text-primaryAccent">{item.title}</h3>
+            {item.description ? <p>{item.description}</p> : null}
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -231,6 +290,7 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
           <section className="w-screen translate-y-1 bg-secondaryAccent py-10 ml-[50%] -translate-x-1/2">
             <Wrapper>
               <h2 className="mb-10 text-center text-5xl font-bold">Project Results</h2>
+              <UnderstandingMetricsSection metrics={caseStudy.understandingMetrics} />
               {projectStats.length > 0 ? (
                 <div className="switcher mb-20 justify-center gap-5 md:gap-10">
                   {projectStats.map((kpi) => (
@@ -248,20 +308,23 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
       ) : null}
 
       {restrictionResult ? (
-        <section className="mt-10 flex flex-wrap justify-between gap-10 py-10 md:flex-nowrap md:gap-2">
-          <div className="basis-full md:max-w-md md:basis-1/2">
-            <h2 className="mb-6 text-5xl font-bold">{restrictionResult.title}</h2>
-            {restrictionResult.items.map((item) => (
-              <div key={item.title} className="mb-4">
-                <h3 className="mb-1 text-xl font-bold">{item.title}</h3>
-                {item.description ? <p>{item.description}</p> : null}
-              </div>
-            ))}
-          </div>
-          <div className="relative flex basis-full flex-col items-center justify-center gap-2 md:basis-1/2 md:max-w-md lg:gap-6">
-            <ResultVisual section={restrictionResult} />
-          </div>
-        </section>
+        <>
+          <section className="mt-10 flex flex-wrap justify-between gap-10 py-10 md:flex-nowrap md:gap-2">
+            <div className="basis-full md:max-w-md md:basis-1/2">
+              <h2 className="mb-6 text-5xl font-bold">{restrictionResult.title}</h2>
+              {restrictionResult.items.map((item) => (
+                <div key={item.title} className="mb-4">
+                  <h3 className="mb-1 text-xl font-bold">{item.title}</h3>
+                  {item.description ? <p>{item.description}</p> : null}
+                </div>
+              ))}
+            </div>
+            <div className="relative flex basis-full flex-col items-center justify-center gap-2 md:basis-1/2 md:max-w-md lg:gap-6">
+              <ResultVisual section={restrictionResult} />
+            </div>
+          </section>
+          <AdditionalImprovementsSection section={caseStudy.additionalImprovements} />
+        </>
       ) : null}
 
       {caseStudy.testimonial ? (

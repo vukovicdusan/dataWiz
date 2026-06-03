@@ -36,9 +36,10 @@ project_overview:
       description: "A custom server-side tracking setup was implemented using Stape. This approach enhances data accuracy, improves attribution, provides more control over data, allows for data enrichment, and even slightly improves site speed."
 project_results:
   understanding_metrics:
-    - description: "Data accuracy measures the percentage of actual purchases that are successfully recorded in each platform. The data accuracy should be as close to 100% as possible, but we should also avoid inflated data."
-    - description: "Attribution improvement shows the percentage increase in properly attributed events after the project. It reflects how many more events are now correctly assigned to marketing channels instead of being classified as unattributed, such as Direct or Not Set."
-    - description: "Overcoming tracking restrictions represents the percentage of users who use a tracking prevention system. While not all of these users necessarily block tracking right now, it reflects the potential for data loss."
+    - description: "Data Accuracy: Measures the percentage of actual purchases that are successfully recorded in each platform. The data accuracy should be as close to 100% as possible, but we should also avoid inflated data."
+    - description: "Accuracy Improvement: Shows the percentage increase in data accuracy after the project, averaged across all marketing platforms."
+    - description: "Attribution Improvement: Shows the percentage increase in properly attributed events after the project. It reflects how many more events are now correctly assigned to marketing channels instead of being classified as unattributed (e.g., Direct or Not Set)."
+    - description: "Overcoming Tracking Restrictions: Represents the percentage of users who use a tracking prevention system. While not all of these users necessarily block tracking right now, it reflects the potential for data loss."
   data_accuracy:
     project_outcomes:
       - platform: "GA4"
@@ -71,7 +72,7 @@ project_results:
       - title: "Ad Performance"
         description: "With more conversion data, ad platforms can optimize targeting, bidding, and delivery more effectively, maximizing return on ad spend and reducing wasted budget."
       - title: "Data Analysis"
-        description: "More data ensures we get the full picture, so we don't miss important insights and can more effectively analyze and optimize marketing and website performance."
+        description: "More data ensures we get the full picture, so we don’t miss important insights and can more effectively analyze and optimize marketing and website performance."
   attribution_improvement:
     project_outcomes:
       - platform: "GA4"
@@ -108,13 +109,32 @@ project_results:
       - title: "Data Analysis"
         description: "When attribution is accurate, businesses can make informed decisions based on reliable data, optimizing future campaigns and improving overall marketing strategy."
   overcoming_tracking_restrictions:
-    use_tracking_prevention: ""
+    use_tracking_prevention: "43%"
     use_tracking_prevention_tone: "red"
-    other_tone: "green"
+    other_tone: "blue"
+    note: "We bypassed these restrictions with server side tracking."
+    business_impact:
+      - title: "Tracking Accuracy:"
+        description: "Server-side tracking bypasses current tracking restrictions, ensuring high data accuracy and attribution."
+      - title: "Future Resilience:"
+        description: "As tracking prevention systems evolve, server-side tracking provides a future-proof solution."
+    additional_improvements:
+      intro: "Beyond measurable gains in tracking accuracy, attribution, tracking prevention mitigation, and site speed, the project delivered several structural and strategic improvements that significantly strengthened the overall tracking foundation."
+      items:
+        - title: "New Events:"
+          description: "Added previously untracked events to capture key user interactions across the customer journey, enabling more granular segmentation and remarketing."
+        - title: "New Parameters:"
+          description: "Introduced additional parameters to enrich events with more context, supporting advanced remarketing and deeper analysis."
+        - title: "Clean Setup:"
+          description: "Simplified and standardized the tracking setup by removing legacy issues, reducing complexity, and ensuring clear ownership and long-term scalability."
+        - title: "Integrations:"
+          description: "Aligned analytics and advertising platforms to ensure consistent event logic, reliable data flow, and platform readiness."
+        - title: "Data Enrichment:"
+          description: "Enhanced events with additional first-party and contextual data to improve attribution, audience building, and performance optimization."
 client_experience:
-  review_text: ""
-  client_name: ""
-  client_position: ""
+  review_text: "Many have tried and failed - Igor is the first person to sor out our tracking - and to a high standard of accuracy. We are very pleased with the results."
+  client_name: "Nick L"
+  client_position: "Founder"
 ---
 
 The Red Dog Company tracking case study content is generated from this Markdown file.

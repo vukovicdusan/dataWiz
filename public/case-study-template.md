@@ -1,0 +1,105 @@
+---
+client: ""
+slug: ""
+categories:
+  - "Tracking"
+  - "Custom Site"
+website: ""
+logo_file: ""
+top_metrics:
+  data_accuracy: ""
+  accuracy_improvement: ""
+  attribution_improvement: ""
+project_overview:
+  meet_the_client: ""
+  challenges:
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+  objectives:
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+  initial_setup:
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+  solutions:
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+    - title: ""
+      description: ""
+project_results:
+  understanding_metrics:
+    - description: ""
+    - description: ""
+    - description: ""
+  data_accuracy:
+    project_outcomes:
+      - platform: ""
+        baseline: ""
+        baseline_tone: ""
+        project_target: ""
+        final_outcome: ""
+        final_outcome_tone: ""
+        uplift: ""
+        uplift_tone: ""
+    industry_average_note: ""
+    consent_note: ""
+    business_impact:
+      - title: ""
+        description: ""
+      - title: ""
+        description: ""
+  attribution_improvement:
+    project_outcomes:
+      - platform: ""
+        health: ""
+        baseline: ""
+        baseline_tone: ""
+        project_target: ""
+        final_outcome: ""
+        final_outcome_tone: ""
+        uplift: ""
+        uplift_tone: ""
+    consent_note: ""
+    business_impact:
+      - title: ""
+        description: ""
+      - title: ""
+        description: ""
+  overcoming_tracking_restrictions:
+    use_tracking_prevention: ""
+    use_tracking_prevention_tone: ""
+    other_tone: ""
+    note: ""
+    business_impact:
+      - title: ""
+        description: ""
+      - title: ""
+        description: ""
+    additional_improvements:
+      intro: ""
+      items:
+        - title: ""
+          description: ""
+        - title: ""
+          description: ""
+client_experience:
+  review_text: ""
+  client_name: ""
+  client_position: ""
+---
+
+Case study content is generated from this Markdown file.
