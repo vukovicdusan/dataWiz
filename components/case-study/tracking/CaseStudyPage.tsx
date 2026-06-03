@@ -147,8 +147,8 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
   const visual = <ResultVisual section={section} />;
 
   return (
-    <div className={`mb-20 flex flex-wrap justify-between gap-4 md:gap-10 lg:flex-nowrap ${section.reverse ? "md:flex-row-reverse sm:items-center" : "items-start"}`}>
-      <div className="flex basis-full flex-col gap-4 md:max-w-md md:basis-[calc(50%-2rem)]">
+    <div className={`mb-20 flex flex-col  justify-between gap-4 md:gap-10  ${section.reverse ? " " : ""}`}>
+      <div className="flex flex-col gap-4 ">
         <h3 className="mb-1 text-5xl font-bold text-primaryAccent">{section.title}</h3>
         {section.items.length > 0 ? (
           <ul className="rounded-3xl bg-secondaryAccent">
@@ -161,7 +161,7 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
           </ul>
         ) : null}
       </div>
-      {visual ? <div className="basis-full overflow-x-auto md:min-w-[15rem] md:basis-[calc(50%-2rem)]">{visual}</div> : null}
+      {visual ? <div className="overflow-x-auto ">{visual}</div> : null}
     </div>
   );
 }
