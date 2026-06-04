@@ -175,9 +175,19 @@ function DetailSection({ title, items = [], tone, icon }: DetailSectionProps) {
 
 function ResultVisual({ section }: { section: CaseStudyResultSection }) {
   if (section.visual === "awesomeBooksTable1" || section.visual === "table") {
+    const hiddenMobileColumn =
+      section.title === "Data Accuracy"
+        ? 3
+        : section.title === "Attribution Improvement"
+          ? 4
+          : undefined;
+
     return (
       <div className="flex flex-col gap-3">
-        <AwesomeBooksTable1 table={section.table} />
+        <AwesomeBooksTable1
+          table={section.table}
+          hiddenMobileColumn={hiddenMobileColumn}
+        />
         {section.note ? (
           <p className="text-sm text-white/80">{section.note}</p>
         ) : null}
@@ -188,7 +198,7 @@ function ResultVisual({ section }: { section: CaseStudyResultSection }) {
   if (section.visual === "awesomeBooksTable2") {
     return (
       <div className="flex flex-col gap-3">
-        <AwesomeBooksTable2 table={section.table} />
+        <AwesomeBooksTable2 table={section.table} hiddenMobileColumn={4} />
         {section.note ? (
           <p className="text-sm text-white/80">{section.note}</p>
         ) : null}
