@@ -84,7 +84,7 @@ const CtaForm = (props: CtaContentPropType) => {
           onBlur={showErrorHandler}
         />
         <label
-          className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
+          className={`absolute  bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
             inputChecker("name") ? "top-1/2 -translate-y-4" : "-translate-y-1/2"
           }`}
           htmlFor="name"
@@ -114,7 +114,7 @@ const CtaForm = (props: CtaContentPropType) => {
           onBlur={showErrorHandler}
         />
         <label
-          className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
+          className={`absolute  bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
             inputChecker("email")
               ? "top-1/2 -translate-y-4"
               : "-translate-y-1/2"
@@ -144,7 +144,7 @@ const CtaForm = (props: CtaContentPropType) => {
           onBlur={showErrorHandler}
         />
         <label
-          className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
+          className={`absolute  bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:-top-1 peer-focus:text-sm ${
             inputChecker("website")
               ? "top-1/2 -translate-y-4"
               : "-translate-y-1/2"
@@ -169,7 +169,7 @@ const CtaForm = (props: CtaContentPropType) => {
           onChange={(e) => valueHandler(e)}
         />
         <label
-          className={`absolute text-primaryAccent bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:text-sm peer-focus:-top-3 ${
+          className={`absolute  bg-secondaryAccent left-4 px-2 transition-all duration-200 ease-linear peer-focus:text-sm peer-focus:-top-3 ${
             // inputValue.message && Object.values(inputValue.message).length === 0
             inputChecker("message") ? "top-3" : "-top-3"
           }`}

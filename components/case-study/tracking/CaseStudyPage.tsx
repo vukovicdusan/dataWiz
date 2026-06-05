@@ -163,7 +163,7 @@ function DetailSection({ title, items = [], tone, icon }: DetailSectionProps) {
         <ul className="list-inside list-disc">
           {items.map((item) => (
             <li key={item.title} className="mb-4 flex flex-col gap-0">
-              <h3 className="text-xl font-bold">{item.title}</h3>
+              <h3 className="text-xl font-bold mb-2">{item.title}</h3>
               {item.description ? <p>{item.description}</p> : null}
             </li>
           ))}
@@ -245,7 +245,11 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
           </ul>
         ) : null}
       </div>
-      {visual ? <div className="overflow-x-auto ">{visual}</div> : null}
+      {visual ? (
+        <div className="overflow-x-auto [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-200/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-400/60 hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
+          {visual}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -288,17 +292,13 @@ function AdditionalImprovementsSection({
   }
 
   return (
-    <section className="mx-auto mt-10 max-w-4xl py-10">
-      <h2 className="mb-5 text-center text-3xl font-bold text-primaryAccent">
-        Additional Improvements
-      </h2>
+    <section className=" mt-10  py-10">
+      <h2 className="mb-5 text-3xl font-bold ">Additional Improvements</h2>
       {section.intro ? <p className="mb-8">{section.intro}</p> : null}
       <div>
         {section.items.map((item) => (
           <div key={item.title} className="mb-3">
-            <h3 className="text-xl font-bold text-primaryAccent">
-              {item.title}
-            </h3>
+            <h3 className="text-xl font-bold mb-2 ">{item.title}</h3>
             {item.description ? <p>{item.description}</p> : null}
           </div>
         ))}
@@ -441,13 +441,19 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
         <>
           <section className="mt-10 flex flex-wrap justify-between gap-10 py-10 md:flex-nowrap md:gap-2">
             <div className="basis-full md:max-w-md md:basis-1/2">
-              <h2 className="mb-6 text-5xl font-bold">
+              <h2 className="text-center sm:text-start mb-6 text-5xl font-bold">
                 {restrictionResult.title}
               </h2>
               {restrictionResult.items.map((item) => (
                 <div key={item.title} className="mb-4">
-                  <h3 className="mb-1 text-xl font-bold">{item.title}</h3>
-                  {item.description ? <p>{item.description}</p> : null}
+                  <h3 className="mb-1 text-xl font-bold text-center sm:text-start">
+                    {item.title}
+                  </h3>
+                  {item.description ? (
+                    <p className="text-center sm:text-start">
+                      {item.description}
+                    </p>
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -467,7 +473,7 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
             Client Experience
           </h2>
 
-          <div className="relative mx-auto max-w-3xl px-8 py-16 text-center text-white">
+          <div className="relative mx-auto max-w-3xl px-10 sm:px-8 py-16 text-center text-white">
             <svg
               className="absolute inset-0 h-full w-full"
               viewBox="0 0 720 560"
