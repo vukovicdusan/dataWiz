@@ -76,7 +76,7 @@ project_results:
   attribution_improvement:
     project_outcomes:
       - platform: "GA4"
-        health: "Direct"
+        health: "Direct/GA4"
         baseline: "40%"
         baseline_tone: "red"
         project_target: "<25%"
