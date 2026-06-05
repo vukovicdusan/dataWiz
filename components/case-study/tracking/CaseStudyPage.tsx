@@ -181,12 +181,14 @@ function ResultVisual({ section }: { section: CaseStudyResultSection }) {
         : section.title === "Attribution Improvement"
           ? 4
           : undefined;
+    const hideFirstColumn = section.title === "Attribution Improvement";
 
     return (
       <div className="flex flex-col gap-3">
         <AwesomeBooksTable1
           table={section.table}
           hiddenMobileColumn={hiddenMobileColumn}
+          hideFirstColumn={hideFirstColumn}
         />
         {section.note ? (
           <p className="text-sm text-white/80">{section.note}</p>
@@ -198,7 +200,7 @@ function ResultVisual({ section }: { section: CaseStudyResultSection }) {
   if (section.visual === "awesomeBooksTable2") {
     return (
       <div className="flex flex-col gap-3">
-        <AwesomeBooksTable2 table={section.table} hiddenMobileColumn={4} />
+        <AwesomeBooksTable2 table={section.table} hiddenMobileColumn={4} hideFirstColumn />
         {section.note ? (
           <p className="text-sm text-white/80">{section.note}</p>
         ) : null}
@@ -473,7 +475,7 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
             Client Experience
           </h2>
 
-          <div className="relative mx-auto max-w-3xl px-10 sm:px-8 py-16 text-center text-white">
+          <div className="relative mx-auto max-w-3xl px-12 sm:px-8 py-16 text-center text-white">
             <svg
               className="absolute inset-0 h-full w-full"
               viewBox="0 0 720 560"

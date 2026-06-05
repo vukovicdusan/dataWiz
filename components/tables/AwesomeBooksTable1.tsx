@@ -3,6 +3,7 @@ import type { CaseStudyTableData } from "@/lib/caseStudies";
 type CaseStudyTableProps = {
   table?: CaseStudyTableData;
   hiddenMobileColumn?: number;
+  hideFirstColumn?: boolean;
 };
 
 const fallbackTable: CaseStudyTableData = {
@@ -53,12 +54,15 @@ function getMobileColumnClass(
 const AwesomeBooksTable1 = ({
   table = fallbackTable,
   hiddenMobileColumn,
+  hideFirstColumn,
 }: CaseStudyTableProps) => {
+  const columns = hideFirstColumn ? table.columns.slice(1) : table.columns;
+
   return (
     <table className="w-full border-collapse border border-gray-300 text-xs md:text-sm">
       <thead>
         <tr>
-          {table.columns.map((column, columnIndex) => (
+          {columns.map((column, columnIndex) => (
             <th
               key={column}
               className={`border border-gray-300 p-2 text-left text-sm sm:text-[1rem] ${getMobileColumnClass(columnIndex, hiddenMobileColumn)}`}
@@ -69,12 +73,14 @@ const AwesomeBooksTable1 = ({
         </tr>
       </thead>
       <tbody>
-        {table.rows.map((row, rowIndex) => (
+        {table.rows.map((row, rowIndex) => {
+          const cells = hideFirstColumn ? row.cells.slice(1) : row.cells;
+          return (
           <tr
             key={`${row.cells.join("-")}-${rowIndex}`}
             className="hover:bg-gray-50/30"
           >
-            {row.cells.map((cell, cellIndex) => (
+            {cells.map((cell, cellIndex) => (
               <td
                 key={`${getCellValue(cell)}-${cellIndex}`}
                 className={`border border-gray-300 p-2 text-sm sm:text-[1rem] ${getMobileColumnClass(cellIndex, hiddenMobileColumn)} ${getCellClassName(cell)}`}
@@ -83,7 +89,8 @@ const AwesomeBooksTable1 = ({
               </td>
             ))}
           </tr>
-        ))}
+          );
+        })}
         {table.footer ? (
           <tr className="font-semibold">
             <td
