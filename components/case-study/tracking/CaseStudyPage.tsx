@@ -423,6 +423,7 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
                       number={kpi.number}
                       afterNumber={kpi.afterNumber}
                       title={kpi.title}
+                      color={"text-green-500"}
                     />
                   ))}
                 </div>

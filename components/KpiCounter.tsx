@@ -8,12 +8,14 @@ type kpiPropsType = {
   afterNumber?: string;
   title: string;
   size?: string;
+  color?: string;
 };
 
 const KpiCounter = (props: kpiPropsType) => {
+  const colorClass = props.color ?? "text-primaryAccent";
   let kpiLg = (
     <div className="text-center border border-white rounded-3xl py-4 md:py-6 px-4 w-[20rem]">
-      <p className="text-6xl md:text-8xl font-bold text-primaryAccent mb-2">
+      <p className={`text-6xl md:text-8xl font-bold ${colorClass} mb-2`}>
         {props.beforeNumber}
         <CountUp
           enableScrollSpy={true}
@@ -29,7 +31,7 @@ const KpiCounter = (props: kpiPropsType) => {
   );
   let kpiSm = (
     <div className="text-center border border-white rounded-2xl py-1 md:py-2 px-3 w-[15ch]">
-      <p className="text-1xl md:text-2xl font-bold text-primaryAccent mb-2">
+      <p className={`text-1xl md:text-2xl font-bold ${colorClass} mb-2`}>
         {props.beforeNumber}
         <CountUp
           enableScrollSpy={true}
