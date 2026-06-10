@@ -5,8 +5,10 @@ import { createClient } from "@/lib/supabase/client";
 
 const GoogleSignInButton = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const handleSignIn = async () => {
+    setIsSigningIn(true);
     try {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithOAuth({
@@ -17,11 +19,13 @@ const GoogleSignInButton = () => {
       });
       if (error) {
         setErrorMessage(error.message);
+        setIsSigningIn(false);
       }
     } catch (err) {
       setErrorMessage(
         err instanceof Error ? err.message : "Unable to start sign-in."
       );
+      setIsSigningIn(false);
     }
   };
 
@@ -30,7 +34,8 @@ const GoogleSignInButton = () => {
       <button
         type="button"
         onClick={handleSignIn}
-        className="mx-auto flex w-full max-w-xs items-center justify-center gap-3 rounded-md bg-white px-5 py-3 font-bold text-gray-800 transition hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:ring-offset-2 focus:ring-offset-primaryBg"
+        disabled={isSigningIn}
+        className="mx-auto flex w-full max-w-xs items-center justify-center gap-3 rounded-md bg-white px-5 py-3 font-bold text-gray-800 transition hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:ring-offset-2 focus:ring-offset-primaryBg disabled:opacity-60"
       >
         <svg
           aria-hidden="true"
@@ -56,10 +61,12 @@ const GoogleSignInButton = () => {
             d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
           />
         </svg>
-        Continue with Google
+        {isSigningIn ? "Redirecting to Google..." : "Continue with Google"}
       </button>
       {errorMessage && (
-        <p className="mt-3 text-sm text-red-300">{errorMessage}</p>
+        <p role="alert" className="mt-3 text-sm text-red-300">
+          {errorMessage}
+        </p>
       )}
     </div>
   );
