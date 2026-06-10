@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import {
+  ensureProfileAndTeam,
+  getTeamWithMembers,
+} from "@/lib/url-builder/teams";
 import SignOutButton from "@/components/url-builder/SignOutButton";
+import TeamCard from "@/components/url-builder/TeamCard";
 
 export const dynamic = "force-dynamic";
 
@@ -19,25 +24,17 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
-  const fullName = user.user_metadata?.full_name as string | undefined;
-  const email = user.email ?? "";
+  await ensureProfileAndTeam(user);
+  const team = await getTeamWithMembers(user.id);
+  if (!team) {
+    redirect("/url-builder");
+  }
 
   return (
-    <div className="flex min-h-[60vh] items-center justify-center px-4 py-16">
-      <div className="w-full max-w-lg rounded-2xl border border-secondaryBg/60 bg-secondaryAccent/20 p-8 text-center shadow-2xl">
-        <h1 className="text-3xl font-bold text-white">
-          {fullName ? `Welcome, ${fullName}!` : "Welcome!"}
-        </h1>
-        <p className="mt-3 text-gray-300">
-          You are signed in as <span className="font-bold">{email}</span>.
-        </p>
-        <p className="mt-3 text-gray-400">
-          The URL Builder is coming in the next phase. This page confirms your
-          sign-in works.
-        </p>
-        <div className="mt-7">
-          <SignOutButton />
-        </div>
+    <div className="flex min-h-[60vh] flex-col items-center px-4 py-16">
+      <TeamCard team={team} />
+      <div className="mt-7">
+        <SignOutButton />
       </div>
     </div>
   );
