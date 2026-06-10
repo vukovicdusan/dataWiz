@@ -71,6 +71,7 @@ const GoogleSignInButton = () => {
         client_id: clientId,
         nonce: hashedNonce,
         callback: async ({ credential }) => {
+          setErrorMessage(null);
           try {
             const supabase = createClient();
             const { error } = await supabase.auth.signInWithIdToken({
@@ -105,6 +106,7 @@ const GoogleSignInButton = () => {
 
     return () => {
       isActive = false;
+      buttonParent.replaceChildren();
     };
   }, [isScriptReady, router]);
 
@@ -114,8 +116,13 @@ const GoogleSignInButton = () => {
         src="https://accounts.google.com/gsi/client"
         strategy="afterInteractive"
         onReady={() => setIsScriptReady(true)}
+        onError={() =>
+          setErrorMessage(
+            "Could not load the Google sign-in button. If you use an ad blocker, allow accounts.google.com and reload the page."
+          )
+        }
       />
-      <div ref={buttonRef} className="flex min-h-[44px] justify-center" />
+      <div ref={buttonRef} className="flex min-h-[40px] justify-center" />
       {errorMessage && (
         <p role="alert" className="mt-3 text-sm text-red-300">
           {errorMessage}
