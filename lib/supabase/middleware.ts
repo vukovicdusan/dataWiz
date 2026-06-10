@@ -55,7 +55,10 @@ export async function updateSession(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Never interfere with the OAuth callback exchange.
-  if (pathname.startsWith("/url-builder/auth")) {
+  if (
+    pathname === "/url-builder/auth" ||
+    pathname.startsWith("/url-builder/auth/")
+  ) {
     return finalize(supabaseResponse);
   }
 
