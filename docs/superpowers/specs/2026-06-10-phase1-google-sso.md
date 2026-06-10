@@ -52,7 +52,7 @@ dashboard again.
 | Decision | Choice | Trade-off |
 |---|---|---|
 | Session handling | Cookie-based via `@supabase/ssr` (browser + server clients) | Slightly more setup than client-only auth, but middleware and server routes can read the session — required for real route protection (decided in parent spec) |
-| Sign-in trigger | Client component calling `supabase.auth.signInWithOAuth({ provider: "google" })` with `redirectTo` → `/url-builder/auth/callback` | Simplest supported flow; a server-action variant adds complexity with no benefit here |
+| Sign-in trigger | Google Identity Services popup button + `supabase.auth.signInWithIdToken` (revised at user request after smoke test; originally redirect-based `signInWithOAuth`) | Popup keeps the user on the page and shows the app name "DataWiz URL Builder" in Google's consent UI instead of the Supabase project domain. Requires `NEXT_PUBLIC_GOOGLE_CLIENT_ID` and an authorized JavaScript origin on the Google OAuth client. The `/url-builder/auth/callback` route is kept for future redirect flows (Phase 2 invites) |
 | Middleware scope | `matcher: ["/url-builder/:path*"]` | Keeps auth checks off the marketing site entirely; zero risk of regressing existing pages |
 | Placeholder dashboard contents | User's name/email + Sign out button | Minimal, but enough to verify the whole loop including sign-out (vs. a bare "you're in" page, which can't prove sign-out works) |
 | Env file | `.env.local` (gitignored) | Standard Next.js convention; secrets never committed |
