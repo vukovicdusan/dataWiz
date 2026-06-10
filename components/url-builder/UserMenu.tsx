@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Avatar from "@/components/url-builder/Avatar";
 import InviteModal from "@/components/url-builder/InviteModal";
+import LeaveTeamDialog from "@/components/url-builder/LeaveTeamDialog";
 
 type UserMenuProps = {
   name: string;
@@ -22,6 +23,7 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [isInviteOpen, setIsInviteOpen] = useState(false);
+  const [isLeaveOpen, setIsLeaveOpen] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -89,7 +91,7 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
             className={menuItemClasses}
             onClick={() => {
               setIsOpen(false);
-              // Wired to the leave-team dialog in Task 7. teamName is used there.
+              setIsLeaveOpen(true);
             }}
           >
             Leave team
@@ -107,6 +109,12 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
       )}
 
       {isInviteOpen && <InviteModal onClose={() => setIsInviteOpen(false)} />}
+      {isLeaveOpen && (
+        <LeaveTeamDialog
+          teamName={teamName}
+          onClose={() => setIsLeaveOpen(false)}
+        />
+      )}
     </div>
   );
 };
