@@ -13,6 +13,7 @@ type InviteModalProps = {
 
 const InviteModal = ({ onClose }: InviteModalProps) => {
   const [inviteUrl, setInviteUrl] = useState<string | null>(null);
+  const [expiresAt, setExpiresAt] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isWorking, setIsWorking] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
@@ -22,6 +23,7 @@ const InviteModal = ({ onClose }: InviteModalProps) => {
       setInviteUrl(
         `${window.location.origin}/url-builder/invite/${result.token}`
       );
+      setExpiresAt(result.expiresAt);
       setError(null);
     } else {
       setError(result.error);
@@ -65,7 +67,10 @@ const InviteModal = ({ onClose }: InviteModalProps) => {
       >
         <h2 className="text-2xl font-bold text-white">Invite a member</h2>
         <p className="mt-2 text-sm text-gray-300">
-          Anyone with this link can join your team. It works for 7 days.
+          Anyone with this link can join your team.
+          {expiresAt
+            ? ` It works until ${new Date(expiresAt).toLocaleDateString()}.`
+            : " It works for 7 days."}
         </p>
 
         {error && (

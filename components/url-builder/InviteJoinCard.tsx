@@ -37,6 +37,9 @@ const InviteJoinCard = ({
     } else {
       setError(result.error);
       setIsJoining(false);
+      // Re-render the server component: after a popup sign-in the page may
+      // still show the signed-out branch even though a session now exists.
+      router.refresh();
     }
   }, [token, router]);
 

@@ -71,25 +71,23 @@ export async function joinTeam(rawToken: string): Promise<JoinResult> {
     }
 
     if (membership) {
-      const { error: removeError } = await admin
+      // Single UPDATE keyed on the user_id primary key: the switch is atomic,
+      // so a failure can never leave the user without a team.
+      const { error: switchError } = await admin
         .from("team_members")
-        .delete()
+        .update({ team_id: inviteTeamId, joined_at: new Date().toISOString() })
         .eq("user_id", user.id);
-      if (removeError) {
-        throw new Error(`Could not leave your old team: ${removeError.message}`);
+      if (switchError) {
+        throw new Error(`Could not switch teams: ${switchError.message}`);
       }
-    }
-
-    const { error: joinError } = await admin
-      .from("team_members")
-      .insert({ team_id: inviteTeamId, user_id: user.id });
-    if (joinError) {
-      throw new Error(`Could not join the team: ${joinError.message}`);
-    }
-
-    // Clean up the old team if the departure emptied it.
-    if (membership) {
       await deleteTeamIfEmpty(membership.team_id as string);
+    } else {
+      const { error: joinError } = await admin
+        .from("team_members")
+        .insert({ team_id: inviteTeamId, user_id: user.id });
+      if (joinError) {
+        throw new Error(`Could not join the team: ${joinError.message}`);
+      }
     }
 
     return { ok: true };

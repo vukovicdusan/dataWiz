@@ -60,6 +60,12 @@ export async function replaceInvite(
     expires_at: expiresAt,
   });
   if (insertError) {
+    // Unique violation on the one-active-link-per-team index: a concurrent
+    // regenerate won the race — return its link instead of erroring.
+    if (insertError.code === "23505") {
+      const winner = await findActiveInvite(teamId);
+      if (winner) return winner;
+    }
     throw new Error(`Could not create the invite link: ${insertError.message}`);
   }
 

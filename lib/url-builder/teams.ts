@@ -18,11 +18,10 @@ export type TeamWithMembers = {
 export function firstNameFrom(
   fullName: string | null | undefined,
   email: string | null | undefined
-): string {
+): string | null {
   const fromName = fullName?.trim().split(/\s+/)[0];
   if (fromName) return fromName;
-  const fromEmail = email?.split("@")[0];
-  return fromEmail || "My";
+  return email?.split("@")[0] || null;
 }
 
 // Creates/refreshes the profile row from the Google identity.
@@ -46,10 +45,11 @@ export async function createPersonalTeam(user: User): Promise<string> {
     user.user_metadata?.full_name as string | undefined,
     user.email
   );
+  const teamName = firstName ? `${firstName}'s team` : "My team";
 
   const { data: team, error: teamError } = await admin
     .from("teams")
-    .insert({ name: `${firstName}'s team` })
+    .insert({ name: teamName })
     .select("id")
     .single();
   if (teamError || !team) {
@@ -62,6 +62,19 @@ export async function createPersonalTeam(user: User): Promise<string> {
     .from("team_members")
     .insert({ team_id: team.id as string, user_id: user.id });
   if (memberError) {
+    // Clean up the just-created team; it has no members either way.
+    await admin.from("teams").delete().eq("id", team.id as string);
+
+    // Unique violation on the user_id primary key: a concurrent request
+    // already gave this user a team — use that one instead of failing.
+    if (memberError.code === "23505") {
+      const { data: existing } = await admin
+        .from("team_members")
+        .select("team_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (existing) return existing.team_id as string;
+    }
     throw new Error(`Could not join the personal team: ${memberError.message}`);
   }
 
@@ -88,26 +101,16 @@ export async function ensureProfileAndTeam(user: User): Promise<void> {
   }
 }
 
-// Deletes a team when its last member has departed. FK cascades remove the
-// team's invites, custom values, and generated URLs.
+// Deletes a team when its last member has departed. Atomic in SQL (see the
+// delete_team_if_empty migration) so a concurrent join can't be cascaded
+// away. FK cascades remove the team's invites, custom values, and URLs.
 export async function deleteTeamIfEmpty(teamId: string): Promise<void> {
   const admin = createAdminClient();
-  const { count, error } = await admin
-    .from("team_members")
-    .select("user_id", { count: "exact", head: true })
-    .eq("team_id", teamId);
+  const { error } = await admin.rpc("delete_team_if_empty", {
+    target_team_id: teamId,
+  });
   if (error) {
-    throw new Error(`Could not count team members: ${error.message}`);
-  }
-
-  if (count === 0) {
-    const { error: deleteError } = await admin
-      .from("teams")
-      .delete()
-      .eq("id", teamId);
-    if (deleteError) {
-      throw new Error(`Could not delete the empty team: ${deleteError.message}`);
-    }
+    throw new Error(`Could not clean up the empty team: ${error.message}`);
   }
 }
 
