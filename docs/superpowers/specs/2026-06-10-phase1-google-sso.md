@@ -28,8 +28,9 @@ dashboard again.
 - Install `@supabase/supabase-js` + `@supabase/ssr`.
 - `lib/supabase/` client helpers: browser client, server client (cookie-based sessions),
   middleware helper.
-- `/url-builder` login page: existing site `Header`, large low-opacity DataWiz logo anchored
-  top-left behind content, centered card with a "Continue with Google" button.
+- `/url-builder` login page: existing site `Header`, centered card with a "Continue with
+  Google" button. (A faded background logo was in the original design; removed at user
+  request after the smoke test.)
 - `/url-builder/auth/callback` route handler: exchanges the OAuth code for a session, then
   redirects to the dashboard.
 - Next.js middleware scoped to `/url-builder/:path*`:
@@ -58,8 +59,7 @@ dashboard again.
 
 ## Acceptance criteria
 
-1. Signed out, `/url-builder` renders: site header, faded top-left DataWiz logo, centered
-   "Continue with Google" card.
+1. Signed out, `/url-builder` renders: site header and a centered "Continue with Google" card.
 2. Clicking the button completes Google sign-in and lands on `/url-builder/dashboard`, which
    shows the user's Google name and email.
 3. Signed out, visiting `/url-builder/dashboard` directly redirects to `/url-builder`.

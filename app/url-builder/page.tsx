@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import fullLogo from "@/public/images/full-logo-blue.png";
 import GoogleSignInButton from "@/components/url-builder/GoogleSignInButton";
 
 export const metadata: Metadata = {
@@ -16,15 +14,8 @@ export default function UrlBuilderLoginPage({
   const hasAuthError = searchParams.error === "auth";
 
   return (
-    <div className="relative min-h-[75vh]">
-      <Image
-        src={fullLogo}
-        alt=""
-        aria-hidden="true"
-        priority
-        className="pointer-events-none absolute left-0 top-0 w-[30rem] max-w-[75vw] opacity-10"
-      />
-      <div className="relative z-10 flex min-h-[75vh] items-center justify-center px-4 py-16">
+    <div className="min-h-[75vh]">
+      <div className="flex min-h-[75vh] items-center justify-center px-4 py-16">
         <div className="w-full max-w-md rounded-2xl border border-secondaryBg/60 bg-secondaryAccent/20 p-8 text-center shadow-2xl backdrop-blur-sm">
           <h1 className="text-3xl font-bold text-white">URL Builder</h1>
           <p className="mt-3 text-gray-300">
