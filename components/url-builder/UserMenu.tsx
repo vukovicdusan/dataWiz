@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Avatar from "@/components/url-builder/Avatar";
+import InviteModal from "@/components/url-builder/InviteModal";
 
 type UserMenuProps = {
   name: string;
@@ -20,6 +21,7 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [isInviteOpen, setIsInviteOpen] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -76,7 +78,7 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
             className={menuItemClasses}
             onClick={() => {
               setIsOpen(false);
-              // Wired to the invite modal in Task 5.
+              setIsInviteOpen(true);
             }}
           >
             Invite member
@@ -103,6 +105,8 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
           </button>
         </div>
       )}
+
+      {isInviteOpen && <InviteModal onClose={() => setIsInviteOpen(false)} />}
     </div>
   );
 };
