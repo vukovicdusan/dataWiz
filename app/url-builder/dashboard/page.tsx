@@ -19,15 +19,14 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
-  const fullName =
-    (user.user_metadata?.full_name as string | undefined) ?? "there";
+  const fullName = user.user_metadata?.full_name as string | undefined;
   const email = user.email ?? "";
 
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-4 py-16">
       <div className="w-full max-w-lg rounded-2xl border border-secondaryBg/60 bg-secondaryAccent/20 p-8 text-center shadow-2xl">
         <h1 className="text-3xl font-bold text-white">
-          Welcome, {fullName}!
+          {fullName ? `Welcome, ${fullName}!` : "Welcome!"}
         </h1>
         <p className="mt-3 text-gray-300">
           You are signed in as <span className="font-bold">{email}</span>.

@@ -80,14 +80,21 @@ const GoogleSignInButton = () => {
               nonce,
             });
             if (error) {
-              setErrorMessage(error.message);
+              console.error("Google sign-in failed:", error.message);
+              setErrorMessage(
+                "Sign-in did not complete. Please try again."
+              );
               return;
             }
             router.push("/url-builder/dashboard");
             router.refresh();
           } catch (err) {
+            console.error("Google sign-in failed:", err);
             setErrorMessage(
-              err instanceof Error ? err.message : "Unable to sign in."
+              err instanceof Error &&
+                err.message.startsWith("Missing Supabase environment")
+                ? err.message
+                : "Sign-in did not complete. Please try again."
             );
           }
         },

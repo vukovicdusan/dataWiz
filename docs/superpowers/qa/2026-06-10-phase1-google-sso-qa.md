@@ -29,8 +29,7 @@ None.
 
 ## NITS
 
-1. **Raw Supabase error message rendered to the user.** `components/url-builder/GoogleSignInButton.tsx:83` displays `error.message` verbatim. Supabase auth errors contain no secrets, but they can be technical/confusing (e.g. "Invalid token"). Suggested fix: show a friendly generic message and keep the raw one out of the UI.
-2. **Awkward greeting fallback (carried over from round 1).** `app/url-builder/dashboard/page.tsx:22-23` falls back to `"there"`, rendering "Welcome, there!" when Google provides no `full_name`. Suggested fix: fall back to the email local-part or render just "Welcome!".
+None. (Both round-2 nits were fixed after this audit: the sign-in error shown to users is now a friendly message with the technical detail logged to the browser console only — except the actionable missing-env-var message, which is kept; and the dashboard greeting renders "Welcome!" when Google provides no name.)
 
 ## Inherent trade-offs (notes, not defects)
 
