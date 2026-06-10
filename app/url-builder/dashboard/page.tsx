@@ -5,7 +5,7 @@ import {
   ensureProfileAndTeam,
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
-import SignOutButton from "@/components/url-builder/SignOutButton";
+import DashboardHeader from "@/components/url-builder/DashboardHeader";
 import TeamCard from "@/components/url-builder/TeamCard";
 
 export const dynamic = "force-dynamic";
@@ -30,11 +30,21 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
+  const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
+  const avatarUrl =
+    (user.user_metadata?.avatar_url as string | undefined) ?? null;
+  const email = user.email ?? "";
+
   return (
-    <div className="flex min-h-[60vh] flex-col items-center px-4 py-16">
-      <TeamCard team={team} />
-      <div className="mt-7">
-        <SignOutButton />
+    <div className="min-h-screen">
+      <DashboardHeader
+        name={fullName ?? email}
+        email={email}
+        avatarUrl={avatarUrl}
+        teamName={team.name}
+      />
+      <div className="flex flex-col items-center px-4 py-12">
+        <TeamCard team={team} />
       </div>
     </div>
   );
