@@ -29,6 +29,12 @@ declare global {
   }
 }
 
+type GoogleSignInButtonProps = {
+  // When provided, replaces the default "go to dashboard" navigation after a
+  // successful sign-in (used by the invite page to join a team first).
+  onSuccess?: () => Promise<void> | void;
+};
+
 // Google requires the raw nonce in the resulting ID token while the
 // initialize call receives its SHA-256 hash, preventing token replay.
 async function generateNonce(): Promise<[string, string]> {
@@ -42,7 +48,7 @@ async function generateNonce(): Promise<[string, string]> {
   return [nonce, hashedNonce];
 }
 
-const GoogleSignInButton = () => {
+const GoogleSignInButton = ({ onSuccess }: GoogleSignInButtonProps) => {
   const router = useRouter();
   const buttonRef = useRef<HTMLDivElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -86,8 +92,12 @@ const GoogleSignInButton = () => {
               );
               return;
             }
-            router.push("/url-builder/dashboard");
-            router.refresh();
+            if (onSuccess) {
+              await onSuccess();
+            } else {
+              router.push("/url-builder/dashboard");
+              router.refresh();
+            }
           } catch (err) {
             console.error("Google sign-in failed:", err);
             setErrorMessage(
@@ -115,7 +125,7 @@ const GoogleSignInButton = () => {
       isActive = false;
       buttonParent.replaceChildren();
     };
-  }, [isScriptReady, router]);
+  }, [isScriptReady, router, onSuccess]);
 
   return (
     <div>

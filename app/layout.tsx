@@ -3,6 +3,7 @@ import { Titillium_Web } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ChromeGate from "@/components/url-builder/ChromeGate";
 
 const titilium = Titillium_Web({
   weight: ["300", "400", "700"],
@@ -29,9 +30,13 @@ export default function RootLayout({
      
 
       <body className={`${titilium.className} bg-primaryBg`}>
-        <Header />
+        <ChromeGate>
+          <Header />
+        </ChromeGate>
         <main className="overflow-hidden">{children}</main>
-        <Footer />
+        <ChromeGate>
+          <Footer />
+        </ChromeGate>
       </body>
     </html>
   );

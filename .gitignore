@@ -40,3 +40,6 @@ next-env.d.ts
 CLAUDE.md
 CLAUDE.local.md
 .superpowers/
+
+# internal planning docs (local only)
+docs/superpowers/
