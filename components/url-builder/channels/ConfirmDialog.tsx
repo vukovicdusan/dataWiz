@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { ChannelActionResult } from "@/app/url-builder/channels/channel-actions";
+
+type ActionResult = { ok: true } | { ok: false; error: string };
 
 type ConfirmDialogProps = {
   title: string;
@@ -10,10 +11,11 @@ type ConfirmDialogProps = {
   /** Button text while the action is in flight, e.g. "Deleting...". */
   workingLabel: string;
   /** Runs the server action. The dialog closes itself on success. */
-  onConfirm: () => Promise<ChannelActionResult>;
+  onConfirm: () => Promise<ActionResult>;
   onClose: () => void;
 };
 
+// Mount/unmount per open: state initializes on mount and is never synced after.
 const ConfirmDialog = ({
   title,
   body,

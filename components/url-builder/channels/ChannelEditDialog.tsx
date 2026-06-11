@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
 import type { ResolvedChannel } from "@/lib/url-builder/teamChannels";
-import type { ChannelActionResult } from "@/app/url-builder/channels/channel-actions";
+
+type ActionResult = { ok: true } | { ok: false; error: string };
 
 export type ChannelDialogValues = {
   name: string;
@@ -13,7 +14,7 @@ type ChannelEditDialogProps = {
   /** Channel being edited, or null for "Create custom channel". */
   channel: ResolvedChannel | null;
   /** Runs upsertChannel. The dialog closes itself on success. */
-  onSave: (values: ChannelDialogValues) => Promise<ChannelActionResult>;
+  onSave: (values: ChannelDialogValues) => Promise<ActionResult>;
   /** Edit mode only: opens the delete confirmation (parent owns it). */
   onRequestDelete?: () => void;
   onClose: () => void;
@@ -22,6 +23,7 @@ type ChannelEditDialogProps = {
 const inputClass =
   "mt-1 w-full rounded-md border border-secondaryBg/60 bg-primaryBg/60 px-3 py-2 text-sm text-gray-200 focus:border-primaryAccent focus:outline-none";
 
+// Mount/unmount per open: state initializes on mount and is never synced after.
 const ChannelEditDialog = ({
   channel,
   onSave,
