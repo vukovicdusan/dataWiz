@@ -5,7 +5,9 @@ import {
   ensureProfileAndTeam,
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
+import { getTeamChannels } from "@/lib/url-builder/teamChannels";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
+import ChannelsManager from "@/components/url-builder/channels/ChannelsManager";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +31,8 @@ export default async function UrlBuilderChannelsPage() {
     redirect("/url-builder");
   }
 
+  const { channels } = await getTeamChannels(supabase, team.id);
+
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
   const avatarUrl =
     (user.user_metadata?.avatar_url as string | undefined) ?? null;
@@ -42,13 +46,9 @@ export default async function UrlBuilderChannelsPage() {
         avatarUrl={avatarUrl}
       />
       <div className="flex flex-col items-center px-4 py-12">
-        <section className="w-full max-w-lg rounded-2xl border border-secondaryBg/60 bg-secondaryAccent/20 p-8 text-center shadow-2xl">
-          <h1 className="text-2xl font-bold text-white">Channels</h1>
-          <p className="mt-3 text-gray-300">
-            Channel management is coming soon. You will be able to review and
-            customize the UTM templates for each channel right here.
-          </p>
-        </section>
+        <div className="w-full max-w-3xl">
+          <ChannelsManager initialChannels={channels} />
+        </div>
       </div>
     </div>
   );
