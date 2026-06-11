@@ -4,6 +4,7 @@ import {
   containsPlatformVariable,
   normalizeBaseUrl,
 } from "@/lib/utm/build";
+import { aliasGroupFor } from "@/lib/utm/aliases";
 
 export type Warning = {
   field: UtmParam | "baseUrl";
@@ -123,19 +124,51 @@ export function collectWarnings(input: WarningInput): Warning[] {
 
     // 8. Same value as before, written differently (case or - vs _)
     const history = input.historyValues?.[param] ?? [];
+    const exactMatch = history.includes(value);
+    let spellingWarned = false;
     if (
       !isPlatform &&
       !containsManualPlaceholder(value) &&
-      !history.includes(value)
+      !exactMatch
     ) {
       const earlier = history.find(
         (used) => consistencyKey(used) === consistencyKey(value)
       );
       if (earlier) {
+        spellingWarned = true;
         warnings.push({
           field: param,
           message: `${name}: "${earlier}" was used in earlier links. "${value}" would count as a separate value in GA4 and split your data. Stick to one spelling.`,
         });
+      }
+    }
+
+    // 9. Different alias for the same platform or medium used earlier
+    // (fb vs facebook, paid vs cpc). History-based only: no nagging when
+    // there is no conflict with previously generated URLs. Skipped when the
+    // typed value already appears in history exactly (no conflict), or when
+    // rule 8 already warned for this parameter (contradictory advice otherwise).
+    if (
+      (param === "source" || param === "medium") &&
+      !isPlatform &&
+      !containsManualPlaceholder(value) &&
+      !spellingWarned &&
+      !exactMatch
+    ) {
+      const key = consistencyKey(value);
+      const group = aliasGroupFor(param, key);
+      if (group) {
+        const earlierAlias = history.find((used) => {
+          const usedKey = consistencyKey(used);
+          return usedKey !== key && group.includes(usedKey);
+        });
+        if (earlierAlias) {
+          const noun = param === "source" ? "platform" : "medium";
+          warnings.push({
+            field: param,
+            message: `${name}: "${value}" and "${earlierAlias}" usually mean the same ${noun}. Based on your previously generated URLs you used "${earlierAlias}". Using both splits your data in reports. Stick to "${earlierAlias}".`,
+          });
+        }
       }
     }
   }
