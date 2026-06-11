@@ -47,6 +47,8 @@ const HistoryRow = ({ entry }: { entry: HistoryEntry }) => {
         <button
           type="button"
           onClick={handleCopy}
+          aria-label={isCopied ? "Copied" : `Copy link for ${entry.campaign}`}
+          aria-live="polite"
           className="flex-shrink-0 rounded-md bg-primaryAccent px-4 py-2 text-xs font-bold text-white transition hover:bg-primaryAccent/80"
         >
           {isCopied ? "Copied!" : "Copy"}

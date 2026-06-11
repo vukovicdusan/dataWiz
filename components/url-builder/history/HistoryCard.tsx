@@ -11,6 +11,7 @@ import {
   groupByYearMonth,
   hasActiveCriteria,
   mostRecentMonthKey,
+  type FilterKey,
   type HistoryFilters,
   type YearGroup,
 } from "@/lib/history/filter";
@@ -49,6 +50,17 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
     [visibleEntries, newestFirst]
   );
   const defaultMonthKey = useMemo(() => mostRecentMonthKey(entries), [entries]);
+  const optionsByKey = useMemo(() => {
+    const options = {} as Record<FilterKey, string[]>;
+    FILTER_KEYS.forEach((key) => {
+      options[key] = filterOptions(entries, key);
+    });
+    // Channel options are displayed as labels, so order them by label too.
+    options.channel = [...options.channel].sort((a, b) =>
+      channelLabel(a).localeCompare(channelLabel(b))
+    );
+    return options;
+  }, [entries]);
 
   const clearAll = () => {
     setFilters(EMPTY_FILTERS);
@@ -103,7 +115,7 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
                 className={inputClass}
               >
                 <option value="">{FILTER_LABELS[key]}: All</option>
-                {filterOptions(entries, key).map((option) => (
+                {optionsByKey[key].map((option) => (
                   <option key={option} value={option}>
                     {key === "channel" ? channelLabel(option) : option}
                   </option>
@@ -124,6 +136,7 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
             <button
               type="button"
               onClick={() => setNewestFirst((previous) => !previous)}
+              aria-label={newestFirst ? "Sorted newest first. Switch to oldest first." : "Sorted oldest first. Switch to newest first."}
               className="rounded-md border border-secondaryBg/60 px-3 py-2 text-sm text-gray-200 transition hover:bg-secondaryBg/30"
             >
               {newestFirst ? "Newest first" : "Oldest first"}
@@ -159,7 +172,7 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
             <p className="mt-6 text-sm text-gray-400">Loading history...</p>
           ) : (
             <GroupList
-              key={`${JSON.stringify(filters)}|${search}`}
+              key={FILTER_KEYS.map((key) => filters[key]).join(" ") + " " + search.trim().toLowerCase()}
               groups={groups}
               criteriaActive={criteriaActive}
               defaultMonthKey={defaultMonthKey}
