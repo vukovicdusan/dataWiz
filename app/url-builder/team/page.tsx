@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -44,14 +43,6 @@ export default async function UrlBuilderTeamPage() {
         avatarUrl={avatarUrl}
       />
       <div className="flex flex-col items-center px-4 py-12">
-        <div className="mb-4 w-full max-w-lg">
-          <Link
-            href="/url-builder/dashboard"
-            className="inline-flex items-center gap-1.5 rounded-md border border-secondaryBg/60 px-4 py-2 text-sm font-bold text-gray-200 transition hover:bg-secondaryBg/30"
-          >
-            <span aria-hidden="true">&larr;</span> Back to builder
-          </Link>
-        </div>
         <TeamPanel team={team} />
       </div>
     </div>
