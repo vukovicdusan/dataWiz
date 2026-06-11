@@ -207,7 +207,8 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
     });
 
   const selectedCount = selected.size;
-  const allSelected = items.length > 0 && selectedCount === items.length;
+  const allSelected =
+    items.length > 0 && items.every((channel) => selected.has(channel.key));
 
   const handleSelectAll = () =>
     setSelected(

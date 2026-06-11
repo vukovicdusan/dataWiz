@@ -188,8 +188,10 @@ export async function saveGeneratedUrl(
     let channel: string | null = null;
     if (channelKey) {
       const labels = await getTeamChannelLabels(ctx.supabase, ctx.teamId);
+      // hasOwnProperty, not `in`: `in` would accept prototype keys like
+      // "toString" and let crafted input invent a channel.
       const known =
-        channelKey in labels ||
+        Object.prototype.hasOwnProperty.call(labels, channelKey) ||
         CHANNELS.some((candidate) => candidate.id === channelKey);
       channel = known ? channelKey : null;
     }
