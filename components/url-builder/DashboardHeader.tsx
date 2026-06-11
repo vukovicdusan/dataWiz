@@ -7,14 +7,12 @@ type DashboardHeaderProps = {
   name: string;
   email: string;
   avatarUrl: string | null;
-  teamName: string;
 };
 
 const DashboardHeader = ({
   name,
   email,
   avatarUrl,
-  teamName,
 }: DashboardHeaderProps) => {
   return (
     <header className="flex items-center justify-between px-4 py-4 sm:px-8">
@@ -30,7 +28,6 @@ const DashboardHeader = ({
         name={name}
         email={email}
         avatarUrl={avatarUrl}
-        teamName={teamName}
       />
     </header>
   );

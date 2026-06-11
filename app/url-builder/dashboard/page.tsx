@@ -44,7 +44,6 @@ export default async function UrlBuilderDashboardPage() {
         name={fullName ?? email}
         email={email}
         avatarUrl={avatarUrl}
-        teamName={team.name}
       />
       <div className="flex flex-col items-center px-4 py-12">
         <BuilderForm initialCustomValues={customValues} />
