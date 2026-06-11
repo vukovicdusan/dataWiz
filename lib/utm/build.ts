@@ -32,9 +32,23 @@ export function encodeUtmValue(value: string): string {
 }
 
 /**
+ * Builds only the utm_* query string, no domain and no leading "?", e.g.
+ * "utm_source=facebook&utm_medium=paid_social". Returns "" when every value
+ * is empty. Empty values (required or optional) are simply omitted; the UI
+ * separately disables the copy buttons until required fields are filled.
+ */
+export function buildQueryString(values: UtmValues): string {
+  return UTM_PARAMS.map((param) => ({
+    param,
+    value: (values[param] ?? "").trim(),
+  }))
+    .filter(({ value }) => value !== "")
+    .map(({ param, value }) => `utm_${param}=${encodeUtmValue(value)}`)
+    .join("&");
+}
+
+/**
  * Assembles the full tagged URL. Returns "" when the base URL is empty.
- * Empty values (required or optional) are simply omitted; the UI separately
- * disables Copy until required fields are filled.
  */
 export function buildUrl(baseUrl: string, values: UtmValues): string {
   const { url } = normalizeBaseUrl(baseUrl);
@@ -48,13 +62,7 @@ export function buildUrl(baseUrl: string, values: UtmValues): string {
   // Strip a stray trailing `?` or `&` before deciding the separator.
   const base = preFragment.replace(/[?&]$/, "");
 
-  const query = UTM_PARAMS.map((param) => ({
-    param,
-    value: (values[param] ?? "").trim(),
-  }))
-    .filter(({ value }) => value !== "")
-    .map(({ param, value }) => `utm_${param}=${encodeUtmValue(value)}`)
-    .join("&");
+  const query = buildQueryString(values);
 
   if (!query) return `${base}${fragment}`;
   const separator = base.includes("?") ? "&" : "?";

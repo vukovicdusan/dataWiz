@@ -19,6 +19,8 @@ type ParamFieldProps = {
   teamValues: string[];
   /** Persists the value for the team; parent updates teamValues on success. */
   onSaveForTeam: (value: string) => Promise<BuilderActionResult>;
+  /** Always-visible helper note rendered under the input, with an "i" icon. */
+  infoNote?: string;
 };
 
 type DropdownGroup = { heading: string; options: string[] };
@@ -32,6 +34,7 @@ const ParamField = ({
   exampleValues,
   teamValues,
   onSaveForTeam,
+  infoNote,
 }: ParamFieldProps) => {
   const fieldRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -203,6 +206,28 @@ const ParamField = ({
             </li>
           ))}
         </ul>
+      )}
+
+      {infoNote && (
+        <p className="mt-1.5 flex items-start gap-1.5 text-xs text-gray-400">
+          <svg
+            aria-hidden="true"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="mt-px shrink-0"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          {infoNote}
+        </p>
       )}
 
       {isEdited && (

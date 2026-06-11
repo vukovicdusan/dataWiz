@@ -2,13 +2,22 @@
 
 import { usePathname } from "next/navigation";
 
+// Signed-in app pages render their own header/nav instead of the
+// marketing site chrome.
+const APP_ROUTES = [
+  "/url-builder/dashboard",
+  "/url-builder/history",
+  "/url-builder/team",
+  "/url-builder/channels",
+];
+
 const ChromeGate = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   if (
-    pathname === "/url-builder/dashboard" ||
-    pathname?.startsWith("/url-builder/dashboard/") ||
-    pathname === "/url-builder/team" ||
-    pathname?.startsWith("/url-builder/team/")
+    pathname &&
+    APP_ROUTES.some(
+      (route) => pathname === route || pathname.startsWith(`${route}/`)
+    )
   ) {
     return null;
   }

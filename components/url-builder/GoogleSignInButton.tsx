@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { AUTH_EVENT_STORAGE_KEY } from "@/lib/url-builder/authEvent";
 
 type GoogleAccountsId = {
   initialize: (config: {
@@ -48,6 +49,15 @@ async function generateNonce(): Promise<[string, string]> {
   return [nonce, hashedNonce];
 }
 
+// A brand-new Supabase user has last_sign_in_at within seconds of
+// created_at; returning users signed in long after the account was made.
+function isNewAccount(createdAt: string, lastSignInAt: string | undefined): boolean {
+  const created = Date.parse(createdAt);
+  const lastSignIn = lastSignInAt ? Date.parse(lastSignInAt) : Number.NaN;
+  if (!Number.isFinite(created) || !Number.isFinite(lastSignIn)) return false;
+  return Math.abs(lastSignIn - created) < 10_000;
+}
+
 const GoogleSignInButton = ({ onSuccess }: GoogleSignInButtonProps) => {
   const router = useRouter();
   const buttonRef = useRef<HTMLDivElement>(null);
@@ -80,7 +90,7 @@ const GoogleSignInButton = ({ onSuccess }: GoogleSignInButtonProps) => {
           setErrorMessage(null);
           try {
             const supabase = createClient();
-            const { error } = await supabase.auth.signInWithIdToken({
+            const { data, error } = await supabase.auth.signInWithIdToken({
               provider: "google",
               token: credential,
               nonce,
@@ -91,6 +101,27 @@ const GoogleSignInButton = ({ onSuccess }: GoogleSignInButtonProps) => {
                 "Sign-in did not complete. Please try again."
               );
               return;
+            }
+            // Hand the auth event to the dashboard via sessionStorage: it
+            // survives any navigation, including hard redirects, and lets
+            // the dashboard (where GTM runs) own the push.
+            const user = data?.user;
+            if (user) {
+              try {
+                sessionStorage.setItem(
+                  AUTH_EVENT_STORAGE_KEY,
+                  JSON.stringify({
+                    event: isNewAccount(user.created_at, user.last_sign_in_at)
+                      ? "sign_up"
+                      : "login",
+                    email: user.email ?? "",
+                    user_id: user.id,
+                  })
+                );
+              } catch {
+                // sessionStorage can be unavailable (e.g. blocked storage);
+                // sign-in must still work, we just skip the event.
+              }
             }
             if (onSuccess) {
               await onSuccess();

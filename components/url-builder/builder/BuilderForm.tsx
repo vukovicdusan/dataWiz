@@ -11,7 +11,7 @@ import {
   type ChannelTemplate,
   type UtmParam,
 } from "@/lib/utm/channels";
-import { buildUrl, type UtmValues } from "@/lib/utm/build";
+import { buildUrl, buildQueryString, type UtmValues } from "@/lib/utm/build";
 import { collectWarnings } from "@/lib/utm/validate";
 import {
   saveCustomValue,
@@ -103,6 +103,7 @@ const BuilderForm = ({
   const templateDefaults: Partial<Record<UtmParam, string>> =
     channel && !channel.noticeOnly ? channel.defaults : {};
   const fullUrl = buildUrl(baseUrl, values);
+  const queryString = buildQueryString(values);
   const warnings = collectWarnings({
     baseUrl,
     values,
@@ -137,6 +138,11 @@ const BuilderForm = ({
       exampleValues={EXAMPLE_VALUES[param]}
       teamValues={customValues[param]}
       onSaveForTeam={handleSaveForTeam(param)}
+      infoNote={
+        param === "content"
+          ? "The template values are recommended values. Feel free to change them."
+          : undefined
+      }
     />
   );
 
@@ -201,6 +207,7 @@ const BuilderForm = ({
       {!isNoticeOnly && (
         <PreviewPanel
           fullUrl={fullUrl}
+          queryString={queryString}
           warnings={warnings}
           copyDisabled={copyDisabled}
           onCopy={handleCopy}

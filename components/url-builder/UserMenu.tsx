@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -70,22 +69,6 @@ const UserMenu = ({ name, email, avatarUrl }: UserMenuProps) => {
           className="absolute right-0 z-40 mt-2 w-60 rounded-xl border border-secondaryBg/60 bg-secondaryAccent p-2 shadow-2xl"
         >
           <p className="truncate px-3 py-2 text-xs text-gray-400">{email}</p>
-          <Link
-            role="menuitem"
-            href="/url-builder/dashboard"
-            className={menuItemClasses}
-            onClick={() => setIsOpen(false)}
-          >
-            Builder
-          </Link>
-          <Link
-            role="menuitem"
-            href="/url-builder/team"
-            className={menuItemClasses}
-            onClick={() => setIsOpen(false)}
-          >
-            Team
-          </Link>
           <button
             role="menuitem"
             type="button"

@@ -5,16 +5,18 @@ import {
   ensureProfileAndTeam,
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
+import { getTeamHistory } from "@/lib/url-builder/history";
+import type { HistoryEntry } from "@/lib/history/types";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
-import TeamPanel from "@/components/url-builder/TeamPanel";
+import HistoryCard from "@/components/url-builder/history/HistoryCard";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Team | DataWiz URL Builder",
+  title: "History | DataWiz URL Builder",
 };
 
-export default async function UrlBuilderTeamPage() {
+export default async function UrlBuilderHistoryPage() {
   const supabase = createClient();
   const {
     data: { user },
@@ -30,6 +32,16 @@ export default async function UrlBuilderTeamPage() {
     redirect("/url-builder");
   }
 
+  // History load failures must not blank the page: the card shows its own
+  // error state instead (same pattern the dashboard used).
+  const historyResult = await getTeamHistory().then(
+    (entries) => ({ entries, failed: false }),
+    (error) => {
+      console.error("Could not load team history:", error);
+      return { entries: [] as HistoryEntry[], failed: true };
+    }
+  );
+
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
   const avatarUrl =
     (user.user_metadata?.avatar_url as string | undefined) ?? null;
@@ -43,7 +55,12 @@ export default async function UrlBuilderTeamPage() {
         avatarUrl={avatarUrl}
       />
       <div className="flex flex-col items-center px-4 py-12">
-        <TeamPanel team={team} />
+        <div className="w-full max-w-6xl">
+          <HistoryCard
+            entries={historyResult.entries}
+            loadFailed={historyResult.failed}
+          />
+        </div>
       </div>
     </div>
   );
