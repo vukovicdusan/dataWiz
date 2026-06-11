@@ -212,10 +212,12 @@ export async function saveGeneratedUrl(
     if (error) {
       throw new Error(`Could not save to history: ${error.message}`);
     }
-    // Refresh the dashboard so the new link shows up in History without a
-    // manual reload. Only needed when a row was actually inserted (the
-    // dedupe early-return above means history did not change).
+    // Refresh both pages after a new row is inserted: History lists the new
+    // link, and the dashboard uses past values for its consistency warnings.
+    // Only needed when a row was actually inserted (the dedupe early-return
+    // above means history did not change).
     revalidatePath("/url-builder/dashboard");
+    revalidatePath("/url-builder/history");
     return { ok: true };
   } catch (err) {
     console.error("saveGeneratedUrl failed:", err);

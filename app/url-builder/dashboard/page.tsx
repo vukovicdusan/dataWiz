@@ -8,12 +8,9 @@ import {
 import { getTeamCustomValues } from "@/lib/url-builder/customValues";
 import { getTeamBaseUrls } from "@/lib/url-builder/baseUrls";
 import { getTeamHistoryValues } from "@/lib/url-builder/historyValues";
-import { getTeamHistory } from "@/lib/url-builder/history";
-import type { HistoryEntry } from "@/lib/history/types";
 import AuthEventTracker from "@/components/url-builder/AuthEventTracker";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
 import BuilderForm from "@/components/url-builder/builder/BuilderForm";
-import HistoryCard from "@/components/url-builder/history/HistoryCard";
 
 export const dynamic = "force-dynamic";
 
@@ -37,19 +34,10 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
-  // History load failures must not blank the whole dashboard: the card
-  // shows its own error state instead (spec polish item).
-  const [customValues, baseUrls, historyValues, historyResult] = await Promise.all([
+  const [customValues, baseUrls, historyValues] = await Promise.all([
     getTeamCustomValues(),
     getTeamBaseUrls().then((urls) => urls, (error) => { console.error("Could not load saved base URLs:", error); return [] as string[]; }),
     getTeamHistoryValues(),
-    getTeamHistory().then(
-      (entries) => ({ entries, failed: false }),
-      (error) => {
-        console.error("Could not load team history:", error);
-        return { entries: [] as HistoryEntry[], failed: true };
-      }
-    ),
   ]);
 
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
@@ -96,12 +84,6 @@ export default async function UrlBuilderDashboardPage() {
             Download UTM Tagging Guide
           </a>
         </p>
-        <div className="mt-10 w-full max-w-6xl">
-          <HistoryCard
-            entries={historyResult.entries}
-            loadFailed={historyResult.failed}
-          />
-        </div>
       </div>
     </div>
   );
