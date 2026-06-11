@@ -34,7 +34,6 @@ export type ChannelId =
   | "email"
   | "social-media"
   | "google-my-business"
-  | "weed-maps"
   | "apple-maps"
   | "custom";
 
@@ -187,12 +186,6 @@ export const CHANNELS: readonly ChannelTemplate[] = [
     label: "Google My Business",
     noticeOnly: false,
     defaults: { source: "gmb", medium: "listing", campaign: "[location]" },
-  },
-  {
-    id: "weed-maps",
-    label: "Weed Maps",
-    noticeOnly: false,
-    defaults: { source: "weed_maps", medium: "listing", campaign: "[location]" },
   },
   {
     id: "apple-maps",
