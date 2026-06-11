@@ -62,10 +62,11 @@ export async function updateSession(request: NextRequest) {
     return finalize(supabaseResponse);
   }
 
-  // Signed out: the dashboard, history, and team pages are locked.
+  // Signed out: the dashboard, channels, history, and team pages are locked.
   if (
     !user &&
     (pathname.startsWith("/url-builder/dashboard") ||
+      pathname.startsWith("/url-builder/channels") ||
       pathname.startsWith("/url-builder/history") ||
       pathname.startsWith("/url-builder/team"))
   ) {
