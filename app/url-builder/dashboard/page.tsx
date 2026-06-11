@@ -5,8 +5,9 @@ import {
   ensureProfileAndTeam,
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
+import { getTeamCustomValues } from "@/lib/url-builder/customValues";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
-import TeamCard from "@/components/url-builder/TeamCard";
+import BuilderForm from "@/components/url-builder/builder/BuilderForm";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +31,8 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
+  const customValues = await getTeamCustomValues();
+
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
   const avatarUrl =
     (user.user_metadata?.avatar_url as string | undefined) ?? null;
@@ -44,7 +47,7 @@ export default async function UrlBuilderDashboardPage() {
         teamName={team.name}
       />
       <div className="flex flex-col items-center px-4 py-12">
-        <TeamCard team={team} />
+        <BuilderForm initialCustomValues={customValues} />
       </div>
     </div>
   );
