@@ -69,7 +69,7 @@ const InviteJoinCard = ({
       {currentTeamName ? (
         <p className="mt-3 text-gray-300">
           You are currently on <strong>{currentTeamName}</strong>. Joining{" "}
-          <strong>{teamName}</strong> switches you to that team — your current
+          <strong>{teamName}</strong> switches you to that team. Your current
           teammates keep all shared data.
         </p>
       ) : (
