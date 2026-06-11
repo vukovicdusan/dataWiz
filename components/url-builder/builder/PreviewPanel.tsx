@@ -6,6 +6,8 @@ import type { BuilderActionResult } from "@/app/url-builder/dashboard/builder-ac
 
 type PreviewPanelProps = {
   fullUrl: string;
+  /** Only the utm_* query string, no domain and no leading "?". */
+  queryString: string;
   warnings: Warning[];
   copyDisabled: boolean;
   /** Saves the URL to team history (server action wired by BuilderForm). */
@@ -14,22 +16,25 @@ type PreviewPanelProps = {
 
 const PreviewPanel = ({
   fullUrl,
+  queryString,
   warnings,
   copyDisabled,
   onCopy,
 }: PreviewPanelProps) => {
   const previewRef = useRef<HTMLParagraphElement>(null);
-  const [isWorking, setIsWorking] = useState(false);
+  const [working, setWorking] = useState<"url" | "params" | null>(null);
   const [confirmation, setConfirmation] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [fallbackHint, setFallbackHint] = useState<string | null>(null);
+  const [paramsFallbackText, setParamsFallbackText] = useState<string | null>(null);
 
   // The URL changed, so any earlier "Copied..." message no longer describes it.
   useEffect(() => {
     setConfirmation(null);
     setSaveError(null);
     setFallbackHint(null);
-  }, [fullUrl]);
+    setParamsFallbackText(null);
+  }, [fullUrl, queryString]);
 
   const selectPreview = () => {
     const node = previewRef.current;
@@ -41,24 +46,35 @@ const PreviewPanel = ({
     selection?.addRange(range);
   };
 
-  const handleCopy = async () => {
-    setIsWorking(true);
+  const handleCopy = async (kind: "url" | "params") => {
+    if (working) return;
+    setWorking(kind);
     setConfirmation(null);
     setSaveError(null);
     setFallbackHint(null);
+    setParamsFallbackText(null);
 
     // Clipboard first: a later save failure must never cost the user the copy.
+    const text = kind === "url" ? fullUrl : queryString;
     let copied = false;
     try {
-      await navigator.clipboard.writeText(fullUrl);
+      await navigator.clipboard.writeText(text);
       copied = true;
     } catch {
-      selectPreview();
-      setFallbackHint(
-        "Copying is blocked in this browser. The link is selected for you, press Cmd+C (Ctrl+C on Windows) to copy it."
-      );
+      if (kind === "url") {
+        selectPreview();
+        setFallbackHint(
+          "Copying is blocked in this browser. The link is selected for you, press Cmd+C (Ctrl+C on Windows) to copy it."
+        );
+      } else {
+        setFallbackHint(
+          "Copying is blocked in this browser. Select the text below and press Cmd+C (Ctrl+C on Windows) to copy it."
+        );
+        setParamsFallbackText(queryString);
+      }
     }
 
+    // Both buttons record the full URL to History (approved default).
     try {
       const result = await onCopy();
       if (result.ok) {
@@ -75,7 +91,7 @@ const PreviewPanel = ({
           : "Could not reach the server to save to history."
       );
     } finally {
-      setIsWorking(false);
+      setWorking(null);
     }
   };
 
@@ -96,20 +112,41 @@ const PreviewPanel = ({
         </p>
       )}
 
-      <button
-        type="button"
-        onClick={handleCopy}
-        disabled={copyDisabled || isWorking}
-        className="mt-4 rounded-md bg-primaryAccent px-5 py-2.5 font-bold text-white transition hover:bg-primaryAccent/80 disabled:opacity-60"
-      >
-        {isWorking ? "Copying..." : "Copy URL"}
-      </button>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={() => handleCopy("url")}
+          disabled={copyDisabled || working !== null}
+          className="rounded-md bg-primaryAccent px-5 py-2.5 font-bold text-white transition hover:bg-primaryAccent/80 disabled:opacity-60"
+        >
+          {working === "url" ? "Copying..." : "Copy URL"}
+        </button>
+        <button
+          type="button"
+          onClick={() => handleCopy("params")}
+          disabled={copyDisabled || working !== null}
+          className="rounded-md border border-primaryAccent px-5 py-2.5 font-bold text-primaryAccent transition hover:bg-primaryAccent/20 disabled:opacity-60"
+        >
+          {working === "params" ? "Copying..." : "Copy UTM Params"}
+        </button>
+      </div>
 
       {confirmation && (
-        <p className="mt-3 text-sm text-green-300">{confirmation}</p>
+        <p role="status" className="mt-3 text-sm text-green-300">
+          {confirmation}
+        </p>
       )}
       {fallbackHint && (
-        <p className="mt-3 text-sm text-amber-300">{fallbackHint}</p>
+        <>
+          <p role="status" className="mt-3 text-sm text-amber-300">
+            {fallbackHint}
+          </p>
+          {paramsFallbackText && (
+            <p className="mt-2 select-all break-all rounded-md border border-secondaryBg/60 bg-black/30 px-3 py-2 font-mono text-sm text-gray-200">
+              {paramsFallbackText}
+            </p>
+          )}
+        </>
       )}
       {saveError && (
         <p role="alert" className="mt-3 text-sm text-red-300">
