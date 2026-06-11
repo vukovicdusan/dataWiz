@@ -67,18 +67,61 @@ async function loadRows(ctx: Ctx): Promise<TeamChannelRow[]> {
  * First mutating action on the Channels page seeds all built-ins into
  * team_channels (positions 0-14). Seed first, then apply the action; if
  * seeding fails the action fails. Returns current rows incl. tombstones.
+ *
+ * Top-up: when rows already exist (team previously customised), any built-in
+ * channel id from CHANNELS that has no row at all (not even a tombstone) is
+ * appended. This covers built-ins added to CHANNELS after a team seeded.
+ * Positions are assigned starting after the current max across all rows
+ * (including tombstones), preserving CHANNELS order for the appended ones.
  */
 async function ensureSeeded(ctx: Ctx): Promise<TeamChannelRow[]> {
   const existing = await loadRows(ctx);
-  if (existing.length > 0) return existing;
 
-  const seedRows = CHANNELS.map((template, index) => ({
+  if (existing.length === 0) {
+    // Full initial seed.
+    const seedRows = CHANNELS.map((template, index) => ({
+      team_id: ctx.teamId,
+      channel_key: template.id,
+      label: template.label,
+      notice_only: template.noticeOnly,
+      is_builtin: true,
+      position: index,
+      visible: true,
+      deleted: false,
+      source: template.defaults.source ?? null,
+      medium: template.defaults.medium ?? null,
+      campaign: template.defaults.campaign ?? null,
+      term: template.defaults.term ?? null,
+      content: template.defaults.content ?? null,
+    }));
+    const { error } = await ctx.supabase
+      .from("team_channels")
+      .insert(seedRows);
+    // 23505: another team member seeded concurrently. Reload and continue.
+    if (error && error.code !== "23505") {
+      throw new Error(`Could not seed team channels: ${error.message}`);
+    }
+    return loadRows(ctx);
+  }
+
+  // Top-up: find built-ins with no row at all (live or tombstone).
+  const existingKeys = new Set(existing.map((row) => row.channel_key));
+  const missing = CHANNELS.filter(
+    (template) => !existingKeys.has(template.id)
+  );
+  if (missing.length === 0) return existing;
+
+  const maxPosition = existing.reduce(
+    (max, row) => Math.max(max, row.position),
+    -1
+  );
+  const topUpRows = missing.map((template, offset) => ({
     team_id: ctx.teamId,
     channel_key: template.id,
     label: template.label,
     notice_only: template.noticeOnly,
     is_builtin: true,
-    position: index,
+    position: maxPosition + 1 + offset,
     visible: true,
     deleted: false,
     source: template.defaults.source ?? null,
@@ -87,10 +130,12 @@ async function ensureSeeded(ctx: Ctx): Promise<TeamChannelRow[]> {
     term: template.defaults.term ?? null,
     content: template.defaults.content ?? null,
   }));
-  const { error } = await ctx.supabase.from("team_channels").insert(seedRows);
-  // 23505: another team member seeded concurrently. Reload and continue.
+  const { error } = await ctx.supabase
+    .from("team_channels")
+    .insert(topUpRows);
+  // 23505: another team member inserted the same built-in concurrently.
   if (error && error.code !== "23505") {
-    throw new Error(`Could not seed team channels: ${error.message}`);
+    throw new Error(`Could not top-up team channels: ${error.message}`);
   }
   return loadRows(ctx);
 }
