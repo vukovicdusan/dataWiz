@@ -25,7 +25,7 @@ const TeamPanel = ({ team }: { team: TeamWithMembers }) => {
               name={member.fullName ?? member.email}
               avatarUrl={member.avatarUrl}
             />
-            <span className="text-gray-200">
+            <span className="min-w-0 break-all text-gray-200">
               {member.fullName
                 ? `${member.fullName} (${member.email})`
                 : member.email}
