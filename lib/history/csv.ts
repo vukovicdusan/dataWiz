@@ -54,12 +54,21 @@ export function inRange(
   }
 }
 
-/** RFC 4180: quote when the value contains a comma, quote, or newline. */
+/**
+ * RFC 4180 quoting plus spreadsheet formula neutralization: values starting
+ * with =, +, -, @, tab, or CR get an apostrophe prefix so team-authored data
+ * (campaign names, creator names) can never execute as a formula when the
+ * CSV is opened in Excel or Google Sheets.
+ */
 export function csvEscape(value: string): string {
-  if (/[",\r\n]/.test(value)) {
-    return `"${value.replace(/"/g, '""')}"`;
+  let v = value;
+  if (/^[=+\-@\t\r]/.test(v)) {
+    v = `'${v}`;
   }
-  return value;
+  if (/[",\r\n]/.test(v)) {
+    return `"${v.replace(/"/g, '""')}"`;
+  }
+  return v;
 }
 
 export const CSV_HEADERS: readonly string[] = [
