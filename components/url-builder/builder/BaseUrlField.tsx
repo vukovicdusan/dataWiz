@@ -48,7 +48,7 @@ const BaseUrlField = ({
   const normalizedTrimmed = trimmed ? normalizeBaseUrl(trimmed).url : "";
 
   const canSave =
-    trimmed !== "" && !savedUrls.includes(normalizedTrimmed);
+    trimmed !== "" && !savedUrls.some((url) => url.toLowerCase() === normalizedTrimmed.toLowerCase());
 
   const handleSave = async () => {
     setIsSaving(true);

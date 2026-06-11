@@ -7,7 +7,8 @@ export async function getTeamBaseUrls(): Promise<string[]> {
   const { data, error } = await supabase
     .from("base_urls")
     .select("value")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .order("id", { ascending: true });
   if (error) {
     throw new Error(`Could not load team base URLs: ${error.message}`);
   }

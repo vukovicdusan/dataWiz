@@ -40,7 +40,7 @@ export default async function UrlBuilderDashboardPage() {
   // shows its own error state instead (spec polish item).
   const [customValues, baseUrls, historyValues, historyResult] = await Promise.all([
     getTeamCustomValues(),
-    getTeamBaseUrls(),
+    getTeamBaseUrls().then((urls) => urls, (error) => { console.error("Could not load saved base URLs:", error); return [] as string[]; }),
     getTeamHistoryValues(),
     getTeamHistory().then(
       (entries) => ({ entries, failed: false }),
