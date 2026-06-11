@@ -84,6 +84,26 @@ export async function saveBaseUrl(
     }
 
     const normalized = normalizeBaseUrl(trimmed).url;
+    // Saved URLs become the team-wide pre-filled default with no delete UI,
+    // so reject anything that does not parse as a real web URL.
+    let parsed: URL;
+    try {
+      parsed = new URL(normalized);
+    } catch {
+      return {
+        ok: false,
+        error: "That does not look like a valid URL. Check it and try again.",
+      };
+    }
+    if (
+      (parsed.protocol !== "https:" && parsed.protocol !== "http:") ||
+      !parsed.hostname.includes(".")
+    ) {
+      return {
+        ok: false,
+        error: "That does not look like a valid URL. Check it and try again.",
+      };
+    }
 
     const ctx = await requireSessionTeam();
     if (!ctx) {
