@@ -25,13 +25,21 @@ Value types:
 |---|---|---|---|---|---|
 | Google Ads | — | — | — | — | — |
 | Meta Ads | `meta` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
+| Microsoft Ads | `microsoft` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
+| LinkedIn Ads | `linkedin` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
+| X (Twitter) Ads | `twitter` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
+| TikTok Ads | `tiktok` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
+| Open AI Ads | `openai` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
+| Snapchat Ads | `snapchat` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
+| Pinterest Ads | `pinterest` | `cpc` | `{{campaign.name}}` | `{{adset.name}}\|{{placement}}` | `{{ad.name}}` |
 | Surfside | `surfside` | `display` | `{{source id}}` | `{{strategy id}}\|{{placement id}}` | `{{creative id}}` |
 | Email | `alpine` | `email` | `[email_type]` | `[audience_segment]` | `[variant]` |
 | Social Media | `[platform_name]` | `social` | `[post_name]` | — | — |
 | Google My Business | `gmb` | `listing` | `[location]` | — | — |
 | Weed Maps | `weed_maps` | `listing` | `[location]` | — | — |
 | Apple Maps | `apple_maps` | `listing` | `[location]` | — | — |
-| Other Listings | `other_listing` | `listing` | `[location]` | — | — |
+
+Ads channels other than Meta reuse the Meta template with a channel-specific source. The `{{...}}` placeholders are Meta syntax: on other platforms they will not auto-fill, so replace them with real values when building those links.
 
 **Google Ads:** auto-tagged via GCLID — do **not** add UTM parameters. The builder must show this notice and skip generation for this channel.
 

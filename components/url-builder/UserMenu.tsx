@@ -1,29 +1,25 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Avatar from "@/components/url-builder/Avatar";
-import InviteModal from "@/components/url-builder/InviteModal";
-import LeaveTeamDialog from "@/components/url-builder/LeaveTeamDialog";
 
 type UserMenuProps = {
   name: string;
   email: string;
   avatarUrl: string | null;
-  teamName: string;
 };
 
 const menuItemClasses =
   "block w-full rounded-md px-3 py-2 text-left text-gray-200 transition hover:bg-primaryAccent/30 disabled:opacity-60";
 
-const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
+const UserMenu = ({ name, email, avatarUrl }: UserMenuProps) => {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [isInviteOpen, setIsInviteOpen] = useState(false);
-  const [isLeaveOpen, setIsLeaveOpen] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -74,28 +70,14 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
           className="absolute right-0 z-40 mt-2 w-60 rounded-xl border border-secondaryBg/60 bg-secondaryAccent p-2 shadow-2xl"
         >
           <p className="truncate px-3 py-2 text-xs text-gray-400">{email}</p>
-          <button
+          <Link
             role="menuitem"
-            type="button"
+            href="/url-builder/team"
             className={menuItemClasses}
-            onClick={() => {
-              setIsOpen(false);
-              setIsInviteOpen(true);
-            }}
+            onClick={() => setIsOpen(false)}
           >
-            Invite member
-          </button>
-          <button
-            role="menuitem"
-            type="button"
-            className={menuItemClasses}
-            onClick={() => {
-              setIsOpen(false);
-              setIsLeaveOpen(true);
-            }}
-          >
-            Leave team
-          </button>
+            Team
+          </Link>
           <button
             role="menuitem"
             type="button"
@@ -106,14 +88,6 @@ const UserMenu = ({ name, email, avatarUrl, teamName }: UserMenuProps) => {
             {isSigningOut ? "Signing out..." : "Sign out"}
           </button>
         </div>
-      )}
-
-      {isInviteOpen && <InviteModal onClose={() => setIsInviteOpen(false)} />}
-      {isLeaveOpen && (
-        <LeaveTeamDialog
-          teamName={teamName}
-          onClose={() => setIsLeaveOpen(false)}
-        />
       )}
     </div>
   );

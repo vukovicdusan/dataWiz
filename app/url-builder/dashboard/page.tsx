@@ -5,8 +5,10 @@ import {
   ensureProfileAndTeam,
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
+import { getTeamCustomValues } from "@/lib/url-builder/customValues";
+import { getTeamHistoryValues } from "@/lib/url-builder/historyValues";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
-import TeamCard from "@/components/url-builder/TeamCard";
+import BuilderForm from "@/components/url-builder/builder/BuilderForm";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +32,11 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
+  const [customValues, historyValues] = await Promise.all([
+    getTeamCustomValues(),
+    getTeamHistoryValues(),
+  ]);
+
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
   const avatarUrl =
     (user.user_metadata?.avatar_url as string | undefined) ?? null;
@@ -41,10 +48,37 @@ export default async function UrlBuilderDashboardPage() {
         name={fullName ?? email}
         email={email}
         avatarUrl={avatarUrl}
-        teamName={team.name}
       />
       <div className="flex flex-col items-center px-4 py-12">
-        <TeamCard team={team} />
+        <BuilderForm
+          initialCustomValues={customValues}
+          historyValues={historyValues}
+        />
+        <p className="mt-10 text-gray-300">
+          Not sure which values to pick?{" "}
+          <a
+            href="/utm-tagging-guide.pdf"
+            download
+            className="inline-flex items-center gap-1.5 font-bold text-primaryAccent transition hover:text-primaryAccent/80"
+          >
+            <svg
+              aria-hidden="true"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download UTM Tagging Guide
+          </a>
+        </p>
       </div>
     </div>
   );

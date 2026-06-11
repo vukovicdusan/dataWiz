@@ -62,8 +62,12 @@ export async function updateSession(request: NextRequest) {
     return finalize(supabaseResponse);
   }
 
-  // Signed out: the dashboard is locked.
-  if (!user && pathname.startsWith("/url-builder/dashboard")) {
+  // Signed out: the dashboard and team pages are locked.
+  if (
+    !user &&
+    (pathname.startsWith("/url-builder/dashboard") ||
+      pathname.startsWith("/url-builder/team"))
+  ) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/url-builder";
     redirectUrl.search = "";
