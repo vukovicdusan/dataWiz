@@ -29,12 +29,18 @@ const LEGACY_CHANNEL_LABELS: Record<string, string> = {
 
 /**
  * Badge text for a channel id. Null (pre-Phase-4 rows) renders as the
- * design-approved placeholder glyph. Removed channels use the legacy
- * label map; unknown ids fall back to the raw id so data is never hidden.
+ * design-approved placeholder glyph. Team channel labels win (so renamed
+ * channels show the new name, and tombstoned team channels keep their
+ * last label); then built-ins, then removed legacy channels, then the
+ * raw id so data is never hidden.
  */
-export function channelLabel(channel: string | null): string {
+export function channelLabel(
+  channel: string | null,
+  teamLabels?: Record<string, string>
+): string {
   if (!channel) return "—";
   return (
+    teamLabels?.[channel] ??
     CHANNELS.find((candidate) => candidate.id === channel)?.label ??
     LEGACY_CHANNEL_LABELS[channel] ??
     channel

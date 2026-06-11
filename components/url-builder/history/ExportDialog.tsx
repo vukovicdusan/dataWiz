@@ -15,6 +15,7 @@ type ExportDialogProps = {
   /** History after the card's current filters and search. */
   filteredEntries: HistoryEntry[];
   onClose: () => void;
+  teamChannelLabels: Record<string, string>;
 };
 
 const MONTH_OPTIONS = [
@@ -39,6 +40,7 @@ const ExportDialog = ({
   entries,
   filteredEntries,
   onClose,
+  teamChannelLabels,
 }: ExportDialogProps) => {
   const years = useMemo(() => {
     const present = new Set<number>();
@@ -100,7 +102,7 @@ const ExportDialog = ({
     }
 
     // "\uFEFF" byte order mark so Excel detects UTF-8.
-    const blob = new Blob(["\uFEFF", buildCsv(rows)], {
+    const blob = new Blob(["\uFEFF", buildCsv(rows, teamChannelLabels)], {
       type: "text/csv;charset=utf-8",
     });
     const url = URL.createObjectURL(blob);

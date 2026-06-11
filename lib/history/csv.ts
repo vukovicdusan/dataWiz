@@ -89,14 +89,17 @@ export const CSV_HEADERS: readonly string[] = [
  * term, and content become empty cells (cleaner in spreadsheets than a
  * placeholder glyph).
  */
-export function buildCsv(entries: readonly HistoryEntry[]): string {
+export function buildCsv(
+  entries: readonly HistoryEntry[],
+  teamLabels?: Record<string, string>
+): string {
   const lines = [CSV_HEADERS.map(csvEscape).join(",")];
   entries.forEach((entry) => {
     lines.push(
       [
         formatEntryDate(entry.createdAt),
         creatorLabel(entry),
-        entry.channel ? channelLabel(entry.channel) : "",
+        entry.channel ? channelLabel(entry.channel, teamLabels) : "",
         entry.baseUrl,
         entry.source,
         entry.medium,
