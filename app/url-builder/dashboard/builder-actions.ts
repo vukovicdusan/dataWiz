@@ -1,7 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
+import { CHANNELS, UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
 import { buildUrl, normalizeBaseUrl } from "@/lib/utm/build";
 
 export type BuilderActionResult = { ok: true } | { ok: false; error: string };
@@ -80,6 +81,8 @@ export type SaveUrlInput = {
   campaign: string;
   term: string;
   content: string;
+  /** Channel template id from lib/utm/channels.ts, or "" when none. */
+  channel: string;
 };
 
 export async function saveGeneratedUrl(
@@ -92,6 +95,12 @@ export async function saveGeneratedUrl(
     const campaign = input.campaign.trim();
     const term = input.term.trim();
     const content = input.content.trim();
+    // Store only known channel ids; anything else becomes null so bad
+    // client input can never invent a channel.
+    const channelKey = input.channel.trim();
+    const channel = CHANNELS.some((candidate) => candidate.id === channelKey)
+      ? channelKey
+      : null;
     if (!baseUrl || !source || !medium || !campaign) {
       return {
         ok: false,
@@ -140,10 +149,15 @@ export async function saveGeneratedUrl(
       term: term || null,
       content: content || null,
       full_url: fullUrl,
+      channel,
     });
     if (error) {
       throw new Error(`Could not save to history: ${error.message}`);
     }
+    // Refresh the dashboard so the new link shows up in History without a
+    // manual reload. Only needed when a row was actually inserted (the
+    // dedupe early-return above means history did not change).
+    revalidatePath("/url-builder/dashboard");
     return { ok: true };
   } catch (err) {
     console.error("saveGeneratedUrl failed:", err);

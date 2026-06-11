@@ -105,6 +105,7 @@ const BuilderForm = ({
       campaign: values.campaign,
       term: values.term,
       content: values.content,
+      channel: channelId,
     });
 
   const renderField = (param: UtmParam, required: boolean) => (
