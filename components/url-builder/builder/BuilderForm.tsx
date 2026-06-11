@@ -94,6 +94,7 @@ const BuilderForm = ({
   });
   const copyDisabled =
     isNoticeOnly ||
+    channelId === "" ||
     baseUrl.trim() === "" ||
     REQUIRED_PARAMS.some((param) => values[param].trim() === "");
 

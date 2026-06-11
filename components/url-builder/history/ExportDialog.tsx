@@ -151,7 +151,7 @@ const ExportDialog = ({
             <select
               aria-label="Year"
               value={year}
-              onFocus={() => pickKind("year")}
+              onClick={() => pickKind("year")}
               onChange={(event) => {
                 setYear(Number(event.target.value));
                 pickKind("year");
@@ -176,7 +176,7 @@ const ExportDialog = ({
             <select
               aria-label="Month"
               value={month}
-              onFocus={() => pickKind("month")}
+              onClick={() => pickKind("month")}
               onChange={(event) => {
                 setMonth(Number(event.target.value));
                 pickKind("month");
@@ -192,7 +192,7 @@ const ExportDialog = ({
             <select
               aria-label="Year of the month"
               value={monthYear}
-              onFocus={() => pickKind("month")}
+              onClick={() => pickKind("month")}
               onChange={(event) => {
                 setMonthYear(Number(event.target.value));
                 pickKind("month");
@@ -218,7 +218,7 @@ const ExportDialog = ({
               type="date"
               aria-label="From date"
               value={from}
-              onFocus={() => pickKind("custom")}
+              onClick={() => pickKind("custom")}
               onChange={(event) => {
                 setFrom(event.target.value);
                 pickKind("custom");
@@ -230,7 +230,7 @@ const ExportDialog = ({
               type="date"
               aria-label="To date"
               value={to}
-              onFocus={() => pickKind("custom")}
+              onClick={() => pickKind("custom")}
               onChange={(event) => {
                 setTo(event.target.value);
                 pickKind("custom");

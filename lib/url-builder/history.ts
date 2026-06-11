@@ -33,6 +33,7 @@ export async function getTeamHistory(): Promise<HistoryEntry[]> {
         "id, created_by, base_url, source, medium, campaign, term, content, channel, full_url, created_at"
       )
       .order("created_at", { ascending: false })
+      .order("id", { ascending: true })
       .range(rows.length, rows.length + PAGE_SIZE - 1);
     if (error) {
       throw new Error(`Could not load team history: ${error.message}`);
