@@ -6,6 +6,7 @@ import {
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
 import { getTeamHistory } from "@/lib/url-builder/history";
+import { getTeamChannelLabels } from "@/lib/url-builder/teamChannels";
 import type { HistoryEntry } from "@/lib/history/types";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
 import HistoryCard from "@/components/url-builder/history/HistoryCard";
@@ -34,13 +35,20 @@ export default async function UrlBuilderHistoryPage() {
 
   // History load failures must not blank the page: the card shows its own
   // error state instead (same pattern the dashboard used).
-  const historyResult = await getTeamHistory().then(
-    (entries) => ({ entries, failed: false }),
-    (error) => {
-      console.error("Could not load team history:", error);
-      return { entries: [] as HistoryEntry[], failed: true };
-    }
-  );
+  // Label load failures also must not blank History; fall back to {}.
+  const [historyResult, teamChannelLabels] = await Promise.all([
+    getTeamHistory().then(
+      (entries) => ({ entries, failed: false }),
+      (error) => {
+        console.error("Could not load team history:", error);
+        return { entries: [] as HistoryEntry[], failed: true };
+      }
+    ),
+    getTeamChannelLabels(supabase, team.id).catch((error) => {
+      console.error("Could not load team channel labels:", error);
+      return {} as Record<string, string>;
+    }),
+  ]);
 
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
   const avatarUrl =
@@ -59,6 +67,7 @@ export default async function UrlBuilderHistoryPage() {
           <HistoryCard
             entries={historyResult.entries}
             loadFailed={historyResult.failed}
+            teamChannelLabels={teamChannelLabels}
           />
         </div>
       </div>

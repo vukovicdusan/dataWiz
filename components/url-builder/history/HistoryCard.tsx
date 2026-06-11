@@ -23,6 +23,7 @@ import { deleteHistoryLinks } from "@/app/url-builder/history/history-actions";
 type HistoryCardProps = {
   entries: HistoryEntry[];
   loadFailed: boolean;
+  teamChannelLabels: Record<string, string>;
 };
 
 const inputClass =
@@ -30,7 +31,7 @@ const inputClass =
 
 const linkCount = (count: number) => (count === 1 ? "1 link" : `${count} links`);
 
-const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
+const HistoryCard = ({ entries, loadFailed, teamChannelLabels }: HistoryCardProps) => {
   const [filters, setFilters] = useState<HistoryFilters>(EMPTY_FILTERS);
   const [search, setSearch] = useState("");
   const [newestFirst, setNewestFirst] = useState(true);
@@ -49,8 +50,8 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
 
   const criteriaActive = hasActiveCriteria(filters, search);
   const visibleEntries = useMemo(
-    () => applyCriteria(entries, filters, search),
-    [entries, filters, search]
+    () => applyCriteria(entries, filters, search, teamChannelLabels),
+    [entries, filters, search, teamChannelLabels]
   );
   const groups = useMemo(
     () => groupByYearMonth(visibleEntries, newestFirst),
@@ -64,10 +65,12 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
     });
     // Channel options are displayed as labels, so order them by label too.
     options.channel = [...options.channel].sort((a, b) =>
-      channelLabel(a).localeCompare(channelLabel(b))
+      channelLabel(a, teamChannelLabels).localeCompare(
+        channelLabel(b, teamChannelLabels)
+      )
     );
     return options;
-  }, [entries]);
+  }, [entries, teamChannelLabels]);
 
   const clearAll = () => {
     setFilters(EMPTY_FILTERS);
@@ -124,7 +127,9 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
                 <option value="">{FILTER_LABELS[key]}: All</option>
                 {optionsByKey[key].map((option) => (
                   <option key={option} value={option}>
-                    {key === "channel" ? channelLabel(option) : option}
+                    {key === "channel"
+                      ? channelLabel(option, teamChannelLabels)
+                      : option}
                   </option>
                 ))}
               </select>
@@ -195,6 +200,7 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
               criteriaActive={criteriaActive}
               defaultMonthKey={defaultMonthKey}
               onRequestDelete={(entry) => setPendingDelete([entry])}
+              teamChannelLabels={teamChannelLabels}
             />
           )}
         </>
@@ -205,6 +211,7 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
           entries={entries}
           filteredEntries={visibleEntries}
           onClose={() => setIsExportOpen(false)}
+          teamChannelLabels={teamChannelLabels}
         />
       )}
 
@@ -226,6 +233,7 @@ type GroupListProps = {
   criteriaActive: boolean;
   defaultMonthKey: string | null;
   onRequestDelete: (entry: HistoryEntry) => void;
+  teamChannelLabels: Record<string, string>;
 };
 
 const GroupList = ({
@@ -233,6 +241,7 @@ const GroupList = ({
   criteriaActive,
   defaultMonthKey,
   onRequestDelete,
+  teamChannelLabels,
 }: GroupListProps) => {
   // Manual open/close choices, keyed by year ("2026") or month ("2026-06").
   // The parent remounts this component (via key) when criteria change, so
@@ -302,6 +311,7 @@ const GroupList = ({
                               key={entry.id}
                               entry={entry}
                               onRequestDelete={() => onRequestDelete(entry)}
+                              teamChannelLabels={teamChannelLabels}
                             />
                           ))}
                         </ul>

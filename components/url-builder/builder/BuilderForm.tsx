@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import {
-  CHANNELS,
   EXAMPLE_VALUES,
   OPTIONAL_PARAMS,
   REQUIRED_PARAMS,
   UTM_PARAMS,
-  type ChannelId,
-  type ChannelTemplate,
   type UtmParam,
 } from "@/lib/utm/channels";
 import { buildUrl, buildQueryString, type UtmValues } from "@/lib/utm/build";
@@ -20,10 +17,12 @@ import {
 } from "@/app/url-builder/dashboard/builder-actions";
 import type { TeamCustomValues } from "@/lib/url-builder/customValues";
 import type { TeamHistoryValues } from "@/lib/url-builder/historyValues";
+import type { ResolvedChannel } from "@/lib/url-builder/teamChannels";
 import ParamField from "@/components/url-builder/builder/ParamField";
 import BaseUrlField from "@/components/url-builder/builder/BaseUrlField";
 import PreviewPanel from "@/components/url-builder/builder/PreviewPanel";
 import ChannelNotice from "@/components/url-builder/builder/ChannelNotice";
+import ChannelPicker from "@/components/url-builder/builder/ChannelPicker";
 
 const EMPTY_VALUES: UtmValues = {
   source: "",
@@ -34,30 +33,32 @@ const EMPTY_VALUES: UtmValues = {
 };
 
 type BuilderFormProps = {
+  channels: ResolvedChannel[];
   initialCustomValues: TeamCustomValues;
   initialBaseUrls: string[];
   historyValues: TeamHistoryValues;
 };
 
 const BuilderForm = ({
+  channels,
   initialCustomValues,
   initialBaseUrls,
   historyValues,
 }: BuilderFormProps) => {
-  const [channelId, setChannelId] = useState<ChannelId | "">("");
+  const [channelKey, setChannelKey] = useState("");
   const [baseUrl, setBaseUrl] = useState(initialBaseUrls[0] ?? "");
   const [savedBaseUrls, setSavedBaseUrls] = useState(initialBaseUrls);
   const [values, setValues] = useState<UtmValues>(EMPTY_VALUES);
   const [customValues, setCustomValues] =
     useState<TeamCustomValues>(initialCustomValues);
 
-  const channel: ChannelTemplate | null =
-    CHANNELS.find((candidate) => candidate.id === channelId) ?? null;
+  const channel: ResolvedChannel | null =
+    channels.find((candidate) => candidate.key === channelKey) ?? null;
   const isNoticeOnly = channel?.noticeOnly ?? false;
 
-  const handleChannelChange = (nextId: string) => {
-    setChannelId(nextId as ChannelId | "");
-    const next = CHANNELS.find((candidate) => candidate.id === nextId);
+  const handleChannelChange = (nextKey: string) => {
+    setChannelKey(nextKey);
+    const next = channels.find((candidate) => candidate.key === nextKey);
     const nextValues = { ...EMPTY_VALUES };
     if (next && !next.noticeOnly) {
       UTM_PARAMS.forEach((param) => {
@@ -110,9 +111,11 @@ const BuilderForm = ({
     templateDefaults,
     historyValues,
   });
+  // channel === null also covers a stale key whose channel was hidden or
+  // deleted by a teammate after selection.
   const copyDisabled =
     isNoticeOnly ||
-    channelId === "" ||
+    channel === null ||
     baseUrl.trim() === "" ||
     REQUIRED_PARAMS.some((param) => values[param].trim() === "");
 
@@ -124,7 +127,7 @@ const BuilderForm = ({
       campaign: values.campaign,
       term: values.term,
       content: values.content,
-      channel: channelId,
+      channel: channelKey,
     });
 
   const renderField = (param: UtmParam, required: boolean) => (
@@ -157,19 +160,11 @@ const BuilderForm = ({
         >
           Channel <span className="text-primaryAccent">*</span>
         </label>
-        <select
-          id="channel-picker"
-          value={channelId}
-          onChange={(event) => handleChannelChange(event.target.value)}
-          className="mt-1 w-full rounded-md border border-secondaryBg/60 bg-primaryBg/60 px-3 py-2 text-sm text-gray-200 focus:border-primaryAccent focus:outline-none"
-        >
-          <option value="">Select a channel</option>
-          {CHANNELS.map((candidate) => (
-            <option key={candidate.id} value={candidate.id}>
-              {candidate.label}
-            </option>
-          ))}
-        </select>
+        <ChannelPicker
+          channels={channels}
+          value={channelKey}
+          onChange={handleChannelChange}
+        />
 
         {isNoticeOnly ? (
           <div className="mt-6">

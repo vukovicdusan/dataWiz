@@ -8,6 +8,7 @@ import {
 import { getTeamCustomValues } from "@/lib/url-builder/customValues";
 import { getTeamBaseUrls } from "@/lib/url-builder/baseUrls";
 import { getTeamHistoryValues } from "@/lib/url-builder/historyValues";
+import { getTeamChannels } from "@/lib/url-builder/teamChannels";
 import AuthEventTracker from "@/components/url-builder/AuthEventTracker";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
 import BuilderForm from "@/components/url-builder/builder/BuilderForm";
@@ -34,10 +35,11 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
-  const [customValues, baseUrls, historyValues] = await Promise.all([
+  const [customValues, baseUrls, historyValues, teamChannels] = await Promise.all([
     getTeamCustomValues(),
     getTeamBaseUrls().then((urls) => urls, (error) => { console.error("Could not load saved base URLs:", error); return [] as string[]; }),
     getTeamHistoryValues(),
+    getTeamChannels(supabase, team.id),
   ]);
 
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
@@ -55,6 +57,7 @@ export default async function UrlBuilderDashboardPage() {
       />
       <div className="flex flex-col items-center px-4 py-12">
         <BuilderForm
+          channels={teamChannels.channels.filter((channel) => channel.visible)}
           initialCustomValues={customValues}
           initialBaseUrls={baseUrls}
           historyValues={historyValues}

@@ -12,9 +12,10 @@ type HistoryRowProps = {
   entry: HistoryEntry;
   /** Opens the delete confirmation dialog for this row. */
   onRequestDelete: () => void;
+  teamChannelLabels: Record<string, string>;
 };
 
-const HistoryRow = ({ entry, onRequestDelete }: HistoryRowProps) => {
+const HistoryRow = ({ entry, onRequestDelete, teamChannelLabels }: HistoryRowProps) => {
   const [isCopied, setIsCopied] = useState(false);
   const [copyError, setCopyError] = useState<string | null>(null);
   const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -89,7 +90,7 @@ const HistoryRow = ({ entry, onRequestDelete }: HistoryRowProps) => {
               : "rounded-full bg-secondaryBg/40 px-2.5 py-0.5 text-gray-400"
           }
         >
-          {channelLabel(entry.channel)}
+          {channelLabel(entry.channel, teamChannelLabels)}
         </span>
         <span>{creatorLabel(entry)}</span>
         <span>{formatEntryDate(entry.createdAt)}</span>

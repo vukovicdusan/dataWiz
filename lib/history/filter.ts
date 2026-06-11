@@ -89,7 +89,11 @@ export function matchesFilters(
  * Case-insensitive substring search across base URL, full URL, every UTM
  * value, the channel label, and the creator name and email.
  */
-export function matchesSearch(entry: HistoryEntry, query: string): boolean {
+export function matchesSearch(
+  entry: HistoryEntry,
+  query: string,
+  teamLabels?: Record<string, string>
+): boolean {
   const needle = query.trim().toLowerCase();
   if (!needle) return true;
   const haystack = [
@@ -100,7 +104,7 @@ export function matchesSearch(entry: HistoryEntry, query: string): boolean {
     entry.campaign,
     entry.term ?? "",
     entry.content ?? "",
-    entry.channel ? channelLabel(entry.channel) : "",
+    entry.channel ? channelLabel(entry.channel, teamLabels) : "",
     entry.creatorName ?? "",
     entry.creatorEmail ?? "",
   ]
@@ -119,10 +123,12 @@ export function hasActiveCriteria(
 export function applyCriteria(
   entries: readonly HistoryEntry[],
   filters: HistoryFilters,
-  query: string
+  query: string,
+  teamLabels?: Record<string, string>
 ): HistoryEntry[] {
   return entries.filter(
-    (entry) => matchesFilters(entry, filters) && matchesSearch(entry, query)
+    (entry) =>
+      matchesFilters(entry, filters) && matchesSearch(entry, query, teamLabels)
   );
 }
 
