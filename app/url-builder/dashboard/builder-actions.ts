@@ -2,8 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { CHANNELS, UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
+import { UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
 import { buildUrl, normalizeBaseUrl } from "@/lib/utm/build";
+import { getTeamChannels } from "@/lib/url-builder/teamChannels";
 
 export type BuilderActionResult = { ok: true } | { ok: false; error: string };
 
@@ -139,7 +140,7 @@ export type SaveUrlInput = {
   campaign: string;
   term: string;
   content: string;
-  /** Channel template id from lib/utm/channels.ts, or "" when none. */
+  /** Team channel_key, or "" when none. */
   channel: string;
 };
 
@@ -153,12 +154,6 @@ export async function saveGeneratedUrl(
     const campaign = input.campaign.trim();
     const term = input.term.trim();
     const content = input.content.trim();
-    // Store only known channel ids; anything else becomes null so bad
-    // client input can never invent a channel.
-    const channelKey = input.channel.trim();
-    const channel = CHANNELS.some((candidate) => candidate.id === channelKey)
-      ? channelKey
-      : null;
     if (!baseUrl || !source || !medium || !campaign) {
       return {
         ok: false,
@@ -182,6 +177,19 @@ export async function saveGeneratedUrl(
         ok: false,
         error: "Your session has expired. Please sign in again.",
       };
+    }
+
+    // Store only channel keys the team actually has (built-in or custom);
+    // anything else becomes null so bad client input can never invent a
+    // channel. Hidden channels still count: hiding happens after a link
+    // was built, and the key must stay attributable in History.
+    const channelKey = input.channel.trim();
+    let channel: string | null = null;
+    if (channelKey) {
+      const { channels } = await getTeamChannels(ctx.supabase, ctx.teamId);
+      channel = channels.some((candidate) => candidate.key === channelKey)
+        ? channelKey
+        : null;
     }
 
     // Dedupe: identical full_url for this team means nothing to do.
