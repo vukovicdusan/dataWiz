@@ -72,6 +72,14 @@ const UserMenu = ({ name, email, avatarUrl }: UserMenuProps) => {
           <p className="truncate px-3 py-2 text-xs text-gray-400">{email}</p>
           <Link
             role="menuitem"
+            href="/url-builder/dashboard"
+            className={menuItemClasses}
+            onClick={() => setIsOpen(false)}
+          >
+            Builder
+          </Link>
+          <Link
+            role="menuitem"
             href="/url-builder/team"
             className={menuItemClasses}
             onClick={() => setIsOpen(false)}

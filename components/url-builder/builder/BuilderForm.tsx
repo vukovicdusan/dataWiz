@@ -15,11 +15,13 @@ import { buildUrl, type UtmValues } from "@/lib/utm/build";
 import { collectWarnings } from "@/lib/utm/validate";
 import {
   saveCustomValue,
+  saveBaseUrl,
   saveGeneratedUrl,
 } from "@/app/url-builder/dashboard/builder-actions";
 import type { TeamCustomValues } from "@/lib/url-builder/customValues";
 import type { TeamHistoryValues } from "@/lib/url-builder/historyValues";
 import ParamField from "@/components/url-builder/builder/ParamField";
+import BaseUrlField from "@/components/url-builder/builder/BaseUrlField";
 import PreviewPanel from "@/components/url-builder/builder/PreviewPanel";
 import ChannelNotice from "@/components/url-builder/builder/ChannelNotice";
 
@@ -33,15 +35,18 @@ const EMPTY_VALUES: UtmValues = {
 
 type BuilderFormProps = {
   initialCustomValues: TeamCustomValues;
+  initialBaseUrls: string[];
   historyValues: TeamHistoryValues;
 };
 
 const BuilderForm = ({
   initialCustomValues,
+  initialBaseUrls,
   historyValues,
 }: BuilderFormProps) => {
   const [channelId, setChannelId] = useState<ChannelId | "">("");
-  const [baseUrl, setBaseUrl] = useState("");
+  const [baseUrl, setBaseUrl] = useState(initialBaseUrls[0] ?? "");
+  const [savedBaseUrls, setSavedBaseUrls] = useState(initialBaseUrls);
   const [values, setValues] = useState<UtmValues>(EMPTY_VALUES);
   const [customValues, setCustomValues] =
     useState<TeamCustomValues>(initialCustomValues);
@@ -64,6 +69,18 @@ const BuilderForm = ({
 
   const setParamValue = (param: UtmParam, nextValue: string) =>
     setValues((previous) => ({ ...previous, [param]: nextValue }));
+
+  const handleSaveBaseUrl = async (valueToSave: string) => {
+    return saveBaseUrl(valueToSave);
+  };
+
+  const handleBaseUrlSaved = (normalized: string) => {
+    setSavedBaseUrls((previous) =>
+      previous.includes(normalized)
+        ? previous
+        : [normalized, ...previous]
+    );
+  };
 
   const handleSaveForTeam =
     (param: UtmParam) => async (valueToSave: string) => {
@@ -94,6 +111,7 @@ const BuilderForm = ({
   });
   const copyDisabled =
     isNoticeOnly ||
+    channelId === "" ||
     baseUrl.trim() === "" ||
     REQUIRED_PARAMS.some((param) => values[param].trim() === "");
 
@@ -105,6 +123,7 @@ const BuilderForm = ({
       campaign: values.campaign,
       term: values.term,
       content: values.content,
+      channel: channelId,
     });
 
   const renderField = (param: UtmParam, required: boolean) => (
@@ -152,25 +171,15 @@ const BuilderForm = ({
           </div>
         ) : (
           <>
-            <label
-              htmlFor="base-url"
-              className="mt-5 block text-sm font-bold text-gray-200"
-            >
-              Base URL <span className="text-primaryAccent">*</span>
-            </label>
-            <input
-              id="base-url"
-              type="text"
-              value={baseUrl}
-              onChange={(event) => setBaseUrl(event.target.value)}
-              placeholder="https://example.com/page"
-              autoComplete="off"
-              className="mt-1 w-full rounded-md border border-secondaryBg/60 bg-primaryBg/60 px-3 py-2 text-sm text-gray-200 focus:border-primaryAccent focus:outline-none"
-            />
-            <p className="mt-1 text-xs text-gray-400">
-              Only tag links that point to other websites, never your own
-              internal links.
-            </p>
+            <div className="mt-5">
+              <BaseUrlField
+                value={baseUrl}
+                savedUrls={savedBaseUrls}
+                onChange={setBaseUrl}
+                onSave={handleSaveBaseUrl}
+                onSaved={handleBaseUrlSaved}
+              />
+            </div>
 
             <h2 className="mt-6 text-sm font-bold uppercase tracking-wide text-gray-400">
               Required
