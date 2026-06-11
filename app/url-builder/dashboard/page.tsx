@@ -10,6 +10,7 @@ import { getTeamBaseUrls } from "@/lib/url-builder/baseUrls";
 import { getTeamHistoryValues } from "@/lib/url-builder/historyValues";
 import { getTeamHistory } from "@/lib/url-builder/history";
 import type { HistoryEntry } from "@/lib/history/types";
+import AuthEventTracker from "@/components/url-builder/AuthEventTracker";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
 import BuilderForm from "@/components/url-builder/builder/BuilderForm";
 import HistoryCard from "@/components/url-builder/history/HistoryCard";
@@ -58,6 +59,7 @@ export default async function UrlBuilderDashboardPage() {
 
   return (
     <div className="min-h-screen">
+      <AuthEventTracker />
       <DashboardHeader
         name={fullName ?? email}
         email={email}
