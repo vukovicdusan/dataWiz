@@ -6,6 +6,7 @@ import {
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
 import { getTeamCustomValues } from "@/lib/url-builder/customValues";
+import { getTeamHistoryValues } from "@/lib/url-builder/historyValues";
 import DashboardHeader from "@/components/url-builder/DashboardHeader";
 import BuilderForm from "@/components/url-builder/builder/BuilderForm";
 
@@ -31,7 +32,10 @@ export default async function UrlBuilderDashboardPage() {
     redirect("/url-builder");
   }
 
-  const customValues = await getTeamCustomValues();
+  const [customValues, historyValues] = await Promise.all([
+    getTeamCustomValues(),
+    getTeamHistoryValues(),
+  ]);
 
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? null;
   const avatarUrl =
@@ -46,7 +50,10 @@ export default async function UrlBuilderDashboardPage() {
         avatarUrl={avatarUrl}
       />
       <div className="flex flex-col items-center px-4 py-12">
-        <BuilderForm initialCustomValues={customValues} />
+        <BuilderForm
+          initialCustomValues={customValues}
+          historyValues={historyValues}
+        />
         <p className="mt-10 text-gray-300">
           Not sure which values to pick?{" "}
           <a

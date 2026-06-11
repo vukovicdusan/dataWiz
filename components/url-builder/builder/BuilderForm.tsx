@@ -18,6 +18,7 @@ import {
   saveGeneratedUrl,
 } from "@/app/url-builder/dashboard/builder-actions";
 import type { TeamCustomValues } from "@/lib/url-builder/customValues";
+import type { TeamHistoryValues } from "@/lib/url-builder/historyValues";
 import ParamField from "@/components/url-builder/builder/ParamField";
 import PreviewPanel from "@/components/url-builder/builder/PreviewPanel";
 import ChannelNotice from "@/components/url-builder/builder/ChannelNotice";
@@ -32,9 +33,13 @@ const EMPTY_VALUES: UtmValues = {
 
 type BuilderFormProps = {
   initialCustomValues: TeamCustomValues;
+  historyValues: TeamHistoryValues;
 };
 
-const BuilderForm = ({ initialCustomValues }: BuilderFormProps) => {
+const BuilderForm = ({
+  initialCustomValues,
+  historyValues,
+}: BuilderFormProps) => {
   const [channelId, setChannelId] = useState<ChannelId | "">("");
   const [baseUrl, setBaseUrl] = useState("");
   const [values, setValues] = useState<UtmValues>(EMPTY_VALUES);
@@ -81,7 +86,12 @@ const BuilderForm = ({ initialCustomValues }: BuilderFormProps) => {
   const templateDefaults: Partial<Record<UtmParam, string>> =
     channel && !channel.noticeOnly ? channel.defaults : {};
   const fullUrl = buildUrl(baseUrl, values);
-  const warnings = collectWarnings({ baseUrl, values, templateDefaults });
+  const warnings = collectWarnings({
+    baseUrl,
+    values,
+    templateDefaults,
+    historyValues,
+  });
   const copyDisabled =
     isNoticeOnly ||
     baseUrl.trim() === "" ||

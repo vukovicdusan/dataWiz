@@ -14,7 +14,15 @@ export type WarningInput = {
   baseUrl: string;
   values: Record<UtmParam, string>;
   templateDefaults: Partial<Record<UtmParam, string>>;
+  /** Values the team used before (history + saved team values), per param. */
+  historyValues?: Partial<Record<UtmParam, readonly string[]>>;
 };
+
+// Case and hyphen/underscore differences are the classic GA4 data-splitters,
+// so "Summer-Sale" and "summer_sale" normalize to the same key.
+function consistencyKey(value: string): string {
+  return value.trim().toLowerCase().replace(/-/g, "_");
+}
 
 export function collectWarnings(input: WarningInput): Warning[] {
   const warnings: Warning[] = [];
@@ -80,6 +88,24 @@ export function collectWarnings(input: WarningInput): Warning[] {
         field: param,
         message: `${name} normally uses "${templateDefault}" for this channel. A different value can split this channel's data in reports.`,
       });
+    }
+
+    // 7. Same value as before, written differently (case or - vs _)
+    const history = input.historyValues?.[param] ?? [];
+    if (
+      !isPlatform &&
+      !containsManualPlaceholder(value) &&
+      !history.includes(value)
+    ) {
+      const earlier = history.find(
+        (used) => consistencyKey(used) === consistencyKey(value)
+      );
+      if (earlier) {
+        warnings.push({
+          field: param,
+          message: `${name}: your team previously used "${earlier}". "${value}" would count as a separate value in GA4 and split your data. Stick to one spelling.`,
+        });
+      }
     }
   }
 

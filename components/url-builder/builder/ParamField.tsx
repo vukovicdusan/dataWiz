@@ -37,6 +37,7 @@ const ParamField = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -91,7 +92,11 @@ const ParamField = ({
     setSaveError(null);
     try {
       const result = await onSaveForTeam(trimmed);
-      if (!result.ok) setSaveError(result.error);
+      if (result.ok) {
+        setIsSaved(true);
+      } else {
+        setSaveError(result.error);
+      }
     } catch {
       setSaveError("Could not save the value. Please check your connection and try again.");
     } finally {
@@ -110,14 +115,38 @@ const ParamField = ({
           {required ? <span className="text-primaryAccent"> *</span> : null}
         </label>
         {canSaveForTeam && (
-          <button
-            type="button"
-            onClick={handleSaveForTeam}
-            disabled={isSaving}
-            className="text-xs font-bold text-primaryAccent transition hover:text-primaryAccent/80 disabled:opacity-60"
-          >
-            {isSaving ? "Saving..." : "+ Save for team"}
-          </button>
+          <span className="group relative inline-flex">
+            <button
+              type="button"
+              onClick={handleSaveForTeam}
+              disabled={isSaving}
+              className="inline-flex items-center gap-1 text-xs font-bold text-primaryAccent transition hover:text-primaryAccent/80 disabled:opacity-60"
+            >
+              {isSaving ? "Saving..." : "Save"}
+              <svg
+                aria-hidden="true"
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </button>
+            <span
+              role="tooltip"
+              className="pointer-events-none absolute right-0 top-full z-40 mt-1 hidden w-60 rounded-md border border-secondaryBg/60 bg-secondaryAccent p-2 text-xs font-normal normal-case text-gray-200 shadow-2xl group-hover:block group-focus-within:block"
+            >
+              Saves this value to your team&apos;s dropdown list, so you and
+              your teammates can pick it next time instead of retyping it.
+            </span>
+          </span>
         )}
       </div>
 
@@ -127,6 +156,7 @@ const ParamField = ({
         value={value}
         onChange={(event) => {
           setSaveError(null);
+          setIsSaved(false);
           onChange(event.target.value);
         }}
         onFocus={() => setIsOpen(true)}
@@ -185,6 +215,12 @@ const ParamField = ({
           >
             Reset to template
           </button>
+        </p>
+      )}
+
+      {isSaved && (
+        <p role="status" className="mt-1 text-xs text-green-300">
+          Saved. This value is now in your team&apos;s dropdown.
         </p>
       )}
 
