@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import GoogleSignInButton from "@/components/url-builder/GoogleSignInButton";
 import { joinTeam } from "@/app/url-builder/invite/actions";
+import { flushAuthEvent } from "@/lib/url-builder/authEvent";
 
 type InviteJoinCardProps = {
   token: string;
@@ -37,6 +38,9 @@ const InviteJoinCard = ({
     } else {
       setError(result.error);
       setIsJoining(false);
+      // The sign-in itself succeeded even though the join failed, so report
+      // the auth event now instead of leaving it for a later dashboard visit.
+      flushAuthEvent();
       // Re-render the server component: after a popup sign-in the page may
       // still show the signed-out branch even though a session now exists.
       router.refresh();

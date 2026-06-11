@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { AUTH_EVENT_STORAGE_KEY } from "@/lib/url-builder/authEvent";
 
 type GoogleAccountsId = {
   initialize: (config: {
@@ -47,9 +48,6 @@ async function generateNonce(): Promise<[string, string]> {
     .join("");
   return [nonce, hashedNonce];
 }
-
-// Key read by AuthEventTracker on the dashboard after the redirect.
-export const AUTH_EVENT_STORAGE_KEY = "dw-auth-event";
 
 // A brand-new Supabase user has last_sign_in_at within seconds of
 // created_at; returning users signed in long after the account was made.
