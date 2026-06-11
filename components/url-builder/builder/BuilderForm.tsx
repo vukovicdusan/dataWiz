@@ -138,6 +138,11 @@ const BuilderForm = ({
       exampleValues={EXAMPLE_VALUES[param]}
       teamValues={customValues[param]}
       onSaveForTeam={handleSaveForTeam(param)}
+      infoNote={
+        param === "content"
+          ? "Recommended values from the selected channel. Feel free to change them."
+          : undefined
+      }
     />
   );
 
