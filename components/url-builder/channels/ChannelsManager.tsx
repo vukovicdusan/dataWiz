@@ -73,8 +73,17 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
   const statusTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // router.refresh() after each successful action re-renders the server
-  // page with fresh props; adopt them as the confirmed state.
-  useEffect(() => setItems(initialChannels), [initialChannels]);
+  // page with fresh props; adopt them as the confirmed state. Also prune
+  // any selected keys that no longer exist in the fresh list so the bulk
+  // bar cannot reference phantom channels.
+  useEffect(() => {
+    setItems(initialChannels);
+    setSelected((previous) => {
+      const valid = new Set(initialChannels.map((channel) => channel.key));
+      const next = Array.from(previous).filter((key) => valid.has(key));
+      return next.length === previous.size ? previous : new Set(next);
+    });
+  }, [initialChannels]);
 
   useEffect(
     () => () => {
