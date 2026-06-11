@@ -207,6 +207,12 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
     });
 
   const selectedCount = selected.size;
+  const allSelected = items.length > 0 && selectedCount === items.length;
+
+  const handleSelectAll = () =>
+    setSelected(
+      allSelected ? new Set() : new Set(items.map((channel) => channel.key))
+    );
 
   return (
     <section className="w-full rounded-2xl border border-secondaryBg/60 bg-secondaryAccent/20 p-6 shadow-2xl">
@@ -278,6 +284,16 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
         </div>
       )}
 
+      <div className="mt-4 flex justify-end">
+        <button
+          type="button"
+          onClick={handleSelectAll}
+          className="text-xs text-blue-300 underline transition hover:text-blue-200"
+        >
+          {allSelected ? "Unselect all" : "Select all"}
+        </button>
+      </div>
+
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -287,7 +303,7 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
           items={items.map((channel) => channel.key)}
           strategy={verticalListSortingStrategy}
         >
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-2 space-y-2">
             {items.map((channel, index) => (
               <SortableRow
                 key={channel.key}
@@ -438,13 +454,6 @@ const SortableRow = ({
       <span className="w-6 shrink-0 text-right text-sm text-gray-400">
         {index + 1}.
       </span>
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(event) => onCheck(event.target.checked)}
-        aria-label={`Select ${channel.label}`}
-        className="shrink-0"
-      />
       <div className={`min-w-0 flex-1 ${channel.visible ? "" : "opacity-50"}`}>
         <p className="truncate text-sm font-bold text-gray-200">
           {channel.label}
@@ -491,6 +500,13 @@ const SortableRow = ({
           <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
         </svg>
       </button>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(event) => onCheck(event.target.checked)}
+        aria-label={`Select ${channel.label}`}
+        className="shrink-0"
+      />
     </li>
   );
 };

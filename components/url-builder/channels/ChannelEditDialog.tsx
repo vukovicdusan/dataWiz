@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
+import { REQUIRED_PARAMS, UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
 import type { ResolvedChannel } from "@/lib/url-builder/teamChannels";
 
 type ActionResult = { ok: true } | { ok: false; error: string };
@@ -58,6 +58,10 @@ const ChannelEditDialog = ({
     if (working) return;
     if (!name.trim()) {
       setError("Enter a channel name.");
+      return;
+    }
+    if (isCreate && REQUIRED_PARAMS.some((param) => !values[param].trim())) {
+      setError("utm_source, utm_medium, and utm_campaign are required.");
       return;
     }
     setWorking(true);
@@ -125,6 +129,9 @@ const ChannelEditDialog = ({
                   className="block text-sm font-bold text-gray-200"
                 >
                   utm_{param}
+                  {isCreate && REQUIRED_PARAMS.includes(param) && (
+                    <span className="text-primaryAccent"> *</span>
+                  )}
                 </label>
                 <input
                   id={`channel-${param}`}
@@ -143,8 +150,11 @@ const ChannelEditDialog = ({
               </div>
             ))}
             <p className="text-xs text-gray-400">
-              All values are optional. Placeholders like {"{{campaign.name}}"}
-              {" "}or [location] are kept as written.
+              {isCreate
+                ? "utm_term and utm_content are optional. "
+                : "All values are optional. "}
+              Placeholders like {"{{campaign.name}}"} or [location] are kept
+              as written.
             </p>
           </div>
         )}

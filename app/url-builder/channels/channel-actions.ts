@@ -3,7 +3,12 @@
 import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { CHANNELS, UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
+import {
+  CHANNELS,
+  REQUIRED_PARAMS,
+  UTM_PARAMS,
+  type UtmParam,
+} from "@/lib/utm/channels";
 import {
   TEAM_CHANNEL_COLUMNS,
   type TeamChannelRow,
@@ -327,6 +332,14 @@ export async function upsertChannel(
       return {
         ok: false,
         error: `Template values can be at most ${VALUE_MAX} characters.`,
+      };
+    }
+    // New custom channels must be usable in the builder, which requires
+    // source, medium, and campaign. Edits keep the looser built-in rules.
+    if (payload.key === null && REQUIRED_PARAMS.some((param) => !values[param])) {
+      return {
+        ok: false,
+        error: "utm_source, utm_medium, and utm_campaign are required.",
       };
     }
 
