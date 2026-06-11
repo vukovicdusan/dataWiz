@@ -13,6 +13,7 @@ type ChannelPickerProps = {
 
 const ChannelPicker = ({ channels, value, onChange }: ChannelPickerProps) => {
   const pickerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -26,7 +27,10 @@ const ChannelPicker = ({ channels, value, onChange }: ChannelPickerProps) => {
       }
     };
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false);
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      }
     };
     document.addEventListener("mousedown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
@@ -43,6 +47,7 @@ const ChannelPicker = ({ channels, value, onChange }: ChannelPickerProps) => {
     <div ref={pickerRef} className="relative">
       <button
         id="channel-picker"
+        ref={triggerRef}
         type="button"
         onClick={() => setIsOpen((previous) => !previous)}
         aria-haspopup="listbox"
@@ -89,6 +94,7 @@ const ChannelPicker = ({ channels, value, onChange }: ChannelPickerProps) => {
                   onClick={() => {
                     onChange(candidate.key);
                     setIsOpen(false);
+                    triggerRef.current?.focus();
                   }}
                   className="flex w-full items-center justify-between rounded px-3 py-1.5 text-left text-sm text-gray-200 transition hover:bg-primaryAccent/30"
                 >

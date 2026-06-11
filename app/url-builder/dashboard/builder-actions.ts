@@ -2,9 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
+import { CHANNELS, UTM_PARAMS, type UtmParam } from "@/lib/utm/channels";
 import { buildUrl, normalizeBaseUrl } from "@/lib/utm/build";
-import { getTeamChannels } from "@/lib/url-builder/teamChannels";
+import { getTeamChannelLabels } from "@/lib/url-builder/teamChannels";
 
 export type BuilderActionResult = { ok: true } | { ok: false; error: string };
 
@@ -181,15 +181,17 @@ export async function saveGeneratedUrl(
 
     // Store only channel keys the team actually has (built-in or custom);
     // anything else becomes null so bad client input can never invent a
-    // channel. Hidden channels still count: hiding happens after a link
-    // was built, and the key must stay attributable in History.
+    // channel. Hidden AND tombstoned channels still count: hiding or
+    // deleting can happen while a link is being built, and the key must
+    // stay attributable in History (tombstones keep their labels).
     const channelKey = input.channel.trim();
     let channel: string | null = null;
     if (channelKey) {
-      const { channels } = await getTeamChannels(ctx.supabase, ctx.teamId);
-      channel = channels.some((candidate) => candidate.key === channelKey)
-        ? channelKey
-        : null;
+      const labels = await getTeamChannelLabels(ctx.supabase, ctx.teamId);
+      const known =
+        channelKey in labels ||
+        CHANNELS.some((candidate) => candidate.id === channelKey);
+      channel = known ? channelKey : null;
     }
 
     // Dedupe: identical full_url for this team means nothing to do.

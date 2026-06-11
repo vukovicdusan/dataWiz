@@ -111,9 +111,11 @@ const BuilderForm = ({
     templateDefaults,
     historyValues,
   });
+  // channel === null also covers a stale key whose channel was hidden or
+  // deleted by a teammate after selection.
   const copyDisabled =
     isNoticeOnly ||
-    channelKey === "" ||
+    channel === null ||
     baseUrl.trim() === "" ||
     REQUIRED_PARAMS.some((param) => values[param].trim() === "");
 
