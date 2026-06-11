@@ -72,8 +72,8 @@ const ParamField = ({
     if (options.length > 0) groups.push({ heading, options });
   };
   addGroup("Channel template", templateDefault ? [templateDefault] : []);
-  addGroup("Examples", exampleValues);
   addGroup("Saved values", teamValues);
+  addGroup("Examples", exampleValues);
 
   const canSaveForTeam =
     trimmed !== "" &&
