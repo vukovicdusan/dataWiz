@@ -63,7 +63,7 @@ const PreviewPanel = ({
       const result = await onCopy();
       if (result.ok) {
         setConfirmation(
-          copied ? "Copied and saved to team history." : "Saved to team history."
+          copied ? "Copied and saved to history." : "Saved to history."
         );
       } else {
         setSaveError(copied ? `Copied. ${result.error}` : result.error);
@@ -71,8 +71,8 @@ const PreviewPanel = ({
     } catch {
       setSaveError(
         copied
-          ? "Copied. Could not reach the server to save to team history."
-          : "Could not reach the server to save to team history."
+          ? "Copied. Could not reach the server to save to history."
+          : "Could not reach the server to save to history."
       );
     } finally {
       setIsWorking(false);

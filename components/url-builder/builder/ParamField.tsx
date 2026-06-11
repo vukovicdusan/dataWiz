@@ -73,7 +73,7 @@ const ParamField = ({
   };
   addGroup("Channel template", templateDefault ? [templateDefault] : []);
   addGroup("Examples", exampleValues);
-  addGroup("Team values", teamValues);
+  addGroup("Saved values", teamValues);
 
   const canSaveForTeam =
     trimmed !== "" &&
@@ -143,8 +143,8 @@ const ParamField = ({
               role="tooltip"
               className="pointer-events-none absolute right-0 top-full z-40 mt-1 hidden w-60 rounded-md border border-secondaryBg/60 bg-secondaryAccent p-2 text-xs font-normal normal-case text-gray-200 shadow-2xl group-hover:block group-focus-within:block"
             >
-              Saves this value to your team&apos;s dropdown list, so you and
-              your teammates can pick it next time instead of retyping it.
+              Saves this value to your dropdown list, so it can be picked
+              next time instead of retyping it.
             </span>
           </span>
         )}
@@ -220,7 +220,7 @@ const ParamField = ({
 
       {isSaved && (
         <p role="status" className="mt-1 text-xs text-green-300">
-          Saved. This value is now in your team&apos;s dropdown.
+          Saved. This value is now in your dropdown list.
         </p>
       )}
 

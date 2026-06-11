@@ -103,7 +103,7 @@ export function collectWarnings(input: WarningInput): Warning[] {
       if (earlier) {
         warnings.push({
           field: param,
-          message: `${name}: your team previously used "${earlier}". "${value}" would count as a separate value in GA4 and split your data. Stick to one spelling.`,
+          message: `${name}: "${earlier}" was used in earlier links. "${value}" would count as a separate value in GA4 and split your data. Stick to one spelling.`,
         });
       }
     }

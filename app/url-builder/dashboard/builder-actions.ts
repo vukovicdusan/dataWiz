@@ -68,7 +68,7 @@ export async function saveCustomValue(
     console.error("saveCustomValue failed:", err);
     return {
       ok: false,
-      error: "Could not save the value for your team. Please try again.",
+      error: "Could not save the value. Please try again.",
     };
   }
 }
@@ -149,7 +149,7 @@ export async function saveGeneratedUrl(
     console.error("saveGeneratedUrl failed:", err);
     return {
       ok: false,
-      error: "Could not save to team history. Please try again.",
+      error: "Could not save to history. Please try again.",
     };
   }
 }
