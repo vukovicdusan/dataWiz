@@ -36,7 +36,6 @@ Value types:
 | Email | `alpine` | `email` | `[email_type]` | `[audience_segment]` | `[variant]` |
 | Social Media | `[platform_name]` | `social` | `[post_name]` | — | — |
 | Google My Business | `gmb` | `listing` | `[location]` | — | — |
-| Weed Maps | `weed_maps` | `listing` | `[location]` | — | — |
 | Apple Maps | `apple_maps` | `listing` | `[location]` | — | — |
 
 Ads channels other than Meta reuse the Meta template with a channel-specific source. The `{{...}}` placeholders are Meta syntax: on other platforms they will not auto-fill, so replace them with real values when building those links.

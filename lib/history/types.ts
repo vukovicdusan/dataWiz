@@ -21,15 +21,23 @@ export type HistoryEntry = {
   createdAt: string;
 };
 
+// Channels removed from the builder whose History rows must keep their
+// human label. The database still holds the old id.
+const LEGACY_CHANNEL_LABELS: Record<string, string> = {
+  "weed-maps": "Weed Maps",
+};
+
 /**
  * Badge text for a channel id. Null (pre-Phase-4 rows) renders as the
- * design-approved placeholder glyph. Unknown ids fall back to the raw id
- * so data is never hidden.
+ * design-approved placeholder glyph. Removed channels use the legacy
+ * label map; unknown ids fall back to the raw id so data is never hidden.
  */
 export function channelLabel(channel: string | null): string {
   if (!channel) return "—";
   return (
-    CHANNELS.find((candidate) => candidate.id === channel)?.label ?? channel
+    CHANNELS.find((candidate) => candidate.id === channel)?.label ??
+    LEGACY_CHANNEL_LABELS[channel] ??
+    channel
   );
 }
 
