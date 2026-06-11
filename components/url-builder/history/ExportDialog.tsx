@@ -64,17 +64,23 @@ const ExportDialog = ({
     setMessage(null);
   };
 
+  const buildRange = (): ExportRange => {
+    switch (kind) {
+      case "all":
+        return { kind: "all" };
+      case "yearToDate":
+        return { kind: "yearToDate" };
+      case "year":
+        return { kind: "year", year };
+      case "month":
+        return { kind: "month", year: monthYear, month };
+      case "custom":
+        return { kind: "custom", from, to };
+    }
+  };
+
   const handleExport = () => {
-    const range: ExportRange =
-      kind === "all"
-        ? { kind: "all" }
-        : kind === "yearToDate"
-          ? { kind: "yearToDate" }
-          : kind === "year"
-            ? { kind: "year", year }
-            : kind === "month"
-              ? { kind: "month", year: monthYear, month }
-              : { kind: "custom", from, to };
+    const range = buildRange();
 
     const source = applyFilters ? filteredEntries : entries;
     const rows = source.filter((entry) => inRange(entry, range));
@@ -96,7 +102,8 @@ const ExportDialog = ({
     document.body.appendChild(link);
     link.click();
     link.remove();
-    URL.revokeObjectURL(url);
+    // Defer the revoke so slower browsers finish reading the blob URL.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
     onClose();
   };
 
@@ -144,6 +151,7 @@ const ExportDialog = ({
             <select
               aria-label="Year"
               value={year}
+              onFocus={() => pickKind("year")}
               onChange={(event) => {
                 setYear(Number(event.target.value));
                 pickKind("year");
@@ -168,6 +176,7 @@ const ExportDialog = ({
             <select
               aria-label="Month"
               value={month}
+              onFocus={() => pickKind("month")}
               onChange={(event) => {
                 setMonth(Number(event.target.value));
                 pickKind("month");
@@ -183,6 +192,7 @@ const ExportDialog = ({
             <select
               aria-label="Year of the month"
               value={monthYear}
+              onFocus={() => pickKind("month")}
               onChange={(event) => {
                 setMonthYear(Number(event.target.value));
                 pickKind("month");
@@ -208,6 +218,7 @@ const ExportDialog = ({
               type="date"
               aria-label="From date"
               value={from}
+              onFocus={() => pickKind("custom")}
               onChange={(event) => {
                 setFrom(event.target.value);
                 pickKind("custom");
@@ -219,6 +230,7 @@ const ExportDialog = ({
               type="date"
               aria-label="To date"
               value={to}
+              onFocus={() => pickKind("custom")}
               onChange={(event) => {
                 setTo(event.target.value);
                 pickKind("custom");
@@ -232,7 +244,10 @@ const ExportDialog = ({
           <input
             type="checkbox"
             checked={applyFilters}
-            onChange={(event) => setApplyFilters(event.target.checked)}
+            onChange={(event) => {
+              setApplyFilters(event.target.checked);
+              setMessage(null);
+            }}
           />
           Apply my current filters and search
         </label>
