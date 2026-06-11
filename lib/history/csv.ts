@@ -29,10 +29,10 @@ export function inRange(
     case "all":
       return true;
     case "yearToDate":
-      return (
-        created.getFullYear() === now.getFullYear() &&
-        created.getTime() <= now.getTime()
-      );
+      // Any entry in the current year is by definition "to date"; comparing
+      // against the viewer's clock could drop a just-created row when the
+      // local clock runs behind the database server.
+      return created.getFullYear() === now.getFullYear();
     case "year":
       return created.getFullYear() === range.year;
     case "month":
