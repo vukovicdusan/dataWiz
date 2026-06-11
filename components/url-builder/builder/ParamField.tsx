@@ -60,7 +60,7 @@ const ParamField = ({
   const name = `utm_${param}`;
   const trimmed = value.trim();
 
-  // Dropdown sections, deduped in priority order: template, examples, team.
+  // Dropdown sections, deduped in priority order: template, saved, examples.
   const seen = new Set<string>();
   const groups: DropdownGroup[] = [];
   const addGroup = (heading: string, candidates: readonly string[]) => {
@@ -188,6 +188,8 @@ const ParamField = ({
                       aria-selected={option === value}
                       onMouseDown={(event) => event.preventDefault()}
                       onClick={() => {
+                        setSaveError(null);
+                        setIsSaved(false);
                         onChange(option);
                         setIsOpen(false);
                       }}
@@ -210,7 +212,11 @@ const ParamField = ({
             : ""}
           <button
             type="button"
-            onClick={() => onChange(templateDefault ?? "")}
+            onClick={() => {
+              setSaveError(null);
+              setIsSaved(false);
+              onChange(templateDefault ?? "");
+            }}
             className="font-bold underline transition hover:text-amber-200"
           >
             Reset to template
