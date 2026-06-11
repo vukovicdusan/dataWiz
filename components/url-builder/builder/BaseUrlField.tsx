@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { normalizeBaseUrl } from "@/lib/utm/build";
 
 type BaseUrlFieldProps = {
   value: string;
   savedUrls: string[];
   onChange: (value: string) => void;
-  onSave: (value: string) => Promise<{ ok: boolean; error?: string }>;
+  onSave: (
+    value: string
+  ) => Promise<{ ok: boolean; error?: string; value?: string }>;
   onSaved: (normalized: string) => void;
 };
 
@@ -42,14 +45,7 @@ const BaseUrlField = ({
   }, [isOpen]);
 
   const trimmed = value.trim();
-
-  // Normalize client-side (same pure function used server-side) to check
-  // whether the normalized form is already in the list.
-  const normalizedTrimmed = (() => {
-    if (!trimmed) return "";
-    if (/^https?:\/\//i.test(trimmed)) return trimmed;
-    return `https://${trimmed}`;
-  })();
+  const normalizedTrimmed = trimmed ? normalizeBaseUrl(trimmed).url : "";
 
   const canSave =
     trimmed !== "" && !savedUrls.includes(normalizedTrimmed);
@@ -61,7 +57,9 @@ const BaseUrlField = ({
       const result = await onSave(trimmed);
       if (result.ok) {
         setIsSaved(true);
-        onSaved(normalizedTrimmed);
+        // Prefer the value the server actually stored; fall back to the
+        // same normalization computed locally.
+        onSaved(result.value ?? normalizedTrimmed);
       } else {
         setSaveError(result.error ?? "Could not save the URL. Please try again.");
       }
