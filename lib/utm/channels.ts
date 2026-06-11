@@ -23,13 +23,19 @@ export const OPTIONAL_PARAMS: readonly UtmParam[] = ["term", "content"];
 export type ChannelId =
   | "google-ads"
   | "meta-ads"
+  | "microsoft-ads"
+  | "linkedin-ads"
+  | "x-twitter-ads"
+  | "tiktok-ads"
+  | "openai-ads"
+  | "snapchat-ads"
+  | "pinterest-ads"
   | "surfside"
   | "email"
   | "social-media"
   | "google-my-business"
   | "weed-maps"
   | "apple-maps"
-  | "other-listings"
   | "custom";
 
 export type ChannelTemplate = {
@@ -52,6 +58,90 @@ export const CHANNELS: readonly ChannelTemplate[] = [
     noticeOnly: false,
     defaults: {
       source: "meta",
+      medium: "cpc",
+      campaign: "{{campaign.name}}",
+      term: "{{adset.name}}|{{placement}}",
+      content: "{{ad.name}}",
+    },
+  },
+  {
+    id: "microsoft-ads",
+    label: "Microsoft Ads",
+    noticeOnly: false,
+    defaults: {
+      source: "microsoft",
+      medium: "cpc",
+      campaign: "{{campaign.name}}",
+      term: "{{adset.name}}|{{placement}}",
+      content: "{{ad.name}}",
+    },
+  },
+  {
+    id: "linkedin-ads",
+    label: "LinkedIn Ads",
+    noticeOnly: false,
+    defaults: {
+      source: "linkedin",
+      medium: "cpc",
+      campaign: "{{campaign.name}}",
+      term: "{{adset.name}}|{{placement}}",
+      content: "{{ad.name}}",
+    },
+  },
+  {
+    id: "x-twitter-ads",
+    label: "X (Twitter) Ads",
+    noticeOnly: false,
+    defaults: {
+      source: "twitter",
+      medium: "cpc",
+      campaign: "{{campaign.name}}",
+      term: "{{adset.name}}|{{placement}}",
+      content: "{{ad.name}}",
+    },
+  },
+  {
+    id: "tiktok-ads",
+    label: "TikTok Ads",
+    noticeOnly: false,
+    defaults: {
+      source: "tiktok",
+      medium: "cpc",
+      campaign: "{{campaign.name}}",
+      term: "{{adset.name}}|{{placement}}",
+      content: "{{ad.name}}",
+    },
+  },
+  {
+    id: "openai-ads",
+    label: "Open AI Ads",
+    noticeOnly: false,
+    defaults: {
+      source: "openai",
+      medium: "cpc",
+      campaign: "{{campaign.name}}",
+      term: "{{adset.name}}|{{placement}}",
+      content: "{{ad.name}}",
+    },
+  },
+  {
+    id: "snapchat-ads",
+    label: "Snapchat Ads",
+    noticeOnly: false,
+    defaults: {
+      source: "snapchat",
+      medium: "cpc",
+      campaign: "{{campaign.name}}",
+      term: "{{adset.name}}|{{placement}}",
+      content: "{{ad.name}}",
+    },
+  },
+  {
+    id: "pinterest-ads",
+    label: "Pinterest Ads",
+    noticeOnly: false,
+    defaults: {
+      source: "pinterest",
       medium: "cpc",
       campaign: "{{campaign.name}}",
       term: "{{adset.name}}|{{placement}}",
@@ -110,16 +200,6 @@ export const CHANNELS: readonly ChannelTemplate[] = [
     noticeOnly: false,
     defaults: {
       source: "apple_maps",
-      medium: "listing",
-      campaign: "[location]",
-    },
-  },
-  {
-    id: "other-listings",
-    label: "Other Listings",
-    noticeOnly: false,
-    defaults: {
-      source: "other_listing",
       medium: "listing",
       campaign: "[location]",
     },
