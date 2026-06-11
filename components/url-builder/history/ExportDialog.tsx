@@ -85,8 +85,8 @@ const ExportDialog = ({
       return;
     }
 
-    // "﻿" byte order mark so Excel detects UTF-8.
-    const blob = new Blob(["﻿", buildCsv(rows)], {
+    // "\uFEFF" byte order mark so Excel detects UTF-8.
+    const blob = new Blob(["\uFEFF", buildCsv(rows)], {
       type: "text/csv;charset=utf-8",
     });
     const url = URL.createObjectURL(blob);
