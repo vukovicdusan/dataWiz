@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { channelLabel, type HistoryEntry } from "@/lib/history/types";
 import {
   EMPTY_FILTERS,
@@ -30,6 +30,12 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
   const [filters, setFilters] = useState<HistoryFilters>(EMPTY_FILTERS);
   const [search, setSearch] = useState("");
   const [newestFirst, setNewestFirst] = useState(true);
+
+  // The year/month groups and row dates use the viewer's local timezone,
+  // which can differ from the server's during SSR. Render them only after
+  // mount so the HTML never disagrees with the hydrated output.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const criteriaActive = hasActiveCriteria(filters, search);
   const visibleEntries = useMemo(
@@ -138,6 +144,8 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
                 Clear filters
               </button>
             </div>
+          ) : !mounted ? (
+            <p className="mt-6 text-sm text-gray-400">Loading history...</p>
           ) : (
             <GroupList
               key={`${JSON.stringify(filters)}|${search}`}

@@ -8,20 +8,43 @@ import type { HistoryEntry } from "@/lib/history/types";
 export async function getTeamHistory(): Promise<HistoryEntry[]> {
   const supabase = createClient();
 
-  const { data: rows, error } = await supabase
-    .from("generated_urls")
-    .select(
-      "id, created_by, base_url, source, medium, campaign, term, content, channel, full_url, created_at"
-    )
-    .order("created_at", { ascending: false });
-  if (error) {
-    throw new Error(`Could not load team history: ${error.message}`);
+  const PAGE_SIZE = 1000;
+  type UrlRow = {
+    id: string;
+    created_by: string | null;
+    base_url: string;
+    source: string;
+    medium: string;
+    campaign: string;
+    term: string | null;
+    content: string | null;
+    channel: string | null;
+    full_url: string;
+    created_at: string;
+  };
+
+  // PostgREST silently caps a single response at 1000 rows, so page through
+  // explicitly: History and the CSV export must really see the full history.
+  const rows: UrlRow[] = [];
+  for (;;) {
+    const { data, error } = await supabase
+      .from("generated_urls")
+      .select(
+        "id, created_by, base_url, source, medium, campaign, term, content, channel, full_url, created_at"
+      )
+      .order("created_at", { ascending: false })
+      .range(rows.length, rows.length + PAGE_SIZE - 1);
+    if (error) {
+      throw new Error(`Could not load team history: ${error.message}`);
+    }
+    rows.push(...((data ?? []) as UrlRow[]));
+    if (!data || data.length < PAGE_SIZE) break;
   }
 
   const creatorIds = Array.from(
     new Set(
-      (rows ?? [])
-        .map((row) => row.created_by as string | null)
+      rows
+        .map((row) => row.created_by)
         .filter((id): id is string => Boolean(id))
     )
   );
@@ -48,23 +71,23 @@ export async function getTeamHistory(): Promise<HistoryEntry[]> {
     });
   }
 
-  return (rows ?? []).map((row) => {
+  return rows.map((row) => {
     const profile = row.created_by
-      ? profileById.get(row.created_by as string)
+      ? profileById.get(row.created_by)
       : undefined;
     return {
-      id: row.id as string,
-      baseUrl: row.base_url as string,
-      source: row.source as string,
-      medium: row.medium as string,
-      campaign: row.campaign as string,
-      term: (row.term as string | null) ?? null,
-      content: (row.content as string | null) ?? null,
-      fullUrl: row.full_url as string,
-      channel: (row.channel as string | null) ?? null,
+      id: row.id,
+      baseUrl: row.base_url,
+      source: row.source,
+      medium: row.medium,
+      campaign: row.campaign,
+      term: row.term,
+      content: row.content,
+      fullUrl: row.full_url,
+      channel: row.channel,
       creatorName: profile?.fullName ?? null,
       creatorEmail: profile?.email ?? null,
-      createdAt: row.created_at as string,
+      createdAt: row.created_at,
     };
   });
 }
