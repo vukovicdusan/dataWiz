@@ -15,6 +15,7 @@ import {
   type YearGroup,
 } from "@/lib/history/filter";
 import HistoryRow from "@/components/url-builder/history/HistoryRow";
+import ExportDialog from "@/components/url-builder/history/ExportDialog";
 
 type HistoryCardProps = {
   entries: HistoryEntry[];
@@ -30,6 +31,7 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
   const [filters, setFilters] = useState<HistoryFilters>(EMPTY_FILTERS);
   const [search, setSearch] = useState("");
   const [newestFirst, setNewestFirst] = useState(true);
+  const [isExportOpen, setIsExportOpen] = useState(false);
 
   // The year/month groups and row dates use the viewer's local timezone,
   // which can differ from the server's during SSR. Render them only after
@@ -61,6 +63,15 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
         <h2 className="text-sm font-bold uppercase tracking-widest text-gray-200">
           History
         </h2>
+        {!loadFailed && entries.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setIsExportOpen(true)}
+            className="rounded-md bg-primaryAccent px-4 py-2 text-sm font-bold text-white transition hover:bg-primaryAccent/80"
+          >
+            Export CSV
+          </button>
+        )}
       </div>
 
       {loadFailed ? (
@@ -155,6 +166,14 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
             />
           )}
         </>
+      )}
+
+      {isExportOpen && (
+        <ExportDialog
+          entries={entries}
+          filteredEntries={visibleEntries}
+          onClose={() => setIsExportOpen(false)}
+        />
       )}
     </section>
   );
