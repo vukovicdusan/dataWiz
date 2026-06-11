@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { HistoryEntry } from "@/lib/history/types";
 import {
   buildCsv,
@@ -57,6 +57,14 @@ const ExportDialog = ({
   const [to, setTo] = useState("");
   const [applyFilters, setApplyFilters] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
   // Picking any option clears a stale "nothing exported" message.
   const pickKind = (next: ExportRange["kind"]) => {
@@ -121,124 +129,127 @@ const ExportDialog = ({
       >
         <h2 className="text-xl font-bold text-white">Export history to CSV</h2>
 
-        <div className="mt-4 space-y-2.5 text-sm text-gray-200">
-          <label className="flex items-center gap-2">
-            <input
-              type="radio"
-              name="export-range"
-              checked={kind === "all"}
-              onChange={() => pickKind("all")}
-            />
-            All time
-          </label>
-          <label className="flex items-center gap-2">
-            <input
-              type="radio"
-              name="export-range"
-              checked={kind === "yearToDate"}
-              onChange={() => pickKind("yearToDate")}
-            />
-            This year to date
-          </label>
-          <label className="flex flex-wrap items-center gap-2">
-            <input
-              type="radio"
-              name="export-range"
-              checked={kind === "year"}
-              onChange={() => pickKind("year")}
-            />
-            A specific year
-            <select
-              aria-label="Year"
-              value={year}
-              onClick={() => pickKind("year")}
-              onChange={(event) => {
-                setYear(Number(event.target.value));
-                pickKind("year");
-              }}
-              className={fieldClass}
-            >
-              {years.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-wrap items-center gap-2">
-            <input
-              type="radio"
-              name="export-range"
-              checked={kind === "month"}
-              onChange={() => pickKind("month")}
-            />
-            A specific month
-            <select
-              aria-label="Month"
-              value={month}
-              onClick={() => pickKind("month")}
-              onChange={(event) => {
-                setMonth(Number(event.target.value));
-                pickKind("month");
-              }}
-              className={fieldClass}
-            >
-              {MONTH_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <select
-              aria-label="Year of the month"
-              value={monthYear}
-              onClick={() => pickKind("month")}
-              onChange={(event) => {
-                setMonthYear(Number(event.target.value));
-                pickKind("month");
-              }}
-              className={fieldClass}
-            >
-              {years.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-wrap items-center gap-2">
-            <input
-              type="radio"
-              name="export-range"
-              checked={kind === "custom"}
-              onChange={() => pickKind("custom")}
-            />
-            Custom range
-            <input
-              type="date"
-              aria-label="From date"
-              value={from}
-              onClick={() => pickKind("custom")}
-              onChange={(event) => {
-                setFrom(event.target.value);
-                pickKind("custom");
-              }}
-              className={fieldClass}
-            />
-            <span className="text-gray-400">to</span>
-            <input
-              type="date"
-              aria-label="To date"
-              value={to}
-              onClick={() => pickKind("custom")}
-              onChange={(event) => {
-                setTo(event.target.value);
-                pickKind("custom");
-              }}
-              className={fieldClass}
-            />
-          </label>
-        </div>
+        <fieldset className="mt-4">
+          <legend className="sr-only">Date range</legend>
+          <div className="space-y-2.5 text-sm text-gray-200">
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="export-range"
+                checked={kind === "all"}
+                onChange={() => pickKind("all")}
+              />
+              All time
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="export-range"
+                checked={kind === "yearToDate"}
+                onChange={() => pickKind("yearToDate")}
+              />
+              This year to date
+            </label>
+            <label className="flex flex-wrap items-center gap-2">
+              <input
+                type="radio"
+                name="export-range"
+                checked={kind === "year"}
+                onChange={() => pickKind("year")}
+              />
+              A specific year
+              <select
+                aria-label="Year"
+                value={year}
+                onClick={() => pickKind("year")}
+                onChange={(event) => {
+                  setYear(Number(event.target.value));
+                  pickKind("year");
+                }}
+                className={fieldClass}
+              >
+                {years.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-wrap items-center gap-2">
+              <input
+                type="radio"
+                name="export-range"
+                checked={kind === "month"}
+                onChange={() => pickKind("month")}
+              />
+              A specific month
+              <select
+                aria-label="Month"
+                value={month}
+                onClick={() => pickKind("month")}
+                onChange={(event) => {
+                  setMonth(Number(event.target.value));
+                  pickKind("month");
+                }}
+                className={fieldClass}
+              >
+                {MONTH_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <select
+                aria-label="Year of the month"
+                value={monthYear}
+                onClick={() => pickKind("month")}
+                onChange={(event) => {
+                  setMonthYear(Number(event.target.value));
+                  pickKind("month");
+                }}
+                className={fieldClass}
+              >
+                {years.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-wrap items-center gap-2">
+              <input
+                type="radio"
+                name="export-range"
+                checked={kind === "custom"}
+                onChange={() => pickKind("custom")}
+              />
+              Custom range
+              <input
+                type="date"
+                aria-label="From date"
+                value={from}
+                onClick={() => pickKind("custom")}
+                onChange={(event) => {
+                  setFrom(event.target.value);
+                  pickKind("custom");
+                }}
+                className={fieldClass}
+              />
+              <span className="text-gray-400">to</span>
+              <input
+                type="date"
+                aria-label="To date"
+                value={to}
+                onClick={() => pickKind("custom")}
+                onChange={(event) => {
+                  setTo(event.target.value);
+                  pickKind("custom");
+                }}
+                className={fieldClass}
+              />
+            </label>
+          </div>
+        </fieldset>
 
         <label className="mt-5 flex items-center gap-2 border-t border-secondaryBg/40 pt-4 text-sm text-gray-200">
           <input
