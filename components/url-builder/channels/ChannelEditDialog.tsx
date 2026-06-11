@@ -43,6 +43,10 @@ const ChannelEditDialog = ({
 
   const isCreate = channel === null;
   const isNoticeOnly = channel?.noticeOnly ?? false;
+  // The built-in "Custom" channel is intentionally blank (no prefills), so
+  // it is exempt from the required-values rule.
+  const isBlankCustom = channel?.isBuiltin === true && channel.key === "custom";
+  const requiresValues = !isNoticeOnly && !isBlankCustom;
   const title =
     channel === null ? "Create custom channel" : `Edit ${channel.label}`;
 
@@ -60,7 +64,7 @@ const ChannelEditDialog = ({
       setError("Enter a channel name.");
       return;
     }
-    if (isCreate && REQUIRED_PARAMS.some((param) => !values[param].trim())) {
+    if (requiresValues && REQUIRED_PARAMS.some((param) => !values[param].trim())) {
       setError("utm_source, utm_medium, and utm_campaign are required.");
       return;
     }
@@ -129,7 +133,7 @@ const ChannelEditDialog = ({
                   className="block text-sm font-bold text-gray-200"
                 >
                   utm_{param}
-                  {isCreate && REQUIRED_PARAMS.includes(param) && (
+                  {requiresValues && REQUIRED_PARAMS.includes(param) && (
                     <span className="text-primaryAccent"> *</span>
                   )}
                 </label>
@@ -150,7 +154,7 @@ const ChannelEditDialog = ({
               </div>
             ))}
             <p className="text-xs text-gray-400">
-              {isCreate
+              {requiresValues
                 ? "utm_term and utm_content are optional. "
                 : "All values are optional. "}
               Placeholders like {"{{campaign.name}}"} or [location] are kept

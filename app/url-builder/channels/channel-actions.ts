@@ -364,6 +364,20 @@ export async function upsertChannel(
     if (key) {
       const row = active.find((candidate) => candidate.channel_key === key);
       if (!row) return { ok: false, error: STALE_ERROR };
+      // Edits require the builder's required params too, except Google Ads
+      // (notice only) and the built-in "Custom" channel, which is blank on
+      // purpose.
+      const isBlankCustom = row.is_builtin && row.channel_key === "custom";
+      if (
+        !row.notice_only &&
+        !isBlankCustom &&
+        REQUIRED_PARAMS.some((param) => !values[param])
+      ) {
+        return {
+          ok: false,
+          error: "utm_source, utm_medium, and utm_campaign are required.",
+        };
+      }
       // Google Ads (notice_only) generates no UTM values, so only the
       // name is editable for it.
       const update = row.notice_only
