@@ -74,6 +74,44 @@ export async function saveCustomValue(
   }
 }
 
+export async function saveBaseUrl(
+  value: string
+): Promise<BuilderActionResult & { value?: string }> {
+  try {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return { ok: false, error: "Type a URL first." };
+    }
+
+    const normalized = normalizeBaseUrl(trimmed).url;
+
+    const ctx = await requireSessionTeam();
+    if (!ctx) {
+      return {
+        ok: false,
+        error: "Your session has expired. Please sign in again.",
+      };
+    }
+
+    const { error } = await ctx.supabase.from("base_urls").insert({
+      team_id: ctx.teamId,
+      value: normalized,
+      created_by: ctx.userId,
+    });
+    // 23505 = unique violation: the team already has this URL. Harmless.
+    if (error && error.code !== "23505") {
+      throw new Error(`Could not save the base URL: ${error.message}`);
+    }
+    return { ok: true, value: normalized };
+  } catch (err) {
+    console.error("saveBaseUrl failed:", err);
+    return {
+      ok: false,
+      error: "Could not save the URL. Please try again.",
+    };
+  }
+}
+
 export type SaveUrlInput = {
   baseUrl: string;
   source: string;

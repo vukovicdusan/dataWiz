@@ -6,6 +6,7 @@ import {
   getTeamWithMembers,
 } from "@/lib/url-builder/teams";
 import { getTeamCustomValues } from "@/lib/url-builder/customValues";
+import { getTeamBaseUrls } from "@/lib/url-builder/baseUrls";
 import { getTeamHistoryValues } from "@/lib/url-builder/historyValues";
 import { getTeamHistory } from "@/lib/url-builder/history";
 import type { HistoryEntry } from "@/lib/history/types";
@@ -37,8 +38,9 @@ export default async function UrlBuilderDashboardPage() {
 
   // History load failures must not blank the whole dashboard: the card
   // shows its own error state instead (spec polish item).
-  const [customValues, historyValues, historyResult] = await Promise.all([
+  const [customValues, baseUrls, historyValues, historyResult] = await Promise.all([
     getTeamCustomValues(),
+    getTeamBaseUrls(),
     getTeamHistoryValues(),
     getTeamHistory().then(
       (entries) => ({ entries, failed: false }),
@@ -64,6 +66,7 @@ export default async function UrlBuilderDashboardPage() {
       <div className="flex flex-col items-center px-4 py-12">
         <BuilderForm
           initialCustomValues={customValues}
+          initialBaseUrls={baseUrls}
           historyValues={historyValues}
         />
         <p className="mt-10 text-gray-300">
