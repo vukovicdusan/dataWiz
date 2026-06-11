@@ -17,6 +17,8 @@ import {
 } from "@/lib/history/filter";
 import HistoryRow from "@/components/url-builder/history/HistoryRow";
 import ExportDialog from "@/components/url-builder/history/ExportDialog";
+import DeleteDialog from "@/components/url-builder/history/DeleteDialog";
+import { deleteHistoryLinks } from "@/app/url-builder/history/history-actions";
 
 type HistoryCardProps = {
   entries: HistoryEntry[];
@@ -33,6 +35,11 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
   const [search, setSearch] = useState("");
   const [newestFirst, setNewestFirst] = useState(true);
   const [isExportOpen, setIsExportOpen] = useState(false);
+  // Rows queued for deletion: [one entry] for the row trash button, the
+  // whole visibleEntries list for the bulk button. Null = dialog closed.
+  const [pendingDelete, setPendingDelete] = useState<HistoryEntry[] | null>(
+    null
+  );
 
   // The year/month groups and row dates use the viewer's local timezone,
   // which can differ from the server's during SSR. Render them only after
@@ -144,6 +151,17 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
             <span className="text-xs text-gray-400">
               {matchCount === 1 ? "1 link matches" : `${matchCount} links match`}
             </span>
+            {criteriaActive && matchCount > 0 && (
+              <button
+                type="button"
+                onClick={() => setPendingDelete(visibleEntries)}
+                className="rounded-md border border-red-500/60 px-3 py-2 text-xs font-bold text-red-300 transition hover:bg-red-500/20"
+              >
+                {matchCount === 1
+                  ? "Delete 1 filtered link"
+                  : `Delete ${matchCount} filtered links`}
+              </button>
+            )}
             {criteriaActive && (
               <button
                 type="button"
@@ -176,6 +194,7 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
               groups={groups}
               criteriaActive={criteriaActive}
               defaultMonthKey={defaultMonthKey}
+              onRequestDelete={(entry) => setPendingDelete([entry])}
             />
           )}
         </>
@@ -188,6 +207,16 @@ const HistoryCard = ({ entries, loadFailed }: HistoryCardProps) => {
           onClose={() => setIsExportOpen(false)}
         />
       )}
+
+      {pendingDelete && (
+        <DeleteDialog
+          count={pendingDelete.length}
+          onConfirm={() =>
+            deleteHistoryLinks(pendingDelete.map((entry) => entry.id))
+          }
+          onClose={() => setPendingDelete(null)}
+        />
+      )}
     </section>
   );
 };
@@ -196,12 +225,14 @@ type GroupListProps = {
   groups: YearGroup[];
   criteriaActive: boolean;
   defaultMonthKey: string | null;
+  onRequestDelete: (entry: HistoryEntry) => void;
 };
 
 const GroupList = ({
   groups,
   criteriaActive,
   defaultMonthKey,
+  onRequestDelete,
 }: GroupListProps) => {
   // Manual open/close choices, keyed by year ("2026") or month ("2026-06").
   // The parent remounts this component (via key) when criteria change, so
@@ -267,7 +298,11 @@ const GroupList = ({
                       {monthOpen && (
                         <ul className="border-t border-secondaryBg/30">
                           {month.entries.map((entry) => (
-                            <HistoryRow key={entry.id} entry={entry} />
+                            <HistoryRow
+                              key={entry.id}
+                              entry={entry}
+                              onRequestDelete={() => onRequestDelete(entry)}
+                            />
                           ))}
                         </ul>
                       )}

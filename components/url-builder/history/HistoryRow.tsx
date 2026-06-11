@@ -8,7 +8,13 @@ import {
   type HistoryEntry,
 } from "@/lib/history/types";
 
-const HistoryRow = ({ entry }: { entry: HistoryEntry }) => {
+type HistoryRowProps = {
+  entry: HistoryEntry;
+  /** Opens the delete confirmation dialog for this row. */
+  onRequestDelete: () => void;
+};
+
+const HistoryRow = ({ entry, onRequestDelete }: HistoryRowProps) => {
   const [isCopied, setIsCopied] = useState(false);
   const [copyError, setCopyError] = useState<string | null>(null);
   const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -52,6 +58,27 @@ const HistoryRow = ({ entry }: { entry: HistoryEntry }) => {
           className="flex-shrink-0 rounded-md bg-primaryAccent px-4 py-2 text-xs font-bold text-white transition hover:bg-primaryAccent/80"
         >
           {isCopied ? "Copied!" : "Copy"}
+        </button>
+        <button
+          type="button"
+          onClick={onRequestDelete}
+          aria-label={`Delete link for ${entry.campaign}`}
+          className="flex-shrink-0 rounded-md border border-red-500/60 px-2.5 py-2 text-red-300 transition hover:bg-red-500/20"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-4 w-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 7h12M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 12a1 1 0 0 0 1 .9h6a1 1 0 0 0 1-.9l1-12M10 11v6M14 11v6"
+            />
+          </svg>
         </button>
       </div>
       <div className="mt-1.5 flex flex-wrap items-center gap-x-3.5 gap-y-1 text-xs text-gray-400">
