@@ -229,12 +229,14 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
     });
 
   const selectedCount = selected.size;
-  const allSelected =
-    items.length > 0 && items.every((channel) => selected.has(channel.key));
 
+  // One link, two jobs: with nothing selected it selects everything, with
+  // any selection (even partial) it clears, matching its visible label.
   const handleSelectAll = () =>
     setSelected(
-      allSelected ? new Set() : new Set(items.map((channel) => channel.key))
+      selectedCount > 0
+        ? new Set()
+        : new Set(items.map((channel) => channel.key))
     );
 
   return (
@@ -316,20 +318,13 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
           >
             Delete
           </button>
-          <button
-            type="button"
-            onClick={() => setSelected(new Set())}
-            className="text-xs text-blue-300 underline transition hover:text-blue-200"
-          >
-            Clear selection
-          </button>
         </div>
         <button
           type="button"
           onClick={handleSelectAll}
           className="text-xs text-blue-300 underline transition hover:text-blue-200"
         >
-          {allSelected ? "Unselect all" : "Select all"}
+          {selectedCount > 0 ? "Clear selection" : "Select all"}
         </button>
       </div>
 
