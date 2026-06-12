@@ -278,43 +278,49 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
         )}
       </div>
 
-      {selectedCount > 0 && (
-        <div className="mt-2 flex flex-wrap items-center gap-2.5 rounded-xl border border-secondaryBg/50 bg-primaryBg/40 px-3 py-2">
-          <span className="text-xs text-gray-300">
-            {selectedCount === 1 ? "1 selected" : `${selectedCount} selected`}
-          </span>
-          <button
-            type="button"
-            onClick={() => handleBulkVisibility(false)}
-            className="rounded-md border border-secondaryBg/60 px-3 py-1.5 text-xs font-bold text-gray-200 transition hover:bg-secondaryBg/30"
-          >
-            Hide
-          </button>
-          <button
-            type="button"
-            onClick={() => handleBulkVisibility(true)}
-            className="rounded-md border border-secondaryBg/60 px-3 py-1.5 text-xs font-bold text-gray-200 transition hover:bg-secondaryBg/30"
-          >
-            Show
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              setDialog({ type: "confirm-delete", keys: Array.from(selected) })
-            }
-            className="rounded-md border border-red-500/60 px-3 py-1.5 text-xs font-bold text-red-300 transition hover:bg-red-500/20"
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelected(new Set())}
-            className="text-xs text-blue-300 underline transition hover:text-blue-200"
-          >
-            Clear selection
-          </button>
-        </div>
-      )}
+      {/* Always rendered, only made visible with a selection: reserving the
+          space keeps the channel list from jumping when a checkbox is
+          ticked. visibility:hidden also removes the buttons from tab order
+          and the accessibility tree while nothing is selected. */}
+      <div
+        className={`mt-2 flex flex-wrap items-center gap-2.5 rounded-xl border border-secondaryBg/50 bg-primaryBg/40 px-3 py-2 ${
+          selectedCount === 0 ? "invisible" : ""
+        }`}
+      >
+        <span className="text-xs text-gray-300">
+          {selectedCount === 1 ? "1 selected" : `${selectedCount} selected`}
+        </span>
+        <button
+          type="button"
+          onClick={() => handleBulkVisibility(false)}
+          className="rounded-md border border-secondaryBg/60 px-3 py-1.5 text-xs font-bold text-gray-200 transition hover:bg-secondaryBg/30"
+        >
+          Hide
+        </button>
+        <button
+          type="button"
+          onClick={() => handleBulkVisibility(true)}
+          className="rounded-md border border-secondaryBg/60 px-3 py-1.5 text-xs font-bold text-gray-200 transition hover:bg-secondaryBg/30"
+        >
+          Show
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            setDialog({ type: "confirm-delete", keys: Array.from(selected) })
+          }
+          className="rounded-md border border-red-500/60 px-3 py-1.5 text-xs font-bold text-red-300 transition hover:bg-red-500/20"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          onClick={() => setSelected(new Set())}
+          className="text-xs text-blue-300 underline transition hover:text-blue-200"
+        >
+          Clear selection
+        </button>
+      </div>
 
       <div className="mt-4 flex justify-end">
         <button
