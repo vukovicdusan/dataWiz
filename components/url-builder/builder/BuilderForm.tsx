@@ -12,6 +12,7 @@ import { buildUrl, buildQueryString, type UtmValues } from "@/lib/utm/build";
 import { collectWarnings } from "@/lib/utm/validate";
 import {
   saveCustomValue,
+  deleteCustomValue,
   saveBaseUrl,
   saveGeneratedUrl,
 } from "@/app/url-builder/dashboard/builder-actions";
@@ -99,6 +100,28 @@ const BuilderForm = ({
       return result;
     };
 
+  const handleDeleteForTeam =
+    (param: UtmParam) => async (valueToDelete: string) => {
+      // Optimistic: drop the value right away, restore it if the server
+      // says no so the list never lies for long.
+      setCustomValues((previous) => ({
+        ...previous,
+        [param]: previous[param].filter((value) => value !== valueToDelete),
+      }));
+      const result = await deleteCustomValue(param, valueToDelete);
+      if (!result.ok) {
+        setCustomValues((previous) =>
+          previous[param].includes(valueToDelete)
+            ? previous
+            : {
+                ...previous,
+                [param]: [...previous[param], valueToDelete].sort(),
+              }
+        );
+      }
+      return result;
+    };
+
   // Explicit annotation: without it TS infers a union with {} from the
   // ternary, which cannot be indexed by UtmParam.
   const templateDefaults: Partial<Record<UtmParam, string>> =
@@ -141,6 +164,7 @@ const BuilderForm = ({
       exampleValues={EXAMPLE_VALUES[param]}
       teamValues={customValues[param]}
       onSaveForTeam={handleSaveForTeam(param)}
+      onDeleteForTeam={handleDeleteForTeam(param)}
       infoNote={
         param === "content"
           ? "The template values are recommended values. Feel free to change them."
