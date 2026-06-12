@@ -46,7 +46,9 @@ type DialogState =
   | { type: "confirm-restore" }
   | null;
 
-type Status = { kind: "success" | "error"; text: string };
+type Status =
+  | { kind: "saving" }
+  | { kind: "success" | "error"; text: string };
 
 const GENERIC_ERROR = "Something went wrong. Your change was not saved.";
 
@@ -98,6 +100,15 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
     statusTimer.current = setTimeout(() => setStatus(null), 4000);
   };
 
+  // In-flight feedback. No auto-dismiss timer: the saving state persists
+  // until the action resolves and showStatus replaces it (or the dialog
+  // path clears it). Clearing any pending timer stops an old success or
+  // error message from wiping out a fresh "Saving..." mid-flight.
+  const showSaving = () => {
+    if (statusTimer.current) clearTimeout(statusTimer.current);
+    setStatus({ kind: "saving" });
+  };
+
   // Optimistic update: show `next` immediately, run the action, revert
   // to the previous server-confirmed state on failure.
   const runAction = async (
@@ -107,6 +118,7 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
   ): Promise<ChannelActionResult> => {
     const previous = items;
     setItems(next);
+    showSaving();
     try {
       const result = await action();
       if (result.ok) {
@@ -190,12 +202,22 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
   const handleDialogSave =
     (key: string | null) =>
     async (values: ChannelDialogValues): Promise<ChannelActionResult> => {
-      const result = await upsertChannel({ key, ...values });
-      if (result.ok) {
-        showStatus("success", key ? "Channel saved" : "Channel created");
-        router.refresh();
+      showSaving();
+      try {
+        const result = await upsertChannel({ key, ...values });
+        if (result.ok) {
+          showStatus("success", key ? "Channel saved" : "Channel created");
+          router.refresh();
+        } else {
+          // The dialog shows the error itself (its own role="alert" line),
+          // exactly as before. Just stop the spinner.
+          setStatus(null);
+        }
+        return result;
+      } catch (err) {
+        setStatus(null);
+        throw err;
       }
-      return result;
     };
 
   const toggleSelected = (key: string, checked: boolean) =>
@@ -235,16 +257,25 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
       </div>
 
       <div aria-live="polite" className="mt-3 min-h-[1.25rem]">
-        {status &&
-          (status.kind === "success" ? (
-            <p role="status" className="text-sm text-green-300">
-              {status.text}
-            </p>
-          ) : (
-            <p role="alert" className="text-sm text-red-300">
-              {status.text}
-            </p>
-          ))}
+        {status?.kind === "saving" && (
+          <p role="status" className="flex items-center gap-2 text-sm text-blue-300">
+            <span
+              aria-hidden="true"
+              className="h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-blue-300/30 border-t-blue-300"
+            />
+            Saving...
+          </p>
+        )}
+        {status?.kind === "success" && (
+          <p role="status" className="text-sm text-green-300">
+            {status.text}
+          </p>
+        )}
+        {status?.kind === "error" && (
+          <p role="alert" className="text-sm text-red-300">
+            {status.text}
+          </p>
+        )}
       </div>
 
       {selectedCount > 0 && (
