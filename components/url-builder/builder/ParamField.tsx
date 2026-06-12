@@ -19,11 +19,13 @@ type ParamFieldProps = {
   teamValues: string[];
   /** Persists the value for the team; parent updates teamValues on success. */
   onSaveForTeam: (value: string) => Promise<BuilderActionResult>;
+  /** Deletes a saved team value; parent removes it from teamValues optimistically. */
+  onDeleteForTeam: (value: string) => Promise<BuilderActionResult>;
   /** Always-visible helper note rendered under the input, with an "i" icon. */
   infoNote?: string;
 };
 
-type DropdownGroup = { heading: string; options: string[] };
+type DropdownGroup = { heading: string; options: string[]; deletable?: boolean };
 
 const ParamField = ({
   param,
@@ -34,6 +36,7 @@ const ParamField = ({
   exampleValues,
   teamValues,
   onSaveForTeam,
+  onDeleteForTeam,
   infoNote,
 }: ParamFieldProps) => {
   const fieldRef = useRef<HTMLDivElement>(null);
@@ -66,16 +69,20 @@ const ParamField = ({
   // Dropdown sections, deduped in priority order: template, saved, examples.
   const seen = new Set<string>();
   const groups: DropdownGroup[] = [];
-  const addGroup = (heading: string, candidates: readonly string[]) => {
+  const addGroup = (
+    heading: string,
+    candidates: readonly string[],
+    deletable?: boolean
+  ) => {
     const options = candidates.filter((option) => {
       if (!option || seen.has(option)) return false;
       seen.add(option);
       return true;
     });
-    if (options.length > 0) groups.push({ heading, options });
+    if (options.length > 0) groups.push({ heading, options, deletable });
   };
   addGroup("Channel template", templateDefault ? [templateDefault] : []);
-  addGroup("Saved values", teamValues);
+  addGroup("Saved values", teamValues, true);
   addGroup("Examples", exampleValues);
 
   const canSaveForTeam =
@@ -184,7 +191,10 @@ const ParamField = ({
               </p>
               <ul>
                 {group.options.map((option) => (
-                  <li key={option}>
+                  <li
+                    key={option}
+                    className={group.deletable ? "flex items-center gap-1" : undefined}
+                  >
                     <button
                       type="button"
                       role="option"
@@ -196,10 +206,50 @@ const ParamField = ({
                         onChange(option);
                         setIsOpen(false);
                       }}
-                      className="block w-full rounded px-3 py-1.5 text-left text-sm text-gray-200 transition hover:bg-primaryAccent/30"
+                      className={`block w-full rounded px-3 py-1.5 text-left text-sm text-gray-200 transition hover:bg-primaryAccent/30${
+                        group.deletable ? " min-w-0 flex-1 truncate" : ""
+                      }`}
                     >
                       {option}
                     </button>
+                    {group.deletable && (
+                      <button
+                        type="button"
+                        aria-label={`Delete saved value ${option}`}
+                        onMouseDown={(event) => event.preventDefault()}
+                        onClick={async (event) => {
+                          event.stopPropagation();
+                          setIsSaved(false);
+                          setSaveError(null);
+                          try {
+                            const result = await onDeleteForTeam(option);
+                            if (!result.ok) {
+                              setSaveError(result.error);
+                            }
+                          } catch {
+                            setSaveError(
+                              "Could not delete the value. Please try again."
+                            );
+                          }
+                        }}
+                        className="shrink-0 rounded p-1.5 text-gray-400 transition hover:bg-red-500/20 hover:text-red-300"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          width="13"
+                          height="13"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>

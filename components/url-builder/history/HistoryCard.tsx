@@ -18,6 +18,7 @@ import {
 import HistoryRow from "@/components/url-builder/history/HistoryRow";
 import ExportDialog from "@/components/url-builder/history/ExportDialog";
 import DeleteDialog from "@/components/url-builder/history/DeleteDialog";
+import SelectMenu from "@/components/url-builder/SelectMenu";
 import { deleteHistoryLinks } from "@/app/url-builder/history/history-actions";
 
 type HistoryCardProps = {
@@ -112,27 +113,27 @@ const HistoryCard = ({ entries, loadFailed, teamChannelLabels }: HistoryCardProp
         <>
           <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {FILTER_KEYS.map((key) => (
-              <select
+              <SelectMenu
                 key={key}
-                aria-label={`Filter by ${FILTER_LABELS[key].toLowerCase()}`}
+                id={`history-filter-${key}`}
+                triggerAriaLabel={`Filter by ${FILTER_LABELS[key].toLowerCase()}`}
+                ariaLabel={`Filter by ${FILTER_LABELS[key].toLowerCase()}`}
                 value={filters[key]}
-                onChange={(event) =>
-                  setFilters((previous) => ({
-                    ...previous,
-                    [key]: event.target.value,
-                  }))
+                onChange={(value) =>
+                  setFilters((previous) => ({ ...previous, [key]: value }))
                 }
-                className={inputClass}
-              >
-                <option value="">{FILTER_LABELS[key]}: All</option>
-                {optionsByKey[key].map((option) => (
-                  <option key={option} value={option}>
-                    {key === "channel"
-                      ? channelLabel(option, teamChannelLabels)
-                      : option}
-                  </option>
-                ))}
-              </select>
+                placeholder={`${FILTER_LABELS[key]}: All`}
+                options={[
+                  { value: "", label: `${FILTER_LABELS[key]}: All` },
+                  ...optionsByKey[key].map((option) => ({
+                    value: option,
+                    label:
+                      key === "channel"
+                        ? channelLabel(option, teamChannelLabels)
+                        : option,
+                  })),
+                ]}
+              />
             ))}
           </div>
 

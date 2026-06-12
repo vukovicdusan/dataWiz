@@ -46,7 +46,9 @@ type DialogState =
   | { type: "confirm-restore" }
   | null;
 
-type Status = { kind: "success" | "error"; text: string };
+type Status =
+  | { kind: "saving" }
+  | { kind: "success" | "error"; text: string };
 
 const GENERIC_ERROR = "Something went wrong. Your change was not saved.";
 
@@ -98,6 +100,15 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
     statusTimer.current = setTimeout(() => setStatus(null), 4000);
   };
 
+  // In-flight feedback. No auto-dismiss timer: the saving state persists
+  // until the action resolves and showStatus replaces it (or the dialog
+  // path clears it). Clearing any pending timer stops an old success or
+  // error message from wiping out a fresh "Saving..." mid-flight.
+  const showSaving = () => {
+    if (statusTimer.current) clearTimeout(statusTimer.current);
+    setStatus({ kind: "saving" });
+  };
+
   // Optimistic update: show `next` immediately, run the action, revert
   // to the previous server-confirmed state on failure.
   const runAction = async (
@@ -107,6 +118,7 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
   ): Promise<ChannelActionResult> => {
     const previous = items;
     setItems(next);
+    showSaving();
     try {
       const result = await action();
       if (result.ok) {
@@ -190,12 +202,22 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
   const handleDialogSave =
     (key: string | null) =>
     async (values: ChannelDialogValues): Promise<ChannelActionResult> => {
-      const result = await upsertChannel({ key, ...values });
-      if (result.ok) {
-        showStatus("success", key ? "Channel saved" : "Channel created");
-        router.refresh();
+      showSaving();
+      try {
+        const result = await upsertChannel({ key, ...values });
+        if (result.ok) {
+          showStatus("success", key ? "Channel saved" : "Channel created");
+          router.refresh();
+        } else {
+          // The dialog shows the error itself (its own role="alert" line),
+          // exactly as before. Just stop the spinner.
+          setStatus(null);
+        }
+        return result;
+      } catch (err) {
+        setStatus(null);
+        throw err;
       }
-      return result;
     };
 
   const toggleSelected = (key: string, checked: boolean) =>
@@ -207,12 +229,14 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
     });
 
   const selectedCount = selected.size;
-  const allSelected =
-    items.length > 0 && items.every((channel) => selected.has(channel.key));
 
+  // One link, two jobs: with nothing selected it selects everything, with
+  // any selection (even partial) it clears, matching its visible label.
   const handleSelectAll = () =>
     setSelected(
-      allSelected ? new Set() : new Set(items.map((channel) => channel.key))
+      selectedCount > 0
+        ? new Set()
+        : new Set(items.map((channel) => channel.key))
     );
 
   return (
@@ -235,20 +259,39 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
       </div>
 
       <div aria-live="polite" className="mt-3 min-h-[1.25rem]">
-        {status &&
-          (status.kind === "success" ? (
-            <p role="status" className="text-sm text-green-300">
-              {status.text}
-            </p>
-          ) : (
-            <p role="alert" className="text-sm text-red-300">
-              {status.text}
-            </p>
-          ))}
+        {status?.kind === "saving" && (
+          <p role="status" className="flex items-center gap-2 text-sm text-blue-300">
+            <span
+              aria-hidden="true"
+              className="h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-blue-300/30 border-t-blue-300"
+            />
+            Saving...
+          </p>
+        )}
+        {status?.kind === "success" && (
+          <p role="status" className="text-sm text-green-300">
+            {status.text}
+          </p>
+        )}
+        {status?.kind === "error" && (
+          <p role="alert" className="text-sm text-red-300">
+            {status.text}
+          </p>
+        )}
       </div>
 
-      {selectedCount > 0 && (
-        <div className="mt-2 flex flex-wrap items-center gap-2.5 rounded-xl border border-secondaryBg/50 bg-primaryBg/40 px-3 py-2">
+      {/* Bulk actions share the always-present Select all row so the channel
+          list never jumps when a checkbox is ticked. The left side is made
+          invisible (not unmounted) while nothing is selected: that keeps
+          Select all pinned right and removes the hidden buttons from tab
+          order and the accessibility tree. min-h matches the buttons so the
+          row height is the same with and without a selection. */}
+      <div className="mt-4 flex min-h-[1.875rem] flex-wrap items-center justify-between gap-2.5">
+        <div
+          className={`flex flex-wrap items-center gap-2.5 ${
+            selectedCount === 0 ? "invisible" : ""
+          }`}
+        >
           <span className="text-xs text-gray-300">
             {selectedCount === 1 ? "1 selected" : `${selectedCount} selected`}
           </span>
@@ -275,23 +318,13 @@ const ChannelsManager = ({ initialChannels }: ChannelsManagerProps) => {
           >
             Delete
           </button>
-          <button
-            type="button"
-            onClick={() => setSelected(new Set())}
-            className="text-xs text-blue-300 underline transition hover:text-blue-200"
-          >
-            Clear selection
-          </button>
         </div>
-      )}
-
-      <div className="mt-4 flex justify-end">
         <button
           type="button"
           onClick={handleSelectAll}
           className="text-xs text-blue-300 underline transition hover:text-blue-200"
         >
-          {allSelected ? "Unselect all" : "Select all"}
+          {selectedCount > 0 ? "Clear selection" : "Select all"}
         </button>
       </div>
 

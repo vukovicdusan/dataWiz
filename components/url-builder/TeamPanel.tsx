@@ -4,11 +4,13 @@ import { useState } from "react";
 import Avatar from "@/components/url-builder/Avatar";
 import InviteModal from "@/components/url-builder/InviteModal";
 import LeaveTeamDialog from "@/components/url-builder/LeaveTeamDialog";
+import DeleteAccountDialog from "@/components/url-builder/DeleteAccountDialog";
 import type { TeamWithMembers } from "@/lib/url-builder/teams";
 
 const TeamPanel = ({ team }: { team: TeamWithMembers }) => {
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [isLeaveOpen, setIsLeaveOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const memberCount = team.members.length;
 
   return (
@@ -51,11 +53,28 @@ const TeamPanel = ({ team }: { team: TeamWithMembers }) => {
         </button>
       </div>
 
+      <div className="mt-8 border-t border-secondaryBg/40 pt-4">
+        <button
+          type="button"
+          onClick={() => setIsDeleteOpen(true)}
+          className="text-sm text-red-300/70 underline transition hover:text-red-300"
+        >
+          Delete account
+        </button>
+      </div>
+
       {isInviteOpen && <InviteModal onClose={() => setIsInviteOpen(false)} />}
       {isLeaveOpen && (
         <LeaveTeamDialog
           teamName={team.name}
           onClose={() => setIsLeaveOpen(false)}
+        />
+      )}
+      {isDeleteOpen && (
+        <DeleteAccountDialog
+          teamName={team.name}
+          memberCount={memberCount}
+          onClose={() => setIsDeleteOpen(false)}
         />
       )}
     </section>

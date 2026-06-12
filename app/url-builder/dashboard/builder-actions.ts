@@ -75,6 +75,48 @@ export async function saveCustomValue(
   }
 }
 
+export async function deleteCustomValue(
+  param: UtmParam,
+  value: string
+): Promise<BuilderActionResult> {
+  try {
+    if (!(UTM_PARAMS as readonly string[]).includes(param)) {
+      return { ok: false, error: "Unknown parameter." };
+    }
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return { ok: false, error: "Nothing to delete." };
+    }
+
+    const ctx = await requireSessionTeam();
+    if (!ctx) {
+      return {
+        ok: false,
+        error: "Your session has expired. Please sign in again.",
+      };
+    }
+
+    // RLS scopes the delete to the caller's team. Zero matched rows is
+    // fine: the value is already gone, which is what the user wanted.
+    const { error } = await ctx.supabase
+      .from("custom_values")
+      .delete()
+      .eq("team_id", ctx.teamId)
+      .eq("param", param)
+      .eq("value", trimmed);
+    if (error) {
+      throw new Error(`Could not delete the team value: ${error.message}`);
+    }
+    return { ok: true };
+  } catch (err) {
+    console.error("deleteCustomValue failed:", err);
+    return {
+      ok: false,
+      error: "Could not delete the value. Please try again.",
+    };
+  }
+}
+
 export async function saveBaseUrl(
   value: string
 ): Promise<BuilderActionResult & { value?: string }> {
