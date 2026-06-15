@@ -236,6 +236,11 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
         <h3 className="mb-1 text-5xl font-bold text-primaryAccent">
           {section.title}
         </h3>
+        {visual ? (
+          <div className="overflow-x-auto mb-4 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-200/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-400/60 hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
+            {visual}
+          </div>
+        ) : null}
         {section.items.length > 0 ? (
           <ul className="rounded-3xl bg-secondaryAccent">
             {section.items.map((item) => (
@@ -247,11 +252,6 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
           </ul>
         ) : null}
       </div>
-      {visual ? (
-        <div className="overflow-x-auto [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-200/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-400/60 hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
-          {visual}
-        </div>
-      ) : null}
     </div>
   );
 }
@@ -423,7 +423,8 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
                       number={kpi.number}
                       afterNumber={kpi.afterNumber}
                       title={kpi.title}
-                      color={"text-green-500"}
+                      color={"text-green-600"}
+                      size={"lg"}
                     />
                   ))}
                 </div>

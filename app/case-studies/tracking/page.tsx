@@ -67,6 +67,7 @@ const TrackingSuccessStories = async () => {
                       number={kpi.number}
                       afterNumber={kpi.afterNumber}
                       title={kpi.title}
+                      color={"text-green-600"}
                     />
                   ))}
                 </div>
