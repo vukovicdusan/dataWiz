@@ -65,7 +65,7 @@ const AwesomeBooksTable1 = ({
           {columns.map((column, columnIndex) => (
             <th
               key={column}
-              className={`border border-gray-300 p-2 text-left text-sm sm:text-[1rem] ${getMobileColumnClass(columnIndex, hiddenMobileColumn)}`}
+              className={`border border-gray-300 p-1 text-left text-sm sm:text-[1rem] ${getMobileColumnClass(columnIndex, hiddenMobileColumn)}`}
             >
               {column}
             </th>

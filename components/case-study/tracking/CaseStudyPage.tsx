@@ -242,14 +242,17 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
           </div>
         ) : null}
         {section.items.length > 0 ? (
-          <ul className="rounded-3xl bg-secondaryAccent">
-            {section.items.map((item) => (
-              <li key={item.title} className="mb-4">
-                <h3 className="mb-1 text-xl font-bold">{item.title}</h3>
-                {item.description ? <p>{item.description}</p> : null}
-              </li>
-            ))}
-          </ul>
+          <>
+            <h3 className="text-3xl font-bold text-primaryAccent">Business Impact</h3>
+            <ul className="rounded-3xl bg-secondaryAccent">
+              {section.items.map((item) => (
+                <li key={item.title} className="mb-4">
+                  <h3 className="mb-1 text-xl font-bold">{item.title}</h3>
+                  {item.description ? <p>{item.description}</p> : null}
+                </li>
+              ))}
+            </ul>
+          </>
         ) : null}
       </div>
     </div>
@@ -448,7 +451,9 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
               <h2 className="text-center sm:text-start mb-6 text-5xl font-bold">
                 {restrictionResult.title}
               </h2>
+              <h3 className="text-3xl text-primaryAccent font-bold mb-4">Business Impact</h3>
               {restrictionResult.items.map((item) => (
+                
                 <div key={item.title} className="mb-4">
                   <h3 className="mb-1 text-xl font-bold text-center sm:text-start">
                     {item.title}
