@@ -237,7 +237,7 @@ function ResultsSection({ section }: { section: CaseStudyResultSection }) {
           {section.title}
         </h3>
         {visual ? (
-          <div className="overflow-x-auto mb-4 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-200/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-400/60 hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
+          <div className="overflow-x-auto overflow-y-hidden mb-4 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-200/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-400/60 hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
             {visual}
           </div>
         ) : null}
