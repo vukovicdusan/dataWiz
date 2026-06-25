@@ -448,18 +448,18 @@ export default function CaseStudyPage({ caseStudy }: CaseStudyPageProps) {
         <>
           <section className="mt-10 flex flex-wrap justify-between gap-10 py-10 md:flex-nowrap md:gap-2">
             <div className="basis-full md:max-w-md md:basis-1/2">
-              <h2 className="text-center sm:text-start mb-6 text-5xl font-bold">
+              <h2 className=" mb-6 text-5xl font-bold">
                 {restrictionResult.title}
               </h2>
-              <h3 className="text-3xl text-primaryAccent font-bold mb-4">Business Impact</h3>
+              <h3 className=" text-3xl text-primaryAccent font-bold mb-4">Business Impact</h3>
               {restrictionResult.items.map((item) => (
                 
                 <div key={item.title} className="mb-4">
-                  <h3 className="mb-1 text-xl font-bold text-center sm:text-start">
+                  <h3 className="mb-1 text-xl font-bold ">
                     {item.title}
                   </h3>
                   {item.description ? (
-                    <p className="text-center sm:text-start">
+                    <p className="">
                       {item.description}
                     </p>
                   ) : null}
