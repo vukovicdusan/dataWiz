@@ -19,9 +19,7 @@ const Footer = () => {
             <div className="flex flex-col gap-2 text-center">
               <p className="font-bold text-center">Contact:</p>
               <a className="hover:text-primaryAccent" href="mailto:igor@datawizanalytics.com">igor@datawizanalytics.com</a>
-              <a href="tel:+38166007765" className="hover:text-primaryAccent text-sm">
-                +381 66 007 765
-              </a>
+             
             </div>
             <ul className="flex gap-8">
               <li>
